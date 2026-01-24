@@ -446,7 +446,7 @@ df_sub["err_ratio"] = (
 ) * 100
 df_sub["err_std"] = (df_sub["val_dut_std"] / df_sub["val_ref_mean"]) * 100
 
-# --- DESIGN & SETTINGS ---
+# --- DESIGN ---
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🎨 Design & Settings")
 sync_axes = st.sidebar.checkbox("🔗 Phasen synchronisieren", value=True)
@@ -454,7 +454,6 @@ y_limit = st.sidebar.slider("Y-Achse Zoom (+/- %)", 0.2, 10.0, 1.5, 0.1)
 acc_class = st.sidebar.selectbox("Norm-Klasse", [0.2, 0.5, 1.0, 3.0], index=2)
 show_err_bars = st.sidebar.checkbox("Fehlerbalken (StdAbw)", value=True)
 
-# 1. Farben & Namen (Expander)
 with st.sidebar.expander("Farben & Namen bearbeiten", expanded=False):
     unique_curves = df_sub[
         ["unique_id", "wandler_key", "folder", "dut_name", "trace_id", "Kommentar"]
@@ -493,41 +492,10 @@ map_color = dict(zip(edited_config["ID"], edited_config["Farbe"]))
 df_sub["final_legend"] = df_sub["unique_id"].map(map_legend)
 df_sub["final_color"] = df_sub["unique_id"].map(map_color)
 
-# 2. Diagramm-Titel (Neuer Expander)
-with st.sidebar.expander("Diagramm-Titel bearbeiten", expanded=False):
-    st.caption(
-        "Hier können die Überschriften für die Diagramme individuell angepasst werden."
-    )
-    # Standard-Titel definieren
-    default_titles_data = [
-        {
-            "Typ": "Gesamtübersicht (Tab 1)",
-            "Titel": f"Gesamtübersicht: {int(sel_current)} A",
-        },
-        {"Typ": "Scatter-Plot", "Titel": "Kosten-Nutzen-Analyse"},
-        {"Typ": "Performance-Index", "Titel": "Performance Index"},
-        {"Typ": "Heatmap", "Titel": "Fehler-Heatmap"},
-        {"Typ": "Boxplot", "Titel": "Fehlerverteilung (Boxplot)"},
-        {"Typ": "Pareto", "Titel": "Pareto-Analyse"},
-        {"Typ": "Radar", "Titel": "Radar-Profil"},
-    ]
-    df_titles_default = pd.DataFrame(default_titles_data)
-
-    edited_titles_df = st.data_editor(
-        df_titles_default,
-        column_config={
-            "Typ": st.column_config.TextColumn("Diagramm-Typ", disabled=True),
-            "Titel": st.column_config.TextColumn("Titel (Editierbar)"),
-        },
-        hide_index=True,
-        key="titles_editor",
-    )
-    # Mapping erstellen: Typ -> Titel
-    TITLES_MAP = dict(zip(edited_titles_df["Typ"], edited_titles_df["Titel"]))
-
 # --- EXPORT ---
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📥 PDF Export")
+# Update: Alle Diagrammtypen sind jetzt hier auswählbar
 export_opts = [
     "Gesamtübersicht (Tab 1)",
     "Detail-Phasen (Tab 1)",
@@ -559,10 +527,10 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
         zip_buffer = io.BytesIO()
 
         # --- ÖKONOMIE DATEN ---
+        # Wir berechnen die Daten IMMER neu für den Export, damit es sicher ist.
         has_eco_request = any("Ökonomie" in s for s in export_selection)
         if has_eco_request:
             try:
-                # Datenaufbereitung (gleiche Logik wie in Tab 2)
                 df_err_exp = (
                     df_sub.groupby("unique_id")
                     .agg(
@@ -610,7 +578,7 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                     df_err_exp["vol_t"] * df_err_exp["vol_b"] * df_err_exp["vol_h"]
                 ) / 1000.0
 
-                # Normalisierung
+                # Normalisierung berechnen (für Perf. Index & Radar)
                 mx_p = df_err_exp["preis"].max() or 1
                 mx_v = df_err_exp["volumen"].max() or 1
                 mx_en = df_err_exp["err_nieder"].abs().max() or 0.01
@@ -628,24 +596,23 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                 df_err_exp["Norm: Überstrom"] = (
                     df_err_exp["err_high"].abs() / mx_eh
                 ) * 100
-
-                # Standard-Score für Sortierung
                 df_err_exp["total_score"] = (
                     df_err_exp["Norm: Preis"]
                     + df_err_exp["Norm: Volumen"]
+                    + df_err_exp["Norm: Niederstrom"]
                     + df_err_exp["Norm: Nennstrom"]
+                    + df_err_exp["Norm: Überstrom"]
                 )
 
+                # Farbmap
                 color_map_dict = dict(
                     zip(df_err_exp["legend_name"], df_err_exp["color_hex"])
                 )
 
                 with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED) as zf:
+
                     # 1. Performance Index
                     if "Ökonomie: Performance-Index" in export_selection:
-                        title_str = TITLES_MAP.get(
-                            "Performance-Index", "Performance Index"
-                        )
                         df_sorted = df_err_exp.sort_values(
                             "total_score", ascending=True
                         )
@@ -654,23 +621,28 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             value_vars=[
                                 "Norm: Preis",
                                 "Norm: Volumen",
+                                "Norm: Niederstrom",
                                 "Norm: Nennstrom",
+                                "Norm: Überstrom",
                             ],
                             var_name="Kategorie",
                             value_name="Anteil (%)",
                         )
+                        cat_colors = {
+                            "Norm: Preis": "#1f77b4",
+                            "Norm: Volumen": "#aec7e8",
+                            "Norm: Niederstrom": "#d62728",
+                            "Norm: Nennstrom": "#ff7f0e",
+                            "Norm: Überstrom": "#ffbb78",
+                        }
                         fig_perf = px.bar(
                             df_long,
                             y="legend_name",
                             x="Anteil (%)",
                             color="Kategorie",
                             orientation="h",
-                            title=title_str,
-                            color_discrete_map={
-                                "Norm: Preis": "#1f77b4",
-                                "Norm: Volumen": "#aec7e8",
-                                "Norm: Nennstrom": "#ff7f0e",
-                            },
+                            title="Performance Index",
+                            color_discrete_map=cat_colors,
                         )
                         fig_perf.update_layout(
                             yaxis=dict(autorange="reversed"),
@@ -678,6 +650,7 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             width=1123,
                             height=794,
                             font=dict(family="Serif", size=14, color="black"),
+                            legend=dict(orientation="h", y=-0.15, x=0.5),
                         )
                         zf.writestr(
                             "Oekonomie_Performance_Index.pdf",
@@ -686,9 +659,6 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
 
                     # 2. Scatter
                     if "Ökonomie: Scatter-Plot" in export_selection:
-                        title_str = TITLES_MAP.get(
-                            "Scatter-Plot", "Kosten-Nutzen-Analyse"
-                        )
                         fig_scat = px.scatter(
                             df_err_exp,
                             x="preis",
@@ -696,21 +666,22 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             color="legend_name",
                             size=[20] * len(df_err_exp),
                             color_discrete_map=color_map_dict,
-                            title=title_str,
+                            title="Preis vs. Genauigkeit (Nennstrom)",
                         )
                         fig_scat.update_layout(
                             template="plotly_white",
                             width=1123,
                             height=794,
                             font=dict(family="Serif", size=14, color="black"),
+                            legend=dict(orientation="h", y=-0.15, x=0.5),
                         )
                         zf.writestr(
-                            "Oekonomie_Scatter.pdf", fig_scat.to_image(format="pdf")
+                            "Oekonomie_Scatter_Preis_Genauigkeit.pdf",
+                            fig_scat.to_image(format="pdf"),
                         )
 
                     # 3. Heatmap
                     if "Ökonomie: Heatmap" in export_selection:
-                        title_str = TITLES_MAP.get("Heatmap", "Fehler-Heatmap")
                         df_hm = df_err_exp.melt(
                             id_vars=["legend_name"],
                             value_vars=["err_nieder", "err_nom", "err_high"],
@@ -723,7 +694,7 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             y="Bereich",
                             z="Fehler",
                             color_continuous_scale="Blues",
-                            title=title_str,
+                            title="Heatmap: Fehlerintensität",
                         )
                         fig_hm.update_layout(
                             template="plotly_white",
@@ -737,9 +708,6 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
 
                     # 4. Boxplot
                     if "Ökonomie: Boxplot" in export_selection:
-                        title_str = TITLES_MAP.get(
-                            "Boxplot", "Fehlerverteilung (Boxplot)"
-                        )
                         df_box = df_err_exp.melt(
                             id_vars=["legend_name"],
                             value_vars=["err_nieder", "err_nom", "err_high"],
@@ -751,13 +719,14 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             x="legend_name",
                             y="Fehler",
                             color="Bereich",
-                            title=title_str,
+                            title="Fehlerverteilung",
                         )
                         fig_box.update_layout(
                             template="plotly_white",
                             width=1123,
                             height=794,
                             font=dict(family="Serif", size=14, color="black"),
+                            legend=dict(orientation="h", y=-0.15, x=0.5),
                         )
                         zf.writestr(
                             "Oekonomie_Boxplot.pdf", fig_box.to_image(format="pdf")
@@ -765,7 +734,6 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
 
                     # 5. Pareto
                     if "Ökonomie: Pareto" in export_selection:
-                        title_str = TITLES_MAP.get("Pareto", "Pareto-Analyse")
                         df_par = df_err_exp.sort_values(by="err_nom", ascending=False)
                         df_par["cum_pct"] = (
                             df_par["err_nom"].cumsum() / df_par["err_nom"].sum() * 100
@@ -791,11 +759,12 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             secondary_y=True,
                         )
                         fig_par.update_layout(
-                            title=title_str,
+                            title="Pareto-Analyse (Nennstrom)",
                             template="plotly_white",
                             width=1123,
                             height=794,
                             font=dict(family="Serif", size=14, color="black"),
+                            legend=dict(orientation="h", y=-0.15, x=0.5),
                         )
                         zf.writestr(
                             "Oekonomie_Pareto.pdf", fig_par.to_image(format="pdf")
@@ -803,7 +772,6 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
 
                     # 6. Radar
                     if "Ökonomie: Radar" in export_selection:
-                        title_str = TITLES_MAP.get("Radar", "Radar-Profil")
                         fig_rad = go.Figure()
                         cats = [
                             "Preis",
@@ -832,11 +800,12 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             )
                         fig_rad.update_layout(
                             polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
-                            title=title_str,
+                            title="Radar-Profil (Normiert)",
                             template="plotly_white",
                             width=1123,
                             height=794,
                             font=dict(family="Serif", size=14, color="black"),
+                            legend=dict(orientation="h", y=-0.15, x=0.5),
                         )
                         zf.writestr(
                             "Oekonomie_Radar.pdf", fig_rad.to_image(format="pdf")
@@ -847,10 +816,13 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
 
         # --- GESAMT EXPORT ---
         if "Gesamtübersicht (Tab 1)" in export_selection:
-            with st.spinner("Generiere Gesamtübersicht..."):
-                main_title_export = TITLES_MAP.get(
-                    "Gesamtübersicht (Tab 1)", f"Gesamtübersicht: {int(sel_current)} A"
+            with st.spinner("Generiere Gesamtübersicht (Thesis Style)..."):
+                ref_name_export = (
+                    df_sub.iloc[0]["ref_name"]
+                    if comp_mode_val == "device_ref" and "ref_name" in df_sub.columns
+                    else "Celsa ICG 6000/5 Kl.0,2S"
                 )
+                main_title_export = f"{int(sel_current)} A | Ref: {ref_name_export}"
                 fig_ex = make_subplots(
                     rows=2,
                     cols=3,
@@ -868,8 +840,8 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                             y=lim_y_p,
                             mode="lines",
                             line=dict(color="black", width=1.5, dash="dash"),
-                            showlegend=(c_idx == 1),
                             name="Klassengrenze",
+                            showlegend=(c_idx == 1),
                         ),
                         row=1,
                         col=c_idx,
@@ -896,6 +868,7 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                                 mode="lines+markers",
                                 name=row_first["final_legend"],
                                 line=dict(color=row_first["final_color"], width=2.5),
+                                marker=dict(size=7),
                                 legendgroup=row_first["final_legend"],
                                 showlegend=(c_idx == 1),
                             ),
@@ -920,9 +893,23 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
                     width=1123,
                     height=794,
                     font=dict(family="Serif", size=14, color="black"),
-                    legend=dict(orientation="h", y=-0.15, x=0.5),
+                    legend=dict(
+                        orientation="h",
+                        yanchor="top",
+                        y=-0.15,
+                        xanchor="center",
+                        x=0.5,
+                        bgcolor="rgba(255,255,255,0.8)",
+                        bordercolor="Black",
+                        borderwidth=1,
+                    ),
+                    margin=dict(l=60, r=30, t=80, b=120),
                 )
+                fig_ex.update_yaxes(title_text="Fehler [%]", row=1, col=1)
+                fig_ex.update_yaxes(title_text="StdAbw [%]", row=2, col=1)
                 fig_ex.update_yaxes(range=[-y_limit, y_limit], row=1)
+                for c in [1, 2, 3]:
+                    fig_ex.update_xaxes(title_text="Strom [% In]", row=2, col=c)
                 with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED) as zf:
                     zf.writestr(
                         f"Zusammenfassung_{int(sel_current)}A.pdf",
@@ -931,25 +918,73 @@ if st.sidebar.button("🔄 Export starten", type="primary"):
 
         # --- DETAIL EXPORT ---
         if "Detail-Phasen (Tab 1)" in export_selection:
-            # (Der Kürze halber wird der Detail-Export Block unverändert übernommen - Hier können ggf. auch Titel angepasst werden, ist aber komplexer da Phasen-abhängig)
             if "MATLAB" in engine_mode:
-                pass  # MATLAB Code (wie oben)
+                if not os.path.exists(matlab_exe):
+                    st.error("MATLAB nicht gefunden.")
+                else:
+                    with st.spinner("MATLAB rendert Details..."):
+                        work_dir_abs = ensure_working_dir()
+                        export_df = df_sub.copy().rename(
+                            columns={
+                                "final_color": "color_hex",
+                                "final_legend": "legend_name",
+                            }
+                        )
+                        export_df["trace_id"] = export_df["legend_name"]
+                        export_df.drop_duplicates(
+                            subset=["trace_id", "target_load", "phase"], keep="last"
+                        ).to_csv(
+                            os.path.join(work_dir_abs, "plot_data.csv"), index=False
+                        )
+                        with open(
+                            os.path.join(work_dir_abs, "create_plots.m"), "w"
+                        ) as f:
+                            f.write(
+                                MATLAB_SCRIPT_TEMPLATE.replace(
+                                    "ACC_CLASS_PH", str(acc_class)
+                                )
+                                .replace("Y_LIMIT_PH", str(y_limit))
+                                .replace("NOMINAL_CURRENT_PH", str(int(sel_current)))
+                            )
+                        try:
+                            subprocess.run(
+                                [matlab_exe, "-batch", "create_plots"],
+                                cwd=work_dir_abs,
+                                check=True,
+                            )
+                            [
+                                zipfile.ZipFile(
+                                    zip_buffer, "a", zipfile.ZIP_DEFLATED
+                                ).write(os.path.join(work_dir_abs, f), f)
+                                for f in os.listdir(work_dir_abs)
+                                if f.endswith(".pdf")
+                            ]
+                            st.success("✅ Details exportiert")
+                        except Exception as e:
+                            st.error(f"MATLAB Fehler: {e}")
             else:
-                with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED) as zf:
-                    for ph in PHASES:
-                        fig_s = create_single_phase_figure(
-                            df_sub,
-                            ph,
-                            acc_class,
-                            y_limit,
-                            show_err_bars,
-                            title_prefix=f"{int(sel_current)} A",
-                        )
-                        zf.writestr(
-                            f"Detail_{ph}_{int(sel_current)}A.pdf",
-                            fig_s.to_image(format="pdf", width=1123, height=794),
-                        )
-            st.success("✅ Details exportiert")
+                with st.spinner("Python generiert Details..."):
+                    ref_name_detail = (
+                        df_sub.iloc[0]["ref_name"]
+                        if comp_mode_val == "device_ref"
+                        and "ref_name" in df_sub.columns
+                        else "Celsa ICG 6000/5 Kl.0,2S"
+                    )
+                    with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED) as zf:
+                        for ph in PHASES:
+                            fig_s = create_single_phase_figure(
+                                df_sub,
+                                ph,
+                                acc_class,
+                                y_limit,
+                                show_err_bars,
+                                title_prefix=f"{int(sel_current)} A | {ref_name_detail}",
+                            )
+                            zf.writestr(
+                                f"Detail_{ph}_{int(sel_current)}A.pdf",
+                                fig_s.to_image(format="pdf", width=1123, height=794),
+                            )
+                    st.success("✅ Details exportiert")
 
         st.session_state["zip_data"] = zip_buffer.getvalue()
 
@@ -966,11 +1001,10 @@ tab1, tab2, tab3 = st.tabs(
 )
 
 with tab1:
-    # Hier verwenden wir den custom Title aus der Map
-    custom_title_tab1 = TITLES_MAP.get(
-        "Gesamtübersicht (Tab 1)", f"Gesamtübersicht: {int(sel_current)} A"
-    )
-
+    if comp_mode_val == "device_ref" and "ref_name" in df_sub.columns:
+        ref_name_main = df_sub.iloc[0]["ref_name"]
+    else:
+        ref_name_main = "Celsa ICG 6000/5 Kl.0,2S"
     fig_main = make_subplots(
         rows=2,
         cols=3,
@@ -1033,7 +1067,7 @@ with tab1:
                     col=col_idx,
                 )
     fig_main.update_layout(
-        title=custom_title_tab1,
+        title=f"Gesamtübersicht: {int(sel_current)} A | Ref: {ref_name_main}",
         template="plotly_white",
         height=800,
         legend=dict(orientation="h", y=-0.15, x=0.5),
@@ -1049,8 +1083,6 @@ with tab1:
 
 with tab2:
     st.markdown("### 💰 Preis/Leistung & Varianten-Vergleich")
-
-    # 1. Daten aggregieren
     df_err = (
         df_sub.groupby("unique_id")
         .agg(
@@ -1094,33 +1126,29 @@ with tab2:
     )
     df_err["volumen"] = (df_err["vol_t"] * df_err["vol_b"] * df_err["vol_h"]) / 1000.0
 
-    # --- DEFINITION DER NAMEN ---
-    Y_OPTIONS_MAP = {
-        "Fehler Niederstrom": "err_nieder",
-        "Fehler Nennstrom": "err_nom",
-        "Fehler Überlast": "err_high",
-        "Preis (€)": "preis",
-        "Volumen (Gesamt)": "volumen",
-        "Breite (B)": "vol_b",
-        "Höhe (H)": "vol_h",
-        "Tiefe (T)": "vol_t",
-    }
-    REVERSE_Y_MAP = {v: k for k, v in Y_OPTIONS_MAP.items()}
-
     if not df_err.empty:
         c1, c2, c3 = st.columns(3)
         with c1:
-            x_sel = st.selectbox("X-Achse:", ["Preis (€)", "Volumen (dm³)"])
+            x_sel = st.selectbox("X-Achse:", ["Preis (€)", "Volumen (cm³)"])
             x_col = "preis" if "Preis" in x_sel else "volumen"
-
         with c2:
-            y_selection = st.multiselect(
-                "Y-Achse (Mehrfachauswahl):",
-                options=list(Y_OPTIONS_MAP.keys()),
-                default=["Fehler Nennstrom"],
+            y_sel = st.selectbox(
+                "Y-Achse:",
+                list(
+                    {
+                        "Fehler Niederstrom": "err_nieder",
+                        "Fehler Nennstrom": "err_nom",
+                        "Fehler Überlast": "err_high",
+                        "Alle": "all",
+                    }.keys()
+                ),
             )
-            y_cols_selected = [Y_OPTIONS_MAP[label] for label in y_selection]
-
+            y_col = {
+                "Fehler Niederstrom": "err_nieder",
+                "Fehler Nennstrom": "err_nom",
+                "Fehler Überlast": "err_high",
+                "Alle": "all",
+            }[y_sel]
         with c3:
             chart_type = st.radio(
                 "Diagramm-Typ:",
@@ -1135,168 +1163,183 @@ with tab2:
             )
 
         color_map_dict = dict(zip(df_err["legend_name"], df_err["color_hex"]))
-
-        if not y_cols_selected:
-            st.warning("Bitte wähle mindestens einen Wert für die Y-Achse aus.")
-        else:
-            # --- DIAGRAMM LOGIK ---
-            if chart_type == "Scatter":
-                title_str = TITLES_MAP.get("Scatter-Plot", f"{x_sel} vs. Auswahl")
+        if chart_type == "Scatter":
+            if y_col == "all":
                 df_long = df_err.melt(
-                    id_vars=["unique_id", "legend_name", x_col, "color_hex"],
-                    value_vars=y_cols_selected,
-                    var_name="Metrik_Intern",
-                    value_name="Wert",
+                    id_vars=[
+                        "unique_id",
+                        "wandler_key",
+                        "legend_name",
+                        "preis",
+                        "volumen",
+                    ],
+                    value_vars=["err_nieder", "err_nom", "err_high"],
+                    var_name="Fehlerart",
+                    value_name="Fehlerwert",
                 )
-                df_long["Metrik"] = df_long["Metrik_Intern"].map(REVERSE_Y_MAP)
                 fig_eco = px.scatter(
                     df_long,
                     x=x_col,
-                    y="Wert",
+                    y="Fehlerwert",
                     color="legend_name",
-                    symbol="Metrik",
-                    size=[15] * len(df_long),
+                    symbol="Fehlerart",
+                    size=[12] * len(df_long),
                     color_discrete_map=color_map_dict,
-                    title=title_str,
+                    title=f"{x_sel} vs. Fehler",
                 )
-                st.plotly_chart(fig_eco, use_container_width=True)
-
-            elif chart_type == "Performance-Index":
-                title_str = TITLES_MAP.get("Performance-Index", "Performance Index")
-                norm_cols = []
-                df_err["total_score"] = 0.0
-                for label in y_selection:
-                    raw_col = Y_OPTIONS_MAP[label]
-                    norm_col_name = label
-                    mx_val = df_err[raw_col].abs().max()
-                    if mx_val == 0:
-                        mx_val = 1.0
-                    df_err[norm_col_name] = (df_err[raw_col].abs() / mx_val) * 100
-                    df_err["total_score"] += df_err[norm_col_name]
-                    norm_cols.append(norm_col_name)
-
-                df_sorted = df_err.sort_values("total_score", ascending=True)
-                df_long = df_sorted.melt(
-                    id_vars=["legend_name"],
-                    value_vars=norm_cols,
-                    var_name="Kategorie",
-                    value_name="Normalisierter Anteil (%)",
+            else:
+                fig_eco = px.scatter(
+                    df_err,
+                    x=x_col,
+                    y=y_col,
+                    color="legend_name",
+                    size=[15] * len(df_err),
+                    color_discrete_map=color_map_dict,
+                    title=f"{x_sel} vs. {y_sel}",
                 )
-                fig_eco = px.bar(
-                    df_long,
-                    y="legend_name",
-                    x="Normalisierter Anteil (%)",
-                    color="Kategorie",
-                    orientation="h",
-                    title=title_str,
-                )
-                fig_eco.update_layout(
-                    yaxis=dict(autorange="reversed"),
-                    legend=dict(orientation="h", y=-0.2, x=0.5, xanchor="center"),
-                )
-                st.plotly_chart(fig_eco, use_container_width=True)
-
-            elif chart_type == "Heatmap":
-                title_str = TITLES_MAP.get("Heatmap", "Heatmap der Auswahl")
+            st.plotly_chart(fig_eco, use_container_width=True)
+        elif chart_type == "Performance-Index":
+            mx_p = df_err["preis"].max() or 1
+            mx_v = df_err["volumen"].max() or 1
+            mx_en = df_err["err_nieder"].abs().max() or 0.01
+            df_err["Norm: Preis"] = (df_err["preis"] / mx_p) * 100
+            df_err["Norm: Volumen"] = (df_err["volumen"] / mx_v) * 100
+            df_err["Norm: Fehler"] = (df_err["err_nieder"].abs() / mx_en) * 100
+            df_err["total_score"] = (
+                df_err["Norm: Preis"] + df_err["Norm: Volumen"] + df_err["Norm: Fehler"]
+            )
+            df_long = df_err.sort_values("total_score").melt(
+                id_vars=["legend_name"],
+                value_vars=["Norm: Preis", "Norm: Volumen", "Norm: Fehler"],
+                var_name="Kategorie",
+                value_name="Anteil (%)",
+            )
+            fig_eco = px.bar(
+                df_long,
+                y="legend_name",
+                x="Anteil (%)",
+                color="Kategorie",
+                orientation="h",
+                title="Performance Index",
+                color_discrete_map={
+                    "Norm: Preis": "#1f77b4",
+                    "Norm: Volumen": "#aec7e8",
+                    "Norm: Fehler": "#d62728",
+                },
+            )
+            fig_eco.update_layout(yaxis=dict(autorange="reversed"))
+            st.plotly_chart(fig_eco, use_container_width=True)
+        elif chart_type == "Heatmap":
+            if y_col == "all":
                 df_long = df_err.melt(
                     id_vars=["legend_name"],
-                    value_vars=y_cols_selected,
-                    var_name="Kategorie_Intern",
-                    value_name="Wert",
+                    value_vars=["err_nieder", "err_nom", "err_high"],
+                    var_name="Fehlerart",
+                    value_name="Fehler",
                 )
-                df_long["Kategorie"] = df_long["Kategorie_Intern"].map(REVERSE_Y_MAP)
                 fig_eco = px.density_heatmap(
                     df_long,
                     x="legend_name",
-                    y="Kategorie",
-                    z="Wert",
+                    y="Fehlerart",
+                    z="Fehler",
                     color_continuous_scale="Blues",
-                    title=title_str,
+                    title="Heatmap",
                 )
-                st.plotly_chart(fig_eco, use_container_width=True)
-
-            elif chart_type == "Boxplot":
-                title_str = TITLES_MAP.get(
-                    "Boxplot", f"Verteilung: {', '.join(y_selection)}"
+            else:
+                fig_eco = px.density_heatmap(
+                    df_err,
+                    x=x_col,
+                    y=y_col,
+                    marginal_x="histogram",
+                    marginal_y="histogram",
+                    title=f"Dichte: {x_sel} vs {y_sel}",
                 )
+            st.plotly_chart(fig_eco, use_container_width=True)
+        elif chart_type == "Boxplot":
+            if y_col == "all":
                 df_long = df_err.melt(
                     id_vars=["legend_name"],
-                    value_vars=y_cols_selected,
-                    var_name="Kategorie_Intern",
-                    value_name="Wert",
+                    value_vars=["err_nieder", "err_nom", "err_high"],
+                    var_name="Fehlerart",
+                    value_name="Fehler",
                 )
-                df_long["Kategorie"] = df_long["Kategorie_Intern"].map(REVERSE_Y_MAP)
                 fig_eco = px.box(
                     df_long,
                     x="legend_name",
-                    y="Wert",
-                    color="Kategorie",
-                    title=title_str,
+                    y="Fehler",
+                    color="Fehlerart",
+                    title="Fehlerverteilung",
                 )
-                st.plotly_chart(fig_eco, use_container_width=True)
-
-            elif chart_type == "Pareto":
-                title_str = TITLES_MAP.get("Pareto", "Pareto-Analyse")
-                target_y = y_cols_selected[0]
-                target_label = y_selection[0]
-                df_sorted = df_err.sort_values(by=target_y, ascending=False)
-                df_sorted["cum_pct"] = (
-                    df_sorted[target_y].cumsum() / df_sorted[target_y].sum() * 100
+            else:
+                fig_eco = px.box(
+                    df_err,
+                    x=x_col,
+                    y=y_col,
+                    points="all",
+                    hover_data=["legend_name"],
+                    title=f"Verteilung: {y_sel} über {x_sel}",
                 )
-                fig_par = make_subplots(specs=[[{"secondary_y": True}]])
-                fig_par.add_trace(
-                    go.Bar(
-                        x=df_sorted["legend_name"],
-                        y=df_sorted[target_y],
-                        name=target_label,
-                        marker_color=df_sorted["color_hex"],
-                    ),
-                    secondary_y=False,
-                )
-                fig_par.add_trace(
-                    go.Scatter(
-                        x=df_sorted["legend_name"],
-                        y=df_sorted["cum_pct"],
-                        name="Kumulativ %",
-                        mode="lines+markers",
-                        line=dict(color="red"),
-                    ),
-                    secondary_y=True,
-                )
-                fig_par.update_layout(title=title_str)
-                st.plotly_chart(fig_par, use_container_width=True)
-
-            elif chart_type == "Radar":
-                title_str = TITLES_MAP.get("Radar", "Radar-Vergleich")
-                fig_r = go.Figure()
-                categories = y_selection
-                max_vals = {}
-                for col_name in y_cols_selected:
-                    m = df_err[col_name].max()
-                    max_vals[col_name] = m if m != 0 else 1
-
-                for i, row in df_err.iterrows():
-                    r_vals = []
-                    for col_name in y_cols_selected:
-                        val = row[col_name]
-                        norm_val = val / max_vals[col_name]
-                        r_vals.append(norm_val)
-                    r_vals.append(r_vals[0])
-                    theta_vals = categories + [categories[0]]
-                    fig_r.add_trace(
-                        go.Scatterpolar(
-                            r=r_vals,
-                            theta=theta_vals,
-                            fill="toself",
-                            name=row["legend_name"],
-                            line_color=row["color_hex"],
-                        )
+            st.plotly_chart(fig_eco, use_container_width=True)
+        elif chart_type == "Pareto":
+            target_y = y_col if y_col != "all" else "err_nom"
+            df_sorted = df_err.sort_values(by=target_y, ascending=False)
+            df_sorted["cum_pct"] = (
+                df_sorted[target_y].cumsum() / df_sorted[target_y].sum() * 100
+            )
+            fig_par = make_subplots(specs=[[{"secondary_y": True}]])
+            fig_par.add_trace(
+                go.Bar(
+                    x=df_sorted["legend_name"],
+                    y=df_sorted[target_y],
+                    name="Fehler",
+                    marker_color=df_sorted["color_hex"],
+                ),
+                secondary_y=False,
+            )
+            fig_par.add_trace(
+                go.Scatter(
+                    x=df_sorted["legend_name"],
+                    y=df_sorted["cum_pct"],
+                    name="Kumulativ %",
+                    mode="lines+markers",
+                    line=dict(color="red"),
+                ),
+                secondary_y=True,
+            )
+            st.plotly_chart(fig_par, use_container_width=True)
+        elif chart_type == "Radar":
+            fig_r = go.Figure()
+            cats = ["Preis", "Volumen", "Err Nieder", "Err Nenn", "Err High"]
+            mx_vals = [
+                df_err["preis"].max() or 1,
+                df_err["volumen"].max() or 1,
+                df_err["err_nieder"].max() or 0.01,
+                df_err["err_nom"].max() or 0.01,
+                df_err["err_high"].max() or 0.01,
+            ]
+            for i, row in df_err.iterrows():
+                vals = [
+                    row["preis"] / mx_vals[0],
+                    row["volumen"] / mx_vals[1],
+                    row["err_nieder"] / mx_vals[2],
+                    row["err_nom"] / mx_vals[3],
+                    row["err_high"] / mx_vals[4],
+                    row["preis"] / mx_vals[0],
+                ]
+                fig_r.add_trace(
+                    go.Scatterpolar(
+                        r=vals,
+                        theta=cats + [cats[0]],
+                        fill="toself",
+                        name=row["legend_name"],
+                        line_color=row["color_hex"],
                     )
-                fig_r.update_layout(
-                    polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
-                    title=title_str,
                 )
-                st.plotly_chart(fig_r, use_container_width=True)
+            fig_r.update_layout(
+                polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
+                title="Radar-Vergleich",
+            )
+            st.plotly_chart(fig_r, use_container_width=True)
 
 with tab3:
     st.markdown("### ⚙️ Stammdaten pro Messdatei")
