@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+<title>Magnetisierungskurve und Hystereseschleife</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+<meta name="description" content="Es gibt Informationen zur Magnetisierungskurve und Hinweise zu ferromagnetischen Werkstoffen.">
+<meta name="keywords" content="Magnetspule, Hysteresekurve, Ferromagnetismus">
+<meta name="author" content="Detlef Mietke">
+
+<link rel="icon" type="image/png" href="../bilder/favicon.png" sizes="32x32">
+<link rel="stylesheet" type="text/css" href="../main.css">
+<link rel="stylesheet" type="text/css" href="../modal_main.css">
+<link rel="stylesheet" type="text/css" media="print" href="../printcss.css">
+
+<script src="../scripte/js_resize.js"></script>
+<script src="../scripte/suchscript.js"></script>
+<script src="../scripte/datapool.js"></script>
+
+</head>
+
+<body>
+
+<header>
+<p>Informations- und Kommunikationstechnik</p>
+</header>
+<div id="menu">
+<nav class="horizontal">
+    <a href="../index.html" class="zweireihig">Elektroniktutor<br>Startseite</a>
+    <a href="../ephysik1.html" class="zweireihig">Elektrophysik<br>Elektrizität &amp; Materie</a>
+    <a href="../ephysik2.html" class="zweireihig aktiv">Elektrophysik<br>Elektromagnetismus</a>
+    <a href="../ephysik3.html" class="zweireihig">Elektrophysik<br>Spezielle Grundlagen</a>
+    <div class="suchitem zentriert">
+        <form action="../sucherg.html" onsubmit="return testeEingabe()">
+            <input type="text" id="schlagwort" value="" size="20" maxlength="20" placeholder="Suchbegriff oder Wortteil">
+            <button type="submit">Suchen</button>
+        </form>
+    </div>
+</nav>
+</div>
+
+<main class="informationen">
+<article>
+<h1>Magnetisierungskurve und Hystereseschleife</h1>
+<p>
+Eine Spule ohne Kernmaterial wird Luftspule genannt. Wird sie vom elektrischen Strom durchflossen, dann erzeugt sie ein Magnetfeld. Der magnetischen Feldstärke ist der Buchstabe H zugeordnet.
+Das Feld kann durch gedachte Feldlinien skizziert werden. Je mehr Feldlinien einen vorgegebenen Bereich, zum Beispiel ein im Feld angeordnetes Flächenelement durchströmen, desto höher ist dort die Feldliniendichte und somit die Feldstärke. Der magnetischen Flussdichte ist die Kenngröße B zugeordnet und direkt proportional zur Feldstärke H.
+</p>
+<p>
+Die Ausbreitung magnetischer Felder ist vom Material abhängig. Luft ist ein schlechter magnetischer Leiter, folglich ist die Feldliniendichte im Inneren eine kernlosen Luftspule gering und ihr gesamtes Magnetfeld relativ klein. Die Magnetisierungskurve, auch magnetische Zustandskurve genannt, stellt grafisch die Abhängigkeit der Feldliniendichte B in der physikalischen Einheit Tesla (T) von der magnetischen Feldstärke H in der Maßeinheit (A/m) dar. Der Kurvenverlauf ist vom Werkstoff und seiner relativen Permeabilität &mu;<span class="tief">r</span> abhängig. Dieser Materialwert ist nicht konstant und variiert mit der magnetischen Feldstärke.
+</p>
+<img class="mittig" src="ephy_pict/m_kurve.png" alt="Magnetisierungsdiagramme" width="580" height="180">
+<p>
+Umgibt die Spule einen magnetisierbaren Kern, so konzentriert er die Feldlinien und vergrößert die magnetische Kraft der vom gleichen Strom durchflossenen Spule. Das Magnetfeld der Spule verschiebt die im Kernwerkstoff vorhandenen <a href="magnet.html#weissbezirk">Bloch-Wände der Weiss-Bezirke</a> zum Rand des Kerns. Wird der Erregerstrom erhöht, so nimmt die Feldstärke zu und im Kernmaterial werden alle Bloch-Wände solange an den Rand verschoben, bis das Material aus einem einzigen Weiss-Bezirk besteht.
+</p>
+<p>
+Bei weiterer Erhöhung der Feldstärke werden die Elektronenspins der Molekularmagnete zur Richtung des Spulenmagnetfelds ausgerichtet. Sind alle Molekularmagnete ausgerichtet und wird die Feldstärke weiter erhöht, so nimmt die Flussdichte nur noch unwesentlich zu. Der Kern hat seine magnetische Sättigung erreicht.
+</p>
+<p class="memoblock">
+Ein ferromagnetischer Kern (Eisenkern) erhöht die Flussdichte B einer Magnetspule.<br>
+Die Permeabilität ferromagnetischer Werkstoffe ist vom Material und der magnetischen Vorbehandlung abhängig.<br>
+Die Permeabilität durchläuft ein Maximum und ist nicht linear von der magnetischen Feldstärke abhängig.
+</p>
+<p>
+Beim Versuchsbeginn soll der Kernwerkstoff magnetisch neutral sein. Die oben dargestellte Magnetisierungskurve wird bei der erstmaligen Magnetisierung eines ferromagnetischen Werkstoffs durchlaufen.
+Im folgenden Bild ist es die blaue Kurve, die sogenannte Neukurve. Mit zunehmender Feldstärke erreicht sie einen für den Werkstoff typischen Sättigungsbereich. Das Magnetfeld der Spule hat den Kernwerkstoff magnetisiert.
+</p>
+<img class="mittig" src="ephy_pict/hyster.png" alt="Hysteresekurve" width="360" height="290">
+<p>
+Wird von der Sättigung ausgehend die magnetische Feldstärke der Spule verringert, so nimmt der Magnetismus im Kern nur langsam ab. Die Flussdichte verringert sich langsamer und die neue Kurve verläuft deutlich oberhalb der Kurve der Erstmagnetisierung. Bei der Feldstärke H&nbsp;=&nbsp;0 ist das Magnetfeld der Spule null. Im Kernwerkstoff bleibt ein Restmagnetismus und die B-Achse wird bei
+B<span class="tief">r</span> dem Remanenzwert geschnitten.
+</p>
+<p>
+Wird der Spulenstrom umgepolt und wieder erhöht, dann wird der Restmagnetismus durch eine entgegen gerichtete Feldstärke beseitigt. Die Feldstärke H<span class="tief">c</span>, bei der die Flussdichte den Wert B&nbsp;=&nbsp;0 angenommen hat, wird Koerzitivfeldstärke genannt. Durch weitere Erhöhung der Feldstärke wird der Kernwerkstoff ummagnetisiert und erreicht wieder die magnetische Sättigung. Wird die Feldstärke wieder auf H&nbsp;=&nbsp;0 reduziert, so durchläuft die Kurve den unteren Zweig bis zur negativen Remanenz, die erst bei positiver Koerzitivfeldstärke den Wert null erreicht. Die Neukurve wird nur einmal durchlaufen, daher sind die Zustände B&nbsp;=&nbsp;0 und H&nbsp;=&nbsp;0 vor der Erstmagnetisierung nicht identisch mit B&nbsp;=&nbsp;0 für
+H&nbsp;=&nbsp;&plusmn;&nbsp;H<span class="tief">c</span>.
+</p>
+<p>
+Vor der Erstmagnetisierung  wird vermutet, dass im Kernmaterial alle Weiss-Bezirke statistisch orientiert sind. Das Kernmaterial ist nach außen magnetisch neutral. Nach der Erstmagnetisierung und dem Abschalten des Magnetfelds der Spule bleiben im Kern einige Weiss-Bezirke ausgerichtet. Das Kernmaterial bleibt magnetisch, messbar als Remanenz. Die Entmagnetisierung kann erst durch ein magnetisches Gegenfeld, der Koerzitivfeldstärke erfolgen. Ab dem Punkt werden durch weitere Erhöhung der Spulenfelds die Weiss-Bezirke in die Gegenrichtung umorientiert. Die Neukurve eines einmal magnetisierten Werkstoffs wird nicht mehr durchlaufen.
+</p>
+<p>
+An der magnetischen Zustandskurve kann für jede benötigte Flussdichte die erforderliche Feldstärke abgelesen werden. Die zugehörige Durchflutung errechnet sich durch Multiplikation mit der mittleren Feldlinienlänge. Der magnetische Fluss ist das Produkt aus Flussdichte und der Querschnittsfläche des Kerns.
+</p>
+<p class="memoblock">
+Die Remanenz ist die bei stromloser Spule im Eisenkern bleibende magnetische Flussdichte.<br>
+Die Koerzitivfeldstärke ist die Feldstärke, die zur Aufhebung der Remanenz erforderlich ist.
+</p>
+<p>
+Der dargestellte Kurvenverlauf wird Hystereseschleife genannt (Hysterese im Sinn von Verzögerung). Liegt die Erregerspule an einer sinusförmigen Wechselspannung, dann wird die Hysteresekurve periodisch je einmal durchlaufen. Die Molekularmagnete werden periodisch umorientiert und die Bloch-Wände erfahren eine ständige Verschiebung. Diese dazu notwendige Energie ist ein Teil der elektrischen Leistung, die der Spule zugeführt werden muss. Die Leistung zur Ummagnetisierung erwärmt den Kernwerkstoff und wird als Hystereseverlust bezeichnet. Je größer die Dichte des Kernwerkstoffs und je höher die Frequenz des Erregerstroms ist, desto höher sind die Hystereseverluste. Abhängig vom Kernmaterial gibt es eine Grenzfrequenz, ab der eine komplette Umorientierung der Weiss-Bezirke nicht mehr möglich ist.
+</p>
+<img class="mittig" src="ephy_pict/entmagn.png" alt="Entmagnetisierung durch Wechselfeld" width="160" height="190">
+<p>
+Die Entmagnetisierung kann durch einen stetig abnehmenden Wechselstrom höherer Frequenz erfolgen. Dabei wird die Hystereseschleife bis zum Nullpunkt spiralartig mit immer kleineren H- und B-Werten durchlaufen. Alle magnetisierbaren Werkstoffe verlieren oberhalb einer Curie-Temperatur schlagartig ihre magnetischen Eigenschaften. Diese Eigenschaft wird in Thermoschaltern genutzt. Die Curie-Temperatur für Eisen beträgt 770&nbsp;&deg;C, für Nickel 360&nbsp;&deg;C und für Kobalt 1115&nbsp;&deg;C. Es gibt spezielle Legierungen mit wesentlich geringeren Curie-Temperaturen.
+</p>
+<h3>Transformatorspulen</h3>
+<p>
+Transformatoren sollen elektrische Energie möglichst verlustfrei übertragen. Ihr Prinzip beruht auf der Energiewandlung von elektrischer- in magnetische- und wieder in elektrische Energie.
+Die Transformatorenkerne bestehen aus ferromagnetischem Material und haben keinen Luftspalt. Der Trafokern bündelt und leitet die Magnetfeldlinien sehr gut. Er ist magnetisch niederohmig
+und die Energieverluste im Kern sind gering.
+</p>
+<h3>Drosselspulen</h3>
+<div id="ferromagnet"></div>
+<p>
+Magnetspulen auf magnetisierbaren Kernen mit einem genau bemessenen Luftspalt werden Drosselspulen genannt. Für Wechselstrom haben sie wegen des hohen magnetischen Widerstands einen hohen induktiven Blindwiderstand, während der geringe ohmsche Drahtwiderstand der Spule den Gleichstrom fast ungehindert durchlässt. Drosselspulen werden in getakteten Netzteilen als Energiespeicher eingesetzt.
+In Netzteilen großer Leistung unterdrücken sie mit dem hohen magnetischen Widerstand nach der Gleichrichtung die Frequenzen der sogenannten Brummspannung und dienen der Glättung zur Gleichspannung.
+Sie werden auch zur Strombegrenzung in Schaltungen mit Gasentladungsröhren, beispielsweise den Leuchtstofflampen eingesetzt.
+</p>
+<h2>Ferromagnetische Werkstoffe</h2>
+<h3>Weichmagnetische Werkstoffe</h3>
+<p>
+Die Hystereseschleife weichmagnetischer Werkstoffe ist schmal. Sie haben eine sehr gute magnetische Leitfähigkeit und hohe relative Permeabilitätswerte &mu;<span class="tief">r</span>. Der maximale
+&mu;<span class="tief">r</span>-Wert wird schon bei kleineren Feldstärken schnell erreicht. Da die Neukurve schnell ansteigt ist das Verhältnis &Delta;B&nbsp;/&nbsp;&Delta;H bis zum Erreichen von
+&mu;<span class="tief">r max</span> groß. Weichmagnetische Werkstoffe zeichnen sich durch kleine Koerzitivfeldstärken aus. Sie werden vielseitig in der Elektrotechnik eingesetzt, z. B. im Elektromaschinenbau als Kernmaterial der Feld- und Ankerwicklungen. Die meisten Magnetkerne von Spulen, Drosseln und Transformatoren sind aus weichmagnetischen Werkstoffen.
+</p>
+<h3>Hartmagnetische Werkstoffe</h3>
+<p>
+Diese Werkstoffe haben oft kleinere Permeabilitätswerte, aber wesentlich höhere Koerzitivfeldstärken. Die Hystereseschleife umschließt eine große Fläche und zur Ummagnetisierung ist viel Energie notwendig. Die ideale Hystereseschleife eines hartmagnetischen Werkstoffs umschließt eine Rechteckfläche. Bis zum Erreichen der Koerzitivfeldstärke bleibt der Remanenzmagnetismus unverändert hoch und fällt dann auf null. Dauermagnete in Messinstrumenten und Lautsprechern bestehen aus hartmagnetischen Werkstoffen, ebenso wie die früher verwendeten Magnetspeicherringe. Die Güte eines Dauermagneten wird durch das Produkt aus Remanenz und Koerzitivfeldstärke bestimmt.
+</p>
+<h3>Permalloy Werkstoffe &mdash; Mu-Metall</h3>
+<p>
+Es sind weichmagnetische Nickel-Eisen-Legierungen mit Kupfer, Chrom und Molybdän Anteilen, aus denen Bleche und Drähte gefertigt werden. Magnetkerne werden auch aus Metallpulver hergestellt, das mit elektrisch isolierenden Bindemitteln in die endgültige Form gepresst und einem abschließenden Glühprozess unterzogen wird. Die Permeabilitätswerte liegen zwischen 25&nbsp;...&nbsp;350, die maximale magnetische Flussdichte für die magnetische Sättigung wird bei B&nbsp;=&nbsp;0,8&nbsp;Tesla erreicht.
+</p>
+<h3>Pulverkerne</h3>
+<p>
+Ferromagnetische Metallpulver werden mit elektrisch nicht leitenden Bindemitteln in einer Pressform gesintert. Die gegenseitige Isolierung der Metallkörner vermindert das Entstehen großer Wirbelstromverluste. Im Vergleich zum Kern aus lamellierten Blechen bildet das Isolationsmaterial im Metallpulverkern vielfach verteilte Luftspalte und verringert die magnetische Leitfähigkeit.
+Die Hersteller geben einen Permeabilitätsfaktor für den linearen Arbeitsbereich des Kernmaterials an. Pulverkerne erreichen nur langsam die magnetische Sättigung. Sie eignen sich besonders gut
+für Speicherdrosseln von Schaltnetzteilen, wo Schaltspannungen höherer Frequenzen mit Gleichspannungen überlagert sind.
+</p>
+<h3>Eisenpulverkerne</h3>
+<p>
+Sie bestehen aus feinst gemahlenem Reineisen. Es wird mit einem Pulver aus Isolations- und Bindematerial vermischt, in Form gebracht und unter hohem Druck ausgehärtet. Permeabilitätswerte liegt zwischen
+&mu;<span class="tief">r</span>&nbsp;=&nbsp;10&nbsp;...&nbsp;125. Kerne hoher &mu;<span class="tief">r</span>-Werte eignen sich für Frequenzen bis 75&nbsp;kHz. Niedrige Permeabilitätswerte werden bevorzugt im hohen Frequenzbereich bis zu einigen 100&nbsp;MHz eingesetzt.
+</p>
+<h3>Metallpulverkerne</h3>
+<p>
+Es sind ferromagnetische Legierungen aus Eisen, Nickel und Molybdän, die als Metallpulver mit elektrisch isolierenden Bindemitteln gemischt im thermischen Pressverfahren zur endgültigen Form aushärten.
+Die Sättigungswerte der magnetischen Flussdichte liegen zwischen 0,8&nbsp;...&nbsp;1,6&nbsp;T. Die Permeabilitäten zwischen 15&nbsp;...&nbsp;550 sind nicht allzu hoch. Die Pulverkerne eignen sich für Frequenzen zwischen 0,5&nbsp;...&nbsp;2&nbsp;MHz.
+</p>
+<div id="wirbel"></div>
+<div id="weiss"></div>
+<h3>Ferrimagnetische Werkstoffe &ndash; Ferrite</h3>
+<p>
+Bei höheren Betriebsfrequenzen reicht ein Lamellieren der Magnetkerne nicht mehr aus. Die Verluste bei der Ummagnetisierung nehmen mit der Frequenz proportional zu und mit den ebenfalls zunehmenden
+<a href="#mb1">Wirbelstromverlusten</a> erwärmt sich der Magnetkern sehr stark. Abhilfe schafft eine weitere Verkleinerung der magnetisierbaren Bereiche in den Kernmaterialien, die gleichzeitig gegeneinander elektrische isoliert sein müssen.
+</p>
+<p>
+Ferrite zeichnen sich durch eine sehr geringe elektrische aber sehr gute magnetische Leitfähigkeit aus. Es sind keramische Sinterwerkstoffe aus meist dreiwertigem Eisenoxid
+Fe<span class="tief">2</span>O<span class="tief">3</span> mit Zusätzen von zweiwertigen Metalloxiden wie NiO, MnO, CoO und ZnO. Die Ausgangskomponenten werden gesintert, fein gemahlen, bis die Korngrößen im Bereich der <a href="#mb2">Weiss-Bezirke</a> liegen. Die Pulver werden in die endgültige Form gepresst und unter Schutzgas erneut gesintert. Mit ihren sehr hohen spezifischen Widerstandswerten verhalten sie sich wie elektrische Isolatoren und für einen weiten Frequenzbereich bleiben die Wirbelstromverluste sehr gering. Im Vergleich mit ferromagnetischen Werkstoffen sind ihre relativen Permeabilitätswerte kleiner.
+</p>
+<p>
+Weichmagnetische Ferrite weisen eine schmale Hystereseschleife auf. Ihre Sättigungsinduktion liegt bei 0,35&nbsp;T. Die Verluste bei der Ummagnetisierung und die Koerzitivfeldstärke sind klein.
+Verwendet werden sie in Kernen von Drosselspulen, Übertragerspulen, in Schwingkreisen, Filtern, Impulstransformatoren und elektromagnetischen Wandlern. Die Tonköpfe von Magnetaufzeichnungsgeräten bestehen aus diesen Ferriten. Sie lassen sich leicht ummagnetisieren und haben fast keinen Restmagnetismus.
+</p>
+<p>
+Vormagnetisierte Ferrite, sog. Ferritdauermagnete werden in Kleinstmotoren und in der Relaistechnik eingebaut. Ferrite mit hohen Koerzitivfeldstärken, etwas kleineren Remanenzwerten und Sättigungsinduktionen bis 0,2&nbsp;T wurden in der Speichertechnik verwendet.
+</p>
+</article>
+
+<!-- einblendbare Infobox -->
+<div class="modalbox" id="mb1">
+<div class="inhalt">
+<h2>Wirbelstrom <a href="#wirbel">&#10006;</a></h2>
+<p>
+Ein magnetisches Wechselfeld induziert in einem elektrisch leitenden Material eine Spannung. Das Material kann ein Spulenkern sein, der wie eine in sich geschlossene Leiterschleife wirkt.
+Die Induktionsspannung im Kern wird dadurch kurzgeschlossen und bei guter Leitfähigkeit entstehen hohe Induktionsströme. Da feste Stromwege im massiven Kernmaterial fehlen, fließen die Ströme ungeordnet und werden Wirbelstrom genannt.
+</p>
+<p>
+Die frei werdende Energie wird dem magnetischen Erregerfeld entnommen. Jeder Wirbelstrompfad erzeugt selbst einen magnetischen Fluss, der dem Erregerfluss entgegengesetzt ist und diesen schwächt.
+In Abhängigkeit von der Kerndicke und der Erregerfrequenz kann das Kernmaterial im Inneren feldfrei und magnetisch unwirksam werden. Die Wirbelströme fließen dann nur noch an der Oberfläche des Magnetkerns. Die wirksame Permeabilität &mu; in Bezug zur Kernquerschnittsfläche ist dann kleiner als erwartet.
+</p>
+<p>
+Es lassen sich optimale Kernstärken in Abhängigkeit von der Frequenz des Erregerfeldes ermitteln. Bei 100&nbsp;Hz liegt der Wert bei 2&nbsp;mm, bei 1&nbsp;MHz sind es 0,05&nbsp;mm. Dickere Kerne werden aus gegeneinander isolierten Blechen der optimalen Kernstärke aufgebaut. Bei höheren Frequenzen verwendet man Ferrite. Bei 1&nbsp;GHz ist die Korngröße der Magnetpartikel von 0,001&nbsp;mm optimal.
+</p>
+<p>
+In vielen Fällen sind Wirbelströme unerwünscht, da sie als Verlustwärme auftreten. Technisch genutzt werden sie bei der induktiven Härtung oder zur Schmelze leitfähiger Materialien. Bei der Wirbelstrombremse dreht sich eine Kupfer- oder Aluminiummetallscheibe in einem Magnetfeld. Der Antrieb der Zählerscheibe im Haushaltsstromzähler beruht auf der Wirbelstromnutzung.
+</p>
+</div>
+</div>
+<!-- Ende der Infobox -->
+
+<!-- einblendbare Infobox -->
+<div class="modalbox" id="mb2">
+<div class="inhalt">
+<h2>Pierre Ernst Weiss <a href="#weiss">&#10006;</a></h2>
+<p>
+Nach dem französischen Physiker Pierre Ernst Weiss (1865 - 1940) werden submakroskopische Bereiche (10<sup>&minus;4</sup> bis 10<sup>&minus;6</sup> mm<sup>3</sup>) in ferromagnetischen kristallinen Stoffen als Weiss-Bezirke bezeichnet. Innerhalb dieser Bezirke, die sich oft nach der Kristallstruktur richten, sind die magnetischen Dipole parallel zueinander ausgerichtet. Die Grenze zwischen den Bereichen wird Bloch- oder N&eacute;el-Wand genannt. In einem nicht magnetisierten Festkörper sind die Weiss-Bezirke so verteilt, dass sich das magnetische Moment nach außen hin aufhebt.
+</p>
+<p>
+Bei einer erzwungenen Magnetisierung verschieben sich die Blochschen Wände nach außen und die Molekularmagnete richten sich nach dem Erregerfeld aus. Eine starke Magnetisierung verschiebt die Wände sprunghaft. Dieser Effekt kann hörbar gemacht werden. Sind alle Blochschen Wände nach außen verschoben, dann besteht der Festkörper aus einem einzigen Weiss-Bezirk.
+</p>
+<p>
+Wird das Erregerfeld weiter verstärkt, so werden die Spins in die Magnetfeldrichtung gedreht. Das Material ist dann magnetisch gesättigt. Wird das äußere Magnetfeld entfernt, dann bilden sich die Bloch-Wände von außen nach innen zurück. Bei vollständiger Rückbildung spricht man von magnetisch weichen Werkstoffen. Bleibt ein Restmagnetismus, die Remanenz bestehen, dann hat das Material magnetisch harte Eigenschaften wie ein Permanentmagnet.
+</p>
+</div>
+</div>
+<!-- Ende der Infobox -->
+</main>
+
+<footer>
+<ul>
+<li>2002&nbsp;&ndash;&nbsp;2026<br>&copy; Detlef Mietke</li>
+<li><a title="Info zum Datenschutz" href="../dsgvo.html">Datenschutz</a></li>
+<li><a href="../impr.html" title="In eigener Sache">Impressum</a></li>
+<li><a href="../kontakt.html" title="Kontakt per E-Mail">Kontakt</a></li>
+<li><a href="#"><span>&#9651;</span></a></li>
+</ul>
+</footer>
+
+</body>
+</html>
