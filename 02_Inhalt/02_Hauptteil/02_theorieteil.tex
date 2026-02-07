@@ -1,7 +1,10 @@
+% KAPITEL 1: Theoretische Grundlagen (02_theorieteil.tex)
+
+
 \section{Theoretische Grundlagen und Stand der Technik}
 \label{chap:theorie}
 
-Dieses Kapitel legt das theoretische Fundament für die vorliegende Arbeit und führt in die Thematik der Strommessung unter dem Einfluss magnetischer Störfelder ein. Zunächst erfolgt eine detaillierte Betrachtung der Messstromwandler, wobei neben dem konstruktiven Aufbau und den verschiedenen Bauformen insbesondere die Unterscheidung zwischen Mess- und Schutzwandlern sowie die Funktionsweise von Kompensationswicklungen erläutert werden. Darauf aufbauend werden die physikalischen Gesetzmäßigkeiten hergeleitet, die das Übertragungsverhalten und die Induktion durch Fremdfelder beschreiben. Dies ist essenziell, um die Ursachen für Sättigungseffekte und die daraus resultierenden Messabweichungen zu verstehen. Im weiteren Verlauf werden die normativen Definitionen der Genauigkeitsklassen vorgestellt, die als Bewertungsgrundlage für die späteren Untersuchungen dienen. Abschließend erfolgt eine Beschreibung der Niederspannungsschaltanlagen, da deren konstruktive Geometrie und Stromschienenanordnung die maßgeblichen Einflussfaktoren für die magnetische Umgebung und somit für die Fremdfeldbeeinflussung der Wandler darstellen.
+Dieses Kapitel legt das theoretische Fundament für die vorliegende Arbeit und führt in die Thematik der Strommessung unter dem Einfluss magnetischer Störfelder ein. Zunächst erfolgt eine detaillierte Betrachtung der Messstromwandler, wobei neben dem konstruktiven Aufbau und den verschiedenen Bauformen insbesondere die Unterscheidung zwischen Mess- und Schutzwandlern sowie die Funktionsweise von Kompensationswicklungen erläutert werden. Darauf aufbauend werden die physikalischen Gesetzmäßigkeiten hergeleitet, die das Übertragungsverhalten und die Induktion durch Fremdfelder beschreiben. Dies ist essenziell, um die Ursachen für Sättigungseffekte und die daraus resultierenden Messabweichungen zu verstehen. Im weiteren Verlauf werden die normativen Definitionen der Genauigkeitsklassen vorgestellt, die als Bewertungsgrundlage für die späteren Untersuchungen dienen. Abschließend erfolgt eine Beschreibung der Niederspannungsschaltanlagen, da deren konstruktive Geometrie und Stromschienenanordnung die maßgeblichen Einflussfaktoren für die magnetische Umgebung und für die Fremdfeldbeeinflussung der Wandler darstellen.
 
 \subsection{Grundlagen Messstromwandler}
 \label{sec:grundlagen_wandler}
@@ -201,7 +204,7 @@ Unter Einbeziehung der geometrischen Abmessungen wird der magnetische Widerstand
 \label{sec:physik_grundlagen_induktion}
 
 Die physikalische Grundlage eines Stromwandlers bildet die elektromagnetische Kopplung zwischen dem Primärleiter und dem Sekundärkreis über einen magnetischen Kern.
-Dieser Zusammenhang wird durch die Maxwell-Gleichungen beschrieben und lässt sich idealisiert am Modell des magnetischen Kreises herleiten, wie in Abbildung \ref{pic:phy_wandler} schematisch dargestellt ist.
+Dieser Zusammenhang wird durch die Maxwell-Gleichungen beschrieben und lässt sich idealisiert am Modell des magnetischen Kreises herleiten, wie in Abbildung~\ref{pic:phy_wandler} schematisch dargestellt ist.
 
 \begin{figure}[H]
     \centering
@@ -319,7 +322,7 @@ Diese Beziehung beschreibt das ideale Übertragungsverhalten des Stromwandlers, 
 
 Magnetische Stoffeigenschaften werden über die Reaktion eines Materials auf ein äußeres Magnetfeld beschrieben.
 Als zentrale Kenngröße dient die relative Permeabilität \gls{sym:mur}, die die magnetische Flussdichte \gls{sym:B} im Material mit der Flussdichte im Vakuum verknüpft.
-Tabelle \ref{tab:magnetische-stoffeigenschaften} gibt einen Überblick über die gebräuchliche Einteilung magnetischer Stoffklassen sowie typische Wertebereiche von \gls{sym:mur} nach \cite[Tab.~48]{kuchling2014taschenbuch}.
+Tabelle~\ref{tab:magnetische-stoffeigenschaften} gibt einen Überblick über die gebräuchliche Einteilung magnetischer Stoffklassen sowie typische Wertebereiche von \gls{sym:mur} nach \cite[Tab.~48]{kuchling2014taschenbuch}.
 
 \begin{table}[H]
     \centering
@@ -351,7 +354,7 @@ Ferromagnetische Werkstoffe weisen im Allgemeinen eine nichtlineare Magnetisieru
 Die räumlich begrenzten Übergangszonen, in denen sich die Magnetisierungsrichtung von einer Domäne zur nächsten ändert, werden als Bloch-Wände bezeichnet~\cite{MikeRun2020}.
 
 
-Abbildung \ref{fig:weiss_bezirke} illustriert die Veränderung der Domänenstruktur beim Anlegen eines äußeren Magnetfeldes.
+Abbildung~\ref{fig:weiss_bezirke} illustriert die Veränderung der Domänenstruktur beim Anlegen eines äußeren Magnetfeldes.
 Im Ausgangszustand ist die Domänenverteilung so beschaffen, dass die resultierende Magnetisierung nach außen näherungsweise verschwindet.
 Es liegt damit keine ausgeprägte Vorzugsrichtung der Magnetisierung vor.
 
@@ -373,7 +376,7 @@ Für Messstromwandler ergibt sich daraus eine reduzierte Übertragungsgenauigkei
 
 Neben der Nichtlinearität tritt Hysterese auf.
 Darunter wird verstanden, dass \gls{sym:B} bei veränderlicher Feldstärke \gls{sym:H} nicht eindeutig von \gls{sym:H} bestimmt ist, sondern vom vorherigen Magnetisierungszustand abhängt.
-Abbildung \ref{fig:bh-hysterese} zeigt dieses Verhalten im $B$-$H$-Diagramm.
+Abbildung~\ref{fig:bh-hysterese} zeigt dieses Verhalten im $B$-$H$-Diagramm.
 Die Neukurve beschreibt den ersten Magnetisierungsvorgang eines zunächst unmagnetisierten Materials bis zur Sättigung.
 Bei anschließender Reduktion der Feldstärke folgt die Flussdichte einer Hystereseschleife und kehrt nicht zum Ursprung zurück.
 Ursächlich sind irreversible Anteile der Domänenwandbewegung, die unter anderem durch Defekte und Inhomogenitäten im Kristallgitter begünstigt werden.
@@ -402,7 +405,7 @@ Die wesentlichen Störeinflüsse gliedern sich in die drei Kategorien fehlerhaft
 \label{par:einfluss_buerde}
 
 Die Impedanz der Bürde bestimmt das Betriebsverhalten des Stromwandlers maßgeblich.
-Wie im vereinfachten Ersatzschaltbild (Abbildung \ref{esb:wandler_vereinfacht}) dargestellt, setzt sich der Sekundärkreis aus der Innenimpedanz der Wicklung und der externen Bürde zusammen.
+Wie im vereinfachten Ersatzschaltbild (Abbildung~\ref{esb:wandler_vereinfacht}) dargestellt, setzt sich der Sekundärkreis aus der Innenimpedanz der Wicklung und der externen Bürde zusammen.
 Ein erhöhter Widerstand im Sekundärkreis erfordert eine höhere induzierte Spannung $U_o$ zur Aufrechterhaltung des eingeprägten Stroms $I_s$.
 Diese Spannung entspricht der Summe der Spannungsabfälle über dem Wicklungswiderstand $R_s$ und dem Bürdenwiderstand $R_B$
 
@@ -472,7 +475,7 @@ Die Variablen sind gemäß der MBS-Spezifikation definiert als zusätzlich induz
     \label{pic:sim_streufluss_abhaengigkeit}
 \end{figure}
 
-Abbildung \ref{pic:sim_streufluss_abhaengigkeit} visualisiert den durch den benachbarten Leiter in den Kern eingekoppelten zusätzlichen magnetischen Fluss $\Phi_{\text{Fremd}}$.
+Abbildung~\ref{pic:sim_streufluss_abhaengigkeit} visualisiert den durch den benachbarten Leiter in den Kern eingekoppelten zusätzlichen magnetischen Fluss $\Phi_{\text{Fremd}}$.
 Es werden die zwei Szenarien eines kleinen Kerns (blau) und eines großen Kerns (rot) verglichen.
 Aus den Verläufen wird deutlich, dass ein geometrisch größerer Kern (rote Kurve) aufgrund seiner größeren räumlichen Ausdehnung absolut gesehen mehr Störfluss aufnimmt als ein kleinerer Kern.
 Dieser im Diagramm dargestellte Fluss addiert sich im Betrieb zum Nutzfluss des Wandlers.
@@ -517,7 +520,7 @@ Bereits geringe Abweichungen von der zentrischen Lage führen zu einer inhomogen
 \end{figure}
 
 
-Abbildung \ref{pic:sim_exzentrische_moniert} visualisiert den simulierten Verlauf des magnetischen Flusses entlang des mittleren Kernumfangs.
+Abbildung~\ref{pic:sim_exzentrische_moniert} visualisiert den simulierten Verlauf des magnetischen Flusses entlang des mittleren Kernumfangs.
 Dabei sind auf der Abszisse der Weg in mm und auf der Ordinate der magnetische Fluss in $\varphi$ aufgetragen.
 Die blaue Kurve repräsentiert die Referenzkonfiguration mit einer zentrierten Leiteranordnung.
 Der Fluss ist hierbei über den gesamten Umfang homogen verteilt.
