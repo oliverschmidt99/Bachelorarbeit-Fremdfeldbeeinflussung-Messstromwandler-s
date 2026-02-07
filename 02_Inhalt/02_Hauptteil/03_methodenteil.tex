@@ -136,7 +136,7 @@ Die Rogowskispulen wurden parallel eingesetzt um deren Eignung für die Prüfung
 Beide Systeme erfassten die Messwerte zeitgleich an einem Messpunkt hinter dem Festtransformator.
 Als Referenzrahmen für die Bewertung der gesamten Messkette wird die Genauigkeitsklasse 0,2 herangezogen.
 Dies stellt eine konservative Betrachtung dar da die primärseitigen Stromwandler der Klasse 0,2S entsprechen.
-Gemäß Norm \cite{din_en_61869_2_2013} definiert die Sonderklasse 0,2S insbesondere im Niederstrombereich strengere Anforderungen als die Standardklasse 0,2.
+Gemäß Norm \cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN} definiert die Sonderklasse 0,2S insbesondere im Niederstrombereich strengere Anforderungen als die Standardklasse 0,2.
 Da die Abweichungen jedoch bereits die weiteren Grenzen der Klasse 0,2 überschreiten ist diese als Vergleichsmaßstab für die Fehleranalyse ausreichend.
 
 Die grafische Darstellung verdeutlicht dass beide Messsysteme die durch die Norm vorgegebenen Toleranzgrenzen (gestrichelte Linien) nicht einhalten.
@@ -166,7 +166,7 @@ Wie im vorangegangenen Abschnitt dargelegt erfüllte die ursprüngliche Messstre
 Aus diesem Grund wurde eine Optimierung des Hochstromprüfstandes durchgeführt.
 Das primäre Ziel dieser Maßnahmen war die Steigerung der Messgenauigkeit sowie die Automatisierung des Prüfablaufs um reproduzierbare und direkt vergleichbare Ergebnisse sicherzustellen.
 Zur technischen Umsetzung wurden zwei digitale Energiemessgeräte der Siemens Produktfamilie ausgewählt.
-Das Modell PAC 3220 welches für die Erfassung des Prüflingsstroms eingesetzt wird \cite[S.~97]{siemens_pac3220_2019} sowie das zur Überwachung der Einspeisung genutzte PAC 4220 \cite[S.~94]{siemens_pac4220_2024} verfügen jeweils über die Genauigkeitsklasse 0,2 für die Strommessung.
+Das Modell PAC 3220 welches für die Erfassung des Prüflingsstroms eingesetzt wird \cite[S.~97]{pdf-Handbuch_PAC3120-Siemens} sowie das zur Überwachung der Einspeisung genutzte PAC 4220 \cite[S.~94]{siemens_pac4220_2024} verfügen jeweils über die Genauigkeitsklasse 0,2 für die Strommessung.
 Diese Geräte ermöglichen durch optionale Erweiterungsmodule eine direkte Integration in die Systemumgebung der Siemens \gls{et200s} via \gls{profinet} Protokoll.
 Ein wesentlicher Vorteil dieser Konfiguration liegt in der dezentralen Messwerterfassung unmittelbar am Messpunkt.
 Dadurch lassen sich parasitäre Effekte über lange Messleitungen minimieren.
@@ -198,7 +198,7 @@ Für die Erfassung der Daten in \gls{wincc} wird im Variablenhaushalt des Visual
 Die Variablen für die gemessenen Ströme werden direkt mit den entsprechenden Speicheradressen innerhalb der \gls{db}s verknüpft.
 Über diese Verbindung werden die Werte der Ströme in regelmäßigen Abständen vom System ausgelesen auf dem \gls{hmi} angezeigt und für den späteren Export als \gls{csv} Datei in der Datenbank gespeichert.
 Die Automatisierung des Prüfablaufs wird über die \gls{sps} realisiert wobei der vorhandene \gls{pid} Regler zur präzisen Stromeinstellung genutzt wird.
-Für die Genauigkeitsmessung eines Wandlers sind gemäß Norm~\cite{din_en_61869_2_2013} primär die Prüfpunkte bei 5~\% 20~\% 100~\% und 120~\% des Primär Nennstroms von Bedeutung.
+Für die Genauigkeitsmessung eines Wandlers sind gemäß Norm~\cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN} primär die Prüfpunkte bei 5~\% 20~\% 100~\% und 120~\% des Primär Nennstroms von Bedeutung.
 Um eine detailliertere Kennlinie zu erhalten und das Verhalten des Wandlers umfassender zu charakterisieren wurden dem Prüfablauf weitere Messpunkte hinzugefügt.
 Die automatisierte Erfassung umfasst somit die Pegel 5~\% 20~\% 50~\% 80~\% 90~\% 100~\% und 120~\%.
 Um diese Messpunkte automatisiert anzufahren wurde eine Schrittkette entwickelt.
@@ -447,7 +447,7 @@ Diese Technologie wurde entwickelt um den Eintritt magnetischer Fremdfelder in d
 Der Hersteller unterteilt die Protektoren in Klassen wie FFP1 FFP5 und FFP10 welche den Grad der Schirmwirkung definieren.
 Technisch wird dies durch die Integration eines Werkstoffs mit hoher magnetischer Permeabilität am oder im Gehäuse des Wandlers realisiert.
 Diese Schirmung fungiert als magnetischer Shunt der die Feldlinien benachbarter Leiter um den Messkern herumleitet.
-Infolgedessen bleibt die magnetische Induktion im Kernmaterial weitgehend unbeeinflusst von äußeren Feldern \cite{Redur2021Fremdfeld}.
+Infolgedessen bleibt die magnetische Induktion im Kernmaterial weitgehend unbeeinflusst von äußeren Feldern \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}.
 Um die Vergleichbarkeit der Messergebnisse zu gewährleisten entsprechen alle ausgewählten Wandler der Genauigkeitsklasse 1,0.
 Die in der Tabelle aufgeführten Nennbürden sind so gewählt dass sie die Anforderungen für die in Abschnitt \ref{sec:integration_programmierung} beschriebene thermische Dauerbelastung erfüllen.
 
