@@ -157,7 +157,7 @@ Für die Berechnung werden pro Laststufe exakt 560 Messpunkte herangezogen, was 
 
 \paragraph{Mathematische Berechnung}
 
-Die mathematische Grundlage für die in der Software ermittelten Kennwerte bildet die Berechnung der prozentualen Übersetzungsmessabweichung \gls{sym:epsilon} gemäß Abschnitt \ref{sec:messabweichung_fehlerfortpflanzung}. Für die automatisierte Auswertung werden zunächst die arithmetischen Mittelwerte der Ströme über das stabile Zeitfenster gebildet und anschließend verrechnet:
+Die mathematische Grundlage für die in der Software ermittelten Kennwerte bildet die Berechnung der prozentualen Übersetzungsmessabweichung \gls{sym:epsilon} gemäß Abschnitt \ref{sec:messabweichung_kenngroessen}. Für die automatisierte Auswertung werden zunächst die arithmetischen Mittelwerte der Ströme über das stabile Zeitfenster gebildet und anschließend verrechnet:
 
 
 
@@ -165,6 +165,9 @@ Die mathematische Grundlage für die in der Software ermittelten Kennwerte bilde
     \label{eq:messabweichung_allg}
     \varepsilon = \frac{\bar{I}_{s} - \bar{I}_{pri}}{\bar{I}_{pri}} \cdot 100\,\%
 \end{equation}
+
+Als Bewertungsgröße wird in dieser Arbeit ausschließlich die Übersetzungsmessabweichung \gls{sym:epsilon} ausgewertet; eine Fehlwinkelbestimmung \gls{sym:deltaphi} erfolgt nicht.
+
 
 Hierbei beschreibt $\bar{I}_{s}$ den arithmetischen Mittelwert der gemessenen Stromstärke des Prüflings und $\bar{I}_{pri}$ den Mittelwert des Referenzmessgerätes im identischen Zeitraum. Ergänzend hierzu berechnet die Software die Standardabweichung \gls{sym:sigma} auf Basis der Einzelmesswerte $x_i$, um die Signalstabilität innerhalb des Plateaus zu quantifizieren:
 
@@ -182,9 +185,9 @@ Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei spezialisierten An
 Für eine bewertende Übersicht dient der Reiter \textbf{„Ökonomische Analyse“}. Um die Komplexität der Kennlinien für einen direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei signifikante Betriebsbereiche:
 
 \begin{itemize}
-    \item \textbf{\gls{sym:Niederstrombereich}:} Erfasst das Anlaufverhalten und die Genauigkeit bei geringer Last (z.\,B. \SI{5}{\percent} und \SI{20}{\percent} \gls{sym:In}).
-    \item \textbf{\gls{sym:Nennstrombereich}:} Bildet den Hauptarbeitsbereich um den Nennstrom ab (z.\,B. \SI{50}{\percent} bis \SI{100}{\percent} \gls{sym:In}).
-    \item \textbf{\gls{sym:Ueberstrombereich}:} Visualisiert das Verhalten bei Überlast (z.\,B. \SI{120}{\percent} \gls{sym:In}).
+    \item \textbf{Nennstrombereich:} Erfasst das Anlaufverhalten und die Genauigkeit bei geringer Last (z.\,B. \SI{5}{\percent} und \SI{20}{\percent} \gls{sym:In}).
+    \item \textbf{Nennstrombereich:} Bildet den Hauptarbeitsbereich um den Nennstrom ab (z.\,B. \SI{50}{\percent} bis \SI{100}{\percent} \gls{sym:In}).
+    \item \textbf{Überstrombereich:} Visualisiert das Verhalten bei Überlast (z.\,B. \SI{120}{\percent} \gls{sym:In}).
 \end{itemize}
 
 Um für diese Bereiche einen einzelnen vergleichbaren Gütefaktor zu erhalten, werden die prozentualen Messabweichungen \gls{sym:epsilon} der zugehörigen Lastpunkte aggregiert. Hierfür wird der arithmetische Mittelwert der Absolutbeträge gebildet. Dies verhindert, dass sich positive und negative Abweichungen (z.\,B. $+\num{0,50}\,\%$ und $-\num{0,50}\,\%$) gegenseitig kompensieren:
