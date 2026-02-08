@@ -46,14 +46,14 @@ Um hochfrequente Regelvorgänge zu vermeiden, welche transiente Stromspitzen ind
     \small
     \begin{tabularx}{\textwidth}{@{}l l l l X@{}}
         \toprule
-        \textbf{Komponente}      & \textbf{Typ}         & \textbf{\makecell[l]{Leistung / \\ Bürde}} & \textbf{\makecell[l]{Primär / \\ Input}} & \textbf{\makecell[l]{Sekundär / \\ Output}} \\ \midrule
-        Säulenstelltransformator & Ruhstrat             & \SI{90}{kVA}                               & \SI{380}{V}                              & \SIrange{0}{380}{V} (\SI{70}{A})            \\
-        Festtransformator        & Janssen              & \SI{30}{kVA}                               & \SI{380}{V}                              & \SI{6}{V} (\SI{5000}{A})                    \\
-        Stromwandler             & Celsa ICG            & \SI{5}{VA}                                 & \SI{6000}{A}                             & \SI{5}{A} (Kl. 0,2S)                        \\
-        Messumformer (3-K)       & 3-K Elektrik          & --                                         & \SI{0}{A} bis \SI{5}{A} \gls{ac}         & \SIrange{0}{20}{mA} \gls{dc}                \\ \midrule
-        \textbf{Leittechnik}     & \textbf{Typ}         & \multicolumn{3}{l}{\textbf{Beschreibung}}                                                                                             \\ \cmidrule(r){1-2}
-        Steuerung                & Siemens \gls{et200s} & \multicolumn{3}{l}{\gls{profinet}-Anbindung, Stromregelung, Analogeingänge}                                                           \\
-        Visualisierung           & Siemens \gls{wincc}  & \multicolumn{3}{l}{\gls{hmi}-System, Prozessüberwachung, Datenlogging}                                                                \\ \bottomrule
+        \textbf{Komponente}      & \textbf{Typ}         & \textbf{\makecell[l]{Leistung /                                                                                                                   \\ Bürde}} & \textbf{\makecell[l]{Primär / \\ Input}} & \textbf{\makecell[l]{Sekundär / \\ Output}} \\ \midrule
+        Säulenstelltransformator & Ruhstrat             & \SI{90}{kVA}                                                                & \SI{380}{V}                      & \SIrange{0}{380}{V} (\SI{70}{A}) \\
+        Festtransformator        & Janssen              & \SI{30}{kVA}                                                                & \SI{380}{V}                      & \SI{6}{V} (\SI{5000}{A})         \\
+        Stromwandler             & Celsa ICG            & \SI{5}{VA}                                                                  & \SI{6000}{A}                     & \SI{5}{A} (Kl. 0,2S)             \\
+        Messumformer (3-K)       & 3-K Elektrik         & --                                                                          & \SI{0}{A} bis \SI{5}{A} \gls{ac} & \SIrange{0}{20}{mA} \gls{dc}     \\ \midrule
+        \textbf{Leittechnik}     & \textbf{Typ}         & \multicolumn{3}{l}{\textbf{Beschreibung}}                                                                                                         \\ \cmidrule(r){1-2}
+        Steuerung                & Siemens \gls{et200s} & \multicolumn{3}{l}{\gls{profinet}-Anbindung, Stromregelung, Analogeingänge}                                                                       \\
+        Visualisierung           & Siemens \gls{wincc}  & \multicolumn{3}{l}{\gls{hmi}-System, Prozessüberwachung, Datenlogging}                                                                            \\ \bottomrule
     \end{tabularx}
 \end{table}
 
@@ -77,7 +77,7 @@ Die initiale Konfiguration der Messstrecke (siehe Abbildung~\ref{pic:aufbau_mess
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/zeichnungen/aufbau_messstrecke.drawio.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/zeichnungen/aufbau_messstrecke.drawio.pdf}
     \caption{Schematischer Aufbau der Messstrecke zur Ermittlung der Messabweichung}
     \label{pic:aufbau_messstrecke}
 \end{figure}
@@ -138,109 +138,35 @@ Die in Abbildung~\ref{pic:aufbau_messstrecke_neu} dargestellte Systemarchitektur
 \subsubsection{Softwaregestützte Prozesskette zur Datenauswertung}
 \label{sec:datenaufbereitung_analyse}
 
-Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv}-Format vor und enthalten die zeitlichen Verläufe der Ströme \gls{sym:I_p} (Referenz) und \gls{sym:I_sec} (Prüfling). Angesichts des Umfangs der Untersuchung, die 31 Konfigurationen mit jeweils zwei Messgeräten und drei Phasen umfasst, ergaben sich insgesamt über 180 auszuwertende Einzelmessreihen. Eine manuelle Verarbeitung dieser Datenmenge mittels Tabellenkalkulation wäre aufgrund des hohen Zeitaufwands und der Fehleranfälligkeit bei manuellen Überträgen unzweckmäßig. Aus diesem Grund wurde eine spezialisierte Auswertungssoftware auf Basis von Python entwickelt.
+Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv}-Format vor und enthalten die zeitlichen Verläufe der Ströme \gls{sym:I_p} (Referenz) und \gls{sym:I_sec} (Prüfling). Angesichts des Umfangs der Untersuchung, die 31 Konfigurationen mit jeweils zwei Messgeräten und drei Phasen umfasst, ergaben sich insgesamt über 180 auszuwertende Einzelmessreihen. Eine manuelle Verarbeitung dieser Datenmenge mittels Tabellenkalkulation wäre aufgrund des hohen Zeitaufwands und der Fehleranfälligkeit bei manuellen Übertragungen unzweckmäßig. Aus diesem Grund wurde eine spezialisierte Auswertungssoftware auf Basis von \textit{Python} entwickelt.
 
 
 
 \paragraph{Extraktion und Filterung der Messdaten}
 
-Der erste Prozessschritt der Auswertung erfolgt im Modul \textit{„Manueller Rohdaten-Export“} (siehe Abbildung~\ref{pic:manual_tagger}). Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} (zwei Messwerte pro Sekunde) erfolgt, entstehen umfangreiche Zeitreihen. Die zentrale Funktion des Rohdaten-Selektors besteht darin, die aufgezeichneten Laststufen automatisiert zu identifizieren und die stationären Messbereiche zu isolieren. Hierbei werden die transienten Ein- und Ausschwingvorgänge aus dem Datensatz entfernt, sodass ausschließlich die stabilen Phasen (Plateaus) in die weiterführende Genauigkeitsberechnung einfließen.
+Der erste Prozessschritt der Auswertung erfolgt im Modul \textit{„Manueller~Rohdaten-Export“} (siehe Abbildung~\ref{pic:manual_tagger}). Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} erfolgt, entstehen umfangreiche Zeitreihen. Die zentrale Funktion des Rohdaten-Selektors besteht darin, die aufgezeichneten Laststufen zu analysieren und die stationären Messbereiche zu isolieren. Hierbei werden die transienten Ein- und Ausschwingvorgänge aus dem Datensatz entfernt, sodass ausschließlich die stabilen Phasen in die weiterführende Genauigkeitsberechnung einfließen.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/pdf/datenverarbeitung/rohdaten_export.png}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/pdf/datenverarbeitung/rohdaten_export.png}
     \caption{Benutzeroberfläche des manuellen Rohdaten-Exports zur Selektion stabiler Messbereiche}
     \label{pic:manual_tagger}
 \end{figure}
 
-Für die statistische Auswertung werden pro Laststufe exakt 560 Messpunkte herangezogen, was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht. Obwohl jedes Belastungsplateau steuerungstechnisch fünf Minuten gehalten wird, werden die finalen 20 Sekunden des Datensatzes verworfen. Diese Maßnahme dient als Sicherheitsmarge, um sicherzustellen, dass keine Signalflanken des nachfolgenden Schaltvorgangs in die Berechnung einfließen. Die verbleibenden 560 Werte bilden eine statistisch valide Basis für die Ergebnisermittlung. Die selektierten Intervalle werden als bereinigte Datensätze in der Datenbank für die nachfolgenden Analyseschritte persistiert.
+Für die Berechnung werden pro Laststufe exakt 560 Messpunkte herangezogen, was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht. Obwohl das Plateau technisch fünf Minuten gehalten wird, werden die letzten 20 Sekunden des Datensatzes verworfen. Diese Maßnahme dient als Sicherheitsabstand, um sicherzustellen, dass keine Signalflanken des Abschaltvorgangs in die Berechnung einfließen. Die verbleibenden 560 Werte bilden eine statistisch valide Basis für die Auswertung. Die selektierten Bereiche werden als sortierte Datensätze in der Datenbank persistiert.
 
-\paragraph{Mathematische Berechnungsgrundlagen}
+\paragraph{Mathematische Berechnung}
 
-Die mathematische Grundlage für die in der Software ermittelten Kennwerte bildet die Berechnung der prozentualen Messabweichung \gls{sym:epsilon} gemäß Abschnitt \ref{sec:messabweichung_fehlerfortpflanzung}. Für die automatisierte Auswertung werden zunächst die arithmetischen Mittelwerte der Ströme über das stationäre Zeitfenster gebildet und anschließend miteinander verrechnet:
+Die mathematische Grundlage für die in der Software ermittelten Kennwerte bildet die Berechnung der prozentualen Übersetzungsmessabweichung \gls{sym:epsilon} gemäß Abschnitt \ref{sec:messabweichung_fehlerfortpflanzung}. Für die automatisierte Auswertung werden zunächst die arithmetischen Mittelwerte der Ströme über das stabile Zeitfenster gebildet und anschließend verrechnet:
+
+
 
 \begin{equation}
     \label{eq:messabweichung_allg}
-    \varepsilon = \frac{\bar{I}_{\text{sec}} - \bar{I}_{\text{pri}}}{\bar{I}_{\text{pri}}} \cdot 100\,\%
+    \varepsilon = \frac{\bar{I}_{s} - \bar{I}_{pri}}{\bar{I}_{pri}} \cdot 100\,\%
 \end{equation}
 
-Hierbei beschreibt $\bar{I}_{\text{sec}}$ den arithmetischen Mittelwert der gemessenen Stromstärke des Prüflings und $\bar{I}_{\text{pri}}$ den Mittelwert des Referenzmessgerätes im identischen Zeitraum. Ergänzend hierzu berechnet die Software die Standardabweichung \gls{sym:sigma} auf Basis der Einzelmesswerte $x_i$, um das Signalrauschen innerhalb des Plateaus zu quantifizieren:
-
-\begin{equation}
-    \label{eq:standardabweichung}
-    \sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2}
-\end{equation}
-
-
-
-Diese statistische Kenngröße fungiert als Indikator für die Güte der Stromregelung sowie für die Stabilität des Messsignals.
-
-\paragraph{Analyse und Visualisierung der Ergebnisse}
-
-Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei spezialisierten Analysemodulen zur Verfügung:
-
-\begin{itemize}
-    \item \textbf{Modul „Gesamtgenauigkeit“:} Dieses Werkzeug ermöglicht den detaillierten technischen Vergleich der Wandlercharakteristiken. Hier wird die prozentuale Messabweichung über dem Primärstrom aufgetragen. Die Darstellung ist modular konfigurierbar, sodass verschiedene Wandlertechnologien oder Messreihen unmittelbar überlagert und visuell mit den normativen Fehlergrenzen (z.\,B. Klasse 1,0) abgeglichen werden können.
-    
-    \item \textbf{Modul „Ökonomische Analyse“:} Um die Komplexität der Kennlinien für einen direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei signifikante Betriebsbereiche:
-    \begin{itemize}
-        \item \textit{Niederstrombereich:} Bewertung des Anlaufverhaltens bei geringer Last (5\,\% und 20\,\% \gls{sym:In}).
-        \item \textit{Nennstrombereich:} Abbildung des Hauptarbeitsbereichs (50\,\% bis 100\,\% \gls{sym:In}).
-        \item \textit{Überstrombereich:} Visualisierung des Verhaltens bei Überlast (120\,\% \gls{sym:In}).
-    \end{itemize}
-\end{itemize}
-
-Um für diese Bereiche einen vergleichbaren Gütefaktor zu erhalten, wird der arithmetische Mittelwert der Absolutbeträge der Messabweichungen gebildet. Dies verhindert, dass sich positive und negative Abweichungen (z.\,B. $+0,50\,\%$ und $-0,50\,\%$) gegenseitig kompensieren, und repräsentiert die durchschnittliche Betragsabweichung des Wandlers im jeweiligen Arbeitsbereich:
-
-\begin{equation}
-    \label{eq:fehler_bereich}
-    \bar{\varepsilon}_{\text{Bereich}} = \frac{1}{k} \sum_{j=1}^{k} |\varepsilon_j|
-\end{equation}
-
-
-
-In dieser Ansicht werden zudem konstruktive und wirtschaftliche Parameter, wie das Gehäusevolumen und die Beschaffungskosten, den aggregierten Genauigkeitswerten gegenübergestellt. Diese multidimensionale Betrachtung ermöglicht eine fundierte Bewertung der Prüflinge hinsichtlich ihres Preis-Leistungs-Verhältnisses und unterstützt die Auswahl des optimalen Stromwandlers für den spezifischen Anwendungsfall.
-
-\subsubsection{Softwaregestützte Prozesskette zur Datenauswertung}
-\label{sec:datenaufbereitung_analyse}
-
-Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv} Format vor und enthalten die zeitlichen Verläufe der Ströme $I_{prim}$ (Referenz) und $I_{sek}$ (Prüfling).
-Angesichts des Umfangs der Untersuchung die 31 Konfigurationen mit jeweils zwei Messgeräten und drei Phasen umfasst ergaben sich insgesamt über 180 auszuwertende Einzelmessreihen.
-Eine manuelle Verarbeitung dieser Datenmenge mittels Tabellenkalkulation wäre zeitaufwendig und anfällig für Übertragungsfehler gewesen.
-Aus diesem Grund wurde eine spezialisierte Auswertungssoftware in Python entwickelt.
-
-\textbf{Extraktion und Filterung der Messdaten}
-
-Der erste Schritt der Auswertung erfolgt im Modul \textit{„Manueller Rohdaten Export“} (siehe Abbildung~\ref{pic:manual_tagger}).
-Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} (zwei Messwerte pro Sekunde) erfolgt entstehen umfangreiche Zeitreihen.
-Die zentrale Funktion des Rohdaten Selektors besteht darin die aufgezeichneten Laststufen zu analysieren und die stationären Messbereiche zu isolieren.
-Hierbei werden die transienten Ein und Ausschwingvorgänge aus dem Datensatz entfernt sodass ausschließlich die stabilen Phasen in die weiterführende Genauigkeitsberechnung einfließen.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/pdf/datenverarbeitung/rohdaten_export.png}
-    \caption{Benutzeroberfläche des manuellen Rohdaten Exports zur Selektion stabiler Messbereiche}
-    \label{pic:manual_tagger}
-\end{figure}
-
-Für die Berechnung werden pro Laststufe exakt 560 Messpunkte herangezogen was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht.
-Obwohl das Plateau technisch fünf Minuten gehalten wird werden die letzten 20 Sekunden des Datensatzes verworfen.
-Diese Maßnahme dient als Sicherheitsabstand um sicherzustellen dass bei der manuellen Selektion über die Software keine Flanken des Abschaltvorgangs in die Berechnung einfließen.
-Die verbleibenden 560 Werte bilden eine statistisch valide Basis für die Auswertung.
-Die so selektierten Bereiche werden als sortierte Datensätze in der Datenbank für die Weiterverarbeitung gespeichert.
-
-\textbf{Mathematische Berechnung}
-
-Die mathematische Grundlage für die in der Software dargestellten Werte bildet die Berechnung der prozentualen Messabweichung $\varepsilon$ gemäß Abschnitt \ref{sec:messabweichung_fehlerfortpflanzung}.
-Für die automatisierte Auswertung werden zunächst die arithmetischen Mittelwerte der Ströme über das stabile Zeitfenster (560 Messpunkte) gebildet und anschließend verrechnet
-
-\begin{equation}
-    \label{eq:messabweichung_allg}
-    \varepsilon = \frac{\bar{I}_{ist} - \bar{I}_{ref}}{\bar{I}_{ref}} \cdot 100\,\%
-\end{equation}
-
-Hierbei beschreibt $\bar{I}_{ist}$ den arithmetischen Mittelwert der gemessenen Stromstärke des Prüflings und $\bar{I}_{ref}$ den Mittelwert des Referenzmessgerätes im gleichen Zeitraum.
-Ergänzend hierzu berechnet die Software die Standardabweichung $\sigma$ auf Basis der Einzelmesswerte $x_i$ um die Signalstabilität (Rauschen) innerhalb des Plateaus zu quantifizieren
+Hierbei beschreibt $\bar{I}_{s}$ den arithmetischen Mittelwert der gemessenen Stromstärke des Prüflings und $\bar{I}_{pri}$ den Mittelwert des Referenzmessgerätes im identischen Zeitraum. Ergänzend hierzu berechnet die Software die Standardabweichung \gls{sym:sigma} auf Basis der Einzelmesswerte $x_i$, um die Signalstabilität innerhalb des Plateaus zu quantifizieren:
 
 \begin{equation}
     \label{eq:standardabweichung}
@@ -249,38 +175,26 @@ Ergänzend hierzu berechnet die Software die Standardabweichung $\sigma$ auf Bas
 
 Diese statistische Kenngröße dient als Indikator für die Güte der Regelung und die Ruhe des Messsignals.
 
-\textbf{Analyse und Visualisierung}
+\paragraph{Analyse und Visualisierung}
 
-Nachdem die Berechnungen abgeschlossen und in der Datenbank gespeichert sind stehen die Ergebnisse in zwei spezialisierten Analyse Tabs zur Verfügung.
+Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei spezialisierten Analyse-Modulen zur Verfügung. Der Reiter \textbf{„Gesamtgenauigkeit“} ermöglicht den detaillierten technischen Vergleich. Hier wird die prozentuale Messabweichung \gls{sym:epsilon} über dem Primärstrom \gls{sym:I_p} aufgetragen. Die Darstellung ist frei konfigurierbar, sodass verschiedene Wandlertechnologien oder Messreihen visuell mit den normativen Fehlergrenzen (z.\,B. Klasse \num{1}) verglichen werden können.
 
-Der Reiter \textbf{„Gesamtgenauigkeit“} ermöglicht den detaillierten technischen Vergleich.
-Hier wird die prozentuale Messabweichung über dem Primärstrom aufgetragen.
-Die Darstellung ist frei konfigurierbar sodass verschiedene Wandlertechnologien oder Messreihen direkt übereinandergelegt und visuell mit den normativen Fehlergrenzen (z.\,B. Klasse 1) verglichen werden können.
-
-Für eine bewertende Übersicht dient der Reiter \textbf{„Ökonomische Analyse“}.
-Um die Komplexität der Kennlinien für einen direkten Vergleich zu reduzieren fasst die Software die Messabweichungen in drei signifikante Betriebsbereiche zusammen
+Für eine bewertende Übersicht dient der Reiter \textbf{„Ökonomische Analyse“}. Um die Komplexität der Kennlinien für einen direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei signifikante Betriebsbereiche:
 
 \begin{itemize}
-    \item \textbf{Niederstrombereich} Erfasst das Anlaufverhalten und die Genauigkeit bei geringer Last (z.\,B. 5\,\% und 20\,\% $I_n$).
-    \item \textbf{Nennstrombereich} Bildet den Hauptarbeitsbereich um den Nennstrom ab (z.\,B. 50\,\% bis 100\,\% $I_n$).
-    \item \textbf{Überstrombereich} Visualisiert das Verhalten bei Überlast (z.\,B. 120\,\% $I_n$).
+    \item \textbf{\gls{sym:Niederstrombereich}:} Erfasst das Anlaufverhalten und die Genauigkeit bei geringer Last (z.\,B. \SI{5}{\percent} und \SI{20}{\percent} \gls{sym:In}).
+    \item \textbf{\gls{sym:Nennstrombereich}:} Bildet den Hauptarbeitsbereich um den Nennstrom ab (z.\,B. \SI{50}{\percent} bis \SI{100}{\percent} \gls{sym:In}).
+    \item \textbf{\gls{sym:Ueberstrombereich}:} Visualisiert das Verhalten bei Überlast (z.\,B. \SI{120}{\percent} \gls{sym:In}).
 \end{itemize}
 
-Um für diese Bereiche einen einzelnen vergleichbaren Gütefaktor zu erhalten werden die prozentualen Messabweichungen $\varepsilon$ der zugehörigen Lastpunkte aggregiert.
-Hierfür wird der arithmetische Mittelwert der Absolutbeträge gebildet.
-Dies verhindert dass sich positive und negative Abweichungen gegenseitig kompensieren (z.\,B. $+0,5\,\%$ und $-0,5\,\%$) und stellt die durchschnittliche Betragsabweichung des Wandlers in diesem Arbeitsbereich dar
+Um für diese Bereiche einen einzelnen vergleichbaren Gütefaktor zu erhalten, werden die prozentualen Messabweichungen \gls{sym:epsilon} der zugehörigen Lastpunkte aggregiert. Hierfür wird der arithmetische Mittelwert der Absolutbeträge gebildet. Dies verhindert, dass sich positive und negative Abweichungen (z.\,B. $+\num{0,50}\,\%$ und $-\num{0,50}\,\%$) gegenseitig kompensieren:
 
 \begin{equation}
     \label{eq:fehler_bereich}
-    \bar{\varepsilon}_{Bereich} = \frac{1}{k} \sum_{j=1}^{k} |\varepsilon_j|
+    \bar{\varepsilon}_{\text{Bereich}} = \frac{1}{k} \sum_{j=1}^{k} |\varepsilon_j|
 \end{equation}
 
-Dabei ist $k$ die Anzahl der angefahrenen Lastpunkte innerhalb des definierten Bereichs und $|\varepsilon_j|$ der Betrag der Messabweichung am jeweiligen Prüfpunkt.
-
-In dieser Ansicht werden zudem konstruktive und wirtschaftliche Parameter wie das Gehäusevolumen und der Preis der Wandler den aggregierten Genauigkeitswerten gegenübergestellt.
-Dies ermöglicht eine multidimensionale Bewertung der Prüflinge hinsichtlich ihres Preis Leistungs Verhältnisses.
-
-Durch diese Auswahl an Visualisierungen kann der Anwender je nach Fragestellung – ob rein technisch wirtschaftlich oder konstruktiv – die geeignete Darstellungsform wählen um eine fundierte Auswahlentscheidung für den optimalen Stromwandler zu treffen.
+Dabei ist $k$ die Anzahl der angefahrenen Lastpunkte innerhalb des definierten Bereichs und $|\varepsilon_j|$ der Betrag der Messabweichung am jeweiligen Prüfpunkt. In dieser Ansicht werden zudem konstruktive und wirtschaftliche Parameter wie das Gehäusevolumen und der Preis der Wandler den aggregierten Genauigkeitswerten gegenübergestellt. Dies ermöglicht eine multidimensionale Bewertung der Prüflinge hinsichtlich ihres Preis-Leistungs-Verhältnisses.
 
 \subsubsection{Auswertung der neuen Messstrecke}
 \label{sec:auswertung_messstrecke}
@@ -293,7 +207,7 @@ Der Kurvenverlauf verdeutlicht, dass das \gls{pac} 4220 über nahezu den gesamte
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_neu/dia_messstrecke_neu-Zusammenfassung_MultiCurrent.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_neu/dia_messstrecke_neu-Zusammenfassung_MultiCurrent.pdf}
     \caption{Vergleichende Analyse der Messabweichung (oben) und Standardabweichung (unten) unter Einsatz des \gls{pac} 4220}
     \label{dia:messstrecke_neu}
 \end{diagram}
@@ -308,7 +222,7 @@ Ergänzend zur Analyse der Einzelabweichungen ermöglicht das Ökonomie-Ranking 
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_neu/dia_messstrecke_neu-Oekonomie_Ranking.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_neu/dia_messstrecke_neu-Oekonomie_Ranking.pdf}
     \caption{Kumulierter Vergleich der Fehleranteile (Ökonomie-Ranking) der verschiedenen Messsysteme über drei Lastbereiche}
     \label{dia:oekonomie_ranking}
 \end{diagram}
@@ -351,33 +265,32 @@ Es ist anzumerken, dass es sich hierbei um eine Vereinfachung handelt, die den W
 
 \begin{table}[H]
     \centering
-    \caption{Erweiterte Spezifikationen und wirtschaftliche Kennwerte der Prüflinge}
+    \caption{Erweiterte Spezifikationen und wirtschaftliche Kennwerte der Prüflinge nach Technologie gruppiert}
     \label{tab:wandler_spezifikationen_erweitert}
     \small
     \begin{tabular}{@{}lll S[table-format=4.0] S[table-format=2.1] S[table-format=4.2] S[table-format=3.2]@{}}
         \toprule
-        \textbf{Hersteller} & \textbf{Typ} & \textbf{Technologie} & {\textbf{\gls{sym:In} [\unit{A}]}} & {\textbf{\gls{sym:Sn} [\unit{VA}]}} & {\textbf{Volumen [\unit{cm^3}]}} & {\textbf{Preis [\unit{\euro}]}} \\
+        \textbf{Hersteller} & \textbf{Typ} & \textbf{Technologie} & {\textbf{\gls{sym:In} [\unit{A}]}} & {\textbf{\gls{sym:Sn} [\unit{VA}]}} & {\textbf{Volumen [\unit{cm^3}]}} & {\textbf{Preis [\text{\euro}]}} \\
         \midrule
-        Celsa & ALO 10030     & Standard    & 2000 & 2,5 & 634,30  & 45,50  \\
-        Celsa & ALO 8030 K    & Kompensiert & 2000 & 10  & 710,20  & 95,95  \\
-        Celsa & ALO 10030     & Standard    & 2500 & 2,5 & 634,30  & 45,50  \\
-        Celsa & ALO 10050 K   & Kompensiert & 2500 & 5   & 1027,00 & 104,20 \\
-        Celsa & ALO 12070     & Standard    & 3000 & 15  & 1520,00 & 71,51  \\
-        Celsa & ALO 12070 K   & Kompensiert & 3000 & 15  & 1520,00 & 346,06 \\
-        Celsa & ALO 12070     & Standard    & 4000 & 15  & 1520,00 & 71,51  \\
-        Celsa & ALO 12070 K   & Kompensiert & 4000 & 15  & 1520,00 & 401,91 \\
-        Celsa & ALO 20060     & Standard    & 5000 & 40  & 1989,00 & 124,76 \\
-        Celsa & ALO E 16050 K & Kompensiert & 5000 & 40  & 1903,00 & 414,56 \\
+        Celsa & ALO 10030     & Standard    & 2000 & 2,5  & 634,30  & 45,50  \\
+        MBS   & ASK 101.4     & Standard    & 2000 & 10,0 & 733,20  & 43,67  \\
+        Celsa & ALO 10030     & Standard    & 2500 & 2,5  & 634,30  & 45,50  \\
+        Celsa & ALO 12070     & Standard    & 3000 & 15,0 & 1520,00 & 71,51  \\
+        Celsa & ALO 12070     & Standard    & 4000 & 15,0 & 1520,00 & 71,51  \\
+        Celsa & ALO 20060     & Standard    & 5000 & 40,0 & 1989,00 & 124,76 \\
+        MBS   & ASK 129.10    & Standard    & 5000 & 15,0 & 6175,00 & 289,80 \\
         \addlinespace
-        MBS   & ASK 101.4     & Standard    & 2000 & 10  & 733,20  & 43,67  \\
-        MBS   & ASK 129.10    & Standard    & 5000 & 15  & 6175,00 & 289,80 \\
+        Celsa & ALO 8030 K    & Kompensiert & 2000 & 10,0 & 710,20  & 95,95  \\
+        Celsa & ALO 10050 K   & Kompensiert & 2500 & 5,0  & 1027,00 & 104,20 \\
+        Celsa & ALO 12070 K   & Kompensiert & 3000 & 15,0 & 1520,00 & 346,06 \\
+        Celsa & ALO 12070 K   & Kompensiert & 4000 & 15,0 & 1520,00 & 401,91 \\
+        Celsa & ALO E 16050 K & Kompensiert & 5000 & 40,0 & 1903,00 & 414,56 \\
         \addlinespace
-        Redur & 13A1030.3ffp  & \gls{ffp}   & 2000 & 10  & 778,70  & 146,01 \\
-        Redur & 20A1456.5FFP  & \gls{ffp}   & 5000 & 15  & 1600,00 & 296,64 \\
+        Redur & 13A1030.3ffp  & \glsentryshort{ffp}   & 2000 & 10,0 & 778,70  & 146,01 \\
+        Redur & 20A1456.5FFP  & \glsentryshort{ffp}   & 5000 & 15,0 & 1600,00 & 296,64 \\
         \bottomrule
     \end{tabular}
 \end{table}
-
 Die eingesetzten Wandler lassen sich technologisch in drei Kategorien unterteilen. Als Basis dienen Standardwandler, die einen klassischen Aufbau ohne zusätzliche konstruktive Schutzmaßnahmen gegen externe Felder aufweisen (siehe Abschnitt \ref{sec:aufbau_wandler}). Eine weiterführende Bauform stellen die kompensierten Wandler dar. Diese Modelle verfügen über eine modifizierte Wicklungsanordnung, die gezielt zur Reduktion von Messabweichungen bei asymmetrischer Primärleiterlage eingesetzt wird (siehe Abschnitt \ref{sec:kompensationswicklungen}). 
 
 Die dritte Gruppe bilden die spezialisierten \gls{ffp}-Wandler der Firma \textit{Redur}, welche die Technologie der Fremdfeldprotektoren nutzen. Die Schirmwirkung wird hierbei durch die Integration eines Werkstoffs mit hoher magnetischer Permeabilität realisiert. Diese Schirmung fungiert als magnetischer Shunt, der die Feldlinien benachbarter Leiter um den Messkern herumleitet. 
@@ -395,7 +308,7 @@ In Niederspannungsschaltanlagen werden Kupferschienen vorwiegend parallel angeor
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/Bilder/kupferschinen_gesamtaufbau.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/Bilder/kupferschinen_gesamtaufbau.pdf}
     \caption{Technische Zeichnung des Kupferschienensystems in paralleler und dreiecksförmiger Anordnung}
     \label{pic:kupferschienen_layout}
 \end{figure}
@@ -428,7 +341,7 @@ Als Referenz fungiert die Parallelanordnung der drei Phasenleiter in einer Ebene
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/Bilder/kupferschienen_parallel.jpg}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/Bilder/kupferschienen_parallel.jpg}
     \caption{Versuchsaufbau in paralleler Schienenanordnung mit montiertem Messstromwandler (Typ: Redur 20A1456.5FFP)}
     \label{pic:kupferschienen_parallel}
 \end{figure}
@@ -442,7 +355,7 @@ Ziel dieser Anordnung ist eine symmetrischere Gestaltung der magnetischen Kopplu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{03_Ressourcen/Bilder/kupferschienen_dreieck.jpg}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/Bilder/kupferschienen_dreieck.jpg}
     \caption{Modifizierter Versuchsaufbau in Dreieckskonfiguration durch räumlichen Versatz der Phase L2 mittels Kupferadapter}
     \label{pic:kupferschienen_dreieck}
 \end{figure}
