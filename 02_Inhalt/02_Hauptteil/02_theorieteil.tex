@@ -86,12 +86,12 @@ Der Genauigkeitsgrenzfaktor gibt an, bis zu welchem Vielfachen des Bemessungsstr
     \label{tab:schutzwandler_fehler}
     \begin{tabular}{lcccc}
         \toprule
-        Genauigkeits- & Übersetzung-                 & \multicolumn{2}{c}{Fehlwinkel}        & Gesamtmess-                                                  \\
-        klasse        & messabweichung               & \multicolumn{2}{c}{bei \gls{sym:In}} & abweichung                                                   \\
-                      & bei \gls{sym:In} ($\pm$ \SI{}{\percent}) & ($\pm$ min)                           & ($\pm$ cgrad) & bei \gls{alf} $\cdot$ \gls{sym:In} (\SI{}{\percent}) \\
+        Genauigkeits- & Übersetzung-                             & \multicolumn{2}{c}{Fehlwinkel}       & Gesamtmess-                                                          \\
+        klasse        & messabweichung                           & \multicolumn{2}{c}{bei \gls{sym:In}} & abweichung                                                           \\
+                      & bei \gls{sym:In} ($\pm$ \SI{}{\percent}) & ($\pm$ min)                          & ($\pm$ cgrad) & bei \gls{alf} $\cdot$ \gls{sym:In} (\SI{}{\percent}) \\
         \midrule
-        5P und 5PR    & \num{1,00}                            & \num{60,00}                                    & \num{1,80}               & \num{5,00}                                        \\
-        10P und 10PR  & \num{3,00}                            & --                                    & --                & \num{10,00}                                       \\
+        5P und 5PR    & \num{1,00}                               & \num{60,00}                          & \num{1,80}    & \num{5,00}                                           \\
+        10P und 10PR  & \num{3,00}                               & --                                   & --            & \num{10,00}                                          \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -104,15 +104,15 @@ Messwandler untergliedern sich in die Standardklassen \num{0,10} bis \num{1,00},
     \label{tab:stromfehler}
     \begin{tabular}{lcccc}
         \toprule
-        Genauigkeits- & \multicolumn{4}{c}{Übersetzungsmessabweichung $\pm$ \SI{}{\percent}}                    \\
-        klasse        & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})}                       \\
+        Genauigkeits- & \multicolumn{4}{c}{Übersetzungsmessabweichung $\pm$ \SI{}{\percent}}                                             \\
+        klasse        & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})}                                                 \\
         \cmidrule(lr){2-5}
-                      & \num{5,00}                                                       & \num{20,00}   & \num{100,00} & \num{120,00} \\
+                      & \num{5,00}                                                           & \num{20,00} & \num{100,00} & \num{120,00} \\
         \midrule
-        \num{0,10}           & \num{0,40}                                                     & \num{0,20}  & \num{0,10} & \num{0,10} \\
-        \num{0,20}           & \num{0,75}                                                    & \num{0,35} & \num{0,20} & \num{0,20} \\
-        \num{0,50}           & \num{1,50}                                                     & \num{0,75} & \num{0,50} & \num{0,50} \\
-        \num{1,00}           & \num{3,00}                                                     & \num{1,50}  & \num{1,00} & \num{1,00} \\
+        \num{0,10}    & \num{0,40}                                                           & \num{0,20}  & \num{0,10}   & \num{0,10}   \\
+        \num{0,20}    & \num{0,75}                                                           & \num{0,35}  & \num{0,20}   & \num{0,20}   \\
+        \num{0,50}    & \num{1,50}                                                           & \num{0,75}  & \num{0,50}   & \num{0,50}   \\
+        \num{1,00}    & \num{3,00}                                                           & \num{1,50}  & \num{1,00}   & \num{1,00}   \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -125,19 +125,21 @@ Neben dem Stromfehler ist der Fehlwinkel \gls{sym:deltaphi} als Maß für die Ph
     \label{tab:fehlwinkel}
     \begin{tabular}{lcccccccc}
         \toprule
-        Genauigkeits- & \multicolumn{8}{c}{Fehlwinkel}                                                                                                                        \\
-        klasse        & \multicolumn{4}{c}{$\pm$ Minuten}                    & \multicolumn{4}{c}{$\pm$ Zentiradiant}                                                         \\
+        Genauigkeits- & \multicolumn{8}{c}{Fehlwinkel}                                                                                                                                                                                             \\
+        klasse        & \multicolumn{4}{c}{$\pm$ Minuten}                                & \multicolumn{4}{c}{$\pm$ Zentiradiant}                                                                                                                  \\
         \cmidrule(lr){2-5} \cmidrule(lr){6-9}
-                      & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})} & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})}                                           \\
-                      & \num{5,00}                                                    & \num{20,00}                                                   & \num{100,00}  & \num{120,00}  & \num{5,00}    & \num{20,00}   & \num{100,00}  & \num{120,00}  \\
+                      & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})} & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})}                                                                                        \\
+                      & \num{5,00}                                                       & \num{20,00}                                                      & \num{100,00} & \num{120,00} & \num{5,00} & \num{20,00} & \num{100,00} & \num{120,00} \\
         \midrule
-        \num{0,10}           & \num{15,00}                                                   & \num{8,00}                                                    & \num{5,00}    & \num{5,00}    & \num{0,45} & \num{0,24} & \num{0,15} & \num{0,15} \\
-        \num{0,20}           & \num{30,00}                                                   & \num{15,00}                                                   & \num{10,00}            & \num{10,00}                                                   & \num{0,90}                                                 & \num{0,45} & \num{0,30} & \num{0,30}                      \\
-        \num{0,50}           & \num{90,00}                                                   & \num{45,00}                                                   & \num{30,00}   & \num{30,00}   & \num{2,70} & \num{1,35} & \num{0,90} & \num{0,90} \\
-        \num{1,00}           & \num{180,00}                                                  & \num{90,00}                                                   & \num{60,00}   & \num{60,00}   & \num{5,40} & \num{2,70} & \num{1,80} & \num{1,80} \\
+        \num{0,10}    & \num{15,00}                                                      & \num{8,00}                                                       & \num{5,00}   & \num{5,00}   & \num{0,45} & \num{0,24}  & \num{0,15}   & \num{0,15}   \\
+        \num{0,20}    & \num{30,00}                                                      & \num{15,00}                                                      & \num{10,00}  & \num{10,00}  & \num{0,90} & \num{0,45}  & \num{0,30}   & \num{0,30}   \\
+        \num{0,50}    & \num{90,00}                                                      & \num{45,00}                                                      & \num{30,00}  & \num{30,00}  & \num{2,70} & \num{1,35}  & \num{0,90}   & \num{0,90}   \\
+        \num{1,00}    & \num{180,00}                                                     & \num{90,00}                                                      & \num{60,00}  & \num{60,00}  & \num{5,40} & \num{2,70}  & \num{1,80}   & \num{1,80}   \\
         \bottomrule
     \end{tabular}
 \end{table}
+
+Im Rahmen dieser Arbeit wird zur Bewertung der Fremdfeldeinflüsse ausschließlich die Übersetzungsmessabweichung \gls{sym:epsilon} herangezogen, da die beobachteten Effekte primär als amplitudenbezogene Sättigungserscheinungen des Kerns auftreten. Eine experimentelle Bestimmung des Fehlwinkels \gls{sym:deltaphi} erfolgt nicht, da die Messkette und die Auswertelogik auf stationäre Effektivwert- bzw. Mittelwertgrößen ausgelegt sind und der Fokus auf der normativen Einhaltung der Amplitudenfehlergrenzen liegt. Die normativen Grenzwerte für \gls{sym:deltaphi} werden im Folgenden der Vollständigkeit halber angegeben. Eine Erweiterung um eine Fehlwinkelanalyse wird im Ausblick adressiert.
 
 
 \subsubsection{Ersatzschaltbild eines Messstromwandlers}
@@ -254,7 +256,7 @@ Setzt man die resultierende Durchflutung in das Hopkinsonsche Gesetz ein, erhäl
 Für die ideale Betrachtung eines Stromwandlers wird ein Kernmaterial mit unendlich hoher Permeabilität ($\mu_r \to \infty$) angenommen. Daraus folgt gemäß Gleichung \eqref{eq:magnetischer_widerstand}, dass der magnetische Widerstand gegen \num{0} strebt ($R_m \to 0$). Damit der magnetische Fluss \gls{sym:Phi} einen endlichen Wert annimmt, muss die resultierende Durchflutung ebenfalls gegen \num{0} streben. Es stellt sich ein nahezu ideales Durchflutungsgleichgewicht ein (siehe Gleichung \eqref{eq:ideales_gleichgewicht})~\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}\cite[S.~75]{book-Technologie_Messwandler-Minkner}:
 
 \begin{align}
-    0                         & = N_{p} \cdot I_{pri} - N_{s} \cdot I_{s} \nonumber \\[6pt]
+    0                 & = N_{p} \cdot I_{pri} - N_{s} \cdot I_{s} \nonumber \\[6pt]
     N_{s} \cdot I_{s} & = N_{p} \cdot I_{pri}
     \label{eq:ideales_gleichgewicht}
 \end{align}
@@ -280,15 +282,15 @@ Magnetische Stoffeigenschaften charakterisieren die Reaktion eines Materials auf
     \begin{tabularx}{\linewidth}{l c l X}
         \toprule
         \textbf{Eigenschaft} & 
-        \thead{\textbf{Permeabilität} \\ \textbf{\gls{sym:mur}}} & 
-        \textbf{Verhalten} & 
-        \textbf{Materialien} \\ 
+        \thead{\textbf{Permeabilität}                                                                                  \\ \textbf{\gls{sym:mur}}} & 
+        \textbf{Verhalten}   & 
+        \textbf{Materialien}                                                                                           \\ 
         \midrule
         Diamagnetismus       & $< \num{1,00}$       & Feldschwächung            & Bi, Cu, Ag, Au, $\text{H}_2\text{O}$ \\
-        Paramagnetismus      & $> \num{1,00}$       & Schwache Verstärkung      & Al, Pt, Mg, Luft       \\
-        Ferromagnetismus     & $\gg \num{1,00}$     & Starke Verstärkung        & Fe, Co, Ni, Mu-Metall  \\
-        Ferrimagnetismus     & $\gg \num{1,00}$     & Permanente Magnetisierung & Ferrite, Magnetit      \\
-        Antiferromagnetismus & $\approx \num{1,00}$ & Keine äußere Wirkung      & Mn, Cr, MnO            \\
+        Paramagnetismus      & $> \num{1,00}$       & Schwache Verstärkung      & Al, Pt, Mg, Luft                     \\
+        Ferromagnetismus     & $\gg \num{1,00}$     & Starke Verstärkung        & Fe, Co, Ni, Mu-Metall                \\
+        Ferrimagnetismus     & $\gg \num{1,00}$     & Permanente Magnetisierung & Ferrite, Magnetit                    \\
+        Antiferromagnetismus & $\approx \num{1,00}$ & Keine äußere Wirkung      & Mn, Cr, MnO                          \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -321,8 +323,8 @@ Die Neukurve beschreibt den initialen Magnetisierungsvorgang eines unmagnetisier
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/simulation/hysterese/hysterese_kurve_final_colors.pdf}
-    \caption{Schematische Darstellung von Neukurve und Hystereseschleife im $B$-$H$-Diagramm}
+    \includegraphics[width=0.8\textwidth]{03_Ressourcen/simulation/hysterese/hysterese_kurve_final_colors.pdf}
+    \caption{Schematische Darstellung von Neukurve und Hystereseschleife im $B$-$H$-Diagramm \cite[text]{website-Magnetisierungskurve-Mietke}}
     \label{fig:bh-hysterese}
 \end{figure}
 
@@ -372,7 +374,7 @@ Durch Substitution von Gleichung \eqref{eq:spannung_impedanz} in \eqref{eq:trafo
 \begin{equation}
     \Phi
     = \frac{I_s \cdot \sqrt{(R_s+R_B)^2 + \bigl(\omega(L_s+L_B)\bigr)^2}}
-           {4{,}44 \cdot f \cdot N_s}.
+    {4{,}44 \cdot f \cdot N_s}.
     \label{eq:fluss_buerde_mit_induktivitaet}
 \end{equation}
 
@@ -439,8 +441,21 @@ Wie in Abschnitt \ref{sec:kompensationswicklungen} dargelegt, ist eine ideal zen
 
 Abbildung~\ref{pic:sim_exzentrische_montiert} verdeutlicht den simulierten Verlauf des magnetischen Flusses \gls{sym:Phi} entlang des Kernumfangs. Während die zentrierte Anordnung (blau) eine homogene Verteilung aufweist, führt die exzentrische Position (orange) zu einer Asymmetrie. In leiternahen Bereichen steigt der Fluss \gls{sym:Phi} an, während er auf der gegenüberliegenden Seite abfällt. Sofern die Sekundärwicklung \gls{sym:Ns} nicht vollkommen gleichmäßig verteilt ist, resultieren aus dieser Inhomogenität Messabweichungen~\cite[S.~76]{book-Technologie_Messwandler-Minkner}.
 
-\subsection{Messabweichung und Fehlerfortpflanzung}
-\label{sec:messabweichung_fehlerfortpflanzung}
+\subsection{Niederspannungsschaltanlagen}
+\label{sec:niederspannungsschaltanlagen}
+
+Niederspannungsschaltanlagen dienen der Verteilung, Schaltung und Absicherung elektrischer Energie innerhalb eines Bemessungsspannungsbereichs von bis zu \SI{1000,00}{V}. Sie fungieren als zentrales Bindeglied zwischen der Energieeinspeisung – etwa über Transformatorenstationen – und den nachgeschalteten Verbrauchern. Aufgrund ihrer primären Funktion im Energiefluss sind diese Anlagen sowohl für hohe Dauerbetriebsströme als auch für signifikante mechanische und thermische Beanspruchungen infolge von Kurzschlussereignissen dimensioniert.
+
+Der konstruktive Aufbau folgt üblicherweise einem modularen Prinzip, bei dem mehrere Schaltschrankfelder über ein gemeinsames Hauptsammelschienensystem elektrisch gekoppelt sind. Dieses System ist zumeist im rückwärtigen oder oberen Bereich der Anlage positioniert und übernimmt die Funktion des zentralen Energieverteilers. Funktional lassen sich die Felder in drei wesentliche Kategorien unterteilen: Einspeisefelder beziehen die elektrische Energie aus der Quelle, führen sie der Hauptsammelschiene zu und beherbergen in der Regel die zentralen Schutz- sowie Messsysteme. Über die Abgangsfelder erfolgt hingegen die gezielte Energieverteilung an nachgelagerte Verbraucher oder Unterverteilungen, während Kupplungsfelder die galvanische Verbindung oder Trennung einzelner Sammelschienenabschnitte ermöglichen. Letztere dienen insbesondere dazu, die Versorgungssicherheit durch redundante Einspeisungen zu erhöhen oder notwendige Wartungsarbeiten im Teilbetrieb zu realisieren.
+
+Ein kritisches Sicherheitsmerkmal der Konstruktion stellt die mechanische und thermische Kurzschlussfestigkeit dar. Die mechanische Struktur muss derart robust ausgeführt sein, dass sie selbst extremen Belastungen, beispielsweise einem Kurzschlussstrom von $I_k = \SI{100,00}{kA}$, ohne strukturelle Zerstörung standhält. Ein wesentlicher Aspekt des Personenschutzes ist zudem die Störlichtbogenqualifikation. Im Fehlerfall eines internen Lichtbogens wird die schlagartig freigesetzte Druckenergie sowie die thermische Last kontrolliert über integrierte Druckentlastungsklappen abgeführt. Diese konstruktive Maßnahme verhindert ein Aufsprengen der Schaltschranktüren und schützt das Bedienpersonal vor den unmittelbaren Auswirkungen des Lichtbogens, während gleichzeitig ein beschleunigtes Erlöschen des Fehlers unterstützt wird.
+
+
+
+
+
+\subsection{Messabweichung und normative Kenngrößen}
+\label{sec:messabweichung_kenngroessen}
 
 Zur Sicherstellung der normativ geforderten Genauigkeitsklassen wird in der Prüftechnik das Prinzip der Vergleichsmessung angewendet. Hierbei werden der zu prüfende Wandler und ein hochpräzises Referenznormal primärseitig von demselben Primärstrom \gls{sym:I_p} durchflossen. Da die Fehlercharakteristik des Normals bekannt und dessen Eigenabweichung vernachlässigbar klein ist, lässt sich die Messabweichung des Prüflings unmittelbar aus der Differenz der sekundärseitigen Ausgangssignale ableiten~\cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}.
 
@@ -452,3 +467,4 @@ Gemäß der Norm DIN EN 61869-2 sind zwei zentrale Kenngrößen zu ermitteln. Di
 \end{equation}
 
 Hierbei entspricht \gls{sym:kn} dem Bemessungsübersetzungsverhältnis. Die zweite essenzielle Kenngröße ist der Fehlwinkel \gls{sym:deltaphi}, welcher die Phasenverschiebung zwischen dem primären und dem sekundären Stromzeiger definiert. Für die Validierung ist zudem die Belastung mit der Nennbürde entscheidend, da die Impedanz des Sekundärkreises die magnetische Aussteuerung des Kerns und somit die resultierenden Fehlerwerte maßgeblich determiniert~\cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}.
+
