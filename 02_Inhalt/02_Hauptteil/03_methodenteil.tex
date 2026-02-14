@@ -98,7 +98,7 @@ Ein wesentlicher Aspekt der beobachteten Unstimmigkeiten liegt in der unterschie
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_alt/dia_messstrecke_alt-Zusammenfassung_MultiCurrent.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_messstrecke_alt_verlauf.png}
     \caption{Analyse der Messabweichung und Standardabweichung der Phasen L1, L2 und L3 im ursprünglichen Versuchsaufbau}
     \label{pic:dia_messstrecke_alt}
 \end{diagram}
@@ -210,7 +210,7 @@ Der Kurvenverlauf verdeutlicht, dass das \gls{pac} 4220 über nahezu den gesamte
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_neu/dia_messstrecke_neu-Zusammenfassung_MultiCurrent.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_messstrecke_neu_verlauf.png}
     \caption{Vergleichende Analyse der Messabweichung (oben) und Standardabweichung (unten) unter Einsatz des \gls{pac} 4220}
     \label{dia:messstrecke_neu}
 \end{diagram}
@@ -225,7 +225,7 @@ Ergänzend zur Analyse der Einzelabweichungen ermöglicht das Ökonomie-Ranking 
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/diagramme/dia_messstrecke_neu/dia_messstrecke_neu-Oekonomie_Ranking.pdf}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/kosten_horizontal/mes_messstrecke_neu_kosten_horizontal.png}
     \caption{Kumulierter Vergleich der Fehleranteile (Ökonomie-Ranking) der verschiedenen Messsysteme über drei Lastbereiche}
     \label{dia:oekonomie_ranking}
 \end{diagram}
@@ -280,17 +280,13 @@ Es ist anzumerken, dass es sich hierbei um eine Vereinfachung handelt, die den W
         Celsa & ALO 10030     & Standard    & 2500 & 2,5  & 634,30  & 45,50  \\
         Celsa & ALO 12070     & Standard    & 3000 & 15,0 & 1520,00 & 71,51  \\
         Celsa & ALO 12070     & Standard    & 4000 & 15,0 & 1520,00 & 71,51  \\
-        Celsa & ALO 20060     & Standard    & 5000 & 40,0 & 1989,00 & 124,76 \\
-        MBS   & ASK 129.10    & Standard    & 5000 & 15,0 & 6175,00 & 289,80 \\
         \addlinespace
         Celsa & ALO 8030 K    & Kompensiert & 2000 & 10,0 & 710,20  & 95,95  \\
         Celsa & ALO 10050 K   & Kompensiert & 2500 & 5,0  & 1027,00 & 104,20 \\
         Celsa & ALO 12070 K   & Kompensiert & 3000 & 15,0 & 1520,00 & 346,06 \\
         Celsa & ALO 12070 K   & Kompensiert & 4000 & 15,0 & 1520,00 & 401,91 \\
-        Celsa & ALO E 16050 K & Kompensiert & 5000 & 40,0 & 1903,00 & 414,56 \\
         \addlinespace
         Redur & 13A1030.3ffp  & \glsentryshort{ffp}   & 2000 & 10,0 & 778,70  & 146,01 \\
-        Redur & 20A1456.5FFP  & \glsentryshort{ffp}   & 5000 & 15,0 & 1600,00 & 296,64 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -340,12 +336,12 @@ Um den Einfluss der Leitergeometrie experimentell zu untersuchen, wurde das Kupf
 \end{table}
 
 \paragraph{Parallelanordnung}
-Als Referenz fungiert die Parallelanordnung der drei Phasenleiter in einer Ebene. Dieser in Abbildung~\ref{pic:kupferschienen_parallel} gezeigte Aufbau bildet die realen Bedingungen in \textit{Siemens SIVACON S8} Schaltfeldern nach. Die verwendeten Abstände entsprechen den in Tabelle~\ref{tab:schienen_konfiguration} aufgeführten Herstellervorgaben. In dieser Konfiguration ist der Prüfling – hier beispielhaft der Messstromwandler \textit{Redur 20A1456.5FFP} (\SI{5000}{A}) – den maximalen magnetischen Fremdfeldern der benachbarten Leiter ausgesetzt.
+Als Referenz fungiert die Parallelanordnung der drei Phasenleiter in einer Ebene. Dieser in Abbildung~\ref{pic:kupferschienen_parallel} gezeigte Aufbau bildet die realen Bedingungen in \textit{Siemens SIVACON S8} Schaltfeldern nach. Die verwendeten Abstände entsprechen den in Tabelle~\ref{tab:schienen_konfiguration} aufgeführten Herstellervorgaben. In dieser Konfiguration ist der Prüfling – hier beispielhaft ein Hochstrom-Messstromwandler – den maximalen magnetischen Fremdfeldern der benachbarten Leiter ausgesetzt.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/Bilder/kupferschienen_parallel.jpg}
-    \caption{Versuchsaufbau in paralleler Schienenanordnung mit montiertem Messstromwandler (Typ: Redur 20A1456.5FFP)}
+    \caption{Versuchsaufbau in paralleler Schienenanordnung mit montiertem Messstromwandler}
     \label{pic:kupferschienen_parallel}
 \end{figure}
 
@@ -354,7 +350,7 @@ Für die Realisierung der Dreiecksanordnung wurde der Aufbau gemäß Abbildung~\
 
 
 
-Ziel dieser Anordnung ist eine symmetrischere Gestaltung der magnetischen Kopplung sowie die partielle Kompensation der vektoriellen Anteile der Fremdfelder im Bereich des Wandlerkerns. Auch in dieser Konfiguration wurde der \SI{5000}{A} Wandler von \textit{Redur} vermessen.
+Ziel dieser Anordnung ist eine symmetrischere Gestaltung der magnetischen Kopplung sowie die partielle Kompensation der vektoriellen Anteile der Fremdfelder im Bereich des Wandlerkerns. Auch in dieser Konfiguration wurden die ausgewählten Prüflinge vermessen.
 
 \begin{figure}[H]
     \centering

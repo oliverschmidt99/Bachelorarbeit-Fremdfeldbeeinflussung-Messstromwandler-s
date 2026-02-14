@@ -83,21 +83,21 @@
 81,Redur 2025 12 08 1305-Redur-13A1030.3ffp-2000A-0R0 | PAC2 | Dreieck (2000A),mes_2000A_buerde,Redur,13A1030.3ffp,Dreieck,2000,"Minimallast 0,0 Ω",L1,"0,39","0,12",,,,"-0,03","-0,04","146,01","778,73"
 82,Redur 2025 12 08 1305-Redur-13A1030.3ffp-2000A-0R0 | PAC2 | Dreieck (2000A),mes_2000A_buerde,Redur,13A1030.3ffp,Dreieck,2000,"Minimallast 0,0 Ω",L2,"0,51","0,19",,,,"0,03","-0,27","146,01","778,73"
 83,Redur 2025 12 08 1305-Redur-13A1030.3ffp-2000A-0R0 | PAC2 | Dreieck (2000A),mes_2000A_buerde,Redur,13A1030.3ffp,Dreieck,2000,"Minimallast 0,0 Ω",L3,"0,69","0,22",,,,"0,1","0,08","146,01","778,73"
-84,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_alt,K-3,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Messumformer,L1,"-0,2","-0,3","0,63","0,62","0,67","0,64","0,69",1,1
-85,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_alt,K-3,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Messumformer,L2,"-4,4","-1,54","-0,43","-0,27","-0,19","-0,19","-0,11",1,1
-86,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_alt,K-3,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Messumformer,L3,"-6,67","-2,68","-0,81","-0,44","-0,35","-0,31","-0,25",1,1
-87,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_alt,Rogowski-Spulen, ,Parallel,4000,Rogowski,L1,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
-88,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_alt,Rogowski-Spulen, ,Parallel,4000,Rogowski,L2,"2,95","1,97","1,24","1,13","1,02","1,77","5,23",1,1
-89,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_alt,Rogowski-Spulen, ,Parallel,4000,Rogowski,L3,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
-90,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,K-3,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Messumformer,L1,"-0,2","-0,3","0,63","0,62","0,67","0,64","0,69",1,1
-91,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,K-3,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Messumformer,L2,"-4,4","-1,54","-0,43","-0,27","-0,19","-0,19","-0,11",1,1
-92,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,K-3,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Messumformer,L3,"-6,67","-2,68","-0,81","-0,44","-0,35","-0,31","-0,25",1,1
-93,"PAC 4220 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,PAC 4220,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Energiemessgerät,L1,"0,27","0,16","0,04","-0,03","0,01","-0,02","-0,01",1,1
-94,"PAC 4220 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,PAC 4220,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Energiemessgerät,L2,"-0,84","0,06",0,"-0,02","0,04","0,01","0,05",1,1
-95,"PAC 4220 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,PAC 4220,"Celsa ICG | 6000/5 | Kl. 0,2S",Parallel,4000,Energiemessgerät,L3,"0,84","0,06","-0,03","-0,02","0,01","0,02","-0,01",1,1
-96,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_neu,Rogowski-Spulen, ,Parallel,4000,Rogowski,L1,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
-97,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_neu,Rogowski-Spulen, ,Parallel,4000,Rogowski,L2,"2,95","1,97","1,24","1,13","1,02","1,77","5,23",1,1
-98,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_neu,Rogowski-Spulen, ,Parallel,4000,Rogowski,L3,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
+84,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_alt,3-K Elektrik,DMI30 05-V01,Referenz,4000,Messumformer,L1,"-0,2","-0,3","0,63","0,62","0,67","0,64","0,69",1,1
+85,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_alt,3-K Elektrik,DMI30 05-V01,Referenz,4000,Messumformer,L2,"-4,4","-1,54","-0,43","-0,27","-0,19","-0,19","-0,11",1,1
+86,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_alt,3-K Elektrik,DMI30 05-V01,Referenz,4000,Messumformer,L3,"-6,67","-2,68","-0,81","-0,44","-0,35","-0,31","-0,25",1,1
+87,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_alt,MBS,FASK-100,Referenz,4000,Rogowski-Spule,L1,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
+88,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_alt,MBS,FASK-100,Referenz,4000,Rogowski-Spule,L2,"2,95","1,97","1,24","1,13","1,02","1,77","5,23",1,1
+89,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_alt,MBS,FASK-100,Referenz,4000,Rogowski-Spule,L3,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
+90,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,3-K Elektrik,DMI30 05-V01,Referenz,4000,Messumformer,L1,"-0,2","-0,3","0,63","0,62","0,67","0,64","0,69",1,1
+91,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,3-K Elektrik,DMI30 05-V01,Referenz,4000,Messumformer,L2,"-4,4","-1,54","-0,43","-0,27","-0,19","-0,19","-0,11",1,1
+92,"K-3 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,3-K Elektrik,DMI30 05-V01,Referenz,4000,Messumformer,L3,"-6,67","-2,68","-0,81","-0,44","-0,35","-0,31","-0,25",1,1
+93,"PAC 4220 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,Siemens,PAC 4220,Referenz,4000,Multifunktionsmessgerät,L1,"0,27","0,16","0,04","-0,03","0,01","-0,02","-0,01",1,1
+94,"PAC 4220 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,Siemens,PAC 4220,Referenz,4000,Multifunktionsmessgerät,L2,"-0,84","0,06",0,"-0,02","0,04","0,01","0,05",1,1
+95,"PAC 4220 | Celsa ICG 6000/5 Kl. 0,2S",mes_messstrecke_neu,Siemens,PAC 4220,Referenz,4000,Multifunktionsmessgerät,L3,"0,84","0,06","-0,03","-0,02","0,01","0,02","-0,01",1,1
+96,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_neu,MBS,FASK-100,Referenz,4000,Rogowski-Spule,L1,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
+97,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_neu,MBS,FASK-100,Referenz,4000,Rogowski-Spule,L2,"2,95","1,97","1,24","1,13","1,02","1,77","5,23",1,1
+98,"Rogowski-Spulen | Kl. 0,2",mes_messstrecke_neu,MBS,FASK-100,Referenz,4000,Rogowski-Spule,L3,"-2,64","-0,88","-0,86","-0,87","-0,82","-0,82","-0,8",1,1
 ,MBS 2025 12 04 1415-MBS-ASK101.4-2000A-8R1  | Parallel ,mes_gesamt,MBS,ASK101.4,Parallel,2000,Standard,L1,"0,13","-0,22",,,,"-0,35","-0,43","43,67","733,2"
 ,MBS 2025 12 04 1415-MBS-ASK101.4-2000A-8R1  | Parallel ,mes_gesamt,MBS,ASK101.4,Parallel,2000,Standard,L2,"0,09","-0,14",,,,"-0,27","-0,36","43,67","733,2"
 ,MBS 2025 12 04 1415-MBS-ASK101.4-2000A-8R1  | Parallel ,mes_gesamt,MBS,ASK101.4,Parallel,2000,Standard,L3,"0,21","-0,06",,,,"-0,2","-0,22","43,67","733,2"
