@@ -1,28 +1,43 @@
 \section{Fazit}
 \label{chap:fazit}
 
-Diese Arbeit hatte das Ziel, eine praxistaugliche Lösung für die Strommessung in einer kompakten Niederspannungsschaltanlage unter magnetischem Fremdfeldeinfluss zu bewerten. Im Mittelpunkt stand die Frage, mit welchen Maßnahmen die geforderte Messgenauigkeit im Drehstromsystem auch bei hohen Strömen erreicht werden kann. Die Messreihen zeigen, dass der Fremdfeldeinfluss im untersuchten Aufbau phasenabhängig wirkt: Die Abweichungen verteilen sich nicht gleichmäßig, sondern treten besonders ausgeprägt auf Phase L2 auf. Damit bestätigt sich die Ausgangslage der Arbeit: Kompaktheit ist konstruktiv erforderlich, kann jedoch die Messqualität im Hochstrombereich deutlich verschlechtern.
+Diese Arbeit untersucht Maßnahmen zur Verbesserung der Strommessung in einer kompakten Niederspannungsschaltanlage unter Fremdfeldeinfluss. Die Bewertung erfolgt im Nennlastbereich bei \SI{80}{\percent}, \SI{90}{\percent} und \SI{100}{\percent}. Dieser Bereich bildet den relevanten Betriebsfall ab und eignet sich für die technische und wirtschaftliche Einordnung der untersuchten Lösungen. Als Kennwert dient die Übersetzungsmessabweichung \gls{sym:epsilon}. Ergänzend werden Integrationsaufwand, Verfügbarkeit und Kosten betrachtet, um eine umsetzbare Empfehlung für Neuentwicklung und Bestandsanlagen abzuleiten.
 
-Gleichzeitig zeigen die Ergebnisse, dass die Abweichungen auf L2 kein unveränderlicher Systemeffekt sind. Die Messstabilität lässt sich gezielt verbessern. Entscheidend ist dabei nicht allein die Wandlertechnologie, sondern das Zusammenspiel aus Wandlerwahl, konstruktiver Umsetzung und der Geometrie des Drehstromsystems. Damit steht für die Neuentwicklung ein Maßnahmenraum zur Verfügung, der die Messung im Worst-Case L2 stabilisiert und zugleich eine wirtschaftliche Serienumsetzung ermöglicht.
+\subsection*{Standardwandler und Dreiecksanordnung als Systemansatz}
+Standardwandler sind kostengünstig und am Markt breit verfügbar. In der Parallelanordnung zeigt sich im Nennlastbereich eine erhöhte Fremdfeldempfindlichkeit, insbesondere auf der Phase L2. Die Wirksamkeit der Dreiecksanordnung lässt sich im Hochstromfall \SI{4000}{A} direkt belegen. Beim Standardwandler \textit{Celsa ALO 12070} beträgt die Abweichung auf L2 bei \SI{100}{\percent} Last in Parallelanordnung \num{-3,30}\,\% und reduziert sich in Dreiecksanordnung auf \num{-0,15}\,\% (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}). Das entspricht einer Reduktion der absoluten Abweichung um \num{3,15} Prozentpunkte. Relativ ergibt sich eine Verringerung um rund \SI{95,5}{\percent}. Der Betrag der Abweichung wird damit um den Faktor \num{22} reduziert. Bereits bei \SI{80}{\percent} Last ist in der Parallelanordnung auf L2 eine Abweichung von \num{-0,90}\,\% dokumentiert (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}). Insgesamt zeigt der Nennlastbereich, dass die geometrische Optimierung der dominante Hebel zur Verbesserung bei Standardwandlern ist. Daraus ergibt sich ein sehr günstiges Kosten Nutzen Verhältnis, weil die Verbesserung ohne kostenintensive Spezialkomponenten erreicht wird. Dieser Ansatz wird daher in der Neuentwicklung umgesetzt.
 
-\begin{itemize}
-    \item \textbf{Dreiecksanordnung -- Basislösung (Preis-Leistungs-Sieger):}
-    Standardkonzept für die Neuentwicklung, da die Fremdfeldkopplung über die Systemgeometrie an der Ursache reduziert wird und damit Standardwandler normnah messen können. Im Worst-Case L2 bei \SI{4000}{A} sinkt beim Celsa ALO 12070 die Abweichung von \(\epsilon=-3{,}280\,\%\) (Parallel) auf \(\epsilon=-0{,}150\,\%\) (Dreieck), d.\,h. um rund 95\,\% (Faktor \(\approx 22\); vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}).
+\subsection*{Fremdfeld Protektion als Nachrüst und Ergänzungslösung}
+Fremdfeldprotektoren können die Messgüte im Nennlastbereich stabilisieren, verursachen jedoch höhere Kosten und erfordern eine definierte Einbaulage. Für den \textit{Redur 13A1030.3ffp} zeigt die Bereichsanalyse bei \SI{2000}{A}, dass der mittlere absolute Fehler im Nennstrombereich \SI{80}{\percent} bis \SI{100}{\percent} in beiden Leitergeometrien sehr klein bleibt und bei etwa \(\approx \num{0,03}\,\%\) liegt (vgl. Abbildung~\ref{dia:2000A_bereichsanalyse}). Dieses Ergebnis stützt die Eignung der Protektorlösung zur Stabilisierung im Nennlastbetrieb. Die Interpretation aus der Arbeit bleibt dabei maßgeblich. Die Wirkung ist richtungsabhängig und wird durch Ausrichtung, Position und Reproduzierbarkeit der Montage bestimmt. Damit ist FFP besonders für Bestandsanlagen relevant, wenn eine Umstellung der Leitergeometrie nicht möglich ist und eine nachrüstbare Maßnahme benötigt wird.
 
-    \item \textbf{FFP-Technologie -- Ergänzung und Retrofit:}
-    Zusatzmaßnahme für konstruktiv besonders eingeschränkte Varianten sowie zur Nachrüstung in Bestandsanlagen, wenn die Geometrie nicht angepasst werden kann. Voraussetzung ist eine prozesssichere Ausführung und definierte Einbaulage/Ausrichtung, da die Wirksamkeit montage- und toleranzabhängig ist.
+\subsection*{Kompensierte Wandler als Technologieansatz}
+Kompensierte Wandler zeigen im Nennlastbereich eine hohe Robustheit gegenüber Fremdfeldeinflüssen. Dies wird bereits im unteren Hochstrombereich sichtbar. Beim \textit{Celsa ALO 8030 K} liegt die maximale Abweichung unter Volllast in der Parallelanordnung bei \num{-0,40}\,\% (vgl. Abschnitt~\ref{sec:analyse_messreihe_2000A}). Für den Hochstromfall \SI{4000}{A} bestätigt die Bereichsanalyse zusätzlich, dass der kompensierte \textit{Celsa ALO 12070 K} in beiden Leitergeometrien über alle Lastbereiche geringe Fehlerwerte aufweist und unter \num{0,21}\,\% bleibt (vgl. Abbildung~\ref{dia:4000A_bereichsanalyse}). Der technische Vorteil besteht damit in einer stabilen Messgüte im Nennlastbereich auch dann, wenn die Systemgeometrie nicht optimiert werden kann. Dem stehen höhere Anschaffungskosten und eine eingeschränkte Verfügbarkeit gegenüber, da kompensierte Ausführungen häufig als Sonderausführung beschafft werden.
 
-    \item \textbf{Kompensierte Wandler -- Premiumlösung für Sonderfälle:}
-    Technisch am robustesten gegenüber Fremdfeldern, jedoch mit erhöhten Kosten und Integrationsaufwand. Einsatz daher nur dort, wo Geometrie und/oder FFP die geforderte Messstabilität nicht sicher erreichen oder wo Anforderungen eine maximale Robustheit zwingend begründen.
-\end{itemize}
+\subsection*{Gesamteinordnung und Umsetzung}
+Im Nennlastbereich verbessern alle untersuchten Ansätze die Messung auf L2. Für eine Neuentwicklung ergibt sich die Dreiecksanordnung mit Standardwandlern als bevorzugter Basisansatz, da sie im Nennlastbetrieb eine sehr große Verbesserung bei gleichzeitig hoher Verfügbarkeit und niedrigen Kosten ermöglicht. Fremdfeld Protektoren sind als Retrofit Lösung geeignet, wenn Geometrieänderungen nicht möglich sind und die Einbaulage prozesssicher definiert werden kann. Kompensierte Wandler sind die technisch robusteste Option im Nennlastbereich, sind jedoch kostenintensiv und in der Beschaffung eingeschränkt.
 
-Die abgeleiteten Maßnahmen wurden bereits in das Konstruktionskonzept überführt; Abbildung~\ref{fig:fazit_3d_neuentwicklung} zeigt den 3D-Gesamtaufbau der Kupferschienen, in dem die optimierte Anordnung berücksichtigt ist. Damit ist nachvollziehbar, warum und wie die Arbeit das Problem löst: Die Fremdfeldbeeinflussung wird primär über eine Geometrieanpassung reduziert und bei Bedarf durch konstruktive bzw. technologische Maßnahmen ergänzt.
-
+Die abgeleitete Maßnahmenstrategie wurde bereits in das konstruktive Konzept der Neuentwicklung übertragen. Abbildung~\ref{fig:fazit_generationen_vergleich} stellt die bisherige Schaltanlage und die Neuentwicklung direkt gegenüber und macht die konstruktive Umsetzung der Ergebnisse nachvollziehbar. Im oberen Bild ist der Anschlussraum der bisherigen Generation dargestellt.
+Die stark begrenzten Platzverhältnisse führen zu kleinen Leiterabständen und zu einer Anordnung der Messstromwandler in unmittelbarer Nähe zu den Sammelschienen. Dadurch ist die Einkopplung magnetischer Streufelder begünstigt, insbesondere in der Umgebung der mittleren Phase L2. Im unteren Bild ist die Neuentwicklung gezeigt. Hier wurde die in dieser Arbeit abgeleitete optimierte Leiteranordnung in das Konstruktionskonzept übernommen, sodass die Fremdfeldbeeinflussung im relevanten Betriebsbereich primär über die Systemgeometrie reduziert wird. Falls Randbedingungen eine reine Geometrieoptimierung einschränken, kann die Messung ergänzend durch Fremdfeld Protektion oder durch kompensierte Wandler stabilisiert werden.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.90\textwidth]{03_Ressourcen/Bilder/kupferschinen_gesamtaufbau_3d.png}
-    \caption{3D-Gesamtaufbau der Kupferschienen als Teil der Neuentwicklung: Überführung der in dieser Arbeit abgeleiteten Maßnahmen in das konstruktive Konzept.}
-    \label{fig:fazit_3d_neuentwicklung}
+
+    \begin{subfigure}[t]{0.95\textwidth}
+        \centering
+        \includegraphics[width=0.85\textwidth]{03_Ressourcen/Bilder/schaltschrank_front.jpg}
+        \caption{Bisherige Schaltanlage im Anschlussraum mit kompakter Leiterführung und Anordnung der Messstromwandler}
+        \label{fig:fazit_generation_alt}
+    \end{subfigure}
+
+    \vspace{0.8em}
+
+    \begin{subfigure}[t]{0.95\textwidth}
+        \centering
+        \includegraphics[width=0.65\textwidth]{03_Ressourcen/Bilder/kupferschinen_gesamtaufbau_3d.png}
+        \caption{Neuentwicklung mit übernommener optimierter Leiteranordnung aus den Untersuchungsergebnissen}
+        \label{fig:fazit_generation_neu}
+    \end{subfigure}
+
+    \caption{Gegenüberstellung der bisherigen Schaltanlage und der Neuentwicklung zur direkten Bewertung der konstruktiven Umsetzung}
+    \label{fig:fazit_generationen_vergleich}
 \end{figure}
 
 
