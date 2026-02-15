@@ -4,13 +4,13 @@
 \section{Auswertung und Diskussion}
 \label{sec:auswertung_diskussion}
 
-Dieses Kapitel widmet sich der detaillierten Evaluation, wie unterschiedliche Leitergeometrien die Messgenauigkeit von Stromwandlern beeinflussen. Im Zentrum steht die Analyse, in welchem Maße die räumliche Anordnung der Primärleiter \gls{sym:I_p} über magnetische Streufelder, Feldüberlagerungen und daraus resultierende Sättigungseffekte des Eisenkerns die Fehlerkennlinien der Prüflinge verändert. 
+Dieses Kapitel widmet sich der detaillierten Evaluation, wie unterschiedliche Leitergeometrien die Messgenauigkeit von Stromwandlern beeinflussen. Im Zentrum steht die Analyse, in welchem Maße die räumliche Anordnung der Primärleiter \gls{sym:I_p} über magnetische Streufelder, Feldüberlagerungen und daraus resultierende Sättigungseffekte des Eisenkerns die Fehlerkennlinien der Prüflinge verändert.
 
 
 
 Die Auswertung basiert auf den erfassten Messreihen über den gesamten Lastbereich — von der Teillast bei \SI{5}{\percent} bis zum Überstrom bei \SI{120}{\percent} — und stellt die Ergebnisse der konventionellen Parallelanordnung sowie der feldoptimierten Dreieckskonfiguration systematisch gegenüber.
 
-Zunächst wird der Geometrieeinfluss über alle Prüflinge hinweg qualitativ und quantitativ eingeordnet, um allgemeine Trends und wiederkehrende Muster, wie etwa eine erhöhte Empfindlichkeit des mittleren Leiters in der Parallelanordnung, zu identifizieren. Darauf aufbauend werden die Ergebnisse modell- und phasenspezifisch analysiert. Hierbei wird insbesondere bewertet, ob die beobachteten Abweichungen \gls{sym:epsilon} primär durch interferierende Magnetfelder benachbarter Leiter oder durch eine konstruktiv bedingte Begrenzung des magnetischen Kreises, beispielsweise ein geringes Kernvolumen, verursacht werden. 
+Zunächst wird der Geometrieeinfluss über alle Prüflinge hinweg qualitativ und quantitativ eingeordnet, um allgemeine Trends und wiederkehrende Muster, wie etwa eine erhöhte Empfindlichkeit des mittleren Leiters in der Parallelanordnung, zu identifizieren. Darauf aufbauend werden die Ergebnisse modell- und phasenspezifisch analysiert. Hierbei wird insbesondere bewertet, ob die beobachteten Abweichungen \gls{sym:epsilon} primär durch interferierende Magnetfelder benachbarter Leiter oder durch eine konstruktiv bedingte Begrenzung des magnetischen Kreises, beispielsweise ein geringes Kernvolumen, verursacht werden.
 
 
 
@@ -44,20 +44,16 @@ Diese systematische Darstellungsweise erlaubt die direkte Bewertung des Geometri
 \subsubsection{Referenzanalyse bei \SI{2000}{A}: Einfluss der Leitergeometrie auf verschiedene Wandlerkonzepte}
 \label{sec:analyse_messreihe_2000A}
 
-Die Untersuchung der Stromwandler bei einem Nennstrom \gls{sym:In} von \SI{2000}{A} liefert differenzierte Ergebnisse für die verschiedenen Modelle und Leiteranordnungen. Abbildung~\ref{dia:2000A_zusammenfassung} stellt die Verläufe der vier Prüflinge gegenüber und verdeutlicht die Einhaltung der Genauigkeitsklasse \num{1} für den Großteil der Messpunkte. Der grafische Vergleich hebt hervor, dass insbesondere zwei Konfigurationen erkennbare Abweichungen aufweisen. Dies betrifft den \textit{Redur~13A1030.ffp} in der Dreieckskonfiguration sowie den \textit{Celsa~ALO~10030} in der Parallelanordnung. Beide Wandler verlassen in diesen spezifischen Szenarien die vorgegebenen Toleranzbereiche.
-
-
+Die Untersuchung der Stromwandler bei einem Nennstrom \gls{sym:In} von \SI{2000}{A} zeigt je nach Wandlerkonzept und Leiteranordnung unterschiedliche Empfindlichkeiten gegenüber externen Magnetfeldern. Abbildung~\ref{dia:2000A_zusammenfassung} stellt die Messabweichungen aller vier Prüflinge für die Phasen L1 bis L3 gegenüber und verdeutlicht, dass die Genauigkeitsklasse \num{1} für den überwiegenden Teil der Messpunkte eingehalten wird. Auffällig sind jedoch zwei Konfigurationen, in denen die vorgegebenen Toleranzbereiche verlassen werden. Dies betrifft den \textit{Redur~13A1030.ffp} in Dreiecksanordnung sowie den \textit{Celsa~ALO~10030} in Parallelanordnung. Die zugehörigen Detailwerte sind im Anhang in den Tabellen~\ref{tab:messergebnisse_redur_2000A} bis \ref{tab:messergebnisse_mbs_2000A} dokumentiert.
 
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_2000A_verlauf.png}
-    \caption{Zusammenfassender Vergleich der Leitergeometrien bei \SI{2000}{A}}
+    \caption{Übersetzungsmessabweichung \gls{sym:epsilon} bei \SI{2000}{A}: Vergleich von Parallel- und Dreiecksanordnung (Phasen L1--L3)}
     \label{dia:2000A_zusammenfassung}
 \end{diagram}
 
-Eine bauliche Besonderheit weist der \textit{Redur~13A1030.ffp} auf. Wie in Abbildung~\ref{fig:wandler_fremdfeldprotektor} zu erkennen ist, befinden sich die Fremdfeldprotektoren (\gls{ffp}) an den seitlichen Flanken des Gehäuses. Diese Positionierung schirmt den Eisenkern gegen magnetische Streufelder benachbarter Leiter ab, sofern diese seitlich angeordnet sind. In der parallelen Leiterführung resultiert dies in normkonformen Messergebnissen, da die Beeinflussung durch die Nachbarphasen minimiert wird.
-
-
+Eine bauliche Besonderheit weist der \textit{Redur~13A1030.ffp} auf. Wie in Abbildung~\ref{fig:wandler_fremdfeldprotektor} zu erkennen ist, sind die Fremdfeldprotektoren (\gls{ffp}) seitlich an den Flanken des Gehäuses angeordnet. Damit wird der Eisenkern gegenüber magnetischen Streufeldern benachbarter Leiter insbesondere dann wirksam abgeschirmt, wenn diese seitlich positioniert sind. In der parallelen Leiterführung ergeben sich folgerichtig normkonforme Messergebnisse, da die Beeinflussung durch die Nachbarphasen deutlich reduziert wird.
 
 \begin{figure}[H]
     \centering
@@ -66,120 +62,116 @@ Eine bauliche Besonderheit weist der \textit{Redur~13A1030.ffp} auf. Wie in Abbi
     \label{fig:wandler_fremdfeldprotektor}
 \end{figure}
 
-Die Grenzen dieser Schirmungstechnologie offenbaren sich in der Dreieckskonfiguration. Die detaillierten numerischen Ergebnisse für diesen Aufbau sind in Tabelle~\ref{tab:messergebnisse_redur_2000A} im Anhang zu finden. Die Phase L2 weist bei \SI{120}{\percent} des Nennstroms eine Übersetzungsmessabweichung \gls{sym:epsilon} von \num{-1,50}\,\% auf. Dieser Wert liegt außerhalb der zulässigen Toleranz der Genauigkeitsklasse \num{1}. Ursächlich hierfür ist die fehlende magnetische Schirmung auf der Rückseite des Wandlergehäuses. In der Dreiecksgeometrie können die Magnetfelder der benachbarten Leiter an dieser ungeschützten Stelle in den Eisenkern eindringen und diesen partiell sättigen. Im Gegensatz dazu bleibt die Phase L1 mit einer Abweichung von lediglich \num{-0,10}\,\% im selben Lastpunkt weit innerhalb der Normgrenzen.
+Die Grenzen dieser Schirmung zeigen sich in der Dreieckskonfiguration. Die vollständigen Messergebnisse sind in Tabelle~\ref{tab:messergebnisse_redur_2000A} im Anhang aufgeführt. Bei \SI{120}{\percent} des Nennstroms weist Phase L2 eine Übersetzungsmessabweichung \gls{sym:epsilon} von \num{-1,50}\,\% auf und liegt damit außerhalb der zulässigen Toleranz der Genauigkeitsklasse \num{1}. Ursächlich ist die fehlende magnetische Schirmung auf der Rückseite des Wandlergehäuses. In der Dreiecksgeometrie können Magnetfelder benachbarter Leiter an dieser ungeschützten Stelle in den Eisenkern einkoppeln und ihn partiell sättigen. Im selben Lastpunkt bleibt Phase L1 mit einer Abweichung von lediglich \num{-0,10}\,\% hingegen deutlich innerhalb der Normgrenzen.
 
-Ein konträres Verhalten ist beim Modell \textit{Celsa~ALO~10030} zu beobachten. Tabelle~\ref{tab:messergebnisse_celsa_2000A} im Anhang dokumentiert die Messergebnisse für diesen Wandler und belegt substanzielle Einbußen der Genauigkeit in der parallelen Leiteranordnung. Bereits bei Nennstrom \gls{sym:In} verletzt die Phase L2 mit \num{-2,00}\,\% den zulässigen Grenzwert. Bei einer Überlast von \SI{120}{\percent} steigt die Abweichung \gls{sym:epsilon} weiter auf \num{-4,20}\,\% an. Auch die Außenleiter L1 und L3 zeigen in der Parallelanordnung bei \SI{120}{\percent} Last mit Werten von \num{-2,70}\,\% beziehungsweise \num{-3,10}\,\% erkennbare Fehler. Die Änderung der Geometrie hin zur Dreiecksanordnung bewirkt bei diesem Modell eine Verbesserung: Der Fehler der Phase L2 reduziert sich hierbei bei \SI{120}{\percent} Last auf einen unkritischen Wert von \num{-0,20}\,\%.
+Ein konträres Verhalten zeigt der \textit{Celsa~ALO~10030}. Die Messergebnisse in Tabelle~\ref{tab:messergebnisse_celsa_2000A} im Anhang belegen in der Parallelanordnung deutliche Genauigkeitseinbußen. Bereits bei Nennstrom \gls{sym:In} verletzt Phase L2 mit \num{-2,00}\,\% den zulässigen Grenzwert. Bei \SI{120}{\percent} Überlast steigt \gls{sym:epsilon} weiter auf \num{-4,20}\,\% an. Auch die Außenleiter L1 und L3 zeigen in der Parallelanordnung bei \SI{120}{\percent} Last mit \num{-2,70}\,\% beziehungsweise \num{-3,10}\,\% erkennbare Fehler. Wird die Leitergeometrie zur Dreiecksanordnung geändert, verbessert sich das Verhalten deutlich. Der Fehler der Phase L2 reduziert sich bei \SI{120}{\percent} Last auf \num{-0,20}\,\%. Entsprechend sind in Abbildung~\ref{dia:2000A_zusammenfassung} für die Parallelanordnung des \textit{Celsa~ALO~10030} deutlich stärkere Abfälle der Messkurven zu erkennen, insbesondere ab etwa \SI{20}{\percent} des Nennstroms. Die Dreiecksanordnung verläuft dagegen weitgehend linear und bleibt im Toleranzband.
 
-Diese Abhängigkeit des Fehlers vom Primärstrom \gls{sym:I_p} wird in Abbildung~\ref{dia:2000A_celsa_zusammenfassung} grafisch aufbereitet. Das Diagramm veranschaulicht den steilen Abfall der Messkurven für die Parallelanordnung ab etwa \SI{20}{\percent} des Nennstroms. Im Vergleich dazu verlaufen die Kurven der Dreiecksanordnung weitestgehend linear und verbleiben im Toleranzbereich.
+Zur kompakten Gegenüberstellung der Geometrieeffekte über den gesamten Lastbereich zeigt Abbildung~\ref{dia:2000A_bereichsanalyse} eine \textit{Bereichsanalyse} des mittleren absoluten Fehlers. Dazu werden die Absolutwerte der Übersetzungsmessabweichung \gls{sym:epsilon} über alle drei Phasen gemittelt und getrennt nach Niederstrom (\SI{5}{\percent}--\SI{50}{\percent}), Nennstrom (\SI{80}{\percent}--\SI{100}{\percent}) sowie Überlast (\SI{120}{\percent}) ausgewertet. Beim \textit{Celsa~ALO~10030} zeigt die Parallelanordnung einen ausgeprägten Anstieg im Hochlastbereich (\num{3,33}\,\% bei Überlast), während die Dreiecksanordnung den Überlastfehler auf \num{0,44}\,\% reduziert. Der \textit{Redur~13A1030.3ffp} weist im Nieder- und Nennstrombereich in beiden Geometrien ähnliche Fehlerwerte (\(\approx\num{0,25}\,\%\) bzw. \(\approx\num{0,03}\,\%\)) auf; bei \SI{120}{\percent} bleibt die Parallelanordnung mit \num{0,21}\,\% günstiger als die Dreiecksanordnung mit \num{0,57}\,\%. Die beiden übrigen Modelle (\textit{Celsa~ALO~8030~K}, \textit{MBS~ASK~101.4}) verbleiben über alle Lastbereiche unter \num{0,35}\,\% und sind damit nur schwach von der Leitergeometrie abhängig.
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_2000A_verlauf.png}
-    \caption{Messfehlerverlauf des \textit{Celsa~ALO~10030} in Abhängigkeit vom Primärstrom \gls{sym:I_p}}
-    \label{dia:2000A_celsa_zusammenfassung}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/bereichs_analyse/mes_2000A_bereichs_analyse.png}
+    \caption{Fehleranalyse nach Lastbereich bei \SI{2000}{A}: mittlerer absoluter Fehler im Niederstrom-, Nennstrom- und Überlastbereich (Vergleich Parallel- und Dreiecksanordnung)}
+    \label{dia:2000A_bereichsanalyse}
 \end{diagram}
 
-Im Gegensatz zu den Abweichungen der vorangegangenen Modelle zeigen der \textit{Celsa~ALO~8030~K} und der \textit{MBS~ASK~101.4} eine hohe Stabilität gegenüber externen Feldern. Diese Unempfindlichkeit lässt sich beim \textit{Celsa~ALO~8030~K} auf die Bauweise als kompensierter Wandler zurückführen, wie in Abschnitt \ref{sec:kompensationswicklungen} erläutert wird. Tabelle~\ref{tab:messergebnisse_celsa8030_2000A} im Anhang fasst die Ergebnisse für dieses Modell zusammen. Selbst unter Volllast und Überstrom bleiben alle Phasen in beiden geometrischen Anordnungen sicher innerhalb der Klasse \num{1}. Die maximale Abweichung tritt in der Parallelanordnung bei Phase L1 mit einem Wert von \num{-0,40}\,\% auf.
+Im Gegensatz zu den beschriebenen Abweichungen zeigen der \textit{Celsa~ALO~8030~K} und der \textit{MBS~ASK~101.4} eine hohe Stabilität gegenüber externen Feldern. Beim \textit{Celsa~ALO~8030~K} ist dies auf die Bauweise als kompensierter Wandler zurückzuführen, wie in Abschnitt~\ref{sec:kompensationswicklungen} erläutert wird. Tabelle~\ref{tab:messergebnisse_celsa8030_2000A} im Anhang fasst die Ergebnisse zusammen. Selbst unter Volllast und Überstrom bleiben alle Phasen in beiden geometrischen Anordnungen innerhalb der Klasse \num{1}. Die maximale Abweichung tritt in der Parallelanordnung bei Phase L1 mit \num{-0,40}\,\% auf.
 
-Ein ähnlich robustes Verhalten bestätigt Tabelle~\ref{tab:messergebnisse_mbs_2000A} im Anhang für den \textit{MBS~ASK~101.4}. Auch hier sind keine signifikanten Einflüsse durch die Leiteranordnung erkennbar. Die Messwerte liegen konstant auf einem Niveau vergleichbar mit dem \textit{Celsa~ALO~8030~K}. In der Dreiecksanordnung erreicht die Phase L1 bei \SI{120}{\percent} Last beispielsweise eine Abweichung von \num{-0,30}\,\% und demonstriert damit die Unempfindlichkeit dieses Modells gegenüber den untersuchten geometrischen Anordnungen.
+Ein ähnlich robustes Verhalten zeigt der \textit{MBS~ASK~101.4}. Tabelle~\ref{tab:messergebnisse_mbs_2000A} im Anhang weist keine signifikanten Einflüsse der Leiteranordnung aus. Die Messwerte liegen insgesamt auf einem Niveau, das mit dem \textit{Celsa~ALO~8030~K} vergleichbar ist. In der Dreiecksanordnung erreicht Phase L1 bei \SI{120}{\percent} Last beispielsweise eine Abweichung von \num{-0,30}\,\% und bestätigt damit die geringe Empfindlichkeit dieses Modells gegenüber den untersuchten Leitergeometrien.
+
+
 
 \subsubsection{Einfluss der Leitergeometrie auf das Sättigungsverhalten bei \SI{2500}{A}}
 \label{sec:analyse_messreihe_2500A}
 
-Die Analyse der Messreihe bei einem Nennstrom \gls{sym:In} von \SI{2500}{A} verdeutlicht den massiven Einfluss der Leitergeometrie auf unterschiedliche Wandlertechnologien. Im Fokus steht der Vergleich zwischen dem kompensierten Wandler \textit{Celsa~ALO~10050~K} und dem Standardwandler \textit{Celsa~ALO~10030} in Bezug auf ihre Stabilität in Parallel- und Dreieckskonfigurationen.
-
-
+Die Analyse der Messreihe bei einem Nennstrom \gls{sym:In} von \SI{2500}{A} zeigt einen ausgeprägten Einfluss der Leitergeometrie auf unterschiedliche Wandlertechnologien. Im Mittelpunkt steht der Vergleich zwischen dem kompensierten Wandler \textit{Celsa~ALO~10050~K} und dem Standardwandler \textit{Celsa~ALO~10030} im Hinblick auf ihre Stabilität in Parallel- und Dreiecksanordnung. Abbildung~\ref{dia:2500A_zusammenfassung} stellt die Messabweichungen für die Phasen L1 bis L3 über dem Lastbereich dar und macht die unterschiedlichen Verläufe beider Wandlerkonzepte sichtbar. Die zugehörigen Messwerte sind im Anhang in den Tabellen~\ref{tab:messergebnisse_celsa10050_2500A_alle} und \ref{tab:messergebnisse_celsa10030_2500A_alle} dokumentiert.
 
 \begin{aufgabenbox}
-    Hier möchte ich noch eine Simulation machen.
-    Es sollen die Sättigungseffekte des Eisenkernes betrachtet werden.
+    Hier soll noch eine Simulation ergänzt werden.
+    Dabei sollen die Sättigungseffekte des Eisenkerns betrachtet werden.
 \end{aufgabenbox}
-
-
 
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_2500A_verlauf.png}
-    \caption{Zusammenfassender Vergleich der Leitergeometrien bei \SI{2500}{A}}
+    \caption{Übersetzungsmessabweichung \gls{sym:epsilon} bei \SI{2500}{A}: Vergleich von Parallel- und Dreiecksanordnung (Phasen L1--L3)}
     \label{dia:2500A_zusammenfassung}
 \end{diagram}
 
-Die Messergebnisse des kompensierten Wandlers \textit{Celsa~ALO~10050~K} belegen, dass dieser über den Großteil des Messbereichs eine hohe Genauigkeit aufweist (siehe Tabelle~\ref{tab:messergebnisse_celsa10050_2500A_alle} im Anhang). In der Parallelanordnung bewegt sich der Wandler nahezu durchgehend innerhalb der normativen Vorgaben. Eine Ausnahme bildet die Phase L2 im Überlastbereich bei \SI{120}{\percent} Nennstrom \gls{sym:In}. Hier überschreitet der Wandler den Grenzwert mit einer Übersetzungsmessabweichung \gls{sym:epsilon} von rund \num{-1,00}\,\% knapp, was einem absoluten Fehlstrom von circa \num{30,00}\,\unit{A} entspricht. 
+Die Messergebnisse des kompensierten Wandlers \textit{Celsa~ALO~10050~K} zeigen über weite Bereiche eine hohe Genauigkeit. In der Parallelanordnung liegt der Wandler nahezu durchgehend innerhalb der normativen Vorgaben, wie Tabelle~\ref{tab:messergebnisse_celsa10050_2500A_alle} im Anhang ausweist. Eine Ausnahme bildet die Phase L2 im Überlastbereich bei \SI{120}{\percent} des Nennstroms \gls{sym:In}. Dort ergibt sich eine Übersetzungsmessabweichung \gls{sym:epsilon} von rund \num{-1,00}\,\%, was einem absoluten Fehlstrom von circa \num{30,00}\,\unit{A} entspricht.
 
-In der Dreieckskonfiguration reduziert sich dieser Messfehler auf etwa \num{-0,55}\,\%, wodurch die normative Genauigkeitsklasse \num{1} wieder eingehalten wird. Dies verdeutlicht, dass selbst ein kompensierter Wandler nicht vollständig immun gegen externe Magnetfelder ist, die Auswirkungen jedoch im Vergleich zur Standardtechnologie gering bleiben. Da sich der Fehlerbetrag hierbei fast halbiert, führt die Dreiecksgeometrie in diesem kritischen Lastpunkt zu einer annähernden Verdopplung der Messgenauigkeit.
+In der Dreiecksanordnung reduziert sich dieser Messfehler auf etwa \num{-0,55}\,\%, wodurch die Genauigkeitsklasse \num{1} wieder eingehalten wird. Damit zeigt sich, dass auch ein kompensierter Wandler nicht vollständig unempfindlich gegenüber externen Magnetfeldern ist, die Auswirkungen jedoch im Vergleich zur Standardtechnologie gering bleiben.
 
+Abbildung~\ref{dia:2500A_bereichsanalyse} ergänzt die Kurven aus Abbildung~\ref{dia:2500A_zusammenfassung} durch eine \textit{Bereichsanalyse} des mittleren absoluten Fehlers. Der Standardwandler \textit{Celsa~ALO~10030} zeigt dabei, dass die Abweichungen nahezu ausschließlich im oberen Lastbereich auftreten: Während der Niederstromfehler in beiden Geometrien unter \num{0,5}\,\% bleibt, steigt der mittlere Fehler im Nennstrombereich in Parallelanordnung auf \num{10,63}\,\% und im Überlastpunkt auf \num{16,89}\,\%. Die Dreiecksanordnung reduziert diese Werte auf \num{2,45}\,\% beziehungsweise \num{5,22}\,\%, verhindert die Sättigung jedoch nicht vollständig. Der kompensierte \textit{Celsa~ALO~10050~K} verbleibt demgegenüber über alle Lastbereiche in beiden Geometrien unter \num{0,55}\,\% und bestätigt damit die Wirksamkeit der Kompensation im Hochlastbereich.
 
+\begin{diagram}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/bereichs_analyse/mes_2500A_bereichs_analyse.png}
+    \caption{Fehleranalyse nach Lastbereich bei \SI{2500}{A}: mittlerer absoluter Fehler im Niederstrom-, Nennstrom- und Überlastbereich (Vergleich Parallel- und Dreiecksanordnung)}
+    \label{dia:2500A_bereichsanalyse}
+\end{diagram}
 
-Im Gegensatz dazu zeigt der nicht kompensierte Standardwandler \textit{Celsa~ALO~10030} in beiden Anordnungen erhebliche Abweichungen, die auf eine beginnende magnetische Sättigung hindeuten (siehe Tabelle~\ref{tab:messergebnisse_celsa10030_2500A_alle} im Anhang). In der Parallelanordnung steigt der Fehler bereits ab \SI{50}{\percent} Nennstrom \gls{sym:In} erkennbar an. Bei \SI{100}{\percent} Last liegen die Abweichungen \gls{sym:epsilon} zwischen \num{-10,00}\,\% und \num{-16,00}\,\%. Um das Ausmaß dieser Sättigungseffekte im Hochlastbereich zu verdeutlichen, stellt Tabelle~\ref{tab:vergleich_hochstlast_celsa_extended} die absoluten Fehlströme der Phase L2 gegenüber und quantifiziert den Präzisionsgewinn durch die geometrische Optimierung.
+Der nicht kompensierte Standardwandler \textit{Celsa~ALO~10030} zeigt im Hochlastbereich erhebliche Abweichungen, die auf eine beginnende magnetische Sättigung hindeuten. Die vollständigen Messwerte sind in Tabelle~\ref{tab:messergebnisse_celsa10030_2500A_alle} im Anhang aufgeführt. In der Parallelanordnung steigt der Fehler bereits ab \SI{50}{\percent} des Nennstroms \gls{sym:In} deutlich an. Bei \SI{100}{\percent} Last liegen die Abweichungen \gls{sym:epsilon} zwischen \num{-10,00}\,\% und \num{-16,00}\,\%. Bei \SI{120}{\percent} Last werden in einzelnen Phasen Fehlströme in der Größenordnung mehrerer hundert Ampere erreicht, was den deutlichen Einbruch der Messgenauigkeit im Überlastbereich bestätigt.
+
+Trotz der betrachteten Leitergeometrien wird die Genauigkeitsklasse \num{1} im Hochlastbereich nicht eingehalten. Die verbleibende Abweichung deutet auf eine grundsätzliche Unterdimensionierung des magnetischen Kreises hin. Ein Vergleich mit den Ergebnissen aus Abschnitt~\ref{sec:analyse_messreihe_2000A} stützt diese Einordnung, da dieser Wandlertyp bereits dort Sättigungstendenzen im Bereich des Nennstroms zeigte. Für das hier untersuchte \SI{2500}{A}-Modell ist zudem erkennbar, dass der starke Fehleranstieg bereits bei \SI{80}{\percent} der Nennlast einsetzt, was einem Primärstrom \gls{sym:I_p} von \SI{2000}{A} entspricht.
+
+Damit fällt der Sättigungsbeginn mit den Beobachtungen der vorherigen Messreihe zusammen. Dies legt nahe, dass der magnetische Kreis dieses Bauteils für Ströme oberhalb von \SI{2000}{A} nicht ausreichend dimensioniert ist. Dieser empirische Befund steht im Einklang mit den Zusammenhängen aus Gleichung~\ref{eq:b_phi_relation}. Wie dort hergeleitet, führt ein zu geringer Eisenquerschnitt \gls{sym:A_Fe} dazu, dass sich der magnetische Fluss auf eine zu kleine Fläche konzentriert. Dadurch steigt die resultierende Flussdichte \gls{sym:B_res} an und die Sättigungsgrenze des Materials wird frühzeitig erreicht.
 
 \begin{table}[H]
     \centering
-    \caption{Vergleich der Fehlströme und Genauigkeitsgewinn (\textit{Celsa~ALO~10030}, Phase L2)}
-    \label{tab:vergleich_hochstlast_celsa_extended}
-    \small
-    \begin{tabular}{l S[table-format=4.0] S[table-format=2.2] S[table-format=3.2] S[table-format=2.2]}
+    \caption{Abschätzung des effektiven Eisenquerschnitts $A_{Fe}$}
+    \label{tab:wandler_querschnitt}
+    \begin{tabular}{
+            l
+            c
+            c
+            S[table-format=2.2]
+        }
         \toprule
-        {Lastpunkt}  & {Primärstrom \gls{sym:I_p}} & {Fehlstrom Dreieck} & {Fehlstrom Parallel} & {Verbesserung} \\
-        {[\% \gls{sym:In}]} & {[\unit{A}]}         & {[\unit{A}]}               & {[\unit{A}]}                & {[\unit{\%}]}         \\
+        {Modell}                   & {Maße ($H \times T$)} & {Füllfaktor} & {Querschnitt $A_{Fe}$ [\unit{cm^2}]} \\
         \midrule
-        80           & 2000          & 31.35               & 231.42               & 10.00           \\
-        90           & 2250          & 39.67               & 321.22               & 12.50           \\
-        100          & 2500          & 45.85               & 415.59               & 14.80           \\
-        120          & 3000          & 58.49               & 616.96               & 18.60           \\
+        \textit{Celsa~ALO~10030}   & $31 \times \SI{144}{mm}$   & 0.7          & 31.25                        \\
+        \textit{Celsa~ALO~10050~K} & $50 \times \SI{145}{mm}$   & 0.7          & 50.75                        \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-Wie den Werten zu entnehmen ist, bricht die Genauigkeit im Überlastbereich bei \SI{120}{\percent} drastisch ein. Während in der Parallelanordnung ein Fehlstrom von über \num{616,96}\,\unit{A} auftritt, sinkt dieser in der Dreieckskonfiguration auf rund \num{58,49}\,\unit{A}. Dies entspricht einer Verbesserung der Genauigkeit um \num{18,60} Prozentpunkte. Auch die Phasen L1 und L3 liegen in der Parallelanordnung mit \num{-16,20}\,\% beziehungsweise \num{-13,90}\,\% weit außerhalb der Toleranzgrenzen, profitieren jedoch in ähnlichem Maße von der Umstellung auf die Dreiecksgeometrie.
+Tabelle~\ref{tab:wandler_querschnitt} untermauert diese Einordnung durch eine Abschätzung des magnetisch wirksamen Eisenquerschnitts \gls{sym:A_Fe}. Da die exakten Innenmaße der vergossenen Wandler nicht bekannt sind, stellt die Berechnung eine Näherung an die tatsächlichen physikalischen Gegebenheiten dar. Basierend auf den äußeren Gehäuseabmessungen (Höhe $H$ und Tiefe $T$) wird ein Faktor von \num{0,7} angesetzt. Dieser Schätzwert versucht, den realen Eisenquerschnitt unter Berücksichtigung der nicht magnetischen Bestandteile wie Gehäusewandungen, Isolation und Sekundärwicklung bestmöglich abzubilden.
 
-Dennoch muss konstatiert werden, dass selbst die optimierte Dreiecksanordnung nicht ausreicht, um die normativen Vorgaben zu erfüllen. Trotz der Fehlerminimierung verbleibt der Wandler außerhalb der Genauigkeitsklasse \num{1}. Diese verbleibende Abweichung deutet auf eine grundsätzliche Unterdimensionierung des magnetischen Kreises hin. Ein Vergleich mit den Ergebnissen aus Abschnitt \ref{sec:analyse_messreihe_2000A} stützt diese Hypothese, da bereits dort dieser Wandlertyp Sättigungstendenzen im Nennstrombereich zeigte. Bei dem hier untersuchten \SI{2500}{A}-Modell wird anhand von Tabelle~\ref{tab:vergleich_hochstlast_celsa_extended} ersichtlich, dass der massive Fehleranstieg bereits bei \SI{80}{\percent} der Nennlast einsetzt, was einem Primärstrom \gls{sym:I_p} von \SI{2000}{A} entspricht.
-
-Damit korreliert der Sättigungsbeginn exakt mit den Beobachtungen der vorherigen Messreihe. Dies lässt den Schluss zu, dass das physikalische Eisenkernvolumen dieses Bauteils unabhängig von der Nennstromangabe auf dem Typenschild für Ströme oberhalb von \SI{2000}{A} nicht ausreichend dimensioniert ist. Dieser empirische Befund bestätigt die theoretischen Zusammenhänge, die durch Gleichung \ref{eq:b_phi_relation} beschrieben werden. Wie dort hergeleitet, führt der geringe Eisenquerschnitt \gls{sym:A} dazu, dass sich der magnetische Fluss auf eine zu kleine Fläche konzentriert. Dies bewirkt trotz der absolut gesehen geringeren Störflussaufnahme einen kritischen Anstieg der resultierenden Flussdichte \gls{sym:B_res}, wodurch die Sättigungsgrenze des Materials frühzeitig erreicht wird.
-
-Tabelle~\ref{tab:wandler_volumen} untermauert diese Vermutung durch die Berechnung des effektiven Materialvolumens. Während der Typ \textit{Celsa~ALO~10050~K} über ein berechnetes Nettovolumen von \num{623,60}\,\unit{cm^3} verfügt, weist der hier betrachtete \textit{Celsa~ALO~10030} lediglich \num{265,50}\,\unit{cm^3} auf. Damit steht diesem Wandler weniger als die Hälfte des Volumens zur Verfügung, was die frühzeitige Sättigung physikalisch plausibilisiert.
-
-\begin{table}[H]
-    \centering
-    \caption{Berechnetes Nettovolumen der untersuchten Wandler}
-    \label{tab:wandler_volumen}
-    \begin{tabular}{l c c S[table-format=3.2]}
-        \toprule
-        {Modell}    & {Gehäusemaße ($H \times B \times T$)} & {Fenstergeometrie}        & {Nettovolumen [\unit{cm^3}]} \\
-        \midrule
-        \textit{Celsa~ALO~10030}   & $31 \times 129 \times \SI{141}{mm}$   & $\varnothing$ \SI{55}{mm} & 265.50                        \\
-        \textit{Celsa~ALO~10050~K} & $50 \times 130 \times \SI{141}{mm}$   & $50 \times \SI{101}{mm}$  & 623.60                        \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-Einschränkend ist anzumerken, dass das berechnete Volumen auf der äußeren Gehäusegeometrie basiert und nicht exakt dem Volumen des Eisenkerns entspricht. Da jedoch ein signifikanter Unterschied im Volumenfaktor vorliegt, ist der Vergleich als Näherung für den verfügbaren Eisenkern zulässig. Der \textit{Celsa~ALO~10050~K} dient an dieser Stelle lediglich als geometrische Referenzgröße; es ist nicht zulässig, die höhere Genauigkeit dieses Typs allein auf das größere Volumen zurückzuführen, da dessen Messstabilität primär durch die Kompensationstechnik erreicht wird.
+Die Abschätzung zeigt, dass dem Typ \textit{Celsa~ALO~10050~K} mit rund \num{50,75}\,\unit{cm^2} eine signifikant größere Querschnittsfläche zur Verfügung steht als dem Standardwandler \textit{Celsa~ALO~10030} mit lediglich \num{31,25}\,\unit{cm^2}. Der um circa \num{60}\,\% größere Eisenquerschnitt ermöglicht eine deutlich geringere Flussdichte bei gleicher induzierter Spannung, was die spätere Sättigung des kompensierten Wandlers physikalisch erklärt.
 
 
 \subsubsection{Einfluss von Geometrie und Bürde bei \SI{3000}{A}}
 \label{sec:analyse_messreihe_3000A}
 
-Die Messreihe bei einer Stromstärke von \SI{3000}{A} fungiert als zentrale Fallstudie, um das Verhalten der Wandler im Grenzbereich ihrer Leistungsfähigkeit zu charakterisieren. Zentraler Gegenstand dieser Betrachtung ist der technologische Vergleich zwischen dem Standardwandler \textit{Celsa~ALO~12070} und der kompensierten Ausführung \textit{Celsa~ALO~12070~K} unter dem Einfluss der Leitergeometrie. Ergänzend wird untersucht, inwiefern eine Reduktion des sekundären Bürdenwiderstands \gls{sym:RB} die Sättigungseffekte in der kritischen Parallelanordnung abmildern kann.
-
-
+Die Messreihe bei \SI{3000}{A} dient als Fallstudie zur Charakterisierung des Wandlerverhaltens im Grenzbereich. Untersucht wird der Standardwandler \textit{Celsa~ALO~12070} im Vergleich zur kompensierten Ausführung \textit{Celsa~ALO~12070~K} unter dem Einfluss der Leitergeometrie. Zusätzlich wird geprüft, ob eine Reduktion des sekundären Bürdenwiderstands \gls{sym:RB} die Sättigungseffekte in der kritischen Parallelanordnung abschwächen kann. Die zugehörigen Messwerte sind im Anhang in den Tabellen~\ref{tab:messergebnisse_celsa12070_3000A_alle}, \ref{tab:messergebnisse_celsa12070_3000A_asym} und \ref{tab:messergebnisse_celsa12070_3000A_min} aufgeführt.
 
 \paragraph{Vergleich der Wandlertechnologien und Geometrien}
 
-Abbildung~\ref{dia:3000A_zusammenfassung} stellt die Fehlerverläufe beider Wandlertypen in Dreiecks- und Parallelanordnung gegenüber. Die Untersuchung des Standardwandlers \textit{Celsa~ALO~12070} in der Parallelanordnung offenbart, dass der Leiter L2 als einziger die Genauigkeitsanforderungen nicht erfüllen kann. Wie in Tabelle~\ref{tab:messergebnisse_celsa12070_3000A_alle} im Anhang ersichtlich, fällt der Messwert bereits bei \SI{80}{\percent} des Nennstroms \gls{sym:In} mit \num{-1,10}\,\% unter den Grenzwert. Dieser Fehler verstärkt sich linear bis in den Überlastbereich, wo er bei \SI{120}{\percent} Last einen Wert von \num{-5,40}\,\% erreicht, was einem absoluten Fehlstrom von rund \num{195,30}\,\unit{A} entspricht.
+Abbildung~\ref{dia:3000A_zusammenfassung} zeigt die Fehlerverläufe beider Wandlertypen in Dreiecks- und Parallelanordnung. Die gestrichelten Begrenzungslinien markieren den zulässigen Toleranzbereich der Genauigkeitsklasse \num{1}. Beim Standardwandler \textit{Celsa~ALO~12070} fällt insbesondere Phase L2 auf. Wie Tabelle~\ref{tab:messergebnisse_celsa12070_3000A_alle} im Anhang zeigt, unterschreitet der Messwert bei \SI{80}{\percent} des Nennstroms \gls{sym:In} mit \num{-1,10}\,\% den Grenzwert. Mit weiter steigender Last nimmt der Fehler zu und erreicht bei \SI{120}{\percent} einen Wert von \num{-5,40}\,\%. Dies entspricht einem absoluten Fehlstrom von rund \num{195,30}\,\unit{A}.
 
-Demgegenüber belegt der kompensierte Typ \textit{Celsa~ALO~12070~K}, dass die zusätzliche Wicklung die Erfassung bei L2 stabilisiert und die Normeinhaltung gewährleistet. Im Überlastbereich ist in der Parallelanordnung eine Abweichung \gls{sym:epsilon} in den positiven Bereich zu beobachten, was auf Effekte ähnlich einer Unterbürdung durch Flussveränderungen im Kern schließen lässt. Die Außenleiter L1 und L3 weisen hingegen in beiden Konfigurationen ein nahezu identisches Verhalten auf. Der direkte Vergleich der Geometrien beim kompensierten Wandler verdeutlicht den Vorteil der Dreieckskonfiguration bei Phase L2 merklich: Der Fehler reduziert sich von \num{0,90}\,\% in der Parallelanordnung auf \num{0,10}\,\% in der Dreieckskonfiguration, was einer Verbesserung um den Faktor zehn gleichkommt.
-
-
+Der kompensierte Typ \textit{Celsa~ALO~12070~K} zeigt demgegenüber eine deutlich stabilere Erfassung von Phase L2, sodass die Normeinhaltung im betrachteten Bereich gewährleistet ist. Im Überlastbereich tritt in der Parallelanordnung eine positive Abweichung \gls{sym:epsilon} auf. Dies deutet auf Effekte hin, die sich wie eine Unterbürdung infolge veränderter Flussverhältnisse im Kern auswirken können. Die Außenleiter L1 und L3 verhalten sich in beiden Konfigurationen weitgehend ähnlich und verbleiben im Toleranzbereich. Der Vergleich der Geometrien beim kompensierten Wandler zeigt den Unterschied vor allem bei Phase L2. Der Fehler liegt in der Parallelanordnung bei \num{0,90}\,\% und in der Dreiecksanordnung bei \num{0,10}\,\%.
 
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_3000A_verlauf.png}
-    \caption{Vergleich von Geometrie und Bürdeneinfluss bei \SI{3000}{A}}
+    \caption{Fehlerverläufe der Wandlertypen bei \SI{3000}{A} in Abhängigkeit von Leitergeometrie und Wandlerkonzept}
     \label{dia:3000A_zusammenfassung}
 \end{diagram}
 
+Zur Verdichtung der Beobachtungen über den gesamten Lastbereich ist in Abbildung~\ref{dia:3000A_bereichsanalyse} eine Bereichsanalyse des mittleren absoluten Fehlers dargestellt. Für den Standardwandler \textit{Celsa~ALO~12070} zeigt sich insbesondere in Parallelanordnung eine deutliche Verschlechterung im Hochlastbereich: Der mittlere Fehler steigt von \num{0,18}\,\% (Niederstrom) über \num{0,82}\,\% (Nennstrom) auf \num{2,45}\,\% bei \SI{120}{\percent}. In der Dreiecksanordnung bleibt der Fehler dagegen auch in Überlast mit \num{0,31}\,\% vergleichsweise niedrig. Beim kompensierten \textit{Celsa~ALO~12070~K} liegen die Fehlerwerte in beiden Geometrien über alle Lastbereiche unter \num{0,31}\,\%, was die erhöhte Sättigungsfestigkeit dieses Konzepts bestätigt.
+
+\begin{diagram}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/bereichs_analyse/mes_3000A_bereichs_analyse.png}
+    \caption{Fehleranalyse nach Lastbereich bei \SI{3000}{A}: mittlerer absoluter Fehler im Niederstrom-, Nennstrom- und Überlastbereich (Standard vs.\ kompensiert; Vergleich Parallel- und Dreiecksanordnung)}
+    \label{dia:3000A_bereichsanalyse}
+\end{diagram}
+
+
 \paragraph{Analyse der Bürdenabhängigkeit}
 
-Da der Standardwandler in der Parallelanordnung erkennbare Sättigungserscheinungen zeigte, wurde in einer vertiefenden Untersuchung analysiert, ob eine Reduktion der sekundären Bürde \gls{sym:RB} diese Effekte kompensieren kann. Hierzu wurden drei Konfigurationen verglichen: die Nennbürde (Referenzlast), der Betrieb ohne Vorwiderstand (Minimallast) und eine asymmetrische Belastung, bei der nur der kritische Leiter L2 entlastet wurde (siehe Tabelle~\ref{tab:buerden_konfigurationen_3000A}).
+Da der Standardwandler in der Parallelanordnung deutliche Sättigungserscheinungen zeigt, wird ergänzend der Einfluss der Bürde untersucht. Dafür werden drei Bürdenkonfigurationen betrachtet. Tabelle~\ref{tab:buerden_konfigurationen_3000A} fasst die Referenzlast, die Minimallast sowie eine asymmetrische Last zusammen, bei der ausschließlich Phase L2 entlastet wird.
 
 \begin{table}[H]
     \centering
@@ -188,42 +180,38 @@ Da der Standardwandler in der Parallelanordnung erkennbare Sättigungserscheinun
     \small
     \begin{tabular}{l S[table-format=2.2] S[table-format=2.2] S[table-format=2.2] l}
         \toprule
-                           & \multicolumn{3}{c}{Bürdenwiderstand \gls{sym:RB} [\unit{\ohm}]} &                                                      \\
+                           & \multicolumn{3}{c}{Bürdenwiderstand \gls{sym:RB} [\unit{\ohm}]} &                                                        \\
         \cmidrule(lr){2-4}
-        {Konfiguration}    & {L1}                                                     & {L2} & {L3} & {Ziel der Untersuchung}                \\
+        {Konfiguration}    & {L1}                                                            & {L2}  & {L3}  & {Ziel der Untersuchung}                \\
         \midrule
-        Referenzlast       & 10.80                                                     & 10.80 & 10.80 & Basisvergleich Geometrieeinfluss       \\
-        Minimallast        & 0.00                                                      & 0.00  & 0.00  & Bestimmung maximaler Sättigungsgrenze  \\
-        Asymmetrische Last & 10.80                                                     & 0.00  & 10.80 & Selektive Entlastung des Mittelleiters \\
+        Referenzlast       & 10.80                                                           & 10.80 & 10.80 & Basisvergleich Geometrieeinfluss       \\
+        Minimallast        & 0.00                                                            & 0.00  & 0.00  & Bestimmung maximaler Sättigungsgrenze  \\
+        Asymmetrische Last & 10.80                                                           & 0.00  & 10.80 & Selektive Entlastung des Mittelleiters \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-
-
-Abbildung~\ref{dia:3000A_buerde_verlauf} visualisiert die Ergebnisse dieser Variation. Für die Außenleiter L1 und L3 ist kaum eine Abhängigkeit von der Bürde festzustellen, da ihre Abweichungen im Niederstrom- und Nennstrombereich konstant gering bleiben. Anders stellt sich die Situation beim mittleren Leiter L2 dar.
+Abbildung~\ref{dia:3000A_buerde_verlauf} zeigt die Fehlerkurven des Standardwandlers \textit{Celsa~ALO~12070} in der Parallelanordnung für diese Bürdenvarianten. Für die Außenleiter L1 und L3 ergibt sich über weite Bereiche nur eine geringe Bürdenabhängigkeit. Die Abweichungen bleiben im Niederstrom- und Nennstrombereich klein und ändern sich zwischen den Varianten nur schwach. Deutlich ausgeprägter ist der Effekt bei Phase L2. Hier treten die dominierenden Abweichungen im oberen Lastbereich auf, was mit einer beginnenden magnetischen Sättigung konsistent ist.
 
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_3000A_buerde_verlauf.png}
-    \caption{Vergleich der Fehlerkurven bei variabler Bürde \gls{sym:RB} und \SI{3000}{A}}
+    \caption{Fehlerkurven des Standardwandlers bei \SI{3000}{A} in Parallelanordnung bei variabler Bürde \gls{sym:RB}}
     \label{dia:3000A_buerde_verlauf}
 \end{diagram}
 
-Ein Vergleich zwischen der Referenzlast (Tabelle~\ref{tab:messergebnisse_celsa12070_3000A_alle} im Anhang) und der asymmetrischen Last (Tabelle~\ref{tab:messergebnisse_celsa12070_3000A_asym} im Anhang) zeigt bei L2 ein nahezu identisches Verhalten, da beide Konfigurationen stark sättigen. Während die asymmetrische Last bei \SI{100}{\percent} des Nennstroms \gls{sym:In} bei \num{-3,00}\,\% liegt, weist die Referenzlast mit \num{-2,90}\,\% eine fast gleiche Abweichung auf, was einer Differenz von lediglich \num{0,10}\,\% entspricht. Auch im Überlastbereich bei \SI{120}{\percent} bleiben die Werte vergleichbar, da die asymmetrische Last hier \num{-5,70}\,\% und die Referenzlast \num{-5,40}\,\% erreicht.
+Der Vergleich der Referenzlast mit der asymmetrischen Last zeigt bei Phase L2 ein nahezu identisches Verhalten. Bei \SI{100}{\percent} des Nennstroms \gls{sym:In} liegt die asymmetrische Last bei \num{-3,00}\,\%, während die Referenzlast \num{-2,90}\,\% erreicht. Auch bei \SI{120}{\percent} bleiben die Werte vergleichbar. Die asymmetrische Last erreicht \num{-5,70}\,\% und die Referenzlast \num{-5,40}\,\%. Die Entlastung ausschließlich von L2 führt damit in dieser Messreihe nicht zu einer deutlichen Reduktion der Abweichung im Hochlastbereich.
 
-Die Konfiguration der Minimallast (Tabelle~\ref{tab:messergebnisse_celsa12070_3000A_min} im Anhang) erweist sich für den kritischen Leiter L2 als die stabilste Variante. Bei \SI{80}{\percent} des Nennstroms liegt der Fehler von L2 hier bei nur \num{-0,60}\,\%, wohingegen die Referenzlast bereits auf \num{-1,10}\,\% abfällt, was eine Verbesserung von rund \num{0,50}\,\% durch die minimale Bürde bedeutet. Dennoch reicht auch die Minimallast nicht aus, um den Standardwandler in der Parallelanordnung bei Nennstrom \gls{sym:In} in die Genauigkeitsklasse \num{1} zurückzuführen (\num{-2,50}\,\% Abweichung).
-
-Der Performance-Index in Abbildung~\ref{dia:3000A_performance_buerde} fasst die Ergebnisse zusammen. Zwar erzielt die Messung mit der Minimallast über alle Strombereiche hinweg die besten Ergebnisse, doch zeigt der Vergleich mit dem vorangegangenen Abschnitt, dass die Wahl der Wandlertechnologie (Kompensation) und der Geometrie (Dreieck) einen weitaus größeren Einfluss auf die Messgüte hat als die Optimierung der Bürde. Die Reduktion des Widerstands zögert die Sättigung physikalisch bedingt zwar hinaus, kann die systembedingten Schwächen der Parallelanordnung bei Standardwandlern jedoch nicht vollständig kompensieren.
+Die Minimallast zeigt für Phase L2 die geringsten Abweichungen im Bereich bis etwa \SI{90}{\percent}. Bei \SI{80}{\percent} liegt der Fehler bei \num{-0,60}\,\%, während die Referenzlast bei \num{-1,10}\,\% liegt. Im Bereich des Nennstroms und darüber bleibt jedoch auch bei Minimallast eine deutliche Abweichung bestehen. Bei \SI{100}{\percent} ergibt sich \num{-2,50}\,\%, womit die Genauigkeitsklasse \num{1} weiterhin nicht eingehalten wird.
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/kosten_horizontal/mes_3000A_buerde_kosten_horizontal.png}
-    \caption{Ranking der Konfigurationen basierend auf dem Performance-Index}
-    \label{dia:3000A_performance_buerde}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/bereichs_analyse/mes_3000A_buerde_bereichs_analyse.png}
+    \caption{Fehleranalyse nach Lastbereich bei \SI{3000}{A} in Parallelanordnung: Einfluss der Bürdenkonfiguration auf den mittleren absoluten Fehler (von unten nach oben: Referenzlast, Minimallast, asymmetrische Last)}
+    \label{dia:3000A_bereichsanalyse_buerde}
 \end{diagram}
 
-
+Abbildung~\ref{dia:3000A_bereichsanalyse_buerde} fasst die drei Bürdenvarianten aus Abbildung~\ref{dia:3000A_buerde_verlauf} über die Lastbereiche zusammen. Die Variation wirkt sich im Mittel vor allem im Nennstrombereich aus: Die Minimallast reduziert den mittleren Fehler von \num{0,82}\,\% (Referenzlast) auf \num{0,65}\,\%, während die asymmetrische Last mit \num{0,80}\,\% nahe am Referenzfall bleibt. Im Überlastpunkt bleiben die Unterschiede hingegen gering (\num{2,45}--\num{2,48}\,\%), was die zuvor beobachtete Dominanz der Sättigungseffekte im Standardwandler bestätigt. Insgesamt wird damit sichtbar, dass eine Bürdenreduktion zwar messbar ist, der Einfluss von Leitergeometrie und Wandlerkonzept jedoch deutlich stärker wirkt.
 \subsubsection{Skalierung der Geometrieeffekte bei \SI{4000}{A}}
 \label{sec:analyse_messreihe_4000A}
 
@@ -236,13 +224,23 @@ Abbildung~\ref{dia:4000A_zusammenfassung} skizziert einen Verlauf, der qualitati
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_4000A_verlauf.png}
-    \caption{Zusammenfassender Vergleich der Leitergeometrien bei \SI{4000}{A}}
+    \caption{Übersetzungsmessabweichung \gls{sym:epsilon} bei \SI{4000}{A}: Vergleich von Parallel- und Dreiecksanordnung (Phasen L1--L3)}
     \label{dia:4000A_zusammenfassung}
 \end{diagram}
 
-Besonders augenfällig wird dies in der Parallelanordnung. Wie die Werte in Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle} im Anhang belegen, bricht die Genauigkeit ab \SI{80}{\percent} des Nennstroms \gls{sym:In} drastisch ein. Bei \SI{3200}{A} weist der mittlere Leiter L2 bereits eine Übersetzungsmessabweichung \gls{sym:epsilon} von \num{-0,90}\,\% auf und verlässt bei weiterer Lasterhöhung den Toleranzbereich der Genauigkeitsklasse \num{1}. Bei Nennstrom (\SI{4000}{A}) liegt der Fehler bei \num{-3,30}\,\%. 
+Besonders augenfällig wird dies in der Parallelanordnung. Wie die Werte in Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle} im Anhang belegen, bricht die Genauigkeit ab \SI{80}{\percent} des Nennstroms \gls{sym:In} drastisch ein. Bei \SI{3200}{A} weist der mittlere Leiter L2 bereits eine Übersetzungsmessabweichung \gls{sym:epsilon} von \num{-0,90}\,\% auf und verlässt bei weiterer Lasterhöhung den Toleranzbereich der Genauigkeitsklasse \num{1}. Bei Nennstrom (\SI{4000}{A}) liegt der Fehler bei \num{-3,30}\,\%.
 
 Dieser Einbruch bei etwa \SI{3200}{A} korreliert signifikant mit den Sättigungseffekten der \SI{3000}{A}-Messreihe, was darauf hindeutet, dass die physikalische Sättigungsgrenze des Eisenkerns in der Parallelgeometrie in diesem Lastbereich liegt. Dieses Verhalten spiegelt die Problematik wider, welche bereits beim Typ \textit{Celsa~ALO~10030} bei \SI{2000}{A} und \SI{2500}{A} beobachtet wurde, wo die Parallelanordnung ebenfalls zu einer vorzeitigen Sättigung durch Fremdfeldeinflüsse führte.
+
+Zur kompakten Gegenüberstellung der Geometrieeffekte über den Lastbereich zeigt Abbildung~\ref{dia:4000A_bereichsanalyse} eine Bereichsanalyse des mittleren absoluten Fehlers. Für den Standardwandler \textit{Celsa~ALO~12070} dominiert in Parallelanordnung der Hochlastbereich: Der mittlere Fehler steigt von \num{0,12}\,\% (Niederstrom) über \num{1,01}\,\% (Nennstrom) auf \num{4,30}\,\% bei \SI{120}{\percent}. Die Dreiecksanordnung reduziert den Fehler im Nennstrombereich auf \num{0,19}\,\%, erreicht jedoch in Überlast weiterhin \num{0,97}\,\%. Der kompensierte \textit{Celsa~ALO~12070~K} bleibt demgegenüber in beiden Geometrien über alle Lastbereiche unter \num{0,21}\,\%.
+
+\begin{diagram}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/bereichs_analyse/mes_4000A_bereichs_analyse.png}
+    \caption{Fehleranalyse nach Lastbereich bei \SI{4000}{A}: mittlerer absoluter Fehler im Niederstrom-, Nennstrom- und Überlastbereich (Standard vs.\ kompensiert; Vergleich Parallel- und Dreiecksanordnung)}
+    \label{dia:4000A_bereichsanalyse}
+\end{diagram}
+
 
 
 
@@ -283,7 +281,7 @@ Demgegenüber stehen die kompensierten Wandler von \textit{Celsa} (\textit{ALO~8
 
 
 
-Eine weitere Technologiestufe stellen Wandler mit Fremdfeldprotektoren dar, vertreten durch die \textit{Redur-Modelle}. Diese zeichnen sich durch eine hohe geometrische Robustheit aus und zeigen selbst in ungünstigen Leiteranordnungen stabile Messwerte. Ökonomisch bewegen sie sich jedoch aufgrund der hohen Anschaffungskosten nur im oberen Mittelfeld, da der Zugewinn an Messgenauigkeit im Nennstrombereich bis \SI{2500}{A} begrenzt bleibt. 
+Eine weitere Technologiestufe stellen Wandler mit Fremdfeldprotektoren dar, vertreten durch die \textit{Redur-Modelle}. Diese zeichnen sich durch eine hohe geometrische Robustheit aus und zeigen selbst in ungünstigen Leiteranordnungen stabile Messwerte. Ökonomisch bewegen sie sich jedoch aufgrund der hohen Anschaffungskosten nur im oberen Mittelfeld, da der Zugewinn an Messgenauigkeit im Nennstrombereich bis \SI{2500}{A} begrenzt bleibt.
 
 Für den Nennstromfall \SI{2000}{A} ist zudem die Parallelanordnung des \textit{Redur~13A1030.3ffp} hervorzuheben. Die Fremdfeldprotektoren (\gls{ffp}) reduzieren in dieser Konfiguration die Messabweichungen insbesondere im Nenn- und Überlastbereich deutlich. Ein zusätzlicher Vorteil der Protektor-Technologie besteht darin, dass Abschirmkörper prinzipiell auch als nachrüstbare Maßnahme in bestehenden Anlagen eingesetzt werden können. Damit eröffnet sich eine wirtschaftlich interessante Option zur Verbesserung der Messgenauigkeit, ohne den Stromwandler vollständig ersetzen zu müssen \cite{pdf-Patent_Abschirmung-Redur}.
 

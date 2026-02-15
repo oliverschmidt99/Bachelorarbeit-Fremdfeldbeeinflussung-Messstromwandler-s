@@ -209,7 +209,7 @@ Die magnetische Flussdichte \gls{sym:B} im Kernmaterial resultiert aus der Felds
     \label{eq:flussdichte_b}
 \end{equation}
 
-Für die Funktion des Stromwandlers ist entscheidend, welcher magnetische Fluss \gls{sym:Phi} den Eisenquerschnitt \gls{sym:A} durchsetzt, da dieser in der Sekundärwicklung die Spannung induziert. Der Fluss berechnet sich durch die Integration der Flussdichte über die Querschnittsfläche gemäß Gleichung \eqref{eq:fluss_integral}~\cite[S.~67]{book-Technologie_Messwandler-Minkner}\cite[Kap.~4.5.4]{book-Physik_Ingenieure-Hering}:
+Für die Funktion des Stromwandlers ist entscheidend, welcher magnetische Fluss \gls{sym:Phi} den Eisenquerschnitt \gls{sym:A_Fe} durchsetzt, da dieser in der Sekundärwicklung die Spannung induziert. Der Fluss berechnet sich durch die Integration der Flussdichte über die Querschnittsfläche gemäß Gleichung \eqref{eq:fluss_integral}~\cite[S.~67]{book-Technologie_Messwandler-Minkner}\cite[Kap.~4.5.4]{book-Physik_Ingenieure-Hering}:
 
 \begin{equation}
     \Phi = \iint_A \vec{B} \cdot \mathrm{d}\vec{A}
@@ -404,7 +404,7 @@ Ein Stromwandler ist idealerweise so konstruiert, dass sein Kern ausschließlich
     \label{pic:aufbau_abschaetzung_fremdfeld}
 \end{figure}
 
-Die Variablen sind definiert als induzierte magnetische Fremdflussdichte \gls{sym:B_fremd} (in \unit{T}), Primärstrom \gls{sym:I_p} (in \unit{A}), äußerer Kernradius \gls{sym:R} (in \unit{m}), Leiterbreite \gls{sym:W} (in \unit{m}), Eisenquerschnitt \gls{sym:A} (in \unit{m^2}) und Außenphasenabstand \gls{sym:D} (in \unit{m}).
+Die Variablen sind definiert als induzierte magnetische Fremdflussdichte \gls{sym:B_fremd} (in \unit{T}), Primärstrom \gls{sym:I_p} (in \unit{A}), äußerer Kernradius \gls{sym:R} (in \unit{m}), Leiterbreite \gls{sym:W} (in \unit{m}), Eisenquerschnitt \gls{sym:A_Fe} (in \unit{m^2}) und Außenphasenabstand \gls{sym:D} (in \unit{m}).
 
 \begin{figure}[H]
     \centering
@@ -420,7 +420,7 @@ Abbildung~\ref{pic:sim_streufluss_abhaengigkeit} visualisiert den eingekoppelten
     \label{eq:b_phi_relation}
 \end{equation}
 
-Ein größerer Kernquerschnitt \gls{sym:A} kompensiert die höhere Flussaufnahme, sodass der Anstieg der Flussdichte gering bleibt. Der absolute Fremdfluss \gls{sym:Phi_fremd} ist dabei unabhängig vom Querschnitt:
+Ein größerer Kernquerschnitt \gls{sym:A_Fe} kompensiert die höhere Flussaufnahme, sodass der Anstieg der Flussdichte gering bleibt. Der absolute Fremdfluss \gls{sym:Phi_fremd} ist dabei unabhängig vom Querschnitt:
 
 \begin{equation}
     \Phi_{\text{Fremd}} \approx \num{1,00} \cdot 10^{-6} \cdot I_{p} \cdot (R + \num{0,50} \cdot W) \cdot \log_{10}\left(\frac{D+R}{D-R}\right)

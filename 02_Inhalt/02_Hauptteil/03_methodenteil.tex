@@ -90,28 +90,26 @@ Parallel dazu erfolgte die Erfassung des Sekundärsignals des Prüflings mittels
 \subsubsection{Schwachstellen im Messkonzept}
 \label{sec:fehleranalyse}
 
-Die Auswertung der initialen Messreihen zeigt signifikante Abweichungen, die über den gesamten Erfassungsbereich auftreten. In Abbildung~\ref{pic:dia_messstrecke_alt} sind die Verläufe der K-3 Messumformer (blau) und der Rogowskispulen (orange) gegenübergestellt. Die Rogowskispulen wurden parallel integriert, um deren Eignung für die hochpräzise Prüfung der Wandler zu evaluieren. Beide Systeme erfassten die Messwerte zeitgleich an einem gemeinsamen Messpunkt sekundärseitig des Festtransformators.
+Die Auswertung der initialen Messreihen zeigt über weite Teile des Messbereichs deutliche Übersetzungsmessabweichungen. Abbildung~\ref{pic:dia_messstrecke_alt} stellt den Verlauf der Abweichung \gls{sym:epsilon} für die beiden parallel betriebenen Erfassungssysteme, den 3-K-Messumformer und die Rogowskispule, in den drei Phasen dar. Beide Sensoren erfassten zeitgleich am identischen Messpunkt auf der Sekundärseite des Festtransformators. Damit sind die Differenzen ausschließlich auf die Eigenschaften der jeweiligen Messkette zurückzuführen.
 
-Als Bezugssystem für die Bewertung der gesamten Messkette wird die Genauigkeitsklasse 0,2 herangezogen. Dies stellt eine konservative Betrachtung dar, da die primärseitigen Stromwandler der Klasse 0,2S entsprechen. Gemäß der Norm \cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN} definiert die Sonderklasse 0,2S insbesondere im niedrigen Strombereich strengere Anforderungen als die Standardklasse 0,2. Da die ermittelten Abweichungen jedoch bereits die weiteren Toleranzgrenzen der Klasse 0,2 überschreiten, ist diese als Vergleichsmaßstab für die Fehleranalyse hinreichend.
-
-Ein wesentlicher Aspekt der beobachteten Unstimmigkeiten liegt in der unterschiedlichen physikalischen Wirkweise der Sensoren begründet. Während der K-3 Messumformer als fest installierte Komponente primär Linearitätsfehler im unteren Skalenbereich aufweist, unterliegen die Rogowskispulen zusätzlich stochastischen Einflüssen durch ihre mechanische Flexibilität und die damit verbundene Lageempfindlichkeit. Da das Magnetfeld am Prüfstand durch die engen Schienenabstände stark inhomogen ist, führt bereits eine geringfügige Verkippung der Spulen zu signifikanten Fehlern im Integrationsergebnis, was die inkonsistenten Verläufe zwischen den Phasen L1 und L2 miterklärt.
+Als Vergleichsmaßstab wird die Genauigkeitsklasse \num{0,2} herangezogen. Dies ist bewusst konservativ gewählt, da die primärseitigen Stromwandler die Klasse \num{0,2}S erfüllen. Die Sonderklasse \num{0,2}S stellt insbesondere im Niederstrombereich strengere Anforderungen als die Klasse \num{0,2} \cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}. Da die beobachteten Abweichungen die Grenzen der Klasse \num{0,2} bereits überschreiten, genügt diese Referenz zur Identifikation systematischer Schwachstellen.
 
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_messstrecke_alt_verlauf.png}
-    \caption{Analyse der Messabweichung und Standardabweichung der Phasen L1, L2 und L3 im ursprünglichen Versuchsaufbau}
+    \caption{Verlauf der Übersetzungsmessabweichung \gls{sym:epsilon} der Phasen L1, L2 und L3 im ursprünglichen Versuchsaufbau (Toleranzband Klasse \num{0,2} gestrichelt)}
     \label{pic:dia_messstrecke_alt}
 \end{diagram}
 
-Die grafische Darstellung verdeutlicht, dass beide Messsysteme die normativ vorgegebenen Toleranzgrenzen (gestrichelte Linien) nicht einhalten. In Phase L1 überschreitet der K-3 Messumformer ab einer Last von \SI{50}{\percent} den positiven Grenzwert, während die Rogowskispulen eine negative Abweichung zwischen \num{-1,00}\,\% und \num{-2,50}\,\% aufweisen. In Phase L2 zeigt der Messumformer bei \SI{20}{\percent} Last einen Abfall der Genauigkeit auf circa \num{-2,00}\,\%, wohingegen die Rogowskispulen eine positive Abweichung von über \num{1,00}\,\% erreichen. 
+Die Abweichungen lassen sich im vorliegenden Aufbau mit hoher Wahrscheinlichkeit nicht allein durch das Messprinzip der Sensoren erklären. Sie resultieren überwiegend aus der jeweiligen Messkette. Entlang der Signalführung und in der nachgelagerten Aufbereitung können parasitäre Einflüsse auftreten, zum Beispiel Kopplungen entlang des Kabelwegs, Erd- und Massebezüge, EMV-Einstreuungen sowie bandbreiten- oder filterbedingte Übertragungsabweichungen. Diese Einflüsse manifestieren sich als systematische Fehleranteile in der Übersetzungsmessabweichung \gls{sym:epsilon}. Eine vollständige und eindeutig isolierbare Fehlerursache lässt sich auf Basis der vorliegenden Daten nicht für alle Betriebspunkte ableiten. Im Rahmen dieser Arbeit steht daher nicht die vollständige Fehlerklärung im Vordergrund, sondern das Ergebnis der Eignungsprüfung der vorhandenen Messstrecke. Auf Grundlage der durchgeführten Vergleichsmessungen kann die bestehende Messkette im relevanten Lastbereich keine normkonforme und hinreichend stabile Referenzerfassung bereitstellen. Damit ist sie für die Genauigkeitsprüfung von Messstromwandlern ungeeignet.
+
+Die Kennlinien verdeutlichen, dass beide Messsysteme das Toleranzband nicht einhalten. Der 3-K-Messumformer überschreitet in Phase L1 ab etwa \SI{50}{\percent} Last den positiven Grenzwert und weist in den Phasen L2 und L3 im Niederstrombereich ausgeprägte negative Abweichungen auf. Die Rogowskispule zeigt ebenfalls deutliche Fehlbeträge, allerdings mit stark phasenabhängiger Richtung. Während in L1 überwiegend negative Abweichungen auftreten, liegt die Abweichung in L2 im mittleren und oberen Lastbereich deutlich im positiven Bereich und steigt bei \SI{120}{\percent} Last stark an.
+
+Damit sind beide Komponenten als Referenzmessmittel ungeeignet. Die Eigenfehler der Sensorik liegen in derselben Größenordnung wie die zu untersuchenden Effekte an den Prüflingen. Dadurch ist eine eindeutige Zuordnung der Abweichungen nicht möglich. Besonders kritisch ist der Niederstrombereich von \SI{5}{\percent} bis \SI{20}{\percent} \gls{sym:In}, da der Säulenstelltransformator bei geringer Auslenkung nur eine begrenzte Stellauflösung besitzt und dadurch eine stabile Stromvorgabe erschwert. Die daraus resultierenden Betriebsbedingungen verstärken die prinzipbedingten Schwächen der Messkette. Aus diesen Gründen wurde die Messstrecke im folgenden Abschnitt~\ref{sec:optimierung_messsystem} grundlegend optimiert.
 
 
 
-Da beide Systeme die geforderte Genauigkeitsklasse signifikant verfehlen, sind sie für eine valide Referenzmessung ungeeignet. Die vorliegenden Ergebnisse unterstreichen die Problematik, dass die Eigenfehler der verwendeten Sensorik in derselben Größenordnung liegen wie die zu untersuchenden Effekte der Prüflinge. Für eine wissenschaftlich fundierte Validierung ist jedoch ein Referenzsystem erforderlich, dessen Unsicherheit deutlich unterhalb der Toleranzgrenzen des Testobjekts angesiedelt ist. Folglich kann auf Basis dieser Komponenten kein belastbarer Referenzwert für den Primärstrom \gls{sym:I_p} bestimmt werden, was die Validierung der Prüflinge verunmöglicht.
 
-
-
-Die im unteren Segment der Abbildung~\ref{pic:dia_messstrecke_alt} dargestellte Standardabweichung \gls{sym:sigma} verdeutlicht, dass beide Messgeräte im niedrigen Strombereich eine erhöhte Varianz aufweisen. Dies ist darauf zurückzuführen, dass der Säulenstelltransformator bei geringen Strömen einen begrenzten Stellbereich besitzt, woraus eine instabile Regelung des Istwertes resultiert. Mit zunehmender Stromstärke \gls{sym:I_p} reduziert sich dieses Signalrauschen deutlich. Dabei weisen die K-3 Messumformer eine geringere Schwankungsbreite auf als die Rogowskispulen. Aufgrund dieser Defizite ist die initiale Messkette für die angestrebte Genauigkeitsprüfung unzureichend. Im folgenden Abschnitt \ref{sec:optimierung_messsystem} wird die Systemoptimierung erläutert, um eine präzisere Messwerterfassung zu realisieren.
 
 
 
@@ -138,13 +136,7 @@ Die in Abbildung~\ref{pic:aufbau_messstrecke_neu} dargestellte Systemarchitektur
 \subsubsection{Softwaregestützte Prozesskette zur Datenauswertung}
 \label{sec:datenaufbereitung_analyse}
 
-Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv}-Format vor und enthalten die zeitlichen Verläufe der Ströme \gls{sym:I_p} (Referenz) und \gls{sym:I_sec} (Prüfling). Angesichts des Umfangs der Untersuchung, die 31 Konfigurationen mit jeweils zwei Messgeräten und drei Phasen umfasst, ergaben sich insgesamt über 180 auszuwertende Einzelmessreihen. Eine manuelle Verarbeitung dieser Datenmenge mittels Tabellenkalkulation wäre aufgrund des hohen Zeitaufwands und der Fehleranfälligkeit bei manuellen Übertragungen unzweckmäßig. Aus diesem Grund wurde eine spezialisierte Auswertungssoftware auf Basis von \textit{Python} entwickelt.
-
-
-
-\paragraph{Extraktion und Filterung der Messdaten}
-
-Der erste Prozessschritt der Auswertung erfolgt im Modul \textit{„Manueller~Rohdaten-Export“} (siehe Abbildung~\ref{pic:manual_tagger}). Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} erfolgt, entstehen umfangreiche Zeitreihen. Die zentrale Funktion des Rohdaten-Selektors besteht darin, die aufgezeichneten Laststufen zu analysieren und die stationären Messbereiche zu isolieren. Hierbei werden die transienten Ein- und Ausschwingvorgänge aus dem Datensatz entfernt, sodass ausschließlich die stabilen Phasen in die weiterführende Genauigkeitsberechnung einfließen.
+Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv}-Format vor und enthalten die zeitlichen Verläufe der Ströme \gls{sym:I_p} als Referenz sowie \gls{sym:I_sec} als Prüflingsstrom. Angesichts des Untersuchungsumfangs mit 31 Konfigurationen, jeweils zwei Messgeräten und drei Phasen ergeben sich insgesamt mehr als 180 auszuwertende Einzelmessreihen. Eine manuelle Verarbeitung in einer Tabellenkalkulation wäre aufgrund des hohen Zeitaufwands und der erhöhten Fehleranfälligkeit bei Übertragungen unzweckmäßig. Daher wurde eine spezialisierte Auswertungssoftware auf Basis von \textit{Python} entwickelt. Der erste Prozessschritt erfolgt im Modul \textit{„Manueller Rohdaten-Export“} (Abbildung~\ref{pic:manual_tagger}). Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} erfolgt, entstehen umfangreiche Zeitreihen. Der Rohdaten-Selektor identifiziert die aufgezeichneten Laststufen und isoliert die stationären Messbereiche. Dazu werden transiente Ein- und Ausschwingvorgänge aus dem Datensatz entfernt, sodass ausschließlich stabile Phasen in die weiterführende Genauigkeitsberechnung eingehen. Pro Laststufe werden exakt 560 Messpunkte ausgewertet, was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht. Obwohl das Plateau technisch fünf Minuten gehalten wird, werden die letzten 20 Sekunden als Sicherheitsabstand verworfen, damit keine Signalflanken des Abschaltvorgangs in die Berechnung einfließen. Die verbleibenden 560 Werte bilden eine statistisch belastbare Grundlage, und die selektierten Bereiche werden als sortierte Datensätze in der Datenbank persistiert.
 
 \begin{figure}[H]
     \centering
@@ -153,107 +145,82 @@ Der erste Prozessschritt der Auswertung erfolgt im Modul \textit{„Manueller~Ro
     \label{pic:manual_tagger}
 \end{figure}
 
-Für die Berechnung werden pro Laststufe exakt 560 Messpunkte herangezogen, was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht. Obwohl das Plateau technisch fünf Minuten gehalten wird, werden die letzten 20 Sekunden des Datensatzes verworfen. Diese Maßnahme dient als Sicherheitsabstand, um sicherzustellen, dass keine Signalflanken des Abschaltvorgangs in die Berechnung einfließen. Die verbleibenden 560 Werte bilden eine statistisch valide Basis für die Auswertung. Die selektierten Bereiche werden als sortierte Datensätze in der Datenbank persistiert.
-
-\paragraph{Mathematische Berechnung}
-
-Die mathematische Grundlage für die in der Software ermittelten Kennwerte bildet die Berechnung der prozentualen Übersetzungsmessabweichung \gls{sym:epsilon} gemäß Abschnitt \ref{sec:messabweichung_kenngroessen}. Für die automatisierte Auswertung werden zunächst die arithmetischen Mittelwerte der Ströme über das stabile Zeitfenster gebildet und anschließend verrechnet:
-
-
-
+Aus den selektierten Zeitfenstern werden je Lastpunkt die arithmetischen Mittelwerte der Ströme gebildet. Dabei beschreibt $\bar{I}_{s}$ den Mittelwert der Stromstärke des Prüflings und $\bar{I}_{pri}$ den Mittelwert des Referenzmessgeräts im identischen Zeitraum. Zur kompakten Bewertung und zum Vergleich verschiedener Konfigurationen werden aus den ermittelten Übersetzungsmessabweichungen drei Kennwerte abgeleitet. Als Basiswert wird für alle Lastpunkte im Bereich \SIrange{5}{120}{\percent} sowie über alle drei Phasen der mittlere Betrag der Messabweichung gebildet, wodurch eine Kompensation positiver und negativer Abweichungen verhindert wird.
 \begin{equation}
-    \label{eq:messabweichung_allg}
-    \varepsilon = \frac{\bar{I}_{s} - \bar{I}_{pri}}{\bar{I}_{pri}} \cdot 100\,\%
+    \label{eq:etotal}
+    \varepsilon_{\text{total}}
+    =
+    \frac{1}{3}
+    \sum_{p \in \{L1,L2,L3\}}
+    \left(
+        \frac{1}{n}
+        \sum_{j=1}^{n}
+        \left|\varepsilon_{p,j}\right|
+    \right)
+\end{equation}
+Dabei ist $n$ die Anzahl der ausgewerteten Lastpunkte und $\varepsilon_{p,j}$ die Übersetzungsmessabweichung der Phase $p$ am Lastpunkt $j$. Die geometrische Verbesserung quantifiziert den Anteil des eliminierten Fehlers beim Wechsel von der Parallelanordnung zur Dreiecksanordnung.
+\begin{equation}
+    \label{eq:eta_geo}
+    \eta_{\text{geo}}
+    =
+    \left(
+        1 - \frac{\varepsilon_{\text{Dreieck}}}{\varepsilon_{\text{Parallel}}}
+    \right)\cdot 100\%
+\end{equation}
+Zur ökonomischen Bewertung wird der technische Gewinn auf die Investitionskosten normiert.
+\begin{equation}
+    \label{eq:eta_eco}
+    \eta_{\text{eco}}
+    =
+    \frac{\eta_{\text{geo}}}{\text{Preis}\,(\text{\euro})}
 \end{equation}
 
-Als Bewertungsgröße wird in dieser Arbeit ausschließlich die Übersetzungsmessabweichung \gls{sym:epsilon} ausgewertet; eine Fehlwinkelbestimmung \gls{sym:deltaphi} erfolgt nicht.
-
-
-Hierbei beschreibt $\bar{I}_{s}$ den arithmetischen Mittelwert der gemessenen Stromstärke des Prüflings und $\bar{I}_{pri}$ den Mittelwert des Referenzmessgerätes im identischen Zeitraum. Ergänzend hierzu berechnet die Software die Standardabweichung \gls{sym:sigma} auf Basis der Einzelmesswerte $x_i$, um die Signalstabilität innerhalb des Plateaus zu quantifizieren:
-
-\begin{equation}
-    \label{eq:standardabweichung}
-    \sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2}
-\end{equation}
-
-Diese statistische Kenngröße dient als Indikator für die Güte der Regelung und die Ruhe des Messsignals.
-
-\paragraph{Analyse und Visualisierung}
-
-Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei spezialisierten Analyse-Modulen zur Verfügung. Der Reiter \textbf{„Gesamtgenauigkeit“} ermöglicht den detaillierten technischen Vergleich. Hier wird die prozentuale Messabweichung \gls{sym:epsilon} über dem Primärstrom \gls{sym:I_p} aufgetragen. Die Darstellung ist frei konfigurierbar, sodass verschiedene Wandlertechnologien oder Messreihen visuell mit den normativen Fehlergrenzen (z.\,B. Klasse \num{1}) verglichen werden können.
-
-Für eine bewertende Übersicht dient der Reiter \textbf{„Ökonomische Analyse“}. Um die Komplexität der Kennlinien für einen direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei signifikante Betriebsbereiche:
-
-\begin{itemize}
-    \item \textbf{Nennstrombereich:} Erfasst das Anlaufverhalten und die Genauigkeit bei geringer Last (z.\,B. \SI{5}{\percent} und \SI{20}{\percent} \gls{sym:In}).
-    \item \textbf{Nennstrombereich:} Bildet den Hauptarbeitsbereich um den Nennstrom ab (z.\,B. \SI{50}{\percent} bis \SI{100}{\percent} \gls{sym:In}).
-    \item \textbf{Überstrombereich:} Visualisiert das Verhalten bei Überlast (z.\,B. \SI{120}{\percent} \gls{sym:In}).
-\end{itemize}
-
-Um für diese Bereiche einen einzelnen vergleichbaren Gütefaktor zu erhalten, werden die prozentualen Messabweichungen \gls{sym:epsilon} der zugehörigen Lastpunkte aggregiert. Hierfür wird der arithmetische Mittelwert der Absolutbeträge gebildet. Dies verhindert, dass sich positive und negative Abweichungen (z.\,B. $+\num{0,50}\,\%$ und $-\num{0,50}\,\%$) gegenseitig kompensieren:
-
+Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei Analysemodulen zur Verfügung. In der Ansicht \textbf{„Gesamtgenauigkeit“} wird die prozentuale Übersetzungsmessabweichung \gls{sym:epsilon} über dem Primärstrom \gls{sym:I_p} dargestellt. Die Darstellung ist frei konfigurierbar, sodass Messreihen unterschiedlicher Wandlertechnologien mit normativen Fehlergrenzen, zum Beispiel der Klasse \num{1}, verglichen werden können. Für eine bewertende Übersicht dient die Ansicht \textbf{„Ökonomische Analyse“}. Um die Komplexität der Kennlinien für den direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei Betriebsbereiche, den Niederstrombereich zur Erfassung des Anlaufverhaltens und der Genauigkeit bei geringer Last, den Nennstrombereich als Hauptarbeitsbereich um den Nennstrom sowie den Überstrombereich zur Bewertung des Verhaltens bei Überlast. Für jeden Bereich wird ein einzelner vergleichbarer Gütefaktor gebildet, indem die prozentualen Messabweichungen \gls{sym:epsilon} der zugehörigen Lastpunkte über den arithmetischen Mittelwert der Absolutbeträge aggregiert werden. Dadurch wird verhindert, dass sich Abweichungen gleichen Betrags mit unterschiedlichem Vorzeichen gegenseitig kompensieren.
 \begin{equation}
     \label{eq:fehler_bereich}
     \bar{\varepsilon}_{\text{Bereich}} = \frac{1}{k} \sum_{j=1}^{k} |\varepsilon_j|
 \end{equation}
+Dabei ist $k$ die Anzahl der angefahrenen Lastpunkte innerhalb des definierten Bereichs und $|\varepsilon_j|$ der Betrag der Messabweichung am jeweiligen Prüfpunkt. In dieser Ansicht werden zusätzlich konstruktive und wirtschaftliche Parameter wie Gehäusevolumen und Preis den aggregierten Genauigkeitswerten gegenübergestellt. Dadurch wird eine multidimensionale Bewertung der Prüflinge im Hinblick auf ihr Preis-Leistungs-Verhältnis ermöglicht.
 
-Dabei ist $k$ die Anzahl der angefahrenen Lastpunkte innerhalb des definierten Bereichs und $|\varepsilon_j|$ der Betrag der Messabweichung am jeweiligen Prüfpunkt. In dieser Ansicht werden zudem konstruktive und wirtschaftliche Parameter wie das Gehäusevolumen und der Preis der Wandler den aggregierten Genauigkeitswerten gegenübergestellt. Dies ermöglicht eine multidimensionale Bewertung der Prüflinge hinsichtlich ihres Preis-Leistungs-Verhältnisses.
 
 \subsubsection{Auswertung der neuen Messstrecke}
 \label{sec:auswertung_messstrecke}
 
-Die Validierung der optimierten Messstrecke belegt eine signifikante Steigerung der Messgüte im Vergleich zu den initialen Komponenten. In Abbildung~\ref{dia:messstrecke_neu} ist der Fehlerverlauf des neu installierten Energiemessgerätes \gls{pac} 4220 (magenta) im direkten Vergleich zum Messumformer 3-K (grün) und den Rogowskispulen (blau) dargestellt. 
+Die Verifikation der optimierten Messstrecke zeigt gegenüber dem ursprünglichen Aufbau eine deutliche Verbesserung der Referenzmessung. Abbildung~\ref{dia:messstrecke_neu} stellt den Fehlerverlauf des Energiemessgeräts \gls{pac}~4220 den beiden zuvor eingesetzten Messsystemen, dem 3-K-Messumformer und der Rogowskispule, gegenüber. Die gestrichelten Linien markieren das Toleranzband der Genauigkeitsklasse \num{0,2}.
 
 
 
-Der Kurvenverlauf verdeutlicht, dass das \gls{pac} 4220 über nahezu den gesamten Lastbereich innerhalb des normativen Toleranzbandes der Genauigkeitsklasse \num{0,2} verbleibt. Ab einer Last von \SI{20}{\percent} des Nennstroms \gls{sym:In} stabilisiert sich die Übersetzungsmessabweichung \gls{sym:epsilon} nahe der Nulllinie.
+Über den relevanten Arbeitsbereich ab etwa \SI{20}{\percent} des Nennstroms \gls{sym:In} liegt die Abweichung des \gls{pac}~4220 in allen drei Phasen nahe der Nulllinie und verbleibt überwiegend innerhalb der Normgrenzen. Eine Grenzwertverletzung ist im Wesentlichen nur bei sehr kleinen Strömen von \SI{5}{\percent} erkennbar. Die Ursachen und Randbedingungen im Niederstrombereich wurden bereits in Abschnitt~\ref{sec:fehleranalyse} erläutert und werden an dieser Stelle nicht erneut ausgeführt.
 
 \begin{diagram}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/verlauf/mes_messstrecke_neu_verlauf.png}
-    \caption{Vergleichende Analyse der Messabweichung (oben) und Standardabweichung (unten) unter Einsatz des \gls{pac} 4220}
+    \caption{Vergleichende Darstellung der Übersetzungsmessabweichung \gls{sym:epsilon} unter Einsatz des \gls{pac}~4220 (Toleranzband Klasse \num{0,2} gestrichelt)}
     \label{dia:messstrecke_neu}
 \end{diagram}
 
-Eine Abweichung außerhalb der Normgrenzen ist lediglich im Bereich geringer Ströme (\SI{5}{\percent}) erkennbar. Wie in Abschnitt \ref{sec:fehleranalyse} erläutert, resultiert dieser Effekt aus dem begrenzten Stellbereich des Säulenstelltransformators, der bei minimaler Auslenkung keine stabile Stromvorgabe ermöglicht. Durch die hohe Auflösung des \gls{pac} 4220 lässt sich diese physikalische Grenze des Prüfstandes messtechnisch präzise erfassen.
-
-Die im unteren Segment der Abbildung~\ref{dia:messstrecke_neu} visualisierte Standardabweichung \gls{sym:sigma} dient als Maß für die Präzision und Reproduzierbarkeit der Messsysteme. Hierbei weisen das \gls{pac} 4220 und der Messumformer 3-K ein ähnliches Verhalten mit einer sehr geringen Streuung auf. Ab einer Last von \SI{50}{\percent} sinkt die Standardabweichung \gls{sym:sigma} für beide Geräte auf ein Niveau von unter \num{0,50}\,\%. Im Gegensatz dazu zeigen die Rogowskispulen über den gesamten Messbereich eine deutlich höhere Streuung. Obwohl die 3-K-Umformer eine vergleichbare Präzision wie das \gls{pac}-Messgerät erzielen, verbleiben sie aufgrund ihrer hohen systematischen Abweichung außerhalb der geforderten Genauigkeitsklasse.
-
-Ergänzend zur Analyse der Einzelabweichungen ermöglicht das Ökonomie-Ranking in Abbildung~\ref{dia:oekonomie_ranking} eine zusammenfassende Bewertung der Messsysteme.
+Die beiden zuvor eingesetzten Systeme zeigen im direkten Vergleich weiterhin deutliche systematische Abweichungen. Der 3-K-Messumformer verhält sich insbesondere im Niederstrombereich stark nichtlinear, während die Rogowskispule bei höheren Lastpunkten eine ausgeprägte Phasenabhängigkeit zeigt und am Überlastpunkt von \SI{120}{\percent} eine deutliche Fehlzunahme aufweist. Damit wird deutlich, dass erst die digitale Referenzmessung mit dem \gls{pac}~4220 eine belastbare Grundlage für die Validierung der Prüflinge bereitstellt.
 
 
+
+Zur kompakten Gesamtbewertung der Messsysteme dient Abbildung~\ref{dia:messstrecke_bereichsanalyse}. Für drei Lastbereiche wird jeweils der mittlere absolute Fehler angegeben. Der Niederstrombereich umfasst \SIrange{5}{50}{\percent} \gls{sym:In}, der Nennstrombereich \SIrange{80}{100}{\percent} \gls{sym:In}, und der Überlastpunkt entspricht \SI{120}{\percent} \gls{sym:In}.
 
 \begin{diagram}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/kosten_horizontal/mes_messstrecke_neu_kosten_horizontal.png}
-    \caption{Kumulierter Vergleich der Fehleranteile (Ökonomie-Ranking) der verschiedenen Messsysteme über drei Lastbereiche}
-    \label{dia:oekonomie_ranking}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/dia_neu/bereichs_analyse/mes_messstrecke_neu_bereichs_analyse.png}
+    \caption{Mittlerer Absolutfehler der Messsysteme getrennt nach Lastbereich}
+    \label{dia:messstrecke_bereichsanalyse}
 \end{diagram}
 
-Hierbei werden die kumulierten Fehleranteile in den Bereichen Niederstrom (blau), Nennstrom (rot) und Überlast (gelb) gegenübergestellt. Zur quantitativen Bewertung dieser Anteile dient der in Tabelle~\ref{tab:fehler_score_vergleich} ausgewiesene Fehler-Score. Um die unterschiedlichen Messsysteme vergleichbar zu machen, erfolgt eine Normierung der Fehlerwerte innerhalb jedes Lastbereichs. Das System mit der größten mittleren Abweichung $\bar{\varepsilon}$ im jeweiligen Bereich wird als Referenz für \SI{100,00}{\percent} gesetzt, während die anderen Systeme relativ dazu skaliert werden. Der Gesamtwert (Fehler-Score) berechnet sich anschließend aus der Summe dieser normierten Einzelwerte gemäß der Formel:
+Die Bereichsanalyse bestätigt den Eindruck aus den Kennlinien. Das \gls{pac}~4220 weist in allen Lastbereichen die geringsten Fehlbeträge auf. Im Niederstrombereich beträgt der mittlere Absolutfehler \SI{0,06}{\percent}, im Nennstrombereich \SI{0,02}{\percent} und am Überlastpunkt \SI{0,01}{\percent}. Der 3-K-Messumformer ist im Nennstrombereich zwar sehr genau, zeigt jedoch im Niederstrombereich den größten mittleren Absolutfehler von \SI{1,82}{\percent}. Die Rogowskispule erreicht im Niederstrombereich eine mittlere Abweichung von \SI{0,34}{\percent}, verfehlt jedoch insbesondere am Überlastpunkt mit \SI{1,21}{\percent} deutlich die Anforderungen. Insgesamt wird damit der Einsatz des \gls{pac}~4220 als Referenzmessgerät für die weiteren Untersuchungen eindeutig begründet.
 
-\begin{equation}
-    \text{Score} = \sum_{\text{Bereich}} \left( \frac{\bar{\varepsilon}_{\text{System}}}{\bar{\varepsilon}_{\text{max}}} \cdot \SI{100,00}{\percent} \right)
-\end{equation}
 
-Ein niedriger Gesamtscore indiziert dabei eine hohe Genauigkeit über alle Betriebsbereiche hinweg.
 
-\begin{table}[H]
-    \centering
-    \caption{Vergleichende Übersicht der normierten Fehleranteile und des resultierenden Fehler-Scores}
-    \label{tab:fehler_score_vergleich}
-    \begin{tabular}{lcccc}
-        \toprule
-        \textbf{Messsystem} & \textbf{Niederstrom [\%]} & \textbf{Nennstrom [\%]} & \textbf{Überlast [\%]} & \textbf{Fehler-Score [\%]} \\ 
-        \midrule
-        \gls{pac} 4220      & \num{13,10}               & \num{2,00}              & \num{0,96}             & \num{16,06}                \\
-        3-K                 & \num{100,00}              & \num{41,19}             & \num{15,36}            & \num{156,55}               \\
-        Rogowskispulen      & \num{84,50}               & \num{100,00}            & \num{100,00}           & \num{284,50}               \\ 
-        \bottomrule
-    \end{tabular}
-\end{table}
 
-Im direkten Vergleich erreicht das \gls{pac} 4220 einen Fehler-Score von lediglich \num{16,06}\,\%. Dies bedeutet, dass seine kumulierte Abweichung nur einen Bruchteil der Fehler der anderen Systeme beträgt. Der Messumformer 3-K weist einen kumulierten Anteil von \num{156,55}\,\% auf, da er insbesondere im Niederstrombereich die größte Ungenauigkeit aufwies und dort den \num{100,00}\,\%-Referenzwert bildete. Die Rogowskispulen markieren mit \num{284,50}\,\% die größte Gesamtabweichung, da sie im Nennstrom- und Überlastbereich jeweils die schlechtesten Ergebnisse lieferten. Diese Resultate bestätigen, dass erst durch den Einsatz der digitalen \gls{pac}-Messgeräte eine valide Datenbasis für die weitere Untersuchung geschaffen wurde.
+
+
+
+
 
 \subsubsection{Auswahl und Spezifikation der Messstromwandler}
 \label{sec:auswahl_wandler}
@@ -273,20 +240,20 @@ Es ist anzumerken, dass es sich hierbei um eine Vereinfachung handelt, die den W
     \small
     \begin{tabular}{@{}lll S[table-format=4.0] S[table-format=2.1] S[table-format=4.2] S[table-format=3.2]@{}}
         \toprule
-        \textbf{Hersteller} & \textbf{Typ} & \textbf{Technologie} & {\textbf{\gls{sym:In} [\unit{A}]}} & {\textbf{\gls{sym:Sn} [\unit{VA}]}} & {\textbf{Volumen [\unit{cm^3}]}} & {\textbf{Preis [\text{\euro}]}} \\
+        \textbf{Hersteller} & \textbf{Typ} & \textbf{Technologie} & {\textbf{\gls{sym:In} [\unit{A}]}} & {\textbf{\gls{sym:Sn} [\unit{VA}]}} & {\textbf{Preis [\text{\euro}]}} \\
         \midrule
-        Celsa & ALO 10030     & Standard    & 2000 & 2,5  & 634,30  & 45,50  \\
-        MBS   & ASK 101.4     & Standard    & 2000 & 10,0 & 733,20  & 43,67  \\
-        Celsa & ALO 10030     & Standard    & 2500 & 2,5  & 634,30  & 45,50  \\
-        Celsa & ALO 12070     & Standard    & 3000 & 15,0 & 1520,00 & 71,51  \\
-        Celsa & ALO 12070     & Standard    & 4000 & 15,0 & 1520,00 & 71,51  \\
+        Celsa               & ALO 10030    & Standard             & 2000                               & 2,5                                 & 45,50                           \\
+        MBS                 & ASK 101.4    & Standard             & 2000                               & 10,0                                & 43,67                           \\
+        Celsa               & ALO 10030    & Standard             & 2500                               & 2,5                                 & 45,50                           \\
+        Celsa               & ALO 12070    & Standard             & 3000                               & 15,0                                & 71,51                           \\
+        Celsa               & ALO 12070    & Standard             & 4000                               & 15,0                                & 71,51                           \\
         \addlinespace
-        Celsa & ALO 8030 K    & Kompensiert & 2000 & 10,0 & 710,20  & 95,95  \\
-        Celsa & ALO 10050 K   & Kompensiert & 2500 & 5,0  & 1027,00 & 104,20 \\
-        Celsa & ALO 12070 K   & Kompensiert & 3000 & 15,0 & 1520,00 & 346,06 \\
-        Celsa & ALO 12070 K   & Kompensiert & 4000 & 15,0 & 1520,00 & 401,91 \\
+        Celsa               & ALO 8030 K   & Kompensiert          & 2000                               & 10,0                                & 95,95                           \\
+        Celsa               & ALO 10050 K  & Kompensiert          & 2500                               & 5,0                                 & 104,20                          \\
+        Celsa               & ALO 12070 K  & Kompensiert          & 3000                               & 15,0                                & 346,06                          \\
+        Celsa               & ALO 12070 K  & Kompensiert          & 4000                               & 15,0                                & 401,91                          \\
         \addlinespace
-        Redur & 13A1030.3ffp  & \glsentryshort{ffp}   & 2000 & 10,0 & 778,70  & 146,01 \\
+        Redur               & 13A1030.3ffp & \glsentryshort{ffp}  & 2000                               & 10,0                                & 146,01                          \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -329,11 +296,11 @@ Um den Einfluss der Leitergeometrie experimentell zu untersuchen, wurde das Kupf
                                         & 2500               & 2x 100x10                      &                              \\
                                         & 3000               & 3x 100x10                      &                              \\
         \midrule
-        \multirow{2}{*}{\textbf{3WA13}} & 4000               & 4x 100x10                      & \multirow{2}{*}{210}         \\
-                                        & 5000               & 5x 120x10                      &                              \\
+        \textbf{3WA13}                  & 4000               & 4x 100x10                      & 210                          \\
         \bottomrule
     \end{tabular}
 \end{table}
+
 
 \paragraph{Parallelanordnung}
 Als Referenz fungiert die Parallelanordnung der drei Phasenleiter in einer Ebene. Dieser in Abbildung~\ref{pic:kupferschienen_parallel} gezeigte Aufbau bildet die realen Bedingungen in \textit{Siemens SIVACON S8} Schaltfeldern nach. Die verwendeten Abstände entsprechen den in Tabelle~\ref{tab:schienen_konfiguration} aufgeführten Herstellervorgaben. In dieser Konfiguration ist der Prüfling – hier beispielhaft ein Hochstrom-Messstromwandler – den maximalen magnetischen Fremdfeldern der benachbarten Leiter ausgesetzt.

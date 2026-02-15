@@ -1,7 +1,28 @@
-% KAPITEL 5: Zusammenfassung der Ergebnisse (05_diskussion_fazit.tex)
+\section{Fazit}
+\label{chap:fazit}
 
+Diese Arbeit hatte das Ziel, eine praxistaugliche Lösung für die Strommessung in einer kompakten Niederspannungsschaltanlage unter magnetischem Fremdfeldeinfluss zu bewerten. Im Mittelpunkt stand die Frage, mit welchen Maßnahmen die geforderte Messgenauigkeit im Drehstromsystem auch bei hohen Strömen erreicht werden kann. Die Messreihen zeigen, dass der Fremdfeldeinfluss im untersuchten Aufbau phasenabhängig wirkt: Die Abweichungen verteilen sich nicht gleichmäßig, sondern treten besonders ausgeprägt auf Phase L2 auf. Damit bestätigt sich die Ausgangslage der Arbeit: Kompaktheit ist konstruktiv erforderlich, kann jedoch die Messqualität im Hochstrombereich deutlich verschlechtern.
 
-\section{Zusammenfassung der Ergebnisse}
-\label{chap:zusammenfassung_ergebnisse}
+Gleichzeitig zeigen die Ergebnisse, dass die Abweichungen auf L2 kein unveränderlicher Systemeffekt sind. Die Messstabilität lässt sich gezielt verbessern. Entscheidend ist dabei nicht allein die Wandlertechnologie, sondern das Zusammenspiel aus Wandlerwahl, konstruktiver Umsetzung und der Geometrie des Drehstromsystems. Damit steht für die Neuentwicklung ein Maßnahmenraum zur Verfügung, der die Messung im Worst-Case L2 stabilisiert und zugleich eine wirtschaftliche Serienumsetzung ermöglicht.
+
+\begin{itemize}
+    \item \textbf{Dreiecksanordnung -- Basislösung (Preis-Leistungs-Sieger):}
+    Standardkonzept für die Neuentwicklung, da die Fremdfeldkopplung über die Systemgeometrie an der Ursache reduziert wird und damit Standardwandler normnah messen können. Im Worst-Case L2 bei \SI{4000}{A} sinkt beim Celsa ALO 12070 die Abweichung von \(\epsilon=-3{,}280\,\%\) (Parallel) auf \(\epsilon=-0{,}150\,\%\) (Dreieck), d.\,h. um rund 95\,\% (Faktor \(\approx 22\); vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}).
+
+    \item \textbf{FFP-Technologie -- Ergänzung und Retrofit:}
+    Zusatzmaßnahme für konstruktiv besonders eingeschränkte Varianten sowie zur Nachrüstung in Bestandsanlagen, wenn die Geometrie nicht angepasst werden kann. Voraussetzung ist eine prozesssichere Ausführung und definierte Einbaulage/Ausrichtung, da die Wirksamkeit montage- und toleranzabhängig ist.
+
+    \item \textbf{Kompensierte Wandler -- Premiumlösung für Sonderfälle:}
+    Technisch am robustesten gegenüber Fremdfeldern, jedoch mit erhöhten Kosten und Integrationsaufwand. Einsatz daher nur dort, wo Geometrie und/oder FFP die geforderte Messstabilität nicht sicher erreichen oder wo Anforderungen eine maximale Robustheit zwingend begründen.
+\end{itemize}
+
+Die abgeleiteten Maßnahmen wurden bereits in das Konstruktionskonzept überführt; Abbildung~\ref{fig:fazit_3d_neuentwicklung} zeigt den 3D-Gesamtaufbau der Kupferschienen, in dem die optimierte Anordnung berücksichtigt ist. Damit ist nachvollziehbar, warum und wie die Arbeit das Problem löst: Die Fremdfeldbeeinflussung wird primär über eine Geometrieanpassung reduziert und bei Bedarf durch konstruktive bzw. technologische Maßnahmen ergänzt.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{03_Ressourcen/Bilder/kupferschinen_gesamtaufbau_3d.png}
+    \caption{3D-Gesamtaufbau der Kupferschienen als Teil der Neuentwicklung: Überführung der in dieser Arbeit abgeleiteten Maßnahmen in das konstruktive Konzept.}
+    \label{fig:fazit_3d_neuentwicklung}
+\end{figure}
 
 
