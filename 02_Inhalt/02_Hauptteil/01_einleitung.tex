@@ -4,70 +4,64 @@
 \subsection{Motivation}
 \label{sec:motivation}
 
-Die zuverlässige Messung hoher Ströme in Niederspannungsschaltanlagen wird im Kontext der Energiewende und der zunehmenden Dezentralisierung der Energieversorgung immer wichtiger \cite{pdf-Zellularer_Ansatz-VDE}. Schaltanlagen bilden in industriellen Infrastrukturen zentrale Verteil- und Knotenpunkte. Entsprechend werden Strommesswerte nicht nur für Schutzfunktionen benötigt, sondern zunehmend auch für Abrechnungszwecke, ein strukturiertes Energiemanagement sowie zur Unterstützung der Netzstabilität \cite{norm-DIN_ISO_50001-Energiemanagement-DIN}. Damit steigen die Anforderungen an Genauigkeit, Reproduzierbarkeit und Langzeitstabilität – besonders im Hochstrombereich.
+Die Strommessung in Niederspannungsschaltanlagen gewinnt deutlich an Bedeutung: Messwerte werden heute nicht nur für Schutzfunktionen benötigt, sondern ebenso für Betriebsdatenerfassung, Energiemonitoring und zunehmend auch für abrechnungsnahe Auswertungen \cite{pdf-Zellularer_Ansatz-VDE}\cite{norm-DIN_ISO_50001-Energiemanagement-DIN}. Parallel dazu steigen die technischen Anforderungen im Hochstrombereich, während Schaltanlagen aus Platz- und Kostengründen immer kompakter konstruiert werden müssen \cite[Kap.~1.4]{pdf-Planung_Energieverteilung-Siemens}. In der Praxis führt diese Kombination zu einem Spannungsfeld: Hohe Ströme und geringe Abstände sind konstruktiv oft unvermeidbar, verschlechtern aber die messtechnischen Randbedingungen.
 
-In der Praxis treffen diese Anforderungen auf konstruktive und wirtschaftliche Randbedingungen. Hersteller wie die \textit{Rolf~Janssen~Elektrotechnische~Werke~GmbH} müssen Schaltanlagen häufig sehr kompakt auslegen, da technische Betriebsräume nur begrenzt Platz bieten \cite[Kap.~1.4]{pdf-Planung_Energieverteilung-Siemens}. Kompakte Bauweisen erhöhen jedoch die Packungsdichte: Sammelschienen mit mehreren Kiloampere verlaufen oft nahe an Messstromwandlern.
-
-Genau daraus entsteht der Zielkonflikt dieser Arbeit: Die Anwendung verlangt präzise Strommessung, gleichzeitig verschlechtern magnetische Streufelder benachbarter Leiter die Messbedingungen im Wandler. Hochspezialisierte Komponenten sind nicht automatisch die beste Lösung, da sie Kosten und Beschaffungsrisiken erhöhen können. Ziel ist daher, Messgüte und Wirtschaftlichkeit so zu kombinieren, dass eine serientaugliche Lösung für eine neue Schaltanlagengeneration entsteht.
+Genau hier setzt die Arbeit an. In der betrachteten Schaltanlage liegen Sammelschienen und Messstromwandler so dicht beieinander, dass magnetische Streufelder benachbarter Leiter die Wandlerfunktion spürbar beeinflussen können. Für die Neuentwicklung der Anlage ist deshalb eine Lösung gefragt, die zwei Ziele gleichzeitig erfüllt: (1) ausreichende Messgüte unter realistischen Hochstrombedingungen und (2) wirtschaftliche sowie konstruktiv robuste Umsetzbarkeit für die Serie. Ziel ist nicht „maximale Technik um jeden Preis“, sondern eine tragfähige Kombination aus Messqualität, Integrationsaufwand und Kosten für eine neue Schaltanlagengeneration.
 
 \subsection{Problemstellung}
 \label{sec:problemstellung}
 
-Moderne Niederspannungsschaltanlagen vereinen hohe Stromtragfähigkeit mit geringer Baugröße. Dadurch befinden sich stromführende Leiter und Messstromwandler in engem räumlichem Verbund. Messstromwandler werden dabei magnetischen Fremdfeldern ausgesetzt, die von benachbarten Leitern ausgehen und die Messerfassung beeinflussen können \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. In Drehstromsystemen ist dieser Effekt besonders relevant: Die Phasenleiter L1, L2 und L3 sind typischerweise parallel geführt oder räumlich dicht gruppiert. Die zeitlich veränderlichen Magnetfelder der Nachbarphasen können in den Wandler einkoppeln und den magnetischen Arbeitspunkt im Kern verschieben. Daraus resultieren Messabweichungen, die mit steigender Stromstärke deutlich zunehmen können.
+Durch die kompakte Leiterführung in modernen Niederspannungsschaltanlagen überlagern sich die Magnetfelder der Phasenleiter. Messstromwandler befinden sich damit nicht in einem ideal „feldfreien“ Umfeld, sondern werden zusätzlich zu ihrem Nutzfluss von externen Feldern beaufschlagt \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. In einem Drehstromsystem (L1, L2, L3) ist diese Einkopplung besonders relevant, weil die Felder zeitlich variieren und sich – abhängig von Geometrie, Abständen und Einbaulage – unterschiedlich stark auf die einzelnen Phasen auswirken.
+
+Im untersuchten Aufbau zeigen die Messdaten, dass der Einfluss ab etwa \SI{2500}{A} deutlich zunimmt (vgl. Tabelle~\ref{tab:messergebnisse_celsa10030_2500A_alle}). Auffällig ist zudem eine Phasen-Asymmetrie: Die mittlere Phase L2 ist konstruktionsbedingt am stärksten von Nachbarleitern umgeben und erweist sich als kritischster Fall. L2 wird daher als \emph{Worst-Case} herangezogen, an dem die Wirksamkeit der Gegenmaßnahmen bewertet wird.
 
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{03_Ressourcen/Bilder/schaltschrank_front.jpg}
-        \caption{Frontansicht}
+        \caption{Ansicht von vorne}
         \label{fig:schaltschrank_front}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{03_Ressourcen/Bilder/schaltschrank_back.jpg}
-        \caption{Rückansicht}
+        \caption{Ansicht von hinten}
         \label{fig:schaltschrank_back}
     \end{subfigure}
-    \caption{Gesamtansicht des untersuchten Schaltschranksystems}
+    \caption{Untersuchtes Schaltschranksystem (Gesamtansicht)}
     \label{fig:schaltschrank_gesamt}
 \end{figure}
 
-Die Messabweichungen wirken sich unmittelbar auf die Zuverlässigkeit von Schutzkonzepten, Betriebsdatenerfassung und Verrechnungsprozessen aus. Für den betrachteten Aufbau zeigen die Messdaten eine deutliche Fremdfeldbeeinflussung ab \SI{2500}{A} (vgl. Tabelle~\ref{tab:messergebnisse_celsa10030_2500A_alle}). Im Hochstrombereich können sich Abweichungen im Prozentbereich einstellen. Zusätzlich tritt die Beeinflussung im Drehstromsystem nicht zwingend symmetrisch auf: Abhängig von Leiterführung, Abständen und Einbausituation kann eine Phase stärker betroffen sein als die anderen. In der untersuchten Schaltanlage zeigt sich dies insbesondere auf Phase L2. L2 wird daher als maßgeblicher Worst-Case für die Bewertung herangezogen.
-
-Am Markt existieren verschiedene Gegenmaßnahmen, z.\,B. kompensierte Wandler oder zusätzliche Abschirmungen. Diese Ansätze sind jedoch mit Zielkonflikten verbunden: Kompensierte Ausführungen erhöhen häufig Kosten und Integrationsaufwand, während Abschirmmaßnahmen stark von Einbaulage, Toleranzen und verfügbarem Bauraum abhängen. Damit stellt sich die Frage, ob sich durch eine gezielte System- und Geometrieoptimierung auch mit wirtschaftlichen Standardwandlern eine normkonforme Messgüte unter realen Hochstrombedingungen erreichen lässt. Genau diese Frage adressiert die vorliegende Arbeit.
+Damit ergibt sich eine klare technische Kernfrage: Wie lässt sich unter den Randbedingungen „kompakt + Hochstrom“ eine Messanordnung realisieren, die Fremdfeldbeeinflussung ausreichend reduziert und zugleich in Serie zuverlässig herstell- und montierbar bleibt?
 
 \subsection{Zielsetzung und Leitfrage}
 \label{sec:zielsetzung}
 
-Ziel der Arbeit ist es, für die Neuentwicklung einer kompakten Niederspannungsschaltanlage eine Lösung zur Strommessung zu bewerten, die technisch belastbar, wirtschaftlich vertretbar und konstruktiv integrierbar ist. Untersucht wird die Messung im Drehstromsystem (L1, L2, L3). Aufgrund der ausgeprägten Beeinflussung wird L2 als kritischer Bewertungsfall genutzt.
+Ziel der Arbeit ist die Bewertung und Gegenüberstellung von Maßnahmen zur Stabilisierung der Strommessung unter Fremdfeldeinfluss in einer kompakten Niederspannungsschaltanlage. Im Fokus steht die Messung im Drehstromsystem; aufgrund der stärksten Abweichungen dient L2 als maßgeblicher Bewertungsfall.
 
-Die zentrale Leitfrage lautet:
-\emph{Welche Maßnahmen an Wandler, Schutzkonzept und Leiter-/Wandlergeometrie stellen sicher, dass die Strommessung auf L2 auch unter Fremdfeldeinfluss im Hochstrombereich die geforderte Messgenauigkeit einhält?}
+Die leitende Fragestellung lautet:
+\emph{Welche Kombination aus Wandlerkonzept, konstruktivem Schutz und Leiter-/Wandleranordnung stellt sicher, dass die Strommessung auf L2 im Hochstrombereich trotz Fremdfeldbeeinflussung die geforderte Messgüte einhält?}
 
-Zur Beantwortung werden drei Lösungsrichtungen betrachtet, die unterschiedliche Ebenen adressieren:
+Untersucht werden drei Lösungsrichtungen auf unterschiedlichen Ebenen:
 
 \begin{itemize}
-    \item \textbf{Einsatz kompensierter Wandler (Technologieansatz):}
-    Untersuchung der Fremdfeldrobustheit kompensierter Ausführungen und Einordnung des technischen Nutzens im Verhältnis zu Kosten, Bauraum und Integrationsaufwand.
-          
+    \item \textbf{Kompensierte Wandler (Technologieansatz):}
+    Quantifizierung der Fremdfeldrobustheit kompensierter Ausführungen und Einordnung des Nutzens gegenüber Mehrkosten, Bauraumbedarf und Integrationsaufwand.
+
     \item \textbf{Fremdfeld-Protektion, FFP (konstruktiver Schutzansatz):}
-    Bewertung, inwieweit konstruktive Schutzmaßnahmen die Einkopplung externer Felder reduzieren und wie empfindlich die Wirksamkeit gegenüber Montage- und Toleranzeinflüssen ist.
-          
-    \item \textbf{Geometrische Optimierung mittels Dreiecksanordnung mit Standardwandler (Systemansatz):}
-    Prüfung, ob eine angepasste Leiter-/Wandleranordnung die Feldüberlagerung im Drehstromsystem so entschärft, dass Standardwandler normnahe Ergebnisse liefern.
+    Analyse, in welchem Maß konstruktive Schutzmaßnahmen die Feldkopplung reduzieren und wie empfindlich die Wirkung auf Toleranzen, Einbaulage und Montageabweichungen reagiert.
+
+    \item \textbf{Geometrische Optimierung durch Dreiecksanordnung mit Standardwandler (Systemansatz):}
+    Prüfung, ob eine optimierte Leiter-/Wandlergeometrie die Feldüberlagerung im Drehstromsystem so entschärft, dass Standardwandler im relevanten Strombereich normnahe Ergebnisse liefern.
 \end{itemize}
 
-Als Bewertungsmaßstäbe dienen die Messabweichung \gls{sym:epsilon}, die Stabilität unter Fremdfeldeinfluss (insbesondere auf L2) sowie eine Kosten-/Bauraum-Einordnung im Hinblick auf die Serienumsetzung.
+Bewertet wird anhand der Messabweichung \gls{sym:epsilon}, der Stabilität unter Fremdfeldeinfluss (insbesondere auf L2) sowie einer praxisnahen Kosten-/Bauraum- und Integrationsbetrachtung im Hinblick auf eine serientaugliche Umsetzung.
 
 \subsection{Vorgehensweise und Aufbau der Arbeit}
 \label{sec:vorgehensweise}
 
-Die Arbeit umfasst einen theoretischen Grundlagenteil, die Beschreibung des Prüfaufbaus und die Auswertung der Messergebnisse. Kapitel~\ref{chap:theorie} erläutert die physikalischen Grundlagen der Stromwandlung sowie die Mechanismen magnetischer Induktion und Kernsättigung. Zusätzlich werden relevante Normen und Genauigkeitsklassen als Bewertungsrahmen eingeführt.
+Kapitel~\ref{chap:theorie} stellt die physikalischen Grundlagen der Stromwandlung, der Feldkopplung und der Sättigungseffekte im Kern dar und führt den normativen Bewertungsrahmen ein. Kapitel~\ref{chap:methodik} beschreibt Prüfaufbau, Messkette und die untersuchten Wandler- und Geometrievarianten im Drehstromsystem.
 
-Kapitel~\ref{chap:methodik} beschreibt den Hochstromprüfstand, die Messkette und deren Auslegung. Darüber hinaus werden die untersuchten Wandlerkonzepte sowie die betrachteten Leitergeometrien und Anordnungen im Drehstromsystem definiert.
-
-Kapitel~\ref{sec:auswertung_diskussion} wertet die Messreihen im Bereich von \SI{2000}{A} bis \SI{4000}{A} aus. Die Ergebnisse werden phasenbezogen analysiert, mit Schwerpunkt auf \gls{sym:epsilon}, Fremdfeldrobustheit und der Bewertung des Worst-Case L2. Ergänzend erfolgt eine wirtschaftliche Einordnung, um technische Wirkung und Umsetzbarkeit gegenüberzustellen.
-
-Kapitel~\ref{chap:zusammenfassung_ergebnisse} fasst die Ergebnisse zusammen, leitet eine Handlungsempfehlung für die Neuentwicklung ab und formuliert konkrete nächste Schritte zur Überführung in eine serienfähige Konstruktion.
+In Kapitel~\ref{sec:auswertung_diskussion} werden die Messreihen im Hochstrombereich (\SI{2000}{A} bis \SI{4000}{A}) ausgewertet und phasenbezogen verglichen, mit Schwerpunkt auf dem Worst-Case L2. Kapitel~\ref{chap:zusammenfassung_ergebnisse} verdichtet die Resultate zu einer konkreten Handlungsempfehlung für die Neuentwicklung und leitet die nächsten Schritte zur robusten Serienumsetzung ab.
