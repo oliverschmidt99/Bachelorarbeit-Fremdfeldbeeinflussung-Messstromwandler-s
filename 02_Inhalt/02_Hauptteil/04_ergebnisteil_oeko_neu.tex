@@ -250,155 +250,88 @@ Die Umstellung auf die Dreieckskonfiguration bewirkt bei Nennstrom eine deutlich
 \subsection{Ökonomische Evaluation und Technologie-Ranking}
 \label{sec:oekonomische_evaluation}
 
-Die vorangehenden Abschnitte haben den Einfluss der Leitergeometrie auf die Messabweichungen \gls{sym:epsilon} für die untersuchten
-Wandlerkonzepte detailliert analysiert. In diesem Abschnitt wird derselbe Befund in eine wirtschaftliche Entscheidungsperspektive
-überführt. Dazu werden die aus Gl.~\ref{eq:etotal} abgeleiteten mittleren Messabweichungen \(\varepsilon_{\text{total}}\) über den
-Verbesserungsgrad \(\eta_{\text{geo}}\) (Gl.~\ref{eq:eta_geo}) zwischen Parallel- und Dreiecksanordnung verglichen und den jeweiligen
-Marktpreisen gegenübergestellt.
+Die technische Bewertung der Prüflinge wurde im vorherigen Abschnitt über die Übersetzungsmessabweichung \gls{sym:epsilon} vorgenommen. Für die wirtschaftliche Einordnung werden diese Genauigkeitswerte nun den Marktpreisen gegenübergestellt. Als Genauigkeitsmaß wird im Folgenden der mittlere Betrag der Abweichung \(\bar{|\epsilon|}_{\mathrm{Nenn}}\) im Nennlastbereich verwendet; ergänzend wird der maximale Betrag \(\max(|\epsilon|)_{\mathrm{Nenn}}\) angegeben, um Ausreißer einzelner Phasen sichtbar zu machen. Die zugehörigen Kostenangaben stammen aus der Spezifikationstabelle der Prüflinge (siehe Tabelle~\ref{tab:wandler_spezifikationen_erweitert}).
 
-Positive Werte von \(\eta_{\text{geo}}\) bedeuten eine Reduktion der mittleren Messabweichung durch die Dreiecksanordnung, negative Werte
-eine Verschlechterung gegenüber der Parallelanordnung. Für die Bewertung wird nach den Betriebsbereichen Niederstrom
-(\SI{5}{\percent}--\SI{50}{\percent}), Nennstrom (\SI{80}{\percent}--\SI{100}{\percent}) und Überlast (\SI{120}{\percent}) getrennt
-ausgewertet (vgl. Abschnitt~\ref{sec:einfluss_leitergeometrie}). Zusätzlich wird ein zusammenfassender Kennwert \emph{Gesamt} angegeben,
-der als Mittelwert der Beträge der drei Bereichswerte definiert ist. Damit beschreibt \emph{Gesamt} primär die \emph{Sensitivität gegenüber
-der Leitergeometrie} (Stärke der Geometriewirkung), nicht zwangsläufig eine durchgängig vorteilhafte Richtung.
+\subsubsection{Wirtschaftlichkeit im Nennstrombereich (\SI{2000}{A} bis \SI{2500}{A})}
 
-\subsubsection{Wirtschaftlichkeit im Bereich \SI{2000}{A} bis \SI{2500}{A}}
+Im Bereich bis \SI{2000}{A} liegen mehrere Technologien hinsichtlich der Messgüte nahe beieinander, sodass die Leitergeometrie (Parallel/Dreieck) und der Anschaffungspreis die entscheidenden Unterscheidungsmerkmale darstellen. Tabelle~\ref{tab:oeko_2000A_kosten_genauigkeit} zeigt, dass die Standardwandler (\textit{MBS~ASK101.4}, \textit{Celsa~ALO~10030}) die niedrigsten Preise aufweisen. Gleichzeitig differenziert die Parallelgeometrie deutlich: Während der \textit{MBS~ASK101.4} im Nennpunkt nur moderate Abweichungen zeigt, weist der \textit{Celsa~ALO~10030} in Parallelkonfiguration deutlich höhere Nennfehler bis \(\max(|\epsilon|)_{\mathrm{Nenn}}=\num{1,97}\,\%\) auf (vgl. Tabelle~\ref{tab:messergebnisse_celsa_2000A}). Die Dreiecksanordnung reduziert diese Empfindlichkeit bei Standardwandlern spürbar, ohne die Komponentenpreise zu erhöhen, und bleibt damit der wirtschaftlich stärkste Hebel, sofern sie konstruktiv umgesetzt werden kann.
 
-Tabelle~\ref{tab:oeko_2000A_parallel_vs_dreieck} zeigt für \SI{2000}{A}, dass die ökonomische Attraktivität stark davon abhängt, ob die
-Leitergeometrie konstruktiv frei wählbar ist oder vorgegeben wird. Der \textit{MBS ASK101.4} weist in allen drei Bereichen positive
-Verbesserungen bei gleichzeitig niedrigem Preis auf. Damit ist dieser Wandler aus Kostensicht besonders interessant, wenn eine moderate
-Verbesserung der Messgüte ausreichend ist und eine robuste, unkritische Umsetzung im Vordergrund steht.
+Die \glsentryshort{ffp}-Technologie (\textit{Redur~13A1030.3ffp}) erreicht bei \SI{2000}{A} die geringsten Nennfehler in Parallelgeometrie, erkauft dies jedoch durch einen deutlich höheren Preis (Tabelle~\ref{tab:oeko_2000A_kosten_genauigkeit}). Daraus ergibt sich eine klare Einsatzlogik: \glsentryshort{ffp} ist insbesondere dann sinnvoll, wenn eine Geometrieänderung in Bestandsanlagen nicht möglich ist und die Messgüte dennoch stabilisiert werden muss. Der kompensierte \textit{Celsa~ALO~8030~K} liegt preislich zwischen Standard und \glsentryshort{ffp}, zeigt im betrachteten Datensatz bei \SI{2000}{A} jedoch keine eindeutige Überlegenheit gegenüber den günstigen Standardwandlern.
 
-Der \textit{Celsa ALO 10030} zeigt eine ausgeprägte Geometriesensitivität (hoher Gesamtwert) mit deutlichem Zugewinn im Nenn- und
-Überlastbereich. Für Anwendungen, in denen der Betrieb überwiegend im oberen Lastbereich stattfindet, kann dies trotz der gemischten
-Niederstromtendenz einen hohen praktischen Mehrwert bedeuten. Wirtschaftlich ist dieser Wandler insbesondere dann attraktiv, wenn die
-Dreiecksanordnung realisiert werden kann; bei konstruktiv erzwungener Parallelanordnung ist er hingegen als risikobehaftet zu bewerten
-(vgl. die technische Diskussion in Abschnitt~\ref{sec:analyse_messreihe_2000A}).
+Mit steigender Stromstärke bis \SI{2500}{A} verschiebt sich die Wirtschaftlichkeit zugunsten der Kompensation. Tabelle~\ref{tab:oeko_2500A_kosten_genauigkeit} belegt, dass der Standardwandler \textit{Celsa~ALO~10030} im Nennlastbereich deutlich in die Sättigung gerät (Parallel: \(\bar{|\epsilon|}_{\mathrm{Nenn}}=\num{10,626}\,\%\), Dreieck: \(\bar{|\epsilon|}_{\mathrm{Nenn}}=\num{2,451}\,\%\); vgl. Tabelle~\ref{tab:messergebnisse_celsa10030_2500A_alle}). Der kompensierte \textit{Celsa~ALO~10050~K} bleibt demgegenüber in beiden Geometrien bei \(\bar{|\epsilon|}_{\mathrm{Nenn}}<\num{0,27}\,\%\) und unterschreitet auch beim Maximalfehler deutlich die Standardausführung. Damit wird der höhere Beschaffungspreis im Bereich \SI{2500}{A} erstmals unmittelbar durch die gewonnene Messstabilität begründet, insbesondere wenn die Anlage eine Parallelführung der Primärleiter erzwingt.
 
-Der kompensierte \textit{Celsa ALO 8030 K} zeigt insgesamt nur geringe Unterschiede zwischen den Geometrien (niedriger Gesamtwert) bei
-höherem Preis. Damit ist der Mehrpreis weniger als „Geometriegewinn“ zu interpretieren, sondern als Beitrag zu Stabilität und
-Planbarkeit: Er ist vor allem dort sinnvoll, wo die Leiterführung nicht optimiert werden kann oder die Messgüte im gesamten Bereich ohne
-geometriespezifische Randbedingungen abgesichert werden soll.
-
-Die \glsentryshort{ffp}-Ausführung (\textit{Redur 13A1030.3ffp}) zeigt im betrachteten Datensatz eine gegensinnige Geometriepräferenz im
-Nenn- und Überlastbereich (stark negative Werte). Für ein Technologie-Ranking bedeutet dies: Bei fest vorgegebener Dreiecksanordnung ist
-diese Variante wirtschaftlich nicht vorteilhaft, während sie bei erzwungener Parallelanordnung – abhängig vom dominanten Betriebsbereich –
-eine Alternative sein kann. Für die Auswahl ist daher die konstruktiv realisierbare Leiterführung als harte Randbedingung zu behandeln
-(vgl. Abschnitt~\ref{sec:analyse_messreihe_2000A}).
-
+% Tabellen für 2000A und 2500A
 \begin{table}[H]
     \centering
-    \caption{Geometrische Verbesserung bei \SI{2000}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_2000A_parallel_vs_dreieck}
+    \caption{Kosten- und Genauigkeitsvergleich im Nennlastbereich bei \SI{2000}{A} (\(\bar{|\epsilon|}\): Mittelwert über Phasen und Lastpunkte im Nennbereich; \(\max(|\epsilon|)\): maximaler Betrag im Nennbereich). Für \SI{2000}{A} umfasst der Nennbereich mangels Messpunkten bei \SI{80}{\percent} und \SI{90}{\percent} nur den Lastpunkt \SI{100}{\percent}.}
+    \label{tab:oeko_2000A_kosten_genauigkeit}
     \small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=3.2]@{}}
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{@{}l S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
         \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
+        \textbf{Wandler (Technologie)} & {\textbf{Preis [\text{\euro}]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Parallel [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Parallel [\%]}} \\
         \midrule
-        \textit{MBS ASK101.4} Standard & 43,67 & 3.53 & 21.95 & 29.70 & 18.39 \\
-        \textit{Celsa ALO 10030} Standard & 45,50 & -44.79 & 78.13 & 86.87 & 69.93 \\
-        \textit{Celsa ALO 8030 K} kompensiert & 95,95 & -8.24 & -2.44 & 6.00 & 5.56 \\
-        \textit{Redur 13A1030.3ffp} \glsentryshort{ffp} & 146,01 & 3.85 & -161.54 & -177.42 & 114.27 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-Für \SI{2500}{A} (Tabelle~\ref{tab:oeko_2500A_parallel_vs_dreieck}) verschiebt sich die Bewertung zugunsten der Dreiecksanordnung beim
-Standardwandler \textit{Celsa ALO 10030}: Die Verbesserungen sind in allen drei Bereichen deutlich positiv und liegen bei gleichzeitig
-niedrigem Preis auf einem Niveau, das ein gutes Kosten-Nutzen-Verhältnis erwarten lässt. Der kompensierte \textit{Celsa ALO 10050 K}
-zeigt demgegenüber kleinere Verbesserungen bei höherem Preis. Seine ökonomische Rechtfertigung liegt daher weniger im maximalen Zugewinn,
-sondern in der robusten Einhaltung einer stabilen Messgüte über Geometrievarianten hinweg (vgl. Abschnitt~\ref{sec:analyse_messreihe_2500A}).
-
-\begin{table}[H]
-    \centering
-    \caption{Geometrische Verbesserung bei \SI{2500}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_2500A_parallel_vs_dreieck}
-    \small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]@{}}
-        \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
-        \midrule
-        \textit{Celsa ALO 10030} Standard & 45,50 & 59.38 & 76.93 & 69.07 & 68.46 \\
-        \textit{Celsa ALO 10050 K} kompensiert & 104,20 & 23.08 & 9.36 & 26.25 & 19.56 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\subsubsection{Kosteneffizienz im Hochstrombereich \SI{3000}{A} bis \SI{4000}{A}}
-
-Im Hochstrombereich (Tabelle~\ref{tab:oeko_3000A_parallel_vs_dreieck} und Tabelle~\ref{tab:oeko_4000A_parallel_vs_dreieck}) wird der
-wirtschaftliche Nutzen der Dreiecksanordnung für Standardwandler besonders deutlich: Der \textit{Celsa ALO 12070} zeigt bei \SI{3000}{A}
-im Nenn- und Überlastbereich hohe Verbesserungsgrade und bleibt dabei preislich moderat. Für Anwendungen mit dominanter Hochlast ist dies
-ein klares Argument zugunsten der Dreiecksanordnung, sofern die mechanische Umsetzung möglich ist (vgl. Abschnitt~\ref{sec:analyse_messreihe_3000A}).
-
-Der kompensierte \textit{Celsa ALO 12070 K} zeigt bei \SI{3000}{A} ein gemischtes Bild: Der Überlastbereich profitiert deutlich, während
-Nieder- und Nennbereich keine konsistenten Vorteile ausweisen. In Kombination mit dem deutlich höheren Preis ergibt sich ein Nutzen vor allem
-dann, wenn Randbedingungen (z.\,B.\ festgelegte Leiterführung, geforderte Stabilität, geringere Streuung) die Auswahl dominieren und nicht
-die maximale Verbesserung durch eine Geometrieoptimierung.
-
-Bei \SI{4000}{A} bestätigt sich die Tendenz für den Standardwandler \textit{Celsa ALO 12070}: Die Verbesserungen im Nenn- und Überlastbereich
-sind ausgeprägt, während der Niederstrombereich nur gering reagiert. Der kompensierte \textit{Celsa ALO 12070 K} zeigt im vorliegenden
-Datensatz dagegen in allen Bereichen negative Werte, sodass aus rein ökonomischer Sicht kein Mehrwert durch die Dreiecksanordnung ableitbar ist.
-Für ein Technologie-Ranking bedeutet dies: Bei \SI{4000}{A} ist die kompensierte Variante primär dann zu begründen, wenn andere Systemziele
-als der Geometriegewinn im Vordergrund stehen (vgl. Abschnitt~\ref{sec:analyse_messreihe_4000A}).
-
-\begin{table}[H]
-    \centering
-    \caption{Geometrische Verbesserung bei \SI{3000}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_3000A_parallel_vs_dreieck}
-    \small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=-2.2] S[table-format=-2.2] S[table-format=2.2] S[table-format=2.2]@{}}
-        \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
-        \midrule
-        \textit{Celsa ALO 12070} Standard & 71,51 & 9.26 & 73.85 & 87.23 & 56.78 \\
-        \textit{Celsa ALO 12070 K} kompensiert & 346,06 & -27.05 & -17.44 & 78.70 & 41.06 \\
+        \textit{MBS ASK101.4} (Standard) & 43,67 & 0,213 & 0,273 & 0,280 & 0,350 \\
+        \textit{Celsa ALO 10030} (Standard) & 45,50 & 0,210 & 0,960 & 0,270 & 1,970 \\
+        \textit{Celsa ALO 8030 K} (Kompensiert) & 95,95 & 0,280 & 0,273 & 0,310 & 0,350 \\
+        \textit{Redur 13A1030.3ffp} (\glsentryshort{ffp}) & 146,01 & 0,113 & 0,043 & 0,130 & 0,080 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \caption{Geometrische Verbesserung bei \SI{4000}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_4000A_parallel_vs_dreieck}
+    \caption{Kosten- und Genauigkeitsvergleich im Nennlastbereich bei \SI{2500}{A} (\(\bar{|\epsilon|}\): Mittelwert über Phasen und Lastpunkte im Nennbereich; \(\max(|\epsilon|)\): maximaler Betrag im Nennbereich)}
+    \label{tab:oeko_2500A_kosten_genauigkeit}
     \small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=-2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]@{}}
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{@{}l S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
         \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
+        \textbf{Wandler (Technologie)} & {\textbf{Preis [\text{\euro}]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Parallel [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Parallel [\%]}} \\
         \midrule
-        \textit{Celsa ALO 12070} Standard & 71,51 & -4.59 & 81.61 & 72.97 & 53.06 \\
-        \textit{Celsa ALO 12070 K} kompensiert & 401,91 & -12.39 & -8.14 & -21.54 & 14.02 \\
+        \textit{Celsa ALO 10030} (Standard) & 45,50 & 2,451 & 10,626 & 5,070 & 16,620 \\
+        \textit{Celsa ALO 10050 K} (Kompensiert) & 104,20 & 0,237 & 0,261 & 0,280 & 0,370 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\paragraph{Kurzfazit für die Auswahlentscheidung}
-Aus wirtschaftlicher Sicht ergeben sich zwei robuste Entscheidungsregeln:
-(i) Wenn die Leitergeometrie frei gestaltbar ist, bieten Standardwandler in mehreren Fällen ein sehr gutes Preis-Leistungs-Verhältnis,
-da die Dreiecksanordnung im Nenn- und Überlastbereich hohe Verbesserungsgrade ermöglicht.
-(ii) Wenn die Leiterführung konstruktiv vorgegeben ist oder eine geringe Geometriesensitivität gefordert wird, kann eine kompensierte
-Ausführung trotz höherer Kosten sinnvoll sein, da der Nutzen dann primär in Stabilität und Planbarkeit liegt und weniger in einem maximalen
-Geometriegewinn.
+\subsubsection{Verschiebung der Kosteneffizienz bei Hochstrom (\SI{3000}{A} bis \SI{4000}{A})}
 
+Im Hochstrombereich wird die wirtschaftliche Betrachtung wesentlich durch die Sättigungsreserven des Wandlers und die Fremdfeldeinkopplung der Leitergeometrie geprägt. Tabelle~\ref{tab:oeko_3000A_kosten_genauigkeit} zeigt für \SI{3000}{A}, dass der Standardwandler \textit{Celsa~ALO~12070} in Dreiecksanordnung weiterhin moderate Nennfehler aufweist, in Parallelanordnung jedoch deutlich an Genauigkeit verliert (\(\max(|\epsilon|)_{\mathrm{Nenn}}=\num{2,92}\,\%\); vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_3000A_alle}). Die kompensierte Variante \textit{Celsa~ALO~12070~K} bleibt in beiden Geometrien im Nennlastbereich stabil (\(\max(|\epsilon|)_{\mathrm{Nenn}}\le\num{0,27}\,\%\)), ist aber mit einem Vielfachen der Standardkosten verbunden (Tabelle~\ref{tab:wandler_spezifikationen_erweitert}). Für Anwendungen, in denen ausschließlich Parallelführung zulässig ist, stellt die Kompensation damit den robusteren, jedoch kostenintensiven Technologiepfad dar.
 
+Bei \SI{4000}{A} verstärkt sich dieser Trend (Tabelle~\ref{tab:oeko_4000A_kosten_genauigkeit}). Der Standardwandler \textit{Celsa~ALO~12070} zeigt in Parallelanordnung einen deutlich erhöhten Nennfehler bis \(\max(|\epsilon|)_{\mathrm{Nenn}}=\num{3,28}\,\%\) (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}), während die Dreiecksanordnung den Nennlastbetrieb wieder in einen gut beherrschten Bereich zurückführt. Der kompensierte \textit{Celsa~ALO~12070~K} bleibt auch hier in beiden Geometrien unter \(\num{0,20}\,\%\) Maximalfehler, wird jedoch aufgrund der sehr hohen Anschaffungskosten primär für Fälle relevant, in denen eine Geometrieoptimierung nicht umsetzbar ist oder die Messgüte mit hoher Sicherheitsmarge abgesichert werden muss.
+
+Aus ökonomischer Sicht ergibt sich damit eine zweistufige Maßnahmenhierarchie: (i) Die Leitergeometrie ist der kosteneffizienteste Stellhebel, da die Genauigkeit ohne Mehrkosten am Wandler verbessert wird. (ii) Wenn die Systemgeometrie nicht geändert werden kann, verschiebt sich das Optimum mit steigender Stromstärke hin zu kompensierten Wandlern beziehungsweise zu \glsentryshort{ffp}-Lösungen als nachrüstbare Stabilisierung für Bestandsanlagen.
+
+% Tabellen für 3000A und 4000A
+\begin{table}[H]
+    \centering
+    \caption{Kosten- und Genauigkeitsvergleich im Nennlastbereich bei \SI{3000}{A} (\(\bar{|\epsilon|}\): Mittelwert über Phasen und Lastpunkte im Nennbereich; \(\max(|\epsilon|)\): maximaler Betrag im Nennbereich)}
+    \label{tab:oeko_3000A_kosten_genauigkeit}
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{@{}l S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
+        \toprule
+        \textbf{Wandler (Technologie)} & {\textbf{Preis [\text{\euro}]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Parallel [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Parallel [\%]}} \\
+        \midrule
+        \textit{Celsa ALO 12070} (Standard) & 71,51 & 0,216 & 0,824 & 0,390 & 2,920 \\
+        \textit{Celsa ALO 12070 K} (Kompensiert) & 346,06 & 0,112 & 0,096 & 0,180 & 0,270 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Kosten- und Genauigkeitsvergleich im Nennlastbereich bei \SI{4000}{A} (\(\bar{|\epsilon|}\): Mittelwert über Phasen und Lastpunkte im Nennbereich; \(\max(|\epsilon|)\): maximaler Betrag im Nennbereich)}
+    \label{tab:oeko_4000A_kosten_genauigkeit}
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{@{}l S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
+        \toprule
+        \textbf{Wandler (Technologie)} & {\textbf{Preis [\text{\euro}]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\bar{|\epsilon|}_{\mathrm{Nenn}}\) Parallel [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Dreieck [\%]}} & {\textbf{\(\max(|\epsilon|)_{\mathrm{Nenn}}\) Parallel [\%]}} \\
+        \midrule
+        \textit{Celsa ALO 12070} (Standard) & 71,51 & 0,186 & 1,009 & 0,300 & 3,280 \\
+        \textit{Celsa ALO 12070 K} (Kompensiert) & 401,91 & 0,103 & 0,096 & 0,200 & 0,200 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

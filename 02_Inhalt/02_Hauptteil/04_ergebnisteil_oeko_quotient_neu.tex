@@ -247,158 +247,97 @@ Die Umstellung auf die Dreieckskonfiguration bewirkt bei Nennstrom eine deutlich
 
 
 
-\subsection{Ökonomische Evaluation und Technologie-Ranking}
+\subsection{Ökonomische Evaluation und Technologie Ranking}
 \label{sec:oekonomische_evaluation}
 
-Die vorangehenden Abschnitte haben den Einfluss der Leitergeometrie auf die Messabweichungen \gls{sym:epsilon} für die untersuchten
-Wandlerkonzepte detailliert analysiert. In diesem Abschnitt wird derselbe Befund in eine wirtschaftliche Entscheidungsperspektive
-überführt. Dazu werden die aus Gl.~\ref{eq:etotal} abgeleiteten mittleren Messabweichungen \(\varepsilon_{\text{total}}\) über den
-Verbesserungsgrad \(\eta_{\text{geo}}\) (Gl.~\ref{eq:eta_geo}) zwischen Parallel- und Dreiecksanordnung verglichen und den jeweiligen
-Marktpreisen gegenübergestellt.
+Die technische Bewertung der Prüflinge erfolgt über die Übersetzungsmessabweichung \gls{sym:epsilon}. Für die wirtschaftliche Einordnung wird der technische Nutzen mit den Anschaffungskosten verknüpft. Grundlage ist die Bereichsaggregation der Absolutfehler nach Gleichung~\ref{eq:fehler_bereich}. Der Vergleich zwischen Parallelanordnung und Dreiecksanordnung erfolgt über den Quotienten
+\[
+q_{\mathrm{Bereich}}=\frac{\bar{\varepsilon}_{\mathrm{Bereich,Dreieck}}}{\bar{\varepsilon}_{\mathrm{Bereich,Parallel}}}
+\]
+Werte kleiner eins bedeuten eine Verbesserung durch die Dreiecksanordnung. Die geometrische Verbesserung \(\eta_{\text{geo}}\) sowie die ökonomische Kenngröße \(\eta_{\text{eco}}\) ergeben sich daraus direkt über die bereits definierten Gleichungen~\ref{eq:eta_geo} und~\ref{eq:eta_eco}. Die Preisangaben stammen aus Tabelle~\ref{tab:wandler_spezifikationen_erweitert}.
 
-Positive Werte von \(\eta_{\text{geo}}\) bedeuten eine Reduktion der mittleren Messabweichung durch die Dreiecksanordnung, negative Werte
-eine Verschlechterung gegenüber der Parallelanordnung. Für die Bewertung wird nach den Betriebsbereichen Niederstrom
-(\SI{5}{\percent}--\SI{50}{\percent}), Nennstrom (\SI{80}{\percent}--\SI{100}{\percent}) und Überlast (\SI{120}{\percent}) getrennt
-ausgewertet (vgl. Abschnitt~\ref{sec:einfluss_leitergeometrie}). Zusätzlich wird ein zusammenfassender Kennwert \emph{Gesamt} angegeben,
-der als Mittelwert der Beträge der drei Bereichswerte definiert ist. Damit beschreibt \emph{Gesamt} primär die \emph{Sensitivität gegenüber
-der Leitergeometrie} (Stärke der Geometriewirkung), nicht zwangsläufig eine durchgängig vorteilhafte Richtung.
+\subsubsection{Wirtschaftlichkeit im Nennstrombereich \SI{2000}{A} bis \SI{2500}{A}}
 
-\subsubsection{Wirtschaftlichkeit im Bereich \SI{2000}{A} bis \SI{2500}{A}}
+Bei \SI{2000}{A} liegen mehrere Prüflinge im Nennbereich in ähnlichen Fehlergrößenordnungen. Der Quotient in Tabelle~\ref{tab:oeko_q_2000A} zeigt, dass die Dreiecksanordnung bei feldempfindlichen Standardwandlern im Nennbereich und im Überlastpunkt deutliche Vorteile bringt. Beim \textit{Celsa ALO 10030} sinkt der Bereichsfehler im Nennbereich stark, während der \textit{MBS ASK101.4} nur moderat profitiert. Der kompensierte \textit{Celsa ALO 8030 K} liegt in allen Bereichen nahe bei \(q\approx 1\), wodurch der zusätzliche konstruktive Aufwand die Geometrieeffekte weitgehend entkoppelt. Beim \glsentryshort{ffp} Wandler \textit{Redur 13A1030.3ffp} ist \(q\) im Nennbereich und im Überlastpunkt größer als eins, was die in Abschnitt~\ref{sec:anhang_2000A} sichtbare Empfindlichkeit der Dreiecksanordnung gegenüber der ungeschirmten Rückseite stützt.
 
-Tabelle~\ref{tab:oeko_2000A_parallel_vs_dreieck} zeigt für \SI{2000}{A}, dass die ökonomische Attraktivität stark davon abhängt, ob die
-Leitergeometrie konstruktiv frei wählbar ist oder vorgegeben wird. Der \textit{MBS ASK101.4} weist in allen drei Bereichen positive
-Verbesserungen bei gleichzeitig niedrigem Preis auf. Damit ist dieser Wandler aus Kostensicht besonders interessant, wenn eine moderate
-Verbesserung der Messgüte ausreichend ist und eine robuste, unkritische Umsetzung im Vordergrund steht.
+Bei \SI{2500}{A} verschiebt sich das Bild. Der Standardwandler \textit{Celsa ALO 10030} zeigt in Parallelanordnung starke Sättigungseffekte und erreicht daher sehr kleine Quotientenwerte, siehe Tabelle~\ref{tab:oeko_q_2500A}. Die Dreiecksanordnung wird in diesem Bereich zum dominanten Hebel, weil sie die Fremdfeldeinkopplung reduziert, ohne die Investitionskosten zu erhöhen. Der kompensierte \textit{Celsa ALO 10050 K} bleibt in beiden Geometrien stabil, der Quotient liegt entsprechend näher bei eins.
 
-Der \textit{Celsa ALO 10030} zeigt eine ausgeprägte Geometriesensitivität (hoher Gesamtwert) mit deutlichem Zugewinn im Nenn- und
-Überlastbereich. Für Anwendungen, in denen der Betrieb überwiegend im oberen Lastbereich stattfindet, kann dies trotz der gemischten
-Niederstromtendenz einen hohen praktischen Mehrwert bedeuten. Wirtschaftlich ist dieser Wandler insbesondere dann attraktiv, wenn die
-Dreiecksanordnung realisiert werden kann; bei konstruktiv erzwungener Parallelanordnung ist er hingegen als risikobehaftet zu bewerten
-(vgl. die technische Diskussion in Abschnitt~\ref{sec:analyse_messreihe_2000A}).
+\subsubsection{Verschiebung der Kosteneffizienz bei Hochstrom \SI{3000}{A} bis \SI{4000}{A}}
 
-Der kompensierte \textit{Celsa ALO 8030 K} zeigt insgesamt nur geringe Unterschiede zwischen den Geometrien (niedriger Gesamtwert) bei
-höherem Preis. Damit ist der Mehrpreis weniger als „Geometriegewinn“ zu interpretieren, sondern als Beitrag zu Stabilität und
-Planbarkeit: Er ist vor allem dort sinnvoll, wo die Leiterführung nicht optimiert werden kann oder die Messgüte im gesamten Bereich ohne
-geometriespezifische Randbedingungen abgesichert werden soll.
+Im Hochstrombereich steigt der Einfluss von Kernbelastung und Fremdfeldkopplung deutlich. Für den Standardwandler \textit{Celsa ALO 12070} zeigen die Quotienten in Tabelle~\ref{tab:oeko_q_3000A} und Tabelle~\ref{tab:oeko_q_4000A} eine starke Verbesserung im Nennbereich und im Überlastpunkt. Damit ergibt sich bei umsetzbarer Dreiecksanordnung ein sehr günstiges Verhältnis aus technischem Gewinn und Kosten, da die Preisdifferenz gegenüber Spezialtechnologien entfällt. 
 
-Die \glsentryshort{ffp}-Ausführung (\textit{Redur 13A1030.3ffp}) zeigt im betrachteten Datensatz eine gegensinnige Geometriepräferenz im
-Nenn- und Überlastbereich (stark negative Werte). Für ein Technologie-Ranking bedeutet dies: Bei fest vorgegebener Dreiecksanordnung ist
-diese Variante wirtschaftlich nicht vorteilhaft, während sie bei erzwungener Parallelanordnung – abhängig vom dominanten Betriebsbereich –
-eine Alternative sein kann. Für die Auswahl ist daher die konstruktiv realisierbare Leiterführung als harte Randbedingung zu behandeln
-(vgl. Abschnitt~\ref{sec:analyse_messreihe_2000A}).
+Die kompensierte Variante \textit{Celsa ALO 12070 K} weist im Nennbereich Quotientenwerte nahe eins auf. Der zusätzliche Wicklungsaufbau stabilisiert die Messgüte bereits in der Parallelanordnung. Der wirtschaftliche Einsatz dieser Technologie ergibt sich daher vor allem dann, wenn die Systemgeometrie konstruktiv festgelegt ist und keine Dreiecksanordnung realisiert werden kann oder wenn eine hohe Sicherheitsmarge gefordert wird.
 
 \begin{table}[H]
     \centering
-    \caption{Geometrische Verbesserung bei \SI{2000}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_2000A_parallel_vs_dreieck}
-    \small
+    \caption{Quotient \(q\) der Bereichsfehler Dreieck zu Parallel bei \SI{2000}{A}. Nieder umfasst \SI{5}{\percent} und \SI{20}{\percent}. Nenn umfasst \SI{100}{\percent}. Überlast entspricht \SI{120}{\percent}.}
+    \label{tab:oeko_q_2000A}
+    \scriptsize
     \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=3.2]@{}}
+    \begin{tabular}{@{}p{4.6cm} S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
         \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
+        \textbf{Wandler} & {\textbf{Preis [\text{\euro}]}} & \multicolumn{3}{c}{\textbf{Quotient \(q\)}} \\
+        \cmidrule(lr){3-5}
+        {} & {} & {\textbf{Nieder}} & {\textbf{Nenn}} & {\textbf{Überlast}} \\
         \midrule
-        \textit{MBS ASK101.4} Standard & 43,67 & 3.53 & 21.95 & 29.70 & 18.39 \\
-        \textit{Celsa ALO 10030} Standard & 45,50 & -44.79 & 78.13 & 86.87 & 69.93 \\
-        \textit{Celsa ALO 8030 K} kompensiert & 95,95 & -8.24 & -2.44 & 6.00 & 5.56 \\
-        \textit{Redur 13A1030.3ffp} \glsentryshort{ffp} & 146,01 & 3.85 & -161.54 & -177.42 & 114.27 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-Für \SI{2500}{A} (Tabelle~\ref{tab:oeko_2500A_parallel_vs_dreieck}) verschiebt sich die Bewertung zugunsten der Dreiecksanordnung beim
-Standardwandler \textit{Celsa ALO 10030}: Die Verbesserungen sind in allen drei Bereichen deutlich positiv und liegen bei gleichzeitig
-niedrigem Preis auf einem Niveau, das ein gutes Kosten-Nutzen-Verhältnis erwarten lässt. Der kompensierte \textit{Celsa ALO 10050 K}
-zeigt demgegenüber kleinere Verbesserungen bei höherem Preis. Seine ökonomische Rechtfertigung liegt daher weniger im maximalen Zugewinn,
-sondern in der robusten Einhaltung einer stabilen Messgüte über Geometrievarianten hinweg (vgl. Abschnitt~\ref{sec:analyse_messreihe_2500A}).
-
-\begin{table}[H]
-    \centering
-    \caption{Geometrische Verbesserung bei \SI{2500}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_2500A_parallel_vs_dreieck}
-    \small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]@{}}
-        \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
-        \midrule
-        \textit{Celsa ALO 10030} Standard & 45,50 & 59.38 & 76.93 & 69.07 & 68.46 \\
-        \textit{Celsa ALO 10050 K} kompensiert & 104,20 & 23.08 & 9.36 & 26.25 & 19.56 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\subsubsection{Kosteneffizienz im Hochstrombereich \SI{3000}{A} bis \SI{4000}{A}}
-
-Im Hochstrombereich (Tabelle~\ref{tab:oeko_3000A_parallel_vs_dreieck} und Tabelle~\ref{tab:oeko_4000A_parallel_vs_dreieck}) wird der
-wirtschaftliche Nutzen der Dreiecksanordnung für Standardwandler besonders deutlich: Der \textit{Celsa ALO 12070} zeigt bei \SI{3000}{A}
-im Nenn- und Überlastbereich hohe Verbesserungsgrade und bleibt dabei preislich moderat. Für Anwendungen mit dominanter Hochlast ist dies
-ein klares Argument zugunsten der Dreiecksanordnung, sofern die mechanische Umsetzung möglich ist (vgl. Abschnitt~\ref{sec:analyse_messreihe_3000A}).
-
-Der kompensierte \textit{Celsa ALO 12070 K} zeigt bei \SI{3000}{A} ein gemischtes Bild: Der Überlastbereich profitiert deutlich, während
-Nieder- und Nennbereich keine konsistenten Vorteile ausweisen. In Kombination mit dem deutlich höheren Preis ergibt sich ein Nutzen vor allem
-dann, wenn Randbedingungen (z.\,B.\ festgelegte Leiterführung, geforderte Stabilität, geringere Streuung) die Auswahl dominieren und nicht
-die maximale Verbesserung durch eine Geometrieoptimierung.
-
-Bei \SI{4000}{A} bestätigt sich die Tendenz für den Standardwandler \textit{Celsa ALO 12070}: Die Verbesserungen im Nenn- und Überlastbereich
-sind ausgeprägt, während der Niederstrombereich nur gering reagiert. Der kompensierte \textit{Celsa ALO 12070 K} zeigt im vorliegenden
-Datensatz dagegen in allen Bereichen negative Werte, sodass aus rein ökonomischer Sicht kein Mehrwert durch die Dreiecksanordnung ableitbar ist.
-Für ein Technologie-Ranking bedeutet dies: Bei \SI{4000}{A} ist die kompensierte Variante primär dann zu begründen, wenn andere Systemziele
-als der Geometriegewinn im Vordergrund stehen (vgl. Abschnitt~\ref{sec:analyse_messreihe_4000A}).
-
-\begin{table}[H]
-    \centering
-    \caption{Geometrische Verbesserung bei \SI{3000}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_3000A_parallel_vs_dreieck}
-    \small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=-2.2] S[table-format=-2.2] S[table-format=2.2] S[table-format=2.2]@{}}
-        \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
-        \midrule
-        \textit{Celsa ALO 12070} Standard & 71,51 & 9.26 & 73.85 & 87.23 & 56.78 \\
-        \textit{Celsa ALO 12070 K} kompensiert & 346,06 & -27.05 & -17.44 & 78.70 & 41.06 \\
+        \textit{MBS ASK101.4} & 43.67 & 0.965 & 0.780 & 0.703 \\
+        \textit{Celsa ALO 10030} & 45.50 & 1.448 & 0.219 & 0.131 \\
+        \textit{Celsa ALO 8030 K} & 95.95 & 1.082 & 1.024 & 0.940 \\
+        \textit{Redur 13A1030.3ffp} & 146.01 & 0.962 & 2.615 & 2.774 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \caption{Geometrische Verbesserung bei \SI{4000}{A}. Der Gesamtwert entspricht dem Mittelwert der Beträge.}
-    \label{tab:oeko_4000A_parallel_vs_dreieck}
-    \small
+    \caption{Quotient \(q\) der Bereichsfehler Dreieck zu Parallel bei \SI{2500}{A}. Nieder umfasst \SI{5}{\percent}, \SI{20}{\percent} und \SI{50}{\percent}. Nenn umfasst \SI{80}{\percent} bis \SI{100}{\percent}. Überlast entspricht \SI{120}{\percent}.}
+    \label{tab:oeko_q_2500A}
+    \scriptsize
     \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{4.5cm} S[table-format=3.2] S[table-format=-2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]@{}}
+    \begin{tabular}{@{}p{4.6cm} S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
         \toprule
-        \textbf{Name} & {\textbf{Preis [\text{\euro}]}} &
-        \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}} \\
-        \cmidrule(lr){3-6}
-        & & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
+        \textbf{Wandler} & {\textbf{Preis [\text{\euro}]}} & \multicolumn{3}{c}{\textbf{Quotient \(q\)}} \\
+        \cmidrule(lr){3-5}
+        {} & {} & {\textbf{Nieder}} & {\textbf{Nenn}} & {\textbf{Überlast}} \\
         \midrule
-        \textit{Celsa ALO 12070} Standard & 71,51 & -4.59 & 81.61 & 72.97 & 53.06 \\
-        \textit{Celsa ALO 12070 K} kompensiert & 401,91 & -12.39 & -8.14 & -21.54 & 14.02 \\
+        \textit{Celsa ALO 10030} & 45.50 & 0.406 & 0.231 & 0.309 \\
+        \textit{Celsa ALO 10050 K} & 104.20 & 0.769 & 0.906 & 0.738 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\paragraph{Kurzfazit für die Auswahlentscheidung}
-Aus wirtschaftlicher Sicht ergeben sich zwei robuste Entscheidungsregeln:
-(i) Wenn die Leitergeometrie frei gestaltbar ist, bieten Standardwandler in mehreren Fällen ein sehr gutes Preis-Leistungs-Verhältnis,
-da die Dreiecksanordnung im Nenn- und Überlastbereich hohe Verbesserungsgrade ermöglicht.
-(ii) Wenn die Leiterführung konstruktiv vorgegeben ist oder eine geringe Geometriesensitivität gefordert wird, kann eine kompensierte
-Ausführung trotz höherer Kosten sinnvoll sein, da der Nutzen dann primär in Stabilität und Planbarkeit liegt und weniger in einem maximalen
-Geometriegewinn.
+\begin{table}[H]
+    \centering
+    \caption{Quotient \(q\) der Bereichsfehler Dreieck zu Parallel bei \SI{3000}{A}. Nieder umfasst \SI{5}{\percent}, \SI{20}{\percent} und \SI{50}{\percent}. Nenn umfasst \SI{80}{\percent} bis \SI{100}{\percent}. Überlast entspricht \SI{120}{\percent}.}
+    \label{tab:oeko_q_3000A}
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{@{}p{4.6cm} S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
+        \toprule
+        \textbf{Wandler} & {\textbf{Preis [\text{\euro}]}} & \multicolumn{3}{c}{\textbf{Quotient \(q\)}} \\
+        \cmidrule(lr){3-5}
+        {} & {} & {\textbf{Nieder}} & {\textbf{Nenn}} & {\textbf{Überlast}} \\
+        \midrule
+        \textit{Celsa ALO 12070} & 71.51 & 0.907 & 0.261 & 0.128 \\
+        \textit{Celsa ALO 12070 K} & 346.06 & 1.270 & 1.174 & 0.213 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
-
+\begin{table}[H]
+    \centering
+    \caption{Quotient \(q\) der Bereichsfehler Dreieck zu Parallel bei \SI{4000}{A}. Nieder umfasst \SI{5}{\percent}, \SI{20}{\percent} und \SI{50}{\percent}. Nenn umfasst \SI{80}{\percent} bis \SI{100}{\percent}. Überlast entspricht \SI{120}{\percent}.}
+    \label{tab:oeko_q_4000A}
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{@{}p{4.6cm} S[table-format=3.2] S[table-format=2.3] S[table-format=2.3] S[table-format=2.3]@{}}
+        \toprule
+        \textbf{Wandler} & {\textbf{Preis [\text{\euro}]}} & \multicolumn{3}{c}{\textbf{Quotient \(q\)}} \\
+        \cmidrule(lr){3-5}
+        {} & {} & {\textbf{Nieder}} & {\textbf{Nenn}} & {\textbf{Überlast}} \\
+        \midrule
+        \textit{Celsa ALO 12070} & 71.51 & 1.046 & 0.184 & 0.270 \\
+        \textit{Celsa ALO 12070 K} & 401.91 & 1.124 & 1.081 & 1.215 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

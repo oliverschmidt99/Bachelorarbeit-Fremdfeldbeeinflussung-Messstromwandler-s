@@ -1,28 +1,63 @@
 \section{Fazit}
 \label{chap:fazit}
 
-Diese Arbeit untersucht Maßnahmen zur Verbesserung der Strommessung in einer kompakten Niederspannungsschaltanlage unter Fremdfeldeinfluss. Die Bewertung erfolgt im Nennlastbereich bei \SI{80}{\percent}, \SI{90}{\percent} und \SI{100}{\percent}. Dieser Bereich bildet den relevanten Betriebsfall ab und eignet sich für die technische und wirtschaftliche Einordnung der untersuchten Lösungen. Als Kennwert dient die Übersetzungsmessabweichung \gls{sym:epsilon}. Ergänzend werden Integrationsaufwand, Verfügbarkeit und Kosten betrachtet, um eine umsetzbare Empfehlung für Neuentwicklung und Bestandsanlagen abzuleiten.
+Ziel dieser Arbeit war es, die Strommessung in einer kompakten Niederspannungsschaltanlage unter Fremdfeldeinfluss gezielt zu verbessern und
+daraus eine umsetzbare Maßnahmenstrategie für Neuentwicklung und Bestandsanlagen abzuleiten. Die Bewertung konzentriert sich auf den
+praxisrelevanten Nennlastbetrieb (\SI{80}{\percent}, \SI{90}{\percent}, \SI{100}{\percent}), da dieser Bereich den dominanten
+Betriebszustand abbildet und sowohl technische als auch wirtschaftliche Entscheidungen maßgeblich bestimmt. Als technischer Kennwert dient die
+Übersetzungsmessabweichung \gls{sym:epsilon}; ergänzend wurden Integrationsaufwand, Verfügbarkeit und Kosten betrachtet.
 
-\subsection*{Standardwandler und Dreiecksanordnung als Systemansatz}
-Standardwandler sind kostengünstig und am Markt breit verfügbar. In der Parallelanordnung zeigt sich im Nennlastbereich eine erhöhte Fremdfeldempfindlichkeit, insbesondere auf der Phase L2. Die Wirksamkeit der Dreiecksanordnung lässt sich im Hochstromfall \SI{4000}{A} direkt belegen. Beim Standardwandler \textit{Celsa ALO 12070} beträgt die Abweichung auf L2 bei \SI{100}{\percent} Last in Parallelanordnung \num{-3,30}\,\% und reduziert sich in Dreiecksanordnung auf \num{-0,15}\,\% (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}). Das entspricht einer Reduktion der absoluten Abweichung um \num{3,15} Prozentpunkte. Relativ ergibt sich eine Verringerung um rund \SI{95,5}{\percent}. Der Betrag der Abweichung wird damit um den Faktor \num{22} reduziert. Bereits bei \SI{80}{\percent} Last ist in der Parallelanordnung auf L2 eine Abweichung von \num{-0,90}\,\% dokumentiert (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}). Insgesamt zeigt der Nennlastbereich, dass die geometrische Optimierung der dominante Hebel zur Verbesserung bei Standardwandlern ist. Daraus ergibt sich ein sehr günstiges Kosten Nutzen Verhältnis, weil die Verbesserung ohne kostenintensive Spezialkomponenten erreicht wird. Dieser Ansatz wird daher in der Neuentwicklung umgesetzt.
+\subsection*{Standardwandler und Dreiecksanordnung als bevorzugter Systemansatz}
+Die Untersuchungen zeigen, dass Standardwandler in einer Parallelanordnung im Nennlastbereich deutlich stärker auf Fremdfeldeinflüsse reagieren
+als in einer feldoptimierten Dreiecksanordnung. Der Nutzen der Geometrieoptimierung wird im Hochstromfall \SI{4000}{A} exemplarisch sichtbar:
+Beim Standardwandler \textit{Celsa ALO 12070} beträgt die Abweichung auf Phase L2 bei \SI{100}{\percent} Last in Parallelanordnung
+\num{-3,30}\,\% und reduziert sich in Dreiecksanordnung auf \num{-0,15}\,\% (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}).
+Damit sinkt die Abweichung um \num{3,15} Prozentpunkte; relativ entspricht dies einer Reduktion um rund \SI{95,5}{\percent} und einer
+Verringerung des Betrags um den Faktor \num{22}. Bereits bei \SI{80}{\percent} Last ist in der Parallelanordnung auf L2 eine Abweichung von
+\num{-0,90}\,\% dokumentiert (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}). Insgesamt bestätigt der Nennlastbereich, dass die
+Leitergeometrie bei Standardwandlern der dominante Hebel zur Fehlerreduktion ist. Daraus ergibt sich ein sehr günstiges
+Kosten-Nutzen-Verhältnis, da die Verbesserung ohne kostenintensive Spezialkomponenten erreicht wird. Für Neuentwicklungen ist die Kombination aus
+Standardwandler und Dreiecksanordnung daher als Basislösung zu bevorzugen.
 
-\subsection*{Fremdfeld Protektion als Nachrüst und Ergänzungslösung}
-Fremdfeldprotektoren können die Messgüte im Nennlastbereich stabilisieren, verursachen jedoch höhere Kosten und erfordern eine definierte Einbaulage. Für den \textit{Redur 13A1030.3ffp} zeigt die Bereichsanalyse bei \SI{2000}{A}, dass der mittlere absolute Fehler im Nennstrombereich \SI{80}{\percent} bis \SI{100}{\percent} in beiden Leitergeometrien sehr klein bleibt und bei etwa \(\approx \num{0,03}\,\%\) liegt (vgl. Abbildung~\ref{dia:2000A_bereichsanalyse}). Dieses Ergebnis stützt die Eignung der Protektorlösung zur Stabilisierung im Nennlastbetrieb. Die Interpretation aus der Arbeit bleibt dabei maßgeblich. Die Wirkung ist richtungsabhängig und wird durch Ausrichtung, Position und Reproduzierbarkeit der Montage bestimmt. Damit ist FFP besonders für Bestandsanlagen relevant, wenn eine Umstellung der Leitergeometrie nicht möglich ist und eine nachrüstbare Maßnahme benötigt wird.
+\subsection*{Fremdfeldprotektion als Nachrüst- und Ergänzungslösung}
+Fremdfeldprotektoren können die Messgüte im Nennlastbereich stabilisieren, erfordern jedoch eine definierte Einbaulage und sind mit erhöhten
+Kosten verbunden. Für den \textit{Redur 13A1030.3ffp} zeigt die Bereichsanalyse bei \SI{2000}{A}, dass der mittlere absolute Fehler im
+Nennstrombereich (\SI{80}{\percent} bis \SI{100}{\percent}) in beiden Leitergeometrien sehr klein ist und bei etwa
+\(\approx \num{0,03}\,\%\) liegt (vgl. Abbildung~\ref{dia:2000A_bereichsanalyse}). Damit eignet sich diese Lösung insbesondere für
+Bestandsanlagen, wenn eine Änderung der Leitergeometrie nicht möglich ist und eine nachrüstbare Maßnahme benötigt wird. Für die Auswahl ist
+dabei entscheidend, dass Ausrichtung und Montage reproduzierbar prozesssicher umgesetzt werden können.
 
-\subsection*{Kompensierte Wandler als Technologieansatz}
-Kompensierte Wandler zeigen im Nennlastbereich eine hohe Robustheit gegenüber Fremdfeldeinflüssen. Dies wird bereits im unteren Hochstrombereich sichtbar. Beim \textit{Celsa ALO 8030 K} liegt die maximale Abweichung unter Volllast in der Parallelanordnung bei \num{-0,40}\,\% (vgl. Abschnitt~\ref{sec:analyse_messreihe_2000A}). Für den Hochstromfall \SI{4000}{A} bestätigt die Bereichsanalyse zusätzlich, dass der kompensierte \textit{Celsa ALO 12070 K} in beiden Leitergeometrien über alle Lastbereiche geringe Fehlerwerte aufweist und unter \num{0,21}\,\% bleibt (vgl. Abbildung~\ref{dia:4000A_bereichsanalyse}). Der technische Vorteil besteht damit in einer stabilen Messgüte im Nennlastbereich auch dann, wenn die Systemgeometrie nicht optimiert werden kann. Dem stehen höhere Anschaffungskosten und eine eingeschränkte Verfügbarkeit gegenüber, da kompensierte Ausführungen häufig als Sonderausführung beschafft werden.
+\subsection*{Kompensierte Wandler als robuster Technologieansatz}
+Kompensierte Wandler zeigen im Nennlastbereich eine hohe Robustheit gegenüber Fremdfeldeinflüssen und liefern eine stabile Messgüte auch dann,
+wenn die Systemgeometrie nicht optimiert werden kann. Dies wird bereits bei \SI{2000}{A} sichtbar: Beim \textit{Celsa ALO 8030 K} liegt die
+maximale Abweichung unter Volllast in der Parallelanordnung bei \num{-0,40}\,\% (vgl. Abschnitt~\ref{sec:analyse_messreihe_2000A}). Für
+\SI{4000}{A} bestätigt die Bereichsanalyse, dass der kompensierte \textit{Celsa ALO 12070 K} in beiden Leitergeometrien über alle Lastbereiche
+geringe Fehlerwerte aufweist und unter \num{0,21}\,\% bleibt (vgl. Abbildung~\ref{dia:4000A_bereichsanalyse}). Dem technischen Vorteil stehen
+höhere Anschaffungskosten und eine eingeschränkte Verfügbarkeit gegenüber, da kompensierte Varianten häufig nur als Sonderausführung beschafft
+werden.
 
-\subsection*{Gesamteinordnung und Umsetzung}
-Im Nennlastbereich verbessern alle untersuchten Ansätze die Messung auf L2. Für eine Neuentwicklung ergibt sich die Dreiecksanordnung mit Standardwandlern als bevorzugter Basisansatz, da sie im Nennlastbetrieb eine sehr große Verbesserung bei gleichzeitig hoher Verfügbarkeit und niedrigen Kosten ermöglicht. Fremdfeld Protektoren sind als Retrofit Lösung geeignet, wenn Geometrieänderungen nicht möglich sind und die Einbaulage prozesssicher definiert werden kann. Kompensierte Wandler sind die technisch robusteste Option im Nennlastbereich, sind jedoch kostenintensiv und in der Beschaffung eingeschränkt.
+\subsection*{Gesamteinordnung, Auswahlregeln und Umsetzung}
+Aus der kombinierten technischen und wirtschaftlichen Bewertung ergeben sich zwei robuste Entscheidungsregeln für die Praxis:
+\begin{enumerate}
+    \item \textbf{Freie Gestaltbarkeit der Leiterführung:} Standardwandler in Dreiecksanordnung sind als bevorzugte Basislösung zu wählen, da im
+          Nennlastbetrieb große Verbesserungen bei gleichzeitig hoher Verfügbarkeit und niedrigen Kosten erreicht werden.
+    \item \textbf{Konstruktiv vorgegebene oder nicht optimierbare Leiterführung:} Maßnahmen mit hoher Robustheit gegenüber Geometrieeinflüssen sind
+          zu priorisieren. Dafür eignen sich Fremdfeldprotektion (Retrofit, wenn Einbaulage prozesssicher beherrscht wird) oder kompensierte Wandler
+          (maximale Stabilität, jedoch kosten- und beschaffungsintensiver).
+\end{enumerate}
 
-Die abgeleitete Maßnahmenstrategie wurde bereits in das konstruktive Konzept der Neuentwicklung übertragen. Abbildung~\ref{fig:fazit_generationen_vergleich} stellt die bisherige Schaltanlage und die Neuentwicklung direkt gegenüber und macht die konstruktive Umsetzung der Ergebnisse nachvollziehbar. Im oberen Bild ist der Anschlussraum der bisherigen Generation dargestellt.
-Die stark begrenzten Platzverhältnisse führen zu kleinen Leiterabständen und zu einer Anordnung der Messstromwandler in unmittelbarer Nähe zu den Sammelschienen. Dadurch ist die Einkopplung magnetischer Streufelder begünstigt, insbesondere in der Umgebung der mittleren Phase L2. Im unteren Bild ist die Neuentwicklung gezeigt. Hier wurde die in dieser Arbeit abgeleitete optimierte Leiteranordnung in das Konstruktionskonzept übernommen, sodass die Fremdfeldbeeinflussung im relevanten Betriebsbereich primär über die Systemgeometrie reduziert wird. Falls Randbedingungen eine reine Geometrieoptimierung einschränken, kann die Messung ergänzend durch Fremdfeld Protektion oder durch kompensierte Wandler stabilisiert werden.
+Die abgeleitete Maßnahmenstrategie wurde in das Konstruktionskonzept der Neuentwicklung übertragen. Abbildung~\ref{fig:fazit_generationen_vergleich}
+stellt die bisherige Schaltanlage und die Neuentwicklung gegenüber und verdeutlicht die konstruktive Umsetzung: In der bisherigen Generation
+begünstigen geringe Leiterabstände und die unmittelbare Nähe der Wandler zu den Sammelschienen die Fremdfeldbeeinflussung, insbesondere im
+Umfeld der Phase L2. In der Neuentwicklung wird der Fremdfeldeinfluss im relevanten Betriebsbereich primär durch die übernommene optimierte
+Leiteranordnung reduziert. Falls Randbedingungen eine reine Geometrieoptimierung begrenzen, kann die Messung ergänzend durch Fremdfeldprotektion oder kompensierte Wandler stabilisiert werden.
+
 \begin{figure}[H]
     \centering
 
     \begin{subfigure}[t]{0.95\textwidth}
         \centering
-        \includegraphics[width=0.85\textwidth]{03_Ressourcen/Bilder/schaltschrank_front.jpg}
+        \includegraphics[width=0.65\textwidth]{03_Ressourcen/Bilder/schaltschrank_front.jpg}
         \caption{Bisherige Schaltanlage im Anschlussraum mit kompakter Leiterführung und Anordnung der Messstromwandler}
         \label{fig:fazit_generation_alt}
     \end{subfigure}
@@ -41,3 +76,8 @@ Die stark begrenzten Platzverhältnisse führen zu kleinen Leiterabständen und 
 \end{figure}
 
 
+Die Ergebnisse belegen, dass im relevanten Nennlastbereich nicht primär der Austausch auf Spezialtechnologien, sondern die geometrische
+Systemauslegung die größte Wirkung pro investiertem Aufwand erzielt. Daraus folgt für Neuentwicklungen eine eindeutige Empfehlung zugunsten
+von Standardwandlern in Dreiecksanordnung. Ist die Leiterführung in Bestandsanlagen nicht änderbar, sollte die Stabilisierung der Messung
+über definierte Fremdfeldprotektion oder über kompensierte Wandler erfolgen, wobei die Entscheidung durch die Randbedingungen der Integration
+und die Wirtschaftlichkeit der Beschaffung zu treffen ist.

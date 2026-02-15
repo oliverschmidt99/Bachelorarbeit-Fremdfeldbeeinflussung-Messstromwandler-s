@@ -175,12 +175,37 @@ Zur ökonomischen Bewertung wird der technische Gewinn auf die Investitionskoste
     \frac{\eta_{\text{geo}}}{\text{Preis}\,(\text{\euro})}
 \end{equation}
 
-Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei Analysemodulen zur Verfügung. In der Ansicht \textbf{„Gesamtgenauigkeit“} wird die prozentuale Übersetzungsmessabweichung \gls{sym:epsilon} über dem Primärstrom \gls{sym:I_p} dargestellt. Die Darstellung ist frei konfigurierbar, sodass Messreihen unterschiedlicher Wandlertechnologien mit normativen Fehlergrenzen, zum Beispiel der Klasse \num{1}, verglichen werden können. Für eine bewertende Übersicht dient die Ansicht \textbf{„Ökonomische Analyse“}. Um die Komplexität der Kennlinien für den direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei Betriebsbereiche, den Niederstrombereich zur Erfassung des Anlaufverhaltens und der Genauigkeit bei geringer Last, den Nennstrombereich als Hauptarbeitsbereich um den Nennstrom sowie den Überstrombereich zur Bewertung des Verhaltens bei Überlast. Für jeden Bereich wird ein einzelner vergleichbarer Gütefaktor gebildet, indem die prozentualen Messabweichungen \gls{sym:epsilon} der zugehörigen Lastpunkte über den arithmetischen Mittelwert der Absolutbeträge aggregiert werden. Dadurch wird verhindert, dass sich Abweichungen gleichen Betrags mit unterschiedlichem Vorzeichen gegenseitig kompensieren.
+Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei Analysemodulen zur Verfügung. In der Ansicht \textbf{„Gesamtgenauigkeit“} wird die prozentuale Übersetzungsmessabweichung \gls{sym:epsilon} über dem Primärstrom \gls{sym:I_p} dargestellt. Die Darstellung ist frei konfigurierbar, sodass Messreihen unterschiedlicher Wandlertechnologien mit normativen Fehlergrenzen, zum Beispiel der Klasse \num{1}, verglichen werden können. Für eine bewertende Übersicht dient die Ansicht \textbf{„Ökonomische Analyse“}. Um die Komplexität der Kennlinien für den direkten Vergleich zu reduzieren, aggregiert die Software die Messabweichungen in drei definierte Betriebsbereiche (Tabelle~\ref{tab:betriebsbereiche}).
+
+\begin{table}[H]
+    \centering
+    \caption{Definition der Betriebsbereiche zur Aggregation der Messabweichungen}
+    \label{tab:betriebsbereiche}
+    \begin{tabular}{l p{0.55\textwidth} l}
+        \toprule
+        \textbf{Bereich} & \textbf{Funktion} & \textbf{Lastpunkte} \\
+        \midrule
+        Niederstrombereich &
+        Erfasst das Anlaufverhalten und die Genauigkeit bei geringer bis mittlerer Last &
+        5\,\%, 20\,\% und 50\,\% $I_n$ \\
+        Nennstrombereich &
+        Bildet den Hauptarbeitsbereich um den Nennstrom ab &
+        80\,\%, 90\,\% und 100\,\% $I_n$ \\
+        Überstrombereich &
+        Visualisiert das Verhalten bei Überlast &
+        120\,\% $I_n$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+Für jeden dieser Bereiche wird ein einzelner vergleichbarer Gütefaktor gebildet, indem die prozentualen Messabweichungen \gls{sym:epsilon} der zugehörigen Lastpunkte über den arithmetischen Mittelwert der Absolutbeträge aggregiert werden. Dadurch wird verhindert, dass sich Abweichungen gleichen Betrags mit unterschiedlichem Vorzeichen gegenseitig kompensieren.
 \begin{equation}
     \label{eq:fehler_bereich}
     \bar{\varepsilon}_{\text{Bereich}} = \frac{1}{k} \sum_{j=1}^{k} |\varepsilon_j|
 \end{equation}
 Dabei ist $k$ die Anzahl der angefahrenen Lastpunkte innerhalb des definierten Bereichs und $|\varepsilon_j|$ der Betrag der Messabweichung am jeweiligen Prüfpunkt. In dieser Ansicht werden zusätzlich konstruktive und wirtschaftliche Parameter wie Gehäusevolumen und Preis den aggregierten Genauigkeitswerten gegenübergestellt. Dadurch wird eine multidimensionale Bewertung der Prüflinge im Hinblick auf ihr Preis-Leistungs-Verhältnis ermöglicht.
+
 
 
 \subsubsection{Auswertung der neuen Messstrecke}
