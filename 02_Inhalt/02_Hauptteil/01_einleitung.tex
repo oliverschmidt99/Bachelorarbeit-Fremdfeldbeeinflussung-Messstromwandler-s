@@ -6,52 +6,49 @@
 
 Die Strommessung in Niederspannungsschaltanlagen gewinnt deutlich an Bedeutung: Messwerte werden heute nicht nur für Schutzfunktionen benötigt, sondern ebenso für Betriebsdatenerfassung, Energiemonitoring und zunehmend auch für abrechnungsnahe Auswertungen \cite{pdf-Zellularer_Ansatz-VDE}\cite{norm-DIN_ISO_50001-Energiemanagement-DIN}. Parallel dazu steigen die technischen Anforderungen im Hochstrombereich, während Schaltanlagen aus Platz- und Kostengründen immer kompakter konstruiert werden müssen \cite[Kap.~1.4]{pdf-Planung_Energieverteilung-Siemens}. In der Praxis führt diese Kombination zu einem Spannungsfeld: Hohe Ströme und geringe Abstände sind konstruktiv oft unvermeidbar, verschlechtern aber die messtechnischen Randbedingungen.
 
-Genau hier setzt die Arbeit an. In der betrachteten Schaltanlage liegen Sammelschienen und Messstromwandler so dicht beieinander, dass magnetische Streufelder benachbarter Leiter die Wandlerfunktion spürbar beeinflussen können. Für die Neuentwicklung der Anlage ist deshalb eine Lösung gefragt, die zwei Ziele gleichzeitig erfüllt: (1) ausreichende Messgüte unter realistischen Hochstrombedingungen und (2) wirtschaftliche sowie konstruktiv robuste Umsetzbarkeit für die Serie. Ziel ist nicht „maximale Technik um jeden Preis“, sondern eine tragfähige Kombination aus Messqualität, Integrationsaufwand und Kosten für eine neue Schaltanlagengeneration.
+Genau hier setzt die Arbeit an. In der betrachteten Schaltanlage liegen Sammelschienen und Messstromwandler so dicht beieinander, dass magnetische Streufelder benachbarter Leiter die Messung spürbar beeinflussen können. Für die Neuentwicklung ist daher eine Lösung erforderlich, die folgende Anforderungen gleichzeitig erfüllt:
+\begin{itemize}
+    \item ausreichende Messgüte unter realistischen Hochstrombedingungen,
+    \item serientaugliche, robuste Umsetzbarkeit (Montagefreundlichkeit und Toleranzrobustheit),
+    \item wirtschaftliche Integration hinsichtlich Bauraum, Integrationsaufwand, Verfügbarkeit und Stückkosten.
+\end{itemize}
+Ziel ist eine ausgewogene Gesamtlösung aus Messqualität, Aufwand und Kosten und nicht eine technisch maximale Ausführung um jeden Preis.
 
 \subsection{Problemstellung}
 \label{sec:problemstellung}
 
-Durch die kompakte Leiterführung in modernen Niederspannungsschaltanlagen überlagern sich die Magnetfelder der Phasenleiter. Messstromwandler befinden sich damit nicht in einem ideal „feldfreien“ Umfeld, sondern werden zusätzlich zu ihrem Nutzfluss von externen Feldern beaufschlagt \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. In einem Drehstromsystem (L1, L2, L3) ist diese Einkopplung besonders relevant, weil die Felder zeitlich variieren und sich – abhängig von Geometrie, Abständen und Einbaulage – unterschiedlich stark auf die einzelnen Phasen auswirken.
+Durch die kompakte Leiterführung in modernen Niederspannungsschaltanlagen überlagern sich die Magnetfelder der Phasenleiter. Messstromwandler befinden sich damit nicht in einem ideal „feldfreien“ Umfeld, sondern werden zusätzlich zu ihrem Nutzfluss von externen Feldern beaufschlagt \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. In einem Drehstromsystem (L1, L2, L3) ist diese Einkopplung besonders relevant, weil die magnetischen Felder der Außenleiter L1 und L3 sich im Bereich der mittleren Phase L2 überlagern. Dadurch wird die Messung auf L2 – abhängig von Leitergeometrie, Abständen und Einbaulage – typischerweise stärker beeinflusst als auf den Außenphasen.
 
-Im untersuchten Aufbau zeigen die Messdaten, dass der Einfluss ab etwa \SI{2500}{A} deutlich zunimmt (vgl. Tabelle~\ref{tab:messergebnisse_celsa10030_2500A_alle}). Auffällig ist zudem eine Phasen-Asymmetrie: Die mittlere Phase L2 ist konstruktionsbedingt am stärksten von Nachbarleitern umgeben und erweist sich als kritischster Fall. L2 wird daher als \emph{Worst-Case} herangezogen, an dem die Wirksamkeit der Gegenmaßnahmen bewertet wird.
+Im untersuchten Aufbau zeigen die Messdaten, dass sich der Fremdfeldeinfluss im Hochstrompunkt deutlich bemerkbar macht: Bei \SI{4000}{A} treten die größten Messabweichungen auf (vgl. Tabelle~\ref{tab:messergebnisse_celsa12070_4000A_alle}).
+Auffällig ist zudem eine Phasen-Asymmetrie: Aufgrund der mittleren Lage ist L2 den Feldern von L1 und L3 gleichzeitig ausgesetzt und erweist sich als kritischster Fall. L2 wird daher als \emph{Worst-Case} herangezogen, an dem die Wirksamkeit der Gegenmaßnahmen bewertet wird.
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{figure}[b]{0.75\textwidth}
         \centering
         \includegraphics[width=\textwidth]{03_Ressourcen/Bilder/schaltschrank_front.jpg}
         \caption{Ansicht von vorne}
         \label{fig:schaltschrank_front}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{03_Ressourcen/Bilder/schaltschrank_back.jpg}
-        \caption{Ansicht von hinten}
-        \label{fig:schaltschrank_back}
-    \end{subfigure}
-    \caption{Untersuchtes Schaltschranksystem (Gesamtansicht)}
-    \label{fig:schaltschrank_gesamt}
+    \end{figure}
 \end{figure}
 
-Damit ergibt sich eine klare technische Kernfrage: Wie lässt sich unter den Randbedingungen „kompakt + Hochstrom“ eine Messanordnung realisieren, die Fremdfeldbeeinflussung ausreichend reduziert und zugleich in Serie zuverlässig herstell- und montierbar bleibt?
+Damit ergibt sich die technische Kernfrage: Wie lässt sich die Strommessung in kompakter Bauweise unter Fremdfeldeinfluss so verbessern, dass sie im Hochstrombereich zuverlässig bleibt und zugleich wirtschaftlich sowie serientauglich umsetzbar ist?
 
 \subsection{Zielsetzung und Leitfrage}
 \label{sec:zielsetzung}
 
-Ziel der Arbeit ist die Bewertung und Gegenüberstellung von Maßnahmen zur Stabilisierung der Strommessung unter Fremdfeldeinfluss in einer kompakten Niederspannungsschaltanlage. Im Fokus steht die Messung im Drehstromsystem; aufgrund der stärksten Abweichungen dient L2 als maßgeblicher Bewertungsfall.
+Ziel der Arbeit ist die Bewertung und Gegenüberstellung von Maßnahmen zur Verbesserung der Strommessung unter Fremdfeldeinfluss in einer kompakten Niederspannungsschaltanlage. Im Fokus steht die Messung im Drehstromsystem; aufgrund der stärksten Abweichungen dient L2 als maßgeblicher Bewertungsfall.
 
 Die leitende Fragestellung lautet:
-\emph{Welche Kombination aus Wandlerkonzept, konstruktivem Schutz und Leiter-/Wandleranordnung stellt sicher, dass die Strommessung auf L2 im Hochstrombereich trotz Fremdfeldbeeinflussung die geforderte Messgüte einhält?}
+\emph{Welche Kombination aus Wandlerkonzept und Leiter-/Wandleranordnung reduziert die Fremdfeldbeeinflussung der Strommessung auf L2 im Hochstrombereich ausreichend und bleibt wirtschaftlich sowie serientauglich umsetzbar?}
 
 Untersucht werden drei Lösungsrichtungen auf unterschiedlichen Ebenen:
-
 \begin{itemize}
     \item \textbf{Kompensierte Wandler (Technologieansatz):}
     Quantifizierung der Fremdfeldrobustheit kompensierter Ausführungen und Einordnung des Nutzens gegenüber Mehrkosten, Bauraumbedarf und Integrationsaufwand.
 
-    \item \textbf{Fremdfeld-Protektion, FFP (konstruktiver Schutzansatz):}
-    Analyse, in welchem Maß konstruktive Schutzmaßnahmen die Feldkopplung reduzieren und wie empfindlich die Wirkung auf Toleranzen, Einbaulage und Montageabweichungen reagiert.
+    \item \textbf{Fremdfeld-Protektion, FFP (konstruktive Maßnahme):}
+    Analyse, in welchem Maß konstruktive Maßnahmen die Feldkopplung reduzieren und wie empfindlich die Wirkung auf Toleranzen, Einbaulage und Montageabweichungen reagiert.
 
     \item \textbf{Geometrische Optimierung durch Dreiecksanordnung mit Standardwandler (Systemansatz):}
     Prüfung, ob eine optimierte Leiter-/Wandlergeometrie die Feldüberlagerung im Drehstromsystem so entschärft, dass Standardwandler im relevanten Strombereich normnahe Ergebnisse liefern.
