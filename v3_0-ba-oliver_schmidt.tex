@@ -30,6 +30,9 @@
 \pagenumbering{gobble}
 \input{02_Inhalt/01_Vorspann/00_deckblatt.tex}
 \newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
 % ---------- VORSPANN (römische Zählung) ----------
 \clearpage
@@ -74,10 +77,7 @@
 
 % --- LITERATURVERZEICHNIS ---
 \clearpage
-\thispagestyle{empty} % Entfernt die Seitenzahl auf dieser Seite
-% Manueller Eintrag ins Inhaltsverzeichnis:
-% 1. \protect\numberline{} sorgt für die Einrückung (Platzhalter für Nummer)
-% 2. Das leere Klammernpaar {} am Ende unterdrückt die Seitenzahl
+\thispagestyle{empty} 
 \addtocontents{toc}{\protect\contentsline{section}{\protect\numberline{}Literaturverzeichnis}{}{}}
 
 % Literaturverzeichnis ausgeben (ohne automatische Überschrift, da wir sie manuell setzen)
