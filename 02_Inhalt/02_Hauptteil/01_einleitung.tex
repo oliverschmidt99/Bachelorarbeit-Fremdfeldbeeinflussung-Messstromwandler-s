@@ -9,7 +9,7 @@ Die Strommessung in Niederspannungsschaltanlagen gewinnt deutlich an Bedeutung. 
 Genau hier setzt die Arbeit an. In der betrachteten Schaltanlage liegen Sammelschienen und Messstromwandler so dicht beieinander, dass magnetische Streufelder benachbarter Leiter die Messung spürbar beeinflussen können. Für die Neuentwicklung ist daher eine Lösung erforderlich, die folgende Anforderungen gleichzeitig erfüllt:
 \begin{itemize}
     \item ausreichende Messgüte unter realistischen Hochstrombedingungen,
-    \item serientaugliche, robuste Umsetzbarkeit (Montagefreundlichkeit und Toleranzrobustheit),
+    \item serientaugliche und robuste Umsetzbarkeit 
     \item wirtschaftliche Integration hinsichtlich Bauraum, Integrationsaufwand, Verfügbarkeit und Stückkosten.
 \end{itemize}
 Ziel ist eine ausgewogene Gesamtlösung aus Messqualität, Aufwand und Kosten zu erreichen.
@@ -17,7 +17,7 @@ Ziel ist eine ausgewogene Gesamtlösung aus Messqualität, Aufwand und Kosten zu
 \subsection{Problemstellung}
 \label{sec:problemstellung}
 
-Durch die kompakte Leiterführung in modernen Niederspannungsschaltanlagen überlagern sich die Magnetfelder der Phasenleiter. Messstromwandler befinden sich damit nicht in einem ideal „feldfreien“ Umfeld, sondern werden zusätzlich zu ihrem Nutzfluss von externen Feldern beaufschlagt \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. In einem Drehstromsystem (L1, L2, L3) ist diese Einkopplung besonders relevant, weil die magnetischen Felder der Außenleiter L1 und L3 im Bereich der mittleren Phase L2 überlagert auftreten. Dadurch wird die Messung auf L2 abhängig von Leitergeometrie, Abständen und Einbaulage typischerweise stärker beeinflusst als auf den Außenphasen.
+Durch die kompakte Leiterführung in modernen Niederspannungsschaltanlagen überlagern sich die Magnetfelder der Phasenleiter. Messstromwandler befinden sich damit nicht in einem ideal „feldfreien“ Umfeld, sondern werden zusätzlich zu ihrem Nutzfluss von externen Feldern beaufschlagt \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. In einem Drehstromsystem ist diese Einkopplung besonders relevant, weil die magnetischen Felder der Außenleiter L1 und L3 im Bereich der mittleren Phase L2 überlagert auftreten. Dadurch wird die Messung auf L2 abhängig von Leitergeometrie, Abständen und Einbaulage typischerweise stärker beeinflusst als auf den Außenphasen.
 
 Abbildung~\ref{fig:anschlussraum_niederspannung} zeigt den Anschlussraum einer Schaltanlage der aktuellen Generation als Referenzaufbau. Der verfügbare Bauraum ist in diesem Bereich stark begrenzt, da neben den Sammelschienen auch die Messstromwandler und die mechanische Befestigung untergebracht werden müssen. Die Messstromwandler sind im oberen Bereich angeordnet und im Bild durch den gelben Rahmen hervorgehoben. Direkt darunter verlaufen die Primärleiter beziehungsweise Sammelschienen mit den Phasen N, L1, L2 und L3. 
 
@@ -29,7 +29,7 @@ Abbildung~\ref{fig:anschlussraum_niederspannung} zeigt den Anschlussraum einer S
     \label{fig:anschlussraum_niederspannung}
 \end{figure}
 
-Durch die kompakte Bauweise sind die Abstände zwischen den Phasen klein und die Wandler befinden sich in unmittelbarer Nähe zu den stromführenden Leitern. Dadurch können magnetische Streufelder der benachbarten Phasen leichter in den Wandlerbereich einkoppeln. Besonders kritisch ist die mittlere Phase L2, da sie zwischen L1 und L3 liegt und damit den Einfluss beider Außenleiter gleichzeitig erfährt.
+Durch die kompakte Bauweise sind die Abstände zwischen den Phasen klein und die Wandler befinden sich in unmittelbarer Nähe zu den stromführenden Leitern. Dadurch können magnetische Streufelder der benachbarten Phasen leichter in den Wandlerbereich einkoppeln.
 
 Damit ergibt sich die technische Kernfrage. Wie lässt sich die Strommessung in kompakter Bauweise unter Fremdfeldeinfluss so verbessern, dass sie im Hochstrombereich zuverlässig bleibt und zugleich wirtschaftlich sowie serientauglich umsetzbar ist.
 
@@ -39,7 +39,7 @@ Damit ergibt sich die technische Kernfrage. Wie lässt sich die Strommessung in 
 Ziel der Arbeit ist die Bewertung und Gegenüberstellung von Maßnahmen zur Verbesserung der Strommessung unter Fremdfeldeinfluss in einer kompakten Niederspannungsschaltanlage. Im Fokus steht die Messung im Drehstromsystem. Aufgrund der stärksten Abweichungen dient L2 als maßgeblicher Bewertungsfall.
 
 Die leitende Fragestellung lautet:\\
-\emph{Welche Kombination aus Wandlerkonzept und Leiter-/Wandleranordnung reduziert die Fremdfeldbeeinflussung der Strommessung auf L2 im Hochstrombereich ausreichend und bleibt wirtschaftlich sowie serientauglich umsetzbar?}
+\emph{Welche Kombination aus Wandlerkonzept und Leiter-/Wandleranordnung verbessert die Strommessung auf L2 unter dem Einfluss von Fremdfeldern im Hochstrombereich ausreichend und bleibt wirtschaftlich sowie serientauglich umsetzbar?}
 
 Untersucht werden drei Lösungsrichtungen auf unterschiedlichen Ebenen
 \begin{itemize}
@@ -49,8 +49,8 @@ Untersucht werden drei Lösungsrichtungen auf unterschiedlichen Ebenen
     \item \textbf{Fremdfeld-Protektion, FFP (konstruktive Maßnahme).}
     Analyse, in welchem Maß konstruktive Maßnahmen die Feldkopplung reduzieren und wie empfindlich die Wirkung auf Toleranzen, Einbaulage und Montageabweichungen reagiert.
 
-    \item \textbf{Geometrische Optimierung durch Dreiecksanordnung mit Standardwandler (Systemansatz).}
-    Prüfung, ob eine optimierte Leiter-/Wandlergeometrie die Feldüberlagerung im Drehstromsystem so entschärft, dass Standardwandler im relevanten Strombereich normnahe Ergebnisse liefern.
+    \item \textbf{Geometrische Variante: Dreiecksanordnung mit Standardwandler (Systemansatz).}
+    Untersuchung, ob eine veränderte Leiter-/Wandleranordnung (insbesondere die Dreiecksanordnung) die Feldüberlagerung im Drehstromsystem so reduziert, dass Standardwandler im relevanten Strombereich normnahe Ergebnisse liefern.
 \end{itemize}
 
 Bewertet wird anhand der Messabweichung \gls{sym:epsilon}, der Stabilität unter Fremdfeldeinfluss (insbesondere auf L2) sowie einer praxisnahen Kosten-/Bauraum- und Integrationsbetrachtung im Hinblick auf eine serientaugliche Umsetzung.
@@ -64,4 +64,4 @@ Kapitel~\ref{chap:methodik} beschreibt den praktischen Teil der Arbeit. Es werde
 
 In Kapitel~\ref{sec:auswertung_diskussion} werden die Messergebnisse dargestellt und phasenbezogen ausgewertet. Der Schwerpunkt liegt auf L2, da diese Phase durch die Lage zwischen L1 und L3 die stärkste Fremdfeldüberlagerung erfährt. Die Ergebnisse werden für die verschiedenen Wandlertechnologien und Anordnungen gegenübergestellt. Es wird herausgearbeitet, welche Variante die Messabweichung am stärksten reduziert und wie stabil die Verbesserung über den Hochstrombereich ausfällt. Abschließend werden die Ergebnisse im Hinblick auf technische Umsetzbarkeit, Kosten, Verfügbarkeit und Integrationsaufwand bewertet.
 
-Kapitel~\ref{chap:fazit} fasst die wesentlichen Erkenntnisse zusammen und leitet daraus eine konkrete Handlungsempfehlung für die Neuentwicklung ab. Der Ausblick skizziert die nächsten Schritte zur Absicherung und Weiterführung, zum Beispiel Validierung unter Serientoleranzen, Montageeinfluss und Übertragung der Ergebnisse in die finale Konstruktion.
+Kapitel~\ref{chap:fazit} fasst die wesentlichen Erkenntnisse zusammen und leitet daraus eine konkrete Handlungsempfehlung für die Neuentwicklung ab. Kapitel~\ref{chap:ausblick} skizziert die nächsten Schritte zur Absicherung und Weiterführung, zum Beispiel Validierung unter Serientoleranzen, Montageeinfluss und Übertragung der Ergebnisse in die finale Konstruktion.
