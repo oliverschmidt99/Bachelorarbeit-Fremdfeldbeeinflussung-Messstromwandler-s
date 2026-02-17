@@ -1,135 +1,86 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+import os
 
-# Einstellungen für das Diagramm
-sns.set_theme(style="whitegrid")
-plt.rcParams['figure.figsize'] = (12, 7)
+# --- KONFIGURATION ---
+input_file = '2026-02-11T11-12_export_ohne_5000A_ba.csv'
+output_file = 'export_final.csv'
 
-def analyze_geometry_improvement(file_path):
-    # 1. Daten laden (als String, um deutsche Formate sicher zu lesen)
-    try:
-        df = pd.read_csv(file_path, dtype=str)
-    except FileNotFoundError:
-        print(f"Fehler: Datei '{file_path}' nicht gefunden.")
-        return
+# Prüfen, ob Eingabedatei existiert
+if not os.path.exists(input_file):
+    print(f"Fehler: Datei '{input_file}' nicht gefunden.")
+    exit(1)
 
-    # 2. Datenbereinigung
-    # Spalten, die Messwerte enthalten
-    load_columns = ['5% In', '20% In', '50% In', '80% In', '90% In', '100% In', '120% In']
-    
-    # Hilfsfunktion: Wandelt deutsche Zahlenstrings ("0,13") in Floats (0.13) um
-    def clean_german_float(val):
-        if pd.isna(val) or val.strip() == '':
-            return np.nan
-        # Entfernt Anführungszeichen und tauscht Komma gegen Punkt
-        clean_val = val.replace('"', '').replace("'", '').replace(',', '.')
-        try:
-            return float(clean_val)
-        except ValueError:
-            return np.nan
+print(f"Lese '{input_file}' ein...")
+# WICHTIG: decimal=',' für korrekte Zahlenerkennung
+df = pd.read_csv(input_file, decimal=',')
 
-    # Konvertierung anwenden
-    for col in load_columns + ['Preis (€)']:
-        if col in df.columns:
-            df[col] = df[col].apply(clean_german_float)
+# NEU: Duplikate entfernen (falls Messungen doppelt vorkommen, z.B. durch Gruppen)
+# Wir behalten den ersten Eintrag pro Legendeneintrag und Phase
+print("Entferne eventuelle Duplikate...")
+df = df.drop_duplicates(subset=['final_legend', 'phase'])
 
-    # Whitespace bei Geometrie entfernen
-    if 'geometrie' in df.columns:
-        df['geometrie'] = df['geometrie'].str.strip()
+# Definition der Spalten
+# total_score wurde hier entfernt, export_group hinzugefügt
+metadata_cols = [
+    'final_legend', 'hersteller', 'modell', 'geometrie',
+    'nennstrom', 'technologie', 'Preis (€)', 'export_group', 'volumen'
+]
 
-    # 3. Gruppierung und Berechnung
-    # Wir gruppieren nach Hersteller, Modell und Nennstrom, um Paare zu finden
-    group_cols = ['hersteller', 'modell', 'nennstrom']
-    grouped = df.groupby(group_cols)
-    
-    results = []
+value_cols = [
+    '5% In', '20% In', '50% In', '80% In', '90% In', '100% In', '120% In'
+]
 
-    for name, group in grouped:
-        hersteller, modell, nennstrom = name
-        
-        # Aufteilen in Parallel und Dreieck
-        df_parallel = group[group['geometrie'] == 'Parallel']
-        df_dreieck = group[group['geometrie'] == 'Dreieck']
+phases = ['L1', 'L2', 'L3']
 
-        # Nur berechnen, wenn beide Varianten für dieses Modell vorliegen
-        if not df_parallel.empty and not df_dreieck.empty:
-            
-            # Alle Messwerte (alle Phasen, alle Lastpunkte) in ein Array packen
-            vals_parallel = df_parallel[load_columns].values.flatten()
-            vals_dreieck = df_dreieck[load_columns].values.flatten()
+# 1. Metadata extrahieren
+print("Extrahiere Metadaten...")
+meta_cols_no_key = [c for c in metadata_cols if c != 'final_legend']
+# Gruppieren nach final_legend und ersten Wert nehmen
+df_meta = df.groupby('final_legend')[meta_cols_no_key].first().reset_index()
 
-            # NaN-Werte entfernen
-            vals_parallel = vals_parallel[~np.isnan(vals_parallel)]
-            vals_dreieck = vals_dreieck[~np.isnan(vals_dreieck)]
+# 2. Pivotieren der Messwerte
+print("Pivotierre Daten (Phasen nebeneinander)...")
+# Hier würde es ohne drop_duplicates knallen, wenn final_legend+phase nicht eindeutig sind
+df_pivot = df.pivot(index='final_legend', columns='phase', values=value_cols)
 
-            if len(vals_parallel) > 0 and len(vals_dreieck) > 0:
-                # epsilon_total berechnen (Gleichung 1): Mittelwert der Absolutbeträge
-                eps_total_parallel = np.mean(np.abs(vals_parallel))
-                eps_total_dreieck = np.mean(np.abs(vals_dreieck))
+# Spaltennamen flachklopfen: "5% In" + "L1" -> "5% In_L1"
+df_pivot.columns = [f'{val}_{phase}' for val, phase in df_pivot.columns]
 
-                # eta_geo berechnen (Gleichung 2): Verbesserung in Prozent
-                if eps_total_parallel != 0:
-                    eta_geo = (1 - (eps_total_dreieck / eps_total_parallel)) * 100
-                else:
-                    eta_geo = 0
+# 3. Spalten logisch sortieren (5% L1, 5% L2, 5% L3, ...)
+desired_order = []
+for val in value_cols:
+    for phase in phases:
+        col_name = f'{val}_{phase}'
+        if col_name in df_pivot.columns:
+            desired_order.append(col_name)
 
-                results.append({
-                    'Label': f"{hersteller} {modell}\n({nennstrom}A)",
-                    'eta_geo': eta_geo,
-                    'eps_parallel': eps_total_parallel,
-                    'eps_dreieck': eps_total_dreieck
-                })
+df_pivot = df_pivot[desired_order]
+df_pivot.reset_index(inplace=True)
 
-    # Ergebnis-DataFrame
-    res_df = pd.DataFrame(results)
+# 4. Zusammenfügen
+print("Füge Daten zusammen...")
+df_final = pd.merge(df_meta, df_pivot, on='final_legend', how='left')
 
-    if res_df.empty:
-        print("Keine vollständigen Paare (Parallel & Dreieck) gefunden.")
-        return
+# 5. Sortieren
+print("Sortiere Daten...")
+# Hilfsspalte für Geometrie-Sortierung erstellen
+# Parallel (0) soll vor Dreieck (1) kommen
+# Wir nutzen .str.strip(), falls aus Versehen Leerzeichen in der Spalte sind
+df_final['geo_sort'] = df_final['geometrie'].astype(str).str.strip().map({'Parallel': 0, 'Dreieck': 1})
+# Falls was anderes drin steht, kommt es danach (fillna mit 2)
+df_final['geo_sort'] = df_final['geo_sort'].fillna(2)
 
-    # Sortieren nach Verbesserung
-    res_df = res_df.sort_values('eta_geo', ascending=False)
+# Sortierreihenfolge: Strom -> Hersteller -> Modell -> Geometrie (Parallel zuerst)
+df_final = df_final.sort_values(by=['nennstrom', 'hersteller', 'modell', 'geo_sort'])
 
-    # 4. Diagramm erstellen
-    plt.figure(figsize=(12, 6))
-    
-    # Balkendiagramm
-    barplot = sns.barplot(
-        data=res_df,
-        x='Label',
-        y='eta_geo',
-        palette='viridis'
-    )
+# Hilfsspalte wieder entfernen
+df_final.drop(columns=['geo_sort'], inplace=True)
 
-    # Beschriftung und Design
-    plt.ylabel(r'Geometrische Verbesserung $\eta_{geo}$ [%]', fontsize=12)
-    plt.xlabel('Prüfling', fontsize=12)
-    plt.title('Gesamtverbesserung durch Dreiecksanordnung (Vergleich pro Modell)', fontsize=14)
-    plt.axhline(0, color='black', linewidth=0.8) # Nulllinie
-    plt.xticks(rotation=45, ha='right') # Beschriftung schräg stellen
+# Speichern
+print(f"Speichere Ergebnis in '{output_file}'...")
+# WICHTIG: sep=';' und decimal=',' für deutsche Excel/CSV-Kompatibilität
+df_final.to_csv(output_file, index=False, sep=';', decimal=',')
 
-    # Werte über den Balken anzeigen
-    for p in barplot.patches:
-        height = p.get_height()
-        if not np.isnan(height):
-            plt.text(
-                p.get_x() + p.get_width() / 2.,
-                height + (1 if height > 0 else -3), # Position je nach Vorzeichen anpassen
-                f'{height:.1f}%',
-                ha="center", 
-                fontsize=10, 
-                fontweight='bold',
-                color='black'
-            )
-
-    plt.tight_layout()
-    plt.savefig('geometrische_verbesserung.png') # Speichert das Bild
-    plt.show()
-
-# --- Hauptprogramm ---
-if __name__ == "__main__":
-    # Dateiname anpassen
-    csv_file = '2026-02-11T11-12_export_ohne_5000A.csv' 
-    analyze_geometry_improvement(csv_file)
+print("Fertig!")
+# Kurze Vorschau der sortierten Spalten
+print(df_final[['nennstrom', 'hersteller', 'modell', 'geometrie']].head(10))

@@ -9,16 +9,10 @@ from matplotlib.patches import Patch
 from matplotlib.ticker import MultipleLocator
 
 # --- KONFIGURATION ---
-CSV_DATEI = "2026-02-11T11-12_export_ohne_5000A.csv"
+CSV_DATEI = "export_sortiert.csv"
 
 SPALTEN_NAMEN_ORIG = [
-    "5% In",
-    "20% In",
-    "50% In",
-    "80% In",
-    "90% In",
-    "100% In",
-    "120% In",
+    "5% In", "20% In", "50% In", "80% In", "90% In", "100% In", "120% In"
 ]
 X_WERTE_LINIE = [5, 20, 50, 80, 90, 100, 120]
 
@@ -40,981 +34,543 @@ FONT_BAR_LABEL = 14
 
 BASE_HEIGHT_LINE = 14
 BASE_HEIGHT_BAR = 10
-
-FIG_SIZE_LINE = (20, 14)
-FONT_SUBTITLE_LINE = 20
-FONT_LEGEND_LINE = 24
-LINE_WIDTH = 3
-MARKER_SIZE = 10
-
-FIG_SIZE_BAR = (18, 10)
 FIXED_BAR_WIDTH = 0.3
 BAR_SPACING = 0.02
 
-# ==========================================
-# EINHEITLICHE BEZEICHNUNGEN (Thesis-Style)
-# ==========================================
-LABEL_ERR_ABS = "Mittlerer absoluter Fehler |ε| [%]"
-LABEL_ERR = "Übersetzungsmessabweichung ε [%]"
-LABEL_I_IN = "Strom I / I_N [%]"
-
-# --- BASIS FARBEN ---
-COLOR_MBS_BASE = "#d62728"  # Rot
-COLOR_CELSA_BASE = "#3187fc"  # Hellblau
-COLOR_CELSA_KOMP = "#103dfc"  # Dunkelblau
-COLOR_REDUR_BASE = "#1CAB10"  # Grün
+# --- BASIS FARBEN (STANDARD / FLAG 0) ---
+COLOR_MBS_BASE = "#d62728"   # Rot
+COLOR_CELSA_BASE = "#3187fc" # Hellblau
+COLOR_CELSA_KOMP = "#103dfc" # Dunkelblau
+COLOR_REDUR_BASE = "#1CAB10" # Grün
 COLOR_GRAY_BASE = "#6d0e78"
+COLOR_SIEMENS = "#00FFFF"
+COLOR_3K = "#800080"
+COLOR_ROGOWSKI = "#FFA500"
 
-# Sonderfarben
-COLOR_SIEMENS = "#00FFFF"  # Cyan
-COLOR_3K = "#800080"  # Lila
-COLOR_ROGOWSKI = "#FFA500"  # Orange
+# --- HARTE KONTRAST-SEQUENZ (FLAG 1) ---
+# Reihenfolge wie gewünscht: Rot, Blau, Grün, Orange ...
+SEQUENCE_COLORS = [
+    "#d62728", # 1. ROT
+    "#0000FF", # 2. BLAU
+    "#00AA00", # 3. GRÜN
+    "#FFA500", # 4. ORANGE
+    "#800080", # 5. LILA
+    "#00FFFF", # 6. CYAN
+    "#A52A2A", # 7. BRAUN
+    "#FF00FF", # 8. MAGENTA
+    "#808080"  # 9. GRAU
+]
 
+# Farben für Bereichsanalyse
+COLOR_RANGE_LOW = "#1f77b4"
+COLOR_RANGE_NOM = "#2ca02c"
+COLOR_RANGE_HIGH = "#d62728"
 
 # ==========================================
-# HELPER: NAMEN / LABELS
+# HELPER
 # ==========================================
+
+def create_directories():
+    for path in DIRS.values():
+        if not os.path.exists(path):
+            os.makedirs(path)
+
 def prettify_group_name(group_name: str) -> str:
     s = str(group_name).strip().replace("_", " ")
     s = re.sub(r"(?i)\bmes\b", "Messung", s)
-    s = re.sub(r"(?i)\bgesamt\b", "Gesamt", s)
-    s = re.sub(r"(?i)\bmessstrecke neu\b", "Messstrecke (neu)", s)
-    s = re.sub(r"(?i)\bmessstrecke alt\b", "Messstrecke (alt)", s)
-    s = re.sub(r"(?i)\bbuerde\b", "Bürdenvariation", s)
     s = re.sub(r"(\d+)\s*A\b", r"\1 A", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
-
+    return s.strip()
 
 def normalize_geo(geo: str) -> str:
     g = str(geo).strip().lower()
-    if "dreieck" in g:
-        return "Dreieck"
-    if "parallel" in g:
-        return "Parallel"
+    if "dreieck" in g: return "Dreieck"
+    if "parallel" in g: return "Parallel"
     return str(geo).strip() or "?"
 
-
 def format_label_text(row: pd.Series, include_current: bool = False) -> str:
-    """
-    Erstellt das Label im Format:
-    Hersteller Modelle | Technologie | Geometrie
-
-    Der Strom (I_N) wird NUR angehängt, wenn include_current=True (für Gesamtansicht).
-    """
     h = str(row.get("hersteller", "")).strip()
     m = str(row.get("modell", "")).strip()
     t = str(row.get("technologie", "")).strip()
     geo = normalize_geo(row.get("geometrie", ""))
     ns = str(row.get("nennstrom", "")).strip()
+    
+    if t.lower() in ("nan", "none", ""): t = "-"
+    if m.lower() in ("nan", "none", ""): m = ""
 
-    # Platzhalter bereinigen
-    if t.lower() in ("nan", "none", ""):
-        t = "-"
-    if h.lower() in ("nan", "none", ""):
-        h = "?"
-    if m.lower() in ("nan", "none", ""):
-        m = ""
-
-    # Basis: Hersteller Modell
-    base_name = f"{h} {m}".strip()
-
-    # Aufbau: Hersteller Modell | Technologie | Geometrie
-    label = f"{base_name} | {t} | {geo}"
-
-    # Nur bei Gesamtansicht den Strom anhängen
+    label = f"{h} {m} | {t} | {geo}"
     if include_current:
         label += f" | {ns} A"
+    return re.sub(r"\s+\|\s+\|\s+", " | ", label).strip()
 
-    # Doppelte Trenner bereinigen falls Felder leer waren
-    label = re.sub(r"\s+\|\s+\|\s+", " | ", label)
-    return label
-
-
-# ==========================================
-# HELPER: DYNAMISCHES LAYOUT
-# ==========================================
 def calculate_layout_adjustments(data, base_height, ncol=2):
-    if "hersteller" in data.columns:
-        unique_items = len(
-            data[["hersteller", "modell", "technologie", "geometrie"]].drop_duplicates()
-        )
-    else:
-        unique_items = 1
-
+    unique_items = len(data)
     n_rows = np.ceil(unique_items / ncol)
     height_factor = 0.6 if ncol == 1 else 0.5
-    extra_height = n_rows * height_factor
-    total_height = base_height + extra_height
-
-    needed_bottom_inches = 2.5 + (n_rows * 0.4)
-    bottom_fraction = needed_bottom_inches / total_height
-    bottom_fraction = min(0.65, max(0.2, bottom_fraction))
-
-    return total_height, bottom_fraction
-
-
-# ==========================================
-# FARB-LOGIK
-# ==========================================
-def adjust_lightness(hex_color, factor):
-    try:
-        c = mcolors.cnames.get(hex_color, hex_color)
-        c = mcolors.to_rgb(c)
-        h, l, s = colorsys.rgb_to_hls(*c)
-        l = max(0.1, min(0.9, l * factor))
-        return mcolors.to_hex(colorsys.hls_to_rgb(h, l, s))
-    except:
-        return hex_color
-
-
-def generate_color_palette(base_color, n):
-    if n <= 1:
-        return [base_color]
-    factors = np.linspace(0.7, 1.4, n)
-    palette = [adjust_lightness(base_color, f) for f in factors]
-    return palette
-
-
-def assign_dynamic_colors(df):
-    if df.empty:
-        return df
-    df["_color_key"] = df["hersteller"] + "_" + df["modell"] + "_" + df["technologie"]
-    unique_entries = df[
-        ["hersteller", "modell", "technologie", "_color_key"]
-    ].drop_duplicates()
-    color_map = {}
-
-    groups = {
-        "mbs": [],
-        "celsa_std": [],
-        "celsa_komp": [],
-        "redur": [],
-        "siemens": [],
-        "3-K Elektrik": [],
-        "rogowski": [],
-        "other": [],
-    }
-
-    for _, row in unique_entries.iterrows():
-        h = str(row["hersteller"]).lower()
-        t = str(row["technologie"]).lower()
-        m = str(row["modell"]).lower()
-        key = row["_color_key"]
-
-        if "mbs" in h:
-            groups["mbs"].append(key)
-        elif "celsa" in h:
-            if "kompensiert" in t:
-                groups["celsa_komp"].append(key)
-            else:
-                groups["celsa_std"].append(key)
-        elif "redur" in h or "ffp" in t:
-            groups["redur"].append(key)
-        elif "siemens" in h or "pac" in m:
-            groups["siemens"].append(key)
-        elif "k-3" in h or "3-k elektrik" in h:
-            groups["3-K Elektrik"].append(key)
-        elif "rogowski" in h:
-            groups["rogowski"].append(key)
-        else:
-            groups["other"].append(key)
-
-    for k, c in zip(
-        sorted(groups["mbs"]),
-        generate_color_palette(COLOR_MBS_BASE, len(groups["mbs"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["celsa_std"]),
-        generate_color_palette(COLOR_CELSA_BASE, len(groups["celsa_std"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["celsa_komp"]),
-        generate_color_palette(COLOR_CELSA_KOMP, len(groups["celsa_komp"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["redur"]),
-        generate_color_palette(COLOR_REDUR_BASE, len(groups["redur"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["siemens"]),
-        generate_color_palette(COLOR_SIEMENS, len(groups["siemens"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["3-K Elektrik"]),
-        generate_color_palette(COLOR_3K, len(groups["3-K Elektrik"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["rogowski"]),
-        generate_color_palette(COLOR_ROGOWSKI, len(groups["rogowski"])),
-    ):
-        color_map[k] = c
-    for k, c in zip(
-        sorted(groups["other"]),
-        generate_color_palette(COLOR_GRAY_BASE, len(groups["other"])),
-    ):
-        color_map[k] = c
-
-    df["color"] = df["_color_key"].map(color_map)
-    return df
-
+    total_height = max(base_height, base_height + (n_rows * height_factor) - 5)
+    
+    needed_bottom = 2.5 + (n_rows * 0.4)
+    bottom_frac = min(0.65, max(0.2, needed_bottom / total_height))
+    return total_height, bottom_frac
 
 def is_dark_color(hex_color, threshold=0.4):
     try:
         c = mcolors.to_rgb(hex_color)
-        lum = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]
-        return lum < threshold
+        return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) < threshold
     except:
         return False
 
-
-# ==========================================
-# SETUP
-# ==========================================
 def format_value(val):
-    if pd.isna(val):
-        return ""
-    if val == 0:
-        return "0.00"
-    abs_val = abs(val)
-    if abs_val < 0.01:
-        return "< 0.01"
+    if pd.isna(val): return ""
+    if val == 0: return "0.00"
+    if abs(val) < 0.01: return "< 0.01"
     return f"{val:.2f}"
 
+# ==========================================
+# FARB-LOGIK (CORE)
+# ==========================================
 
-def create_directories():
-    for key, path in DIRS.items():
-        if not os.path.exists(path):
-            os.makedirs(path)
+def get_standard_color(row):
+    """Gibt die STANDARD-Basisfarbe zurück (für Flag 0)."""
+    h = str(row.get("hersteller", "")).lower()
+    t = str(row.get("technologie", "")).lower()
+    if "mbs" in h: return COLOR_MBS_BASE
+    if "celsa" in h: return COLOR_CELSA_KOMP if "kompensiert" in t else COLOR_CELSA_BASE
+    if "redur" in h or "ffp" in t: return COLOR_REDUR_BASE
+    if "siemens" in h: return COLOR_SIEMENS
+    if "rogowski" in h: return COLOR_ROGOWSKI
+    if "3-k" in h: return COLOR_3K
+    return COLOR_GRAY_BASE
 
+def assign_dynamic_colors_per_group(df_group):
+    """
+    Weist Farben basierend auf FLAGS zu.
+    """
+    if df_group.empty: return df_group
+    
+    # Flag auslesen
+    flag = 0
+    if "flags" in df_group.columns:
+        val = df_group["flags"].iloc[0]
+        try:
+            if pd.notna(val): flag = int(val)
+        except:
+            flag = 0
+            
+    group_name = str(df_group["export_group"].iloc[0]) if "export_group" in df_group.columns else "?"
+    print(f"   -> Gruppe '{group_name}' | Modus: {'SEQUENZ (Rot/Blau...)' if flag == 1 else 'Standard'}")
+
+    if flag == 0:
+        # --- FLAG 0: STANDARD ---
+        df_group["color"] = df_group.apply(get_standard_color, axis=1)
+        return df_group
+        
+    elif flag == 1:
+        # --- FLAG 1: HARTE SEQUENZ ---
+        # Farben werden strikt nach Reihenfolge vergeben:
+        # 1. Messung (Par+Drei) -> Rot
+        # 2. Messung (Par+Drei) -> Blau
+        # usw.
+        
+        # Key zur Identifikation gleicher Wandlertypen
+        df_group["_type_key"] = df_group["hersteller"] + "_" + df_group["modell"] + "_" + df_group["technologie"]
+        
+        colors_out = pd.Series(index=df_group.index, dtype=object)
+        
+        # Sortiere Typen (damit z.B. MBS vor Siemens kommt, oder alphabetisch)
+        type_keys = sorted(df_group["_type_key"].unique())
+        
+        current_seq_idx = 0
+        
+        for type_key in type_keys:
+            sub_df = df_group[df_group["_type_key"] == type_key]
+            
+            # Sortieren nach Legende für Konsistenz (damit Messung 1 immer Messung 1 bleibt)
+            sub_df = sub_df.sort_values("final_legend")
+            
+            # Gruppieren nach Geometrie, um Messungs-Paare zu finden
+            parallels = sub_df[sub_df["geometrie"].str.lower().str.contains("parallel")]
+            triangles = sub_df[sub_df["geometrie"].str.lower().str.contains("dreieck")]
+            others = sub_df[~sub_df.index.isin(parallels.index) & ~sub_df.index.isin(triangles.index)]
+            
+            # Anzahl der "Instanzen" dieses Typs ermitteln
+            n_instances = max(len(parallels), len(triangles), 1)
+            if len(others) > 0: n_instances = max(n_instances, len(others))
+            
+            # Zuweisung:
+            # i läuft von 0 bis n_instances-1
+            # Farbe kommt aus globalem Counter (current_seq_idx)
+            
+            for i in range(n_instances):
+                # Farbe auswählen (modulo, falls mehr Messungen als Farben)
+                color = SEQUENCE_COLORS[current_seq_idx % len(SEQUENCE_COLORS)]
+                current_seq_idx += 1
+                
+                # Zuweisen an Parallel (i-te Zeile)
+                if i < len(parallels):
+                    colors_out[parallels.index[i]] = color
+                    
+                # Zuweisen an Dreieck (i-te Zeile) -> GLEICHE Farbe wie Parallel!
+                if i < len(triangles):
+                    colors_out[triangles.index[i]] = color
+                    
+                # Zuweisen an Others
+                if i < len(others):
+                    colors_out[others.index[i]] = color
+        
+        df_group["color"] = colors_out
+        return df_group
+    
+    else:
+        df_group["color"] = df_group.apply(get_standard_color, axis=1)
+        return df_group
 
 def create_dynamic_legend_handles(data, color_col="color", show_geo=True):
     legend_dict = {}
-    sort_cols = [
-        c
-        for c in ["hersteller", "modell", "technologie", "geometrie"]
-        if c in data.columns
-    ]
-    data_sorted = data.sort_values(by=sort_cols) if sort_cols else data
-    has_geo = "geometrie" in data_sorted.columns
-
-    for _, row in data_sorted.iterrows():
+    if "nennstrom_num" in data.columns:
+        data = data.sort_values(by=["nennstrom_num", "hersteller"])
+        
+    for _, row in data.iterrows():
         color = row.get(color_col, "#7f7f7f")
-        geo = str(row.get("geometrie", "")).strip() if has_geo else ""
-        is_tri = has_geo and ("dreieck" in geo.lower())
-
+        geo = str(row.get("geometrie", "")).strip()
+        is_tri = show_geo and ("dreieck" in geo.lower())
+        
         hatch = "///" if is_tri else None
-        edge_color = "black"
-        if is_tri and is_dark_color(color):
-            edge_color = "white"
-
-        # Legenden-Label OHNE Stromstärke (Standard)
-        label = format_label_text(row, include_current=False)
-
-        if label not in legend_dict:
-            legend_dict[label] = Patch(
-                facecolor=color,
-                hatch=hatch,
-                edgecolor=edge_color,
-                label=label,
-            )
-
+        edge = "white" if (is_tri and is_dark_color(color)) else "black"
+        
+        base_label = format_label_text(row, include_current=False)
+        
+        # Label deduplizieren
+        label = base_label
+        counter = 1
+        while True:
+            if label in legend_dict:
+                existing_patch = legend_dict[label]
+                # Wenn Farbe & Hatch gleich -> gleicher Eintrag
+                if existing_patch.get_facecolor() == mcolors.to_rgba(color) and \
+                   existing_patch.get_hatch() == hatch:
+                    break 
+                else:
+                    # Gleicher Name, andere Farbe -> Zusatzinfo anhängen
+                    counter += 1
+                    extra = str(row.get("final_legend", ""))
+                    # Versuche Datum
+                    match = re.search(r'\d{4} \d{2} \d{2}', extra)
+                    suffix = match.group(0) if match else f"V{counter}"
+                    label = f"{base_label} ({suffix})"
+            else:
+                legend_dict[label] = Patch(facecolor=color, hatch=hatch, edgecolor=edge, label=label)
+                break
+            
     return list(legend_dict.values())
 
+def draw_limit_lines(ax, accuracy_class="1.0"):
+    x_lims = [5, 20, 100, 120]
+    if accuracy_class == "0.2":
+        y_vals = [0.75, 0.35, 0.20, 0.20]
+        lbl = "Grenzwert Kl. 0.2"
+    else:
+        y_vals = [3.0, 1.5, 1.0, 1.0]
+        lbl = "Grenzwert Kl. 1.0"
+        
+    ax.plot(x_lims, y_vals, 'k--', lw=2.5, alpha=0.8, label=lbl)
+    ax.plot(x_lims, [-y for y in y_vals], 'k--', lw=2.5, alpha=0.8)
 
 # ==========================================
 # PLOT FUNKTIONEN
 # ==========================================
 
+def plot_line_curves_thesis_grouped(data, group_name):
+    if data.empty: return
 
-def plot_range_analysis(
-    data, filename, folder_key, group_name, current_val, is_gesamt=False
-):
-    if data.empty:
-        return
+    current_val = data["nennstrom"].iloc[0] if "nennstrom" in data.columns else "?"
+    is_messstrecke = "messstrecke" in group_name.lower()
+    acc_class = "0.2" if is_messstrecke else "1.0"
+    
+    print(f" -> Verlauf für {group_name} ({current_val} A)")
+    
+    calc_h, calc_b = calculate_layout_adjustments(data, BASE_HEIGHT_LINE, ncol=2)
+    fig, axes = plt.subplots(1, 3, figsize=(20, calc_h), sharey=True)
+    fig.suptitle(f"Genauigkeitsverlauf – I_N = {current_val} A", fontsize=FONT_TITLE, fontweight="bold", y=0.96)
+    
+    phases = ["L1", "L2", "L3"]
+    
+    for i, ax in enumerate(axes):
+        phase = phases[i]
+        cols = [f"{c.lower().strip()}_{phase.lower()}" for c in SPALTEN_NAMEN_ORIG]
+        
+        ax.grid(True, which="both", linestyle="--", alpha=0.7)
+        ax.axhline(0, color="black", linewidth=1)
+        draw_limit_lines(ax, acc_class)
+        
+        ax.set_title(f"Phase {phase}", fontsize=20, pad=10)
+        ax.set_xlabel("Strom I / I_N [%]", fontsize=FONT_AXIS_LABEL)
+        if i == 0: ax.set_ylabel("Abweichung [%]", fontsize=FONT_AXIS_LABEL)
+        ax.set_xlim(0, 125)
+        
+        for _, row in data.iterrows():
+            valid_cols = [c for c in cols if c in data.columns]
+            if len(valid_cols) < 3: continue 
 
-    cols_low = ["5% in", "20% in", "50% in"]
-    cols_nom = ["80% in", "90% in", "100% in"]
-    cols_high = ["120% in"]
+            y_vals = pd.to_numeric(row[valid_cols], errors='coerce').values
+            mask = ~np.isnan(y_vals)
+            if not np.any(mask): continue
+            
+            x_plot = np.array(X_WERTE_LINIE)[mask]
+            y_plot = y_vals[mask]
+            
+            col = row["color"]
+            geo = str(row.get("geometrie", "")).lower()
+            ls, mk = ("--", "^") if "dreieck" in geo else ("-", "o")
+            
+            ax.plot(x_plot, y_plot, marker=mk, markersize=10, linestyle=ls, linewidth=3, color=col)
+            
+        ax.tick_params(labelsize=FONT_TICK_LABEL)
+        
+    handles = create_dynamic_legend_handles(data)
+    if handles:
+        fig.legend(handles, [h.get_label() for h in handles], loc="center", ncol=2, 
+                   fontsize=16, bbox_to_anchor=(0.5, 0.12))
+                   
+    plt.tight_layout(rect=[0, calc_b, 1, 0.95])
+    full_path = os.path.join(DIRS["verlauf"], f"{group_name}_verlauf.png")
+    plt.savefig(full_path, dpi=300)
+    plt.close()
+    print(f"Gespeichert: {full_path}")
 
-    def calc_mean_range(row, cols):
-        vals = []
-        for c in cols:
-            if c in row and pd.notnull(row[c]):
-                vals.append(abs(row[c]))
-        return np.mean(vals) if vals else 0
 
-    group_cols = ["nennstrom", "hersteller", "modell", "technologie", "geometrie"]
-    group_cols = [c for c in group_cols if c in data.columns]
+def plot_range_analysis(data, filename, folder_key, group_name):
+    cols = ["nieder_ges", "nenn_ges", "ueber_ges"]
+    if not all(c in data.columns for c in cols): return
 
-    df_agg = data.groupby(group_cols).mean(numeric_only=True).reset_index()
+    calc_h, calc_b = calculate_layout_adjustments(data, 10, ncol=3)
+    plt.figure(figsize=(20, calc_h))
+    ax = plt.gca()
 
-    df_agg["range_low"] = df_agg.apply(lambda r: calc_mean_range(r, cols_low), axis=1)
-    df_agg["range_nom"] = df_agg.apply(lambda r: calc_mean_range(r, cols_nom), axis=1)
-    df_agg["range_high"] = df_agg.apply(lambda r: calc_mean_range(r, cols_high), axis=1)
-
-    if "nennstrom" in df_agg.columns:
-        df_agg = df_agg.sort_values(by=["nennstrom", "hersteller", "modell"])
-
-    dynamic_height = max(10, len(df_agg) * 1.5 + 4)
-    fig, ax = plt.subplots(figsize=(20, dynamic_height))
-
-    y_pos = np.arange(len(df_agg))
+    y_pos = np.arange(len(data))
     height = 0.25
 
-    c_low = "#00007F"
-    c_nom = "#FFA400"
-    c_high = "#FF0000"
+    ax.barh(y_pos - height, data["nieder_ges"], height, label='Niederlast', color=COLOR_RANGE_LOW, edgecolor='black')
+    ax.barh(y_pos, data["nenn_ges"], height, label='Nennlast', color=COLOR_RANGE_NOM, edgecolor='black')
+    ax.barh(y_pos + height, data["ueber_ges"], height, label='Überlast', color=COLOR_RANGE_HIGH, edgecolor='black')
 
-    rects1 = ax.barh(
-        y_pos + height,
-        df_agg["range_low"],
-        height,
-        label="Niederstrom (5–50 % I_N)",
-        color=c_low,
-        edgecolor="black",
-    )
-    rects2 = ax.barh(
-        y_pos,
-        df_agg["range_nom"],
-        height,
-        label="Nennstrom (80–100 % I_N)",
-        color=c_nom,
-        edgecolor="black",
-    )
-    rects3 = ax.barh(
-        y_pos - height,
-        df_agg["range_high"],
-        height,
-        label="Überlast (120 % I_N)",
-        color=c_high,
-        edgecolor="black",
-    )
-
-    # Label-Erstellung: Strom nur bei Gesamtansicht
-    y_labels = [
-        format_label_text(r, include_current=is_gesamt) for _, r in df_agg.iterrows()
-    ]
-
+    y_labels = [format_label_text(r) for _, r in data.iterrows()]
     ax.set_yticks(y_pos)
     ax.set_yticklabels(y_labels, fontsize=16, fontweight="bold")
-    ax.set_xlabel(LABEL_ERR_ABS, fontsize=FONT_AXIS_LABEL)
-
-    titel_str = f"Fehleranalyse nach Lastbereich – {prettify_group_name(group_name)}"
-    if current_val and not is_gesamt:
-        titel_str += f" ({current_val} A)"
-
-    ax.set_title(
-        titel_str,
-        fontsize=FONT_TITLE,
-        fontweight="bold",
-        pad=20,
-    )
-
-    def label_bars(rects, x_offset):
-        for rect in rects:
-            width = rect.get_width()
-            if width > 0:
-                ax.text(
-                    width + x_offset,
-                    rect.get_y() + rect.get_height() / 2,
-                    format_value(width),
-                    va="center",
-                    fontsize=12,
-                    fontweight="bold",
-                )
-
-    all_vals = np.concatenate(
-        [df_agg["range_low"], df_agg["range_nom"], df_agg["range_high"]]
-    )
-    x_max = max(all_vals) if len(all_vals) else 0
-    x_offset = max(0.01, x_max * 0.01)
-
-    label_bars(rects1, x_offset)
-    label_bars(rects2, x_offset)
-    label_bars(rects3, x_offset)
-
-    if x_max > 0:
-        ax.set_xlim(0, x_max * 1.15)
+    ax.set_xlabel("Mittlerer Fehler |ε| [%]", fontsize=FONT_AXIS_LABEL)
+    ax.set_title(f"Fehleranalyse Bereiche – {prettify_group_name(group_name)}", fontsize=FONT_TITLE, fontweight="bold")
+    
+    for i, row in data.iterrows():
+        for off, col in zip([-height, 0, height], cols):
+            val = row[col]
+            if pd.notna(val) and val != 0:
+                ax.text(val + 0.01, i + off, format_value(val), va='center', fontsize=12, fontweight='bold')
 
     ax.invert_yaxis()
     ax.grid(axis="x", linestyle="--", alpha=0.5)
-
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.10), fontsize=16, ncol=3)
-
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=3, fontsize=14)
+    
     plt.tight_layout()
-    plt.subplots_adjust(bottom=0.2)
-
+    plt.subplots_adjust(bottom=calc_b)
     full_path = os.path.join(DIRS[folder_key], filename)
     plt.savefig(full_path, dpi=300)
-    print(f"Gespeichert: {full_path}")
     plt.close()
+    print(f"Gespeichert: {full_path}")
 
 
-def plot_unified_bars(
-    data,
-    x_col,
-    y_col,
-    color_col,
-    title,
-    ylabel,
-    filename,
-    folder_key,
-    group_name,
-    sort_col=None,
-):
-    # Diese Funktion bleibt weitgehend gleich, da sie x-Achsen-Gruppen nutzt
-    if data.empty:
-        return
-
-    if sort_col and sort_col in data.columns:
-        data = data.sort_values(sort_col)
-
-    groups = data[x_col].unique()
-    try:
-        groups = sorted(
-            groups,
-            key=lambda x: float(x) if str(x).replace(".", "", 1).isdigit() else x,
-        )
-    except:
-        pass
-
-    is_messstrecke = "messstrecke" in group_name.lower()
-    leg_ncol = 1 if is_messstrecke else 2
-    show_geo_in_legend = False
-
-    calc_height, calc_bottom = calculate_layout_adjustments(
-        data, BASE_HEIGHT_BAR, ncol=leg_ncol
-    )
-
-    plt.figure(figsize=(20, calc_height))
+def plot_horizontal_generic(data, value_col, title, x_label, filename, folder_key, is_cost=False):
+    if data.empty: return
+    
+    df_plot = data.copy()
+    
+    calc_h, calc_b = calculate_layout_adjustments(df_plot, 10, ncol=2)
+    plt.figure(figsize=(20, calc_h))
     ax = plt.gca()
+    
+    y_pos = np.arange(len(df_plot))
+    bars = ax.barh(y_pos, df_plot[value_col], color=df_plot["color"], edgecolor="black", height=0.7)
+    
+    for i, bar in enumerate(bars):
+        geo = str(df_plot.iloc[i].get("geometrie", "")).lower()
+        if "dreieck" in geo:
+            bar.set_hatch("///")
+            if is_dark_color(df_plot.iloc[i]["color"]): bar.set_edgecolor("white")
+            
+    y_labels = [format_label_text(r, include_current=True) for _, r in df_plot.iterrows()]
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(y_labels, fontsize=16, fontweight="bold")
+    ax.set_xlabel(x_label, fontsize=FONT_AXIS_LABEL)
+    ax.set_title(title, fontsize=FONT_TITLE, fontweight="bold")
+    
+    for bar, val in zip(bars, df_plot[value_col]):
+        txt = f"{val:.2f} €" if is_cost else format_value(val)
+        ax.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2, txt, va='center', fontsize=14, fontweight="bold")
+        
+    ax.invert_yaxis()
+    ax.grid(axis="x", linestyle="--", alpha=0.5)
+    
+    handles = create_dynamic_legend_handles(df_plot)
+    if handles:
+        ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=14)
+        
+    plt.tight_layout()
+    plt.subplots_adjust(bottom=calc_b)
+    full_path = os.path.join(DIRS[folder_key], filename)
+    plt.savefig(full_path, dpi=300)
+    plt.close()
+    print(f"Gespeichert: {full_path}")
 
-    max_val = data[y_col].max()
-    if pd.isna(max_val):
-        max_val = 0
-    if max_val > 0:
-        ax.set_ylim(top=max_val * 1.2)
 
-    x_positions = []
+def plot_unified_bars(data, y_col, title, ylabel, filename, folder_key):
+    data = data[data[y_col].notna() & (data[y_col] != 0)].copy()
+    if data.empty: return
+
+    # Gruppierung nach Nennstrom
+    grp_cols = ["nennstrom_num", "nennstrom", "hersteller", "modell", "technologie", "color"]
+    df_agg = data.groupby([c for c in grp_cols if c in data.columns], as_index=False)[y_col].mean()
+    
+    if "nennstrom_num" in df_agg.columns:
+        df_agg = df_agg.sort_values("nennstrom_num")
+        groups = df_agg["nennstrom_num"].unique()
+    else:
+        groups = df_agg["nennstrom"].unique()
+        
+    calc_h, calc_b = calculate_layout_adjustments(df_agg, BASE_HEIGHT_BAR, ncol=2)
+    plt.figure(figsize=(20, calc_h))
+    ax = plt.gca()
+    
+    x_pos_list = []
     x_labels = []
-
-    for i, group_val in enumerate(groups):
-        sub = data[data[x_col] == group_val]
-        sort_col_local = (
-            "sort_idx"
-            if "sort_idx" in sub.columns
-            else ("_sort_idx" if "_sort_idx" in sub.columns else None)
-        )
-        if sort_col_local:
-            sub = sub.sort_values(sort_col_local)
-
+    
+    for i, grp in enumerate(groups):
+        if "nennstrom_num" in df_agg.columns:
+            sub = df_agg[df_agg["nennstrom_num"] == grp]
+            label = f"{int(grp)} A"
+        else:
+            sub = df_agg[df_agg["nennstrom"] == grp]
+            label = str(grp)
+            
         n_bars = len(sub)
-        if n_bars == 0:
-            continue
-
-        current_group_width = n_bars * FIXED_BAR_WIDTH
-        group_start_x = i - (current_group_width / 2)
-
+        width = FIXED_BAR_WIDTH
+        start_x = i - (n_bars * width / 2)
+        
         for j in range(n_bars):
             row = sub.iloc[j]
             val = row[y_col]
-            color = row[color_col]
-            x_pos = group_start_x + (j * FIXED_BAR_WIDTH) + (FIXED_BAR_WIDTH / 2)
-
-            if pd.notnull(val):
-                draw_width = FIXED_BAR_WIDTH * (1 - BAR_SPACING)
-                current_edge_color = "white" if is_dark_color(color) else "black"
-
-                ax.bar(
-                    x_pos,
-                    val,
-                    width=draw_width,
-                    color=color,
-                    edgecolor=current_edge_color,
-                    linewidth=1.5,
-                )
-
-                txt = format_value(val)
-                y_pos_txt = val + (val * 0.02) if val != 0 else 0
-                va_align = "bottom" if val >= 0 else "top"
-                if val < 0:
-                    y_pos_txt = val - (abs(val) * 0.02)
-
-                ax.text(
-                    x_pos,
-                    y_pos_txt,
-                    txt,
-                    ha="center",
-                    va=va_align,
-                    fontsize=FONT_BAR_LABEL,
-                    fontweight="bold",
-                )
-
-        x_positions.append(i)
-        x_labels.append(str(group_val))
-
-    ax.set_xticks(x_positions)
-    ax.set_xticklabels(x_labels, fontsize=FONT_TICK_LABEL, fontweight="bold")
-    ax.tick_params(axis="y", labelsize=FONT_TICK_LABEL)
-    ax.set_ylabel(ylabel, fontsize=FONT_AXIS_LABEL)
-    ax.set_title(title, fontsize=FONT_TITLE, fontweight="bold", pad=20)
+            x = start_x + j * width + width/2
+            
+            c = row["color"]
+            edge = "white" if is_dark_color(c) else "black"
+            ax.bar(x, val, width=width*0.9, color=c, edgecolor=edge)
+            
+            txt = format_value(val)
+            y_txt = val + (0.5 if val > 0 else -0.5)
+            if abs(val) < 2: y_txt = val + (2 if val > 0 else -2)
+            
+            ax.text(x, y_txt, txt, ha='center', va='center', fontsize=12, fontweight='bold')
+            
+        x_pos_list.append(i)
+        x_labels.append(label)
+        
+    ax.set_xticks(x_pos_list)
+    ax.set_xticklabels(x_labels, fontsize=16, fontweight="bold")
+    ax.set_ylabel(ylabel, fontsize=18)
+    ax.set_title(title, fontsize=32, fontweight="bold", pad=20)
     ax.grid(axis="y", linestyle="--", alpha=0.5)
-
-    handles = create_dynamic_legend_handles(
-        data, color_col, show_geo=show_geo_in_legend
-    )
+    
+    handles = create_dynamic_legend_handles(df_agg, show_geo=False)
     if handles:
-        ax.legend(
-            handles=handles,
-            loc="upper center",
-            bbox_to_anchor=(0.5, -0.15),
-            fontsize=FONT_TICK_LABEL,
-            title="Legende",
-            ncol=leg_ncol,
-        )
-
+        ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=2, fontsize=14)
+        
     plt.tight_layout()
-    plt.subplots_adjust(bottom=calc_bottom)
-
+    plt.subplots_adjust(bottom=calc_b)
     full_path = os.path.join(DIRS[folder_key], filename)
     plt.savefig(full_path, dpi=300)
-    print(f"Gespeichert: {full_path}")
     plt.close()
-
-
-def plot_horizontal_generic(
-    data,
-    value_col,
-    title,
-    x_label,
-    filename,
-    folder_key,
-    group_name,
-    is_cost=False,
-    is_gesamt=False,
-):
-    if data.empty:
-        return
-
-    sort_cols = [
-        c
-        for c in ["nennstrom", "hersteller", "modell", "geometrie"]
-        if c in data.columns
-    ]
-    if sort_cols:
-        if "nennstrom" in data.columns:
-            data["_ns_sort"] = pd.to_numeric(data["nennstrom"], errors="coerce").fillna(
-                0
-            )
-            sort_cols = ["_ns_sort"] + [c for c in sort_cols if c != "nennstrom"]
-        data = data.sort_values(by=sort_cols, ascending=[True] * len(sort_cols))
-
-    y_labels = []
-    colors = []
-    values = []
-    geometries = []
-    y_positions = []
-
-    current_y = 0
-    last_nennstrom = None
-    GAP_SIZE = 1.5
-
-    for _, row in data.iterrows():
-        ns_val = row.get("nennstrom", "")
-        # Visuelle Trennung bei neuem Nennstrom
-        if last_nennstrom is not None and ns_val != last_nennstrom:
-            current_y += GAP_SIZE
-
-        # HIER: Neues Label Format nutzen
-        # Strom (ns_val) wird nur angehängt, wenn is_gesamt=True
-        label = format_label_text(row, include_current=is_gesamt)
-
-        y_labels.append(label)
-        colors.append(row.get("color", "#7f7f7f"))
-        val = row.get(value_col, 0)
-        values.append(val)
-        geometries.append(str(row.get("geometrie", "")))
-        y_positions.append(current_y)
-        last_nennstrom = ns_val
-        current_y += 1
-
-    is_messstrecke = "messstrecke" in group_name.lower()
-    leg_ncol = 1 if is_messstrecke else 2
-    show_geo_in_legend = not is_messstrecke
-
-    data_height = max(8, current_y * 0.6)
-    calc_total_h, calc_bottom = calculate_layout_adjustments(
-        data, data_height, ncol=leg_ncol
-    )
-
-    plt.figure(figsize=(20, calc_total_h))
-    ax = plt.gca()
-
-    bars = ax.barh(y_positions, values, color=colors, edgecolor="black", height=0.7)
-
-    for bar, geo, col in zip(bars, geometries, colors):
-        if "dreieck" in geo.lower():
-            bar.set_hatch("///")
-            if is_dark_color(col):
-                bar.set_edgecolor("white")
-                bar.set_linewidth(1.0)
-            else:
-                bar.set_edgecolor("black")
-
-    max_val = max(values) if values else 0
-    if max_val > 0:
-        ax.set_xlim(0, max_val * 1.15)
-
-    ax.set_yticks(y_positions)
-    ax.set_yticklabels(y_labels, fontsize=16, fontweight="bold")
-    ax.set_xlabel(x_label, fontsize=FONT_AXIS_LABEL)
-    ax.set_title(title, fontsize=FONT_TITLE, fontweight="bold", pad=20)
-
-    for bar, val in zip(bars, values):
-        width = bar.get_width()
-        if pd.isna(val):
-            continue
-        label_text = f"{val:.2f} €" if is_cost else format_value(val)
-        text_x = width + (max_val * 0.01)
-        ax.text(
-            text_x,
-            bar.get_y() + bar.get_height() / 2,
-            label_text,
-            va="center",
-            fontsize=14,
-            fontweight="bold",
-        )
-
-    ax.invert_yaxis()
-    ax.grid(axis="x", linestyle="--", alpha=0.5)
-
-    handles = create_dynamic_legend_handles(data, show_geo=show_geo_in_legend)
-    if handles:
-        ax.legend(
-            handles=handles,
-            loc="upper center",
-            bbox_to_anchor=(0.5, -0.1),
-            fontsize=14,
-            ncol=leg_ncol,
-        )
-
-    plt.tight_layout()
-    plt.subplots_adjust(bottom=calc_bottom)
-
-    full_path = os.path.join(DIRS[folder_key], filename)
-    plt.savefig(full_path, dpi=300)
     print(f"Gespeichert: {full_path}")
-    plt.close()
 
-
-def draw_limit_lines(ax, accuracy_class="1.0"):
-    x_lims = [5, 20, 100, 120]
-    if accuracy_class == "0.2":
-        y_upper = [0.75, 0.35, 0.20, 0.20]
-        y_lower = [-0.75, -0.35, -0.20, -0.20]
-        label_text = "Grenzwert Kl. 0.2"
-    else:
-        y_upper = [3.0, 1.5, 1.0, 1.0]
-        y_lower = [-3.0, -1.5, -1.0, -1.0]
-        label_text = "Grenzwert Kl. 1.0"
-
-    ax.plot(
-        x_lims,
-        y_upper,
-        color="black",
-        linestyle="--",
-        linewidth=2.5,
-        alpha=0.8,
-        label=label_text,
-    )
-    ax.plot(x_lims, y_lower, color="black", linestyle="--", linewidth=2.5, alpha=0.8)
-
-
-def plot_line_curves_thesis_grouped(data, group_name):
-    if data.empty:
-        return
-
-    current_val = data["nennstrom"].iloc[0] if "nennstrom" in data.columns else "?"
-    phase_col = "phase" if "phase" in data.columns else None
-
-    is_messstrecke = "messstrecke" in group_name.lower()
-    acc_class = "0.2" if is_messstrecke else "1.0"
-    leg_ncol = 1 if is_messstrecke else 2
-
-    print(
-        f"  -> Plot Verlauf für Gruppe: {group_name} ({current_val} A) [Kl. {acc_class}]"
-    )
-
-    calc_height, calc_bottom = calculate_layout_adjustments(
-        data, BASE_HEIGHT_LINE, ncol=leg_ncol
-    )
-
-    fig, axes = plt.subplots(1, 3, figsize=(20, calc_height), sharey=True)
-    fig.suptitle(
-        f"Genauigkeitsverlauf der Übersetzungsmessabweichung ε – I_N = {current_val} A",
-        fontsize=FONT_TITLE,
-        fontweight="bold",
-        y=0.96,
-    )
-
-    phases = ["L1", "L2", "L3"]
-    data_cols_lower = [c.lower().strip() for c in SPALTEN_NAMEN_ORIG]
-
-    for i, ax in enumerate(axes):
-        phase_name = phases[i]
-        if phase_col:
-            df_phase = data[
-                data[phase_col]
-                .astype(str)
-                .str.contains(phase_name, case=False, na=False)
-            ]
-        else:
-            df_phase = data
-
-        ax.grid(True, which="both", linestyle="--", alpha=0.7)
-        ax.axhline(0, color="black", linewidth=1)
-
-        draw_limit_lines(ax, accuracy_class=acc_class)
-
-        ax.set_title(f"Phase {phase_name}", fontsize=FONT_SUBTITLE_LINE, pad=10)
-        ax.set_xlabel(LABEL_I_IN, fontsize=FONT_AXIS_LABEL)
-        if i == 0:
-            ax.set_ylabel(LABEL_ERR, fontsize=FONT_AXIS_LABEL)
-
-        ax.set_xlim(0, 125)
-
-        for _, row in df_phase.iterrows():
-            y_vals = []
-            for col_name in data_cols_lower:
-                val = row.get(col_name, np.nan)
-                y_vals.append(val)
-            y_vals = pd.to_numeric(y_vals, errors="coerce")
-            mask = ~np.isnan(y_vals)
-            if not np.any(mask):
-                continue
-
-            x_plot = np.array(X_WERTE_LINIE)[mask]
-            y_plot = np.array(y_vals)[mask]
-
-            color = row["color"]
-            geo = str(row.get("geometrie", "")).strip()
-            linestyle = "--" if "dreieck" in geo.lower() else "-"
-            marker = "^" if "dreieck" in geo.lower() else "o"
-
-            # Auch hier: Standard Label Format
-            label_txt = format_label_text(row, include_current=False)
-
-            ax.plot(
-                x_plot,
-                y_plot,
-                marker=marker,
-                markersize=MARKER_SIZE,
-                linestyle=linestyle,
-                linewidth=LINE_WIDTH,
-                color=color,
-                label=label_txt,
-            )
-
-        ax.tick_params(axis="both", which="major", labelsize=FONT_TICK_LABEL)
-
-    handles, labels = axes[0].get_legend_handles_labels()
-    unique_items = {}
-    for h, l in zip(handles, labels):
-        unique_items[l] = h
-
-    if is_messstrecke:
-        final_handles = []
-        final_labels = []
-        sorted_keys = sorted(unique_items.keys())
-        for k in sorted_keys:
-            if "grenzwert" in k.lower():
-                continue
-            final_handles.append(unique_items[k])
-            final_labels.append(k)
-    else:
-        parallel_list = []
-        dreieck_list = []
-        for lbl, hdl in unique_items.items():
-            if "grenzwert" in lbl.lower():
-                continue
-            if "dreieck" in lbl.lower() or "circular" in lbl.lower():
-                dreieck_list.append((lbl, hdl))
-            else:
-                parallel_list.append((lbl, hdl))
-
-        parallel_list.sort(key=lambda x: x[0])
-        dreieck_list.sort(key=lambda x: x[0])
-
-        final_handles = []
-        final_labels = []
-        max_len = max(len(parallel_list), len(dreieck_list))
-        for k in range(max_len):
-            if k < len(parallel_list):
-                final_labels.append(parallel_list[k][0])
-                final_handles.append(parallel_list[k][1])
-            if k < len(dreieck_list):
-                final_labels.append(dreieck_list[k][0])
-                final_handles.append(dreieck_list[k][1])
-
-    if final_handles:
-        legend_title = f"Klasse {acc_class}"
-        fig.legend(
-            final_handles,
-            final_labels,
-            loc="center",
-            ncol=leg_ncol,
-            title=legend_title,
-            title_fontsize=FONT_LEGEND_LINE + 2,
-            fontsize=FONT_LEGEND_LINE,
-            bbox_to_anchor=(0.5, 0.12),
-            frameon=True,
-        )
-
-    plt.tight_layout(rect=[0, calc_bottom, 1, 0.95])
-    full_path = os.path.join(DIRS["verlauf"], f"{group_name}_verlauf.png")
-    plt.savefig(full_path, dpi=300)
-    print(f"Gespeichert: {full_path}")
-    plt.close()
-
+# ==========================================
+# MAIN
+# ==========================================
 
 def lade_und_plotte_alle():
     create_directories()
     print(f"Lade Datei {CSV_DATEI} ...")
     if not os.path.exists(CSV_DATEI):
-        print(f"Datei nicht gefunden: {CSV_DATEI}")
+        print("Datei nicht gefunden.")
         return
 
     try:
-        df = pd.read_csv(CSV_DATEI, decimal=",", thousands=".")
-        if len(df.columns) < 2:
-            df = pd.read_csv(CSV_DATEI, sep=";", decimal=",", thousands=".")
+        df = pd.read_csv(CSV_DATEI, sep=";", decimal=",", thousands=".")
+        if len(df.columns) < 5: 
+             df = pd.read_csv(CSV_DATEI, sep=",", decimal=",", thousands=".")
     except Exception as e:
-        print(f"Fehler beim Lesen: {e}")
+        print(f"Fehler: {e}")
         return
 
     df.columns = df.columns.str.strip().str.lower()
-    df = df.drop(
-        columns=[c for c in df.columns if c.startswith("unnamed")], errors="ignore"
-    )
-    df = df.loc[:, ~df.columns.duplicated()]
+    str_cols = ["hersteller", "modell", "technologie", "geometrie", "nennstrom", "export_group", "final_legend"]
+    for c in str_cols:
+        if c in df.columns: df[c] = df[c].astype(str).str.strip()
+        
+    cols_num = ["Preis (€)", "Gesamtfehler", "Verbesserung Dreick", "Nieder_Ges", "Nenn_Ges", "Ueber_Ges", "flags"]
+    for c in cols_num:
+        if c.lower() in df.columns: df[c.lower()] = pd.to_numeric(df[c.lower()], errors="coerce")
 
-    meta_cols = [
-        "hersteller",
-        "modell",
-        "technologie",
-        "geometrie",
-        "nennstrom",
-        "phase",
-        "export_group",
-    ]
-    for c in meta_cols:
-        if c in df.columns:
-            df[c] = df[c].astype(str).str.strip()
-
-    spalten_lower = [c.lower().strip() for c in SPALTEN_NAMEN_ORIG]
-    for col in spalten_lower:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors="coerce")
-
-    preis_col = "preis (€)"
-    if preis_col in df.columns:
-        df[preis_col] = pd.to_numeric(df[preis_col], errors="coerce")
+    if "nennstrom" in df.columns:
+        df["nennstrom_num"] = pd.to_numeric(df["nennstrom"].str.replace("A", "", regex=False), errors="coerce")
+        df = df.sort_values("nennstrom_num")
 
     if "export_group" not in df.columns:
         df["export_group"] = "default"
-
-    unique_groups = df["export_group"].unique()
-    print(f"Gefundene Gruppen: {unique_groups}")
-
-    for group in unique_groups:
-        print(f"\n--- Verarbeite Gruppe: {group} ---")
-        df_group = df[df["export_group"] == group].copy()
-        if df_group.empty:
-            continue
-
-        current_val = ""
-        if "nennstrom" in df_group.columns:
-            current_val = str(df_group["nennstrom"].iloc[0])
-
-        # Check ob es sich um eine Gesamtansicht handelt (anhand des Namens oder der Vielfalt)
-        is_gesamt = "gesamt" in group.lower()
-
-        df_group = assign_dynamic_colors(df_group)
-
-        # 1. VERLAUF
-        plot_line_curves_thesis_grouped(df_group, group_name=group)
-
-        # 2. BEREICHS-ANALYSE
-        plot_range_analysis(
-            df_group,
-            filename=f"{group}_bereichs_analyse.png",
-            folder_key="bereich",
-            group_name=group,
-            current_val=current_val,
-            is_gesamt=is_gesamt,
-        )
-
-        # 3. AGGREGATION
-        existing_cols = [c for c in spalten_lower if c in df_group.columns]
-        if existing_cols:
-            df_group["phase_mean_val"] = df_group[existing_cols].abs().mean(axis=1)
-        else:
-            df_group["phase_mean_val"] = 0
-
-        groupby_keys = ["nennstrom", "hersteller", "modell", "technologie", "geometrie"]
-        groupby_keys = [k for k in groupby_keys if k in df_group.columns]
-        if not groupby_keys:
-            continue
-
-        agg_dict = {"phase_mean_val": "mean", "color": "first"}
-        if preis_col in df_group.columns:
-            agg_dict[preis_col] = "first"
-
-        df_agg = df_group.groupby(groupby_keys).agg(agg_dict).reset_index()
-        df_agg.rename(columns={"phase_mean_val": "total_error"}, inplace=True)
-
-        # 4. ABSOLUTER FEHLER
-        title_abs = f"Mittlerer absoluter Fehler |ε| – {prettify_group_name(group)}"
-        if current_val and not is_gesamt:
-            title_abs += f" ({current_val} A)"
-
-        plot_horizontal_generic(
-            df_agg,
-            value_col="total_error",
-            title=title_abs,
-            x_label=LABEL_ERR_ABS,
-            filename=f"{group}_absoluten_fehler_horizontal.png",
-            folder_key="absolut",
-            group_name=group,
-            is_cost=False,
-            is_gesamt=is_gesamt,
-        )
-
-        # 5. KOSTEN
-        if preis_col in df_agg.columns:
-            title_cost = f"Kostenübersicht – {prettify_group_name(group)}"
-            if current_val and not is_gesamt:
-                title_cost += f" ({current_val} A)"
-
-            plot_horizontal_generic(
-                df_agg,
-                value_col=preis_col,
-                title=title_cost,
-                x_label="Kosten [€]",
-                filename=f"{group}_kosten_horizontal.png",
-                folder_key="kosten",
-                group_name=group,
-                is_cost=True,
-                is_gesamt=is_gesamt,
-            )
-
         
+    # --- FARBEN PRO GRUPPE ZUWEISEN ---
+    df_list = []
+    # Reihenfolge beibehalten wichtig für Plots!
+    # Wir nehmen die Unique Groups in Reihenfolge des Auftretens (wenn möglich), sonst sortiert.
+    
+    for grp_name, grp_df in df.groupby("export_group"):
+        grp_df = assign_dynamic_colors_per_group(grp_df.copy())
+        df_list.append(grp_df)
+    
+    df = pd.concat(df_list)
+    
+    # Sortierindex
+    def get_sort_idx(r):
+        h = str(r.get('hersteller','')).lower()
+        if "mbs" in h: return 1
+        if "celsa" in h: return 2
+        if "redur" in h: return 4
+        return 99
+    df["sort_idx"] = df.apply(get_sort_idx, axis=1)
+
+    print("\n--- Erstelle Diagramme ---")
+    
+    unique_groups = df["export_group"].unique()
+    for group in unique_groups:
+        sub = df[df["export_group"] == group].copy()
+        if sub.empty: continue
+        
+        # 1. Verlauf
+        plot_line_curves_thesis_grouped(sub, group_name=group)
+        
+        # 2. Bereichsanalyse
+        if all(c.lower() in sub.columns for c in ["Nieder_Ges", "Nenn_Ges", "Ueber_Ges"]):
+            plot_range_analysis(sub, f"{group}_bereichs_analyse.png", "bereich", group)
+            
+        # 3. Horizontal: Absoluter Fehler
+        if "gesamtfehler" in sub.columns:
+            plot_horizontal_generic(sub, "gesamtfehler", f"Absoluter Fehler – {prettify_group_name(group)}", 
+                                    "Fehler [%]", f"{group}_abs_fehler.png", "absolut")
+                                    
+        # 4. Horizontal: Kosten
+        if "preis (€)" in sub.columns:
+             plot_horizontal_generic(sub, "preis (€)", f"Kosten – {prettify_group_name(group)}", 
+                                    "Kosten [€]", f"{group}_kosten.png", "kosten", is_cost=True)
+                                    
+    # 5. Global: Verbesserung
+    if "verbesserung dreick" in df.columns:
+        plot_unified_bars(df, "verbesserung dreick", "Verbesserung Dreieck", "Verbesserung [%]", 
+                          "verbesserung_dreieck.png", "verbesserung")
+
 if __name__ == "__main__":
     lade_und_plotte_alle()
