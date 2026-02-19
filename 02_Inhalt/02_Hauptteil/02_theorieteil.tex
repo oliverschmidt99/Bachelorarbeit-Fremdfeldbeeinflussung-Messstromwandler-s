@@ -6,34 +6,36 @@
 
 Das vorliegende Kapitel erarbeitet das theoretische Fundament dieser Arbeit und führt in die Problematik der Strommessung unter dem Einfluss magnetischer Störfelder ein. Zunächst erfolgt eine detaillierte Betrachtung von Messstromwandlern. Neben dem konstruktiven Aufbau und den verschiedenen Bauformen liegt ein besonderer Schwerpunkt auf der Differenzierung zwischen Mess- und Schutzwandlern sowie auf der Funktionsweise von Kompensationswicklungen.
 
-Darauf aufbauend werden die physikalischen Gesetzmäßigkeiten hergeleitet, welche das Übertragungsverhalten sowie die Induktion durch magnetische Fremdfelder determinieren. Die mathematische Beschreibung dieser Prinzipien ist essenziell, um die Ursachen für Sättigungseffekte im Transformatorkern und die daraus resultierenden Messabweichungen zu analysieren. 
+Darauf aufbauend werden die physikalischen Gesetzmäßigkeiten hergeleitet, welche das Übertragungsverhalten sowie die Induktion durch magnetische Fremdfelder bestimmen. Die mathematische Beschreibung dieser Prinzipien ist essenziell, um die Ursachen für Sättigungseffekte im Eisenkern und die daraus resultierenden Messabweichungen zu analysieren. 
 
 Im weiteren Verlauf werden die normativen Definitionen der Genauigkeitsklassen vorgestellt, die als objektive Bewertungsgrundlage für die experimentellen Untersuchungen dienen. Abschließend wird die Architektur von Niederspannungsschaltanlagen beschrieben. Dabei wird verdeutlicht, dass deren konstruktive Geometrie sowie die spezifische Stromschienenanordnung die maßgeblichen Einflussfaktoren für die elektromagnetische Umgebung und die damit verbundene Fremdfeldbeeinflussung der Wandler darstellen.
 
 \subsection{Grundlagen Messstromwandler}
 \label{sec:grundlagen_wandler}
 
-Ein Stromwandler transformiert hohe Wechselströme aus dem Primärnetz in kleine und messbare Ströme auf der Sekundärseite. Er fungiert als Bindeglied zwischen dem Hochstrombereich und den Mess- oder Schutzeinrichtungen. Das grundlegende Funktionsprinzip beruht auf der galvanischen Trennung zwischen Primär- und Sekundärkreis. Dies ermöglicht den Anschluss standardisierter Messgeräte, Zähler oder Schutzrelais für Nennströme von \SI{1,00}{\ampere} oder \SI{5,00}{\ampere}, ohne diese dem hohen Potenzial oder den hohen Strömen des Primärleiters auszusetzen.
+Ein Stromwandler transformiert hohe Wechselströme aus dem Primärnetz in kleine und messbare Ströme auf der Sekundärseite. Er fungiert als Bindeglied zwischen dem Hochstrombereich und den Mess- oder Schutzeinrichtungen. Das grundlegende Funktionsprinzip beruht auf dem transformatorischen Prinzip der elektromagnetischen Induktion. Dies ermöglicht den Anschluss standardisierter Messgeräte, Zähler oder Schutzrelais für Nennströme von \SI{1,00}{\ampere} oder \SI{5,00}{\ampere}, ohne diese dem hohen Potenzial oder den hohen Strömen des Primärleiters auszusetzen.
 
 \subsection{Aufbau und Bauformen}
 \label{sec:aufbau_wandler}
 
 Der betrachtete Messstromwandler setzt sich konstruktiv im Wesentlichen aus sechs in Abbildung~\ref{pic:aufbau_wandler} dargestellten Hauptkomponenten zusammen.
 
+
+Im Niederspannungsbereich fungiert meist eine Kupferschienenanordnung als Primärleiter. Diese weist in der Regel ein Rechteckprofil auf und kann aus mehreren Einzelschienen bestehen. Eine detaillierte Betrachtung der Schienenanordnung erfolgt in Abschnitt~\ref{sec:layout_geometrie}. Der Primärleiter wird durch die Fensteröffnung des Wandlers geführt.
+
+Die Bauform ohne integrierte Primärwicklung wird als Durchsteck- oder Aufsteckstromwandler bezeichnet. Sie entspricht physikalisch einer Windungszahl von \num{1,00} (\gls{sym:N}$_{\text{p}} = \num{1,00}$) und dominiert aufgrund der einfachen Montage im Bereich mittlerer bis hoher Ströme. Zur Gewährleistung einer zentrierten Leiterführung bieten einige Hersteller spezielle Vorrichtungen zur Fixierung unterschiedlicher Schienengeometrien im Fensterausschnitt an.
+
+Das zentrale Element der Übertragung bildet der Eisenkern. Ist dieser als geschlossener Toroid ohne Luftspalt ausgeführt, wird er als Ringkern bezeichnet. Der Kern besteht zur Minimierung der Übertragungsverluste aus einem ferromagnetischen Werkstoff mit hoher Permeabilität \gls{sym:mur} (siehe \ref{sec:magnetische_stoffeigenschaften}). Die magnetischen Eigenschaften des Kernmaterials sowie die Querschnittsfläche des Kerns bestimmen maßgeblich die Genauigkeit und das Sättigungsverhalten des Wandlers. Als Werkstoffe kommen üblicherweise Siliziumeisen, Nickeleisen oder nanokristalline Legierungen zum Einsatz~\cite[S.~63]{book-Technologie_Messwandler-Minkner}.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/zeichnungen/aufbau_wandler.drawio.pdf}
+    \includegraphics[width=0.8\textwidth]{03_Ressourcen/zeichnungen/aufbau_wandler.drawio.pdf}
     \caption{Schematischer Aufbau eines Aufsteckstromwandlers}
     \label{pic:aufbau_wandler}
 \end{figure}
 
-Im Niederspannungsbereich fungiert meist eine Kupferschienenanordnung als Primärleiter. Diese weist in der Regel ein Rechteckprofil auf und kann aus mehreren Einzelschienen bestehen. Eine detaillierte Betrachtung der Schienenanordnung erfolgt in Abschnitt~\ref{sec:layout_geometrie}. Dieser Primärleiter wird durch die Fensteröffnung des Wandlers geführt.
 
-Diese Bauform ohne integrierte Primärwicklung wird als Durchsteck- oder Aufsteckstromwandler bezeichnet. Sie entspricht physikalisch einer Windungszahl von \num{1,00} (\gls{sym:N}$_{\text{p}} = \num{1,00}$) und dominiert aufgrund der einfachen Montage im Bereich mittlerer bis hoher Ströme. Zur Gewährleistung einer zentrierten Leiterführung bieten einige Hersteller spezielle Vorrichtungen zur Fixierung unterschiedlicher Schienengeometrien im Fensterausschnitt an.
-
-Das zentrale Element der Übertragung bildet der Magnetkern. Ist dieser als geschlossener Toroid ohne Luftspalt ausgeführt, wird er als Ringkern bezeichnet. Der Kern besteht zur Minimierung der Übertragungsverluste aus einem ferromagnetischen Werkstoff mit hoher Permeabilität \gls{sym:mur} \ref{sec:magnetische_stoffeigenschaften}. Die magnetischen Eigenschaften des Kernmaterials bestimmen maßgeblich die Genauigkeit und das Sättigungsverhalten des Wandlers. Als Werkstoffe kommen üblicherweise Siliziumeisen, Nickeleisen oder nanokristalline Legierungen zum Einsatz~\cite[S.~63]{book-Technologie_Messwandler-Minkner}.
-
-Die Sekundärwicklung ist direkt auf diesen Ringkern aufgebracht, transformiert den magnetischen Fluss zurück in einen elektrischen Strom und ist mit den externen Anschlussklemmen verbunden. Das Gehäuse umschließt den gesamten Eisenkern samt Sekundärwicklung und gewährleistet die notwendige elektrische Isolation sowie den mechanischen Schutz.
+Die Sekundärwicklung ist direkt auf diesen Ringkern aufgebracht. Sie Transformiert den magnetischen Fluss zurück in einen elektrischen Strom und ist mit den externen Anschlussklemmen verbunden. Das Gehäuse umschließt den gesamten Eisenkern samt Sekundärwicklung und gewährleistet die notwendige elektrische Isolation sowie den mechanischen Schutz.
 
 
 \subsubsection{Unterscheidung zwischen Mess- und Schutzstromwandlern}
@@ -41,32 +43,32 @@ Die Sekundärwicklung ist direkt auf diesen Ringkern aufgebracht, transformiert 
 
 Stromwandler lassen sich je nach Anwendungszweck in die zwei Hauptkategorien Messstromwandler und Schutzstromwandler unterteilen. Obwohl beide Funktionstypen auf demselben physikalischen Prinzip basieren, unterscheiden sie sich maßgeblich durch ihr Sättigungsverhalten. Der Messstromwandler dient primär der Erfassung von Strömen innerhalb des Bemessungsstrombereichs \gls{sym:In} zur Speisung von Betriebsmitteln, wie beispielsweise Energiezählern. Ein entscheidendes Kriterium ist hierbei der frühzeitige Übergang des Kerns in die Sättigung bei hohen Überströmen. Dies begrenzt den Sekundärstrom \gls{sym:I_sec} und schützt die angeschlossene, empfindliche Messtechnik vor thermischer oder mechanischer Zerstörung~\cite[Kap.~2.2]{book-Einmaleins_Stromwandler-Redur}.
 
-Im Gegensatz dazu dient der Schutzstromwandler der Ansteuerung von Schutzeinrichtungen wie Relais. Dieser muss gewährleisten, dass der sekundäre Strom auch bei einem Vielfachen des Primärstroms \gls{sym:I_p} weit über den Nennbereich hinaus proportional zum Primärleiterstrom bleibt. Der Magnetkern darf folglich nicht frühzeitig sättigen, um eine zuverlässige Schutzauslösung im Fehlerfall sicherzustellen~\cite[Kap.~2.2]{book-Einmaleins_Stromwandler-Redur}. Eine technologische Besonderheit zur Optimierung der Messgenauigkeit stellen die im folgenden Abschnitt~\ref{sec:kompensationswicklungen} behandelten Kompensationswicklungen dar.
+Im Gegensatz dazu dienen Schutzstromwandler der Ansteuerung von Schutzeinrichtungen wie beispielsweise Relais. Es muss gewährleistet sein, dass der Sekundärstrom auch bei einem Primärstrom \gls{sym:I_p} weit außerhalb des Nennbereichs proportional zum Primärleiterstrom verläuft. Der Eisenkern darf folglich nicht frühzeitig in Sättigung gehen, um eine zuverlässige Schutzauslösung im Fehlerfall sicherzustellen~\cite[Kap.~2.2]{book-Einmaleins_Stromwandler-Redur}.
 
 
 \subsubsection{Kompensationswicklungen}
 \label{sec:kompensationswicklungen}
 
-Kompensationswicklungen dienen primär der Minimierung zweier signifikanter Störeinflüsse bei Messstromwandlern. Dabei handelt es sich um den durch eine exzentrische Positionierung des Primärleiters verursachten Lagefehler (siehe Abbildung~\ref{pic:schema_kupferschiene_pos}) sowie die Einwirkung externer Fremdfelder. Die physikalischen Grundlagen zum letztgenannten Aspekt werden in Abschnitt~\ref{sec:stoerfelder_schaltanlagen} erläutert.
+Kompensationswicklungen dienen primär der Minimierung zweier signifikanter Störeinflüsse bei Messstromwandlern. Hierbei handelt es sich zum einen um den Lagefehler, welcher durch eine exzentrische Positionierung des Primärleiters hervorgerufen wird (siehe Abbildung~\ref{pic:schema_kupferschiene_pos}), und zum anderen um die Einwirkung von Fremdfeldern. Die physikalischen Grundlagen des letztgenannten Aspekts werden in Abschnitt~\ref{sec:stoerfelder_schaltanlagen} detailliert dargelegt.
 
-Eine exzentrische Leiteranordnung tritt in der Praxis häufig auf, wenn die Fensteröffnung des Wandlers deutlich größer als der Querschnitt der verwendeten Stromschiene dimensioniert ist. Aufgrund des resultierenden geometrischen Spielraums ist eine exakte Zentrierung bei der Montage oft nicht gewährleistet. Abbildung~\ref{pic:aufbau_wandler_kompensationswicklungen} veranschaulicht das grundlegende Funktionsprinzip. 
+Eine exzentrische Leiteranordnung tritt in der Praxis häufig auf, wenn die Fensteröffnung des Wandlers deutlich größer als der Querschnitt der verwendeten Stromschiene dimensioniert ist. Aufgrund des resultierenden geometrischen Spielraums ist eine exakte Zentrierung bei der Montage oft nicht gewährleistet. Abbildung~\ref{pic:aufbau_wandler_kompensationswicklungen} veranschaulicht den Aufbau. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/zeichnungen/aufbau_wandler_kompensiert.drawio.pdf}
+    \includegraphics[width=0.8\textwidth]{03_Ressourcen/zeichnungen/aufbau_wandler_kompensiert.drawio.pdf}
     \caption{Schematischer Aufbau eines Wandlers mit zusätzlichen Kompensationswicklungen}
     \label{pic:aufbau_wandler_kompensationswicklungen}
 \end{figure}
 
-Die Teilwicklungen $W_{1}$ bis $W_{4}$ sind symmetrisch über den Umfang des Eisenkerns verteilt. Technisch wird dies durch zusätzliche, zur eigentlichen Sekundärwicklung $W_{0}$ parallel geschaltete Wicklungssegmente realisiert. Die Abbildung stellt lediglich die allgemeine Kompensationswicklungstechnik dar. Da Hersteller in der Praxis oft individuelle und teils proprietäre Wicklungsdesigns einsetzen, kann die tatsächliche technische Ausführung von dieser schematischen Darstellung abweichen.
+Die Teilwicklungen $W_{1}$ bis $W_{4}$ sind symmetrisch über den Umfang des Eisenkerns verteilt. Technisch wird dies durch zusätzliche, diese sind zur Wicklung $W_0$ parallel geschaltet. Die Abbildung stellt lediglich die allgemeine Kompensationswicklungstechnik dar. Da Hersteller in der Praxis oft individuelle und teils proprietäre Wicklungsdesigns einsetzen, kann die tatsächliche technische Ausführung von dieser schematischen Darstellung abweichen.
 
-Diese Parallelschaltung ermöglicht den Fluss von Ausgleichsströmen zwischen den Segmenten zur Kompensation lokaler Sättigungserscheinungen und Asymmetrien im magnetischen Fluss \gls{sym:Phi}~\cite[S.~77]{book-Technologie_Messwandler-Minkner}.
+Parallelschaltung ermöglicht das fließen von Ausgleichsströmen zwischen den Segmenten zur Kompensation lokaler Sättigungserscheinungen und Asymmetrien im magnetischen Fluss \gls{sym:Phi}~\cite[S.~77]{book-Technologie_Messwandler-Minkner}.
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/zeichnungen/kupferschiene_positionierung_vergleich.drawio.pdf}
-    \caption{Schematische Darstellung der zentrischen und exzentrischen (außermittigen) Positionierung der Kupferschiene}
+    \includegraphics[width=0.8\textwidth]{03_Ressourcen/zeichnungen/kupferschiene_positionierung_vergleich.drawio.pdf}
+    \caption{Schematische Darstellung der zentrischen und exzentrischen Positionierung der Kupferschiene}
     \label{pic:schema_kupferschiene_pos}
 \end{figure}
 
@@ -76,7 +78,7 @@ Diese Parallelschaltung ermöglicht den Fluss von Ausgleichsströmen zwischen de
 
 Messstromwandler werden gemäß ihrer messtechnischen Güte in verschiedene Genauigkeitsklassen eingeteilt. Die Anforderungen hierfür sind in der Norm \gls{din} \gls{en} 61869-2 spezifiziert. Diese Klassen definieren die maximal zulässigen Messabweichungen und bilden die Entscheidungsgrundlage für die bedarfsgerechte Auswahl eines Wandlers. Wie bereits dargelegt, unterscheiden sich die Anforderungen an Mess- und Schutzwandler grundlegend~\cite[S.~22]{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}.
 
-Für Schutzwandler ist das Übertragungsverhalten bei hohen Kurzschlussströmen entscheidend. Diese werden in die Klassen P (Protection) und PR (Protection, niedrige Remanenz) kategorisiert. Die Bezeichnung der Genauigkeitsklasse setzt sich aus der höchstzulässigen prozentualen Gesamtmessabweichung, dem Kennbuchstaben sowie dem Genauigkeitsgrenzfaktor \gls{alf} zusammen. Während die Klasse P Standard-Schutzwandler ohne definierten Grenzwert für den Remanenzfluss beschreibt, kennzeichnet die Klasse PR Schutzwandler mit begrenztem Remanenzfluss. Letztere müssen nach der Abschaltung von Fehlerströmen eine geringe Remanenz aufweisen, was in der Praxis häufig durch konstruktive Maßnahmen, wie die Integration von Luftspalten in den Magnetkern, realisiert wird~\cite[S.~23--24]{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}\cite[S.~82]{book-Technologie_Messwandler-Minkner}.
+Für Schutzwandler ist das Übertragungsverhalten bei hohen Kurzschlussströmen entscheidend. Diese werden in die Klassen P (Protection) und PR (Protection, niedrige Remanenz) kategorisiert. Die Bezeichnung der Genauigkeitsklasse setzt sich aus der höchstzulässigen prozentualen Gesamtmessabweichung, dem Kennbuchstaben sowie dem Genauigkeitsgrenzfaktor \gls{alf} zusammen. Während die Klasse P Standard-Schutzwandler ohne definierten Grenzwert für den Remanenzfluss beschreibt, kennzeichnet die Klasse PR Schutzwandler mit begrenztem Remanenzfluss. Letztere müssen nach der Abschaltung von Fehlerströmen eine geringe Remanenz aufweisen, was in der Praxis häufig durch konstruktive Maßnahmen, wie die Integration von Luftspalten in den Eisenkern, realisiert wird~\cite[S.~23--24]{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}\cite[S.~82]{book-Technologie_Messwandler-Minkner}.
 
 Der Genauigkeitsgrenzfaktor gibt an, bis zu welchem Vielfachen des Bemessungsstroms \gls{sym:In} die Fehlergrenzen eingehalten werden. Eine Bezeichnung wie „5P20“ spezifiziert demnach eine Gesamtmessabweichung von \SI{5,00}{\percent} bei \num{20,00}-fachem Bemessungsstrom. Tabelle~\ref{tab:schutzwandler_fehler} führt die Grenzwerte für die gebräuchlichen Schutzklassen auf.
 
@@ -104,20 +106,20 @@ Messwandler untergliedern sich in die Standardklassen \num{0,10} bis \num{1,00},
     \label{tab:stromfehler}
     \begin{tabular}{lcccc}
         \toprule
-        Genauigkeits- & \multicolumn{4}{c}{Übersetzungsmessabweichung $\pm$ \SI{}{\percent}}                                             \\
-        klasse        & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})}                                                 \\
+        Genauigkeits- & \multicolumn{4}{c}{Übersetzungsmessabweichung $\varepsilon\,\pm$ \SI{}{\percent}}                                             \\
+        klasse        & \multicolumn{4}{c}{bei Strom (\SI{}{\percent} von \gls{sym:In})}                                                              \\
         \cmidrule(lr){2-5}
-                      & \num{5,00}                                                           & \num{20,00} & \num{100,00} & \num{120,00} \\
+                      & \num{5,00}                                                                        & \num{20,00} & \num{100,00} & \num{120,00} \\
         \midrule
-        \num{0,10}    & \num{0,40}                                                           & \num{0,20}  & \num{0,10}   & \num{0,10}   \\
-        \num{0,20}    & \num{0,75}                                                           & \num{0,35}  & \num{0,20}   & \num{0,20}   \\
-        \num{0,50}    & \num{1,50}                                                           & \num{0,75}  & \num{0,50}   & \num{0,50}   \\
-        \num{1,00}    & \num{3,00}                                                           & \num{1,50}  & \num{1,00}   & \num{1,00}   \\
+        \num{0,10}    & \num{0,40}                                                                        & \num{0,20}  & \num{0,10}   & \num{0,10}   \\
+        \num{0,20}    & \num{0,75}                                                                        & \num{0,35}  & \num{0,20}   & \num{0,20}   \\
+        \num{0,50}    & \num{1,50}                                                                        & \num{0,75}  & \num{0,50}   & \num{0,50}   \\
+        \num{1,00}    & \num{3,00}                                                                        & \num{1,50}  & \num{1,00}   & \num{1,00}   \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-Neben dem Stromfehler ist der Fehlwinkel \gls{sym:deltaphi} als Maß für die Phasenverschiebung entscheidend. Die Einhaltung der Grenzwerte ist insbesondere für Schutzeinrichtungen mit Richtungsbestimmung von hoher Relevanz~\cite[S.~51]{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}. Tabelle~\ref{tab:fehlwinkel} fasst die zulässigen Fehlwinkel für die Klassen \num{0,10} bis \num{1,00} zusammen.
+Ein wesentliches Kriterium ist die Übersetzungsmessabweichung \gls{sym:epsilon} als prozentuale Abweichung des Sekundärstroms \gls{sym:I_sec} vom idealen, durch das Übersetzungsverhältnis bestimmten Sollwert. Dieser sogenannte Stromfehler beschreibt somit die Amplitudenabweichung zwischen tatsächlichem und ideal transformiertem Strom (siehe Tabelle~\ref{tab:stromfehler})~\cite[S.~21]{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}. Tabelle~\ref{tab:fehlwinkel} fasst die zulässigen Fehlwinkel für die Klassen \num{0,10} bis \num{1,00} zusammen.
 
 \begin{table}[H]
     \centering
@@ -145,9 +147,9 @@ Im Rahmen dieser Arbeit wird zur Bewertung der Fremdfeldeinflüsse ausschließli
 \subsubsection{Ersatzschaltbild eines Messstromwandlers}
 \label{sec:ersatzschaltbild}
 
-Ein Messstromwandler basiert physikalisch auf dem Wirkprinzip eines Transformators. Sein Übertragungsverhalten lässt sich daher mithilfe eines Transformator-Ersatzschaltbildes beschreiben. In der Darstellung gemäß Abbildung~\ref{esb:wandler_vollständig} sind alle primärseitigen Größen auf die Sekundärseite transformiert.
+Ein Messstromwandler basiert physikalisch auf dem Wirkprinzip des Transformators. Sein Übertragungsverhalten lässt sich daher mithilfe eines Transformator-Ersatzschaltbildes beschreiben. In der Darstellung gemäß Abbildung~\ref{esb:wandler_vollständig} sind alle primärseitigen Größen auf die Sekundärseite transformiert.
 
-Hierbei repräsentieren \gls{sym:R}$'_{p}$ den ohmschen Widerstand und $L'_{p}$ die Streuinduktivität der Primärseite. Die Sekundärseite wird durch den Wicklungswiderstand \gls{sym:R}$_{s}$ und die Streuinduktivität $L_{s}$ modelliert. Der Querzweig, bestehend aus dem Eisenverlustwiderstand \gls{sym:R}$_{\text{Fe}}$ und der Hauptinduktivität $L_{\text{H}}$, bildet den Magnetkern ab, während \gls{sym:R}$_{\text{B}}$ und $L_{\text{B}}$ die externe Bürde repräsentieren.
+Hierbei repräsentieren \gls{sym:R}$'_{p}$ den ohmschen Widerstand und $L'_{p}$ die Streuinduktivität der Primärseite. Die Sekundärseite wird durch den Wicklungswiderstand \gls{sym:R}$_{s}$ und die Streuinduktivität $L_{s}$ modelliert. Der Querzweig, bestehend aus dem Eisenverlustwiderstand \gls{sym:R}$_{\text{Fe}}$ und der Hauptinduktivität $L_{\text{H}}$, bildet den Eisenkern ab, während \gls{sym:R}$_{\text{B}}$ und $L_{\text{B}}$ die externe Bürde repräsentieren.
 
 \begin{figure}[H]
     \centering
@@ -171,7 +173,7 @@ Theoretisch ließe sich auch die sekundäre Streuinduktivität $L_{s}$ bei ideal
 \subsection{Physikalische Grundlagen}
 \label{sec:physikalisches_prinzip}
 
-Physikalisch betrachtet basiert die Funktionsweise des Messstromwandlers auf dem Wirkprinzip eines kurzgeschlossenen Transformators. Die Wandlung beruht auf der elektromagnetischen Kopplung zwischen dem Primärleiter und der Sekundärwicklung über einen Magnetkern. Zur Analyse des Betriebsverhaltens sowie potenzieller Fehlerquellen werden im Folgenden die theoretischen Zusammenhänge der magnetischen Induktion hergeleitet~\cite[S.~63]{book-Technologie_Messwandler-Minkner}\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}.
+Physikalisch betrachtet basiert die Funktionsweise des Messstromwandlers auf dem Wirkprinzip eines kurzgeschlossenen Transformators. Die Wandlung beruht auf der elektromagnetischen Kopplung zwischen dem Primärleiter und der Sekundärwicklung über einen Eisenkern. Zur Analyse des Betriebsverhaltens sowie potenzieller Fehlerquellen werden im Folgenden die theoretischen Zusammenhänge der magnetischen Induktion hergeleitet~\cite[S.~63]{book-Technologie_Messwandler-Minkner}\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}.
 
 Die Betrachtung beginnt bei der Entstehung der magnetischen Feldstärke \gls{sym:H} durch den Primärstrom \gls{sym:I_p} und führt unter Berücksichtigung der Materialeigenschaften des Kerns zur magnetischen Flussdichte \gls{sym:B}. Unter Einbeziehung der geometrischen Abmessungen wird der magnetische Widerstand \gls{sym:Rm} definiert, welcher die Grundlage für das Hopkinsonsche Gesetz bildet. Abschließend wird erläutert, wie sich durch die induzierte Gegendurchflutung auf der Sekundärseite das für die Stromtransformation erforderliche Durchflutungsgleichgewicht \gls{sym:Theta} einstellt~\cite[Kap.~4.5.4]{book-Physik_Ingenieure-Hering}\cite[Kap.~11.9]{book-Magnetisches_Feld_Moeller-Harriehausen}\cite[S.~75]{book-Technologie_Messwandler-Minkner}.
 
@@ -297,12 +299,12 @@ Magnetische Stoffeigenschaften charakterisieren die Reaktion eines Materials auf
 
 Diamagnetische Stoffe weisen eine relative Permeabilität \gls{sym:mur} kleiner als \num{1,00} auf, wie beispielsweise Kupfer oder Wasser. Paramagnetische und diamagnetische Materialien werden in vielen elektrotechnischen Anwendungen näherungsweise als vakuumähnlich behandelt, da ihre Abweichung von der relativen Permeabilität \gls{sym:mur} $\approx \num{1,00}$ nur geringfügig ist. Für Messstromwandler sind hingegen ferromagnetische Werkstoffe essenziell, da deren hohe Permeabilität \gls{sym:mur} den magnetischen Fluss \gls{sym:Phi} konzentriert im Kern führt und somit eine effiziente induktive Kopplung ermöglicht~\cite[Tab.~48]{book-Taschenbuch_Physik-Kuchling}\cite[S.~63]{book-Technologie_Messwandler-Minkner}.
 
-Da die Permeabilität ferromagnetischer Materialien nichtlinear von der Feldstärke \gls{sym:H} abhängt, tritt bei hohen Feldstärken die magnetische Sättigung ein. In diesem Zustand nimmt die wirksame Permeabilität \gls{sym:mur} signifikant ab, wodurch die Übertragungsgenauigkeit bei hohen Primärströmen \gls{sym:I_p} oder unter externem Fremdfeldeinfluss deutlich reduziert wird~\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}\cite[S.~73]{book-Technologie_Messwandler-Minkner}.
+Da die Permeabilität ferromagnetischer Materialien nichtlinear von der Feldstärke \gls{sym:H} abhängt, geht das Material bei hohen Feldstärken in den Sättigungsbereich über. Die daraus resultierende Abnahme der wirksamen Permeabilität \gls{sym:mur} sowie die Konsequenzen für Messstromwandler werden im folgenden Kapitel detailliert hergeleitet und quantifiziert. Die Übertragungsgenauigkeit nimmt dadurch bei hohen Primärströmen \gls{sym:I_p} und bei überlagerten magnetischen Fremdfeldern deutlich ab~\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}\cite[S.~73]{book-Technologie_Messwandler-Minkner}.
 
 \subsubsection{Hysterese und reales Verhalten}
 \label{sec:hysterese-und-reales_verhalten}
 
-Ferromagnetische Werkstoffe zeichnen sich durch eine nichtlineare Magnetisierungskennlinie aus, deren physikalische Ursache in der Domänenstruktur des Materials begründet liegt. Im Kristallgefüge bilden sich mikroskopische Bereiche, die als magnetische Domänen oder \textit{Weißsche Bezirke} bezeichnet werden. Innerhalb dieser Domänen sind die atomaren magnetischen Momente parallel orientiert, woraus eine lokale Sättigungsmagnetisierung resultiert. Die räumlich begrenzten Übergangszonen zwischen benachbarten Domänen mit unterschiedlicher Magnetisierungsrichtung werden als Bloch-Wände bezeichnet~\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}.
+Ferromagnetische Werkstoffe zeichnen sich durch eine nichtlineare Magnetisierungskennlinie aus, deren physikalische Ursache in der Domänenstruktur des Materials begründet liegt. Im Kristallgefüge bilden sich mikroskopische Bereiche, die als magnetische Domänen oder \textit{Weißsche Bezirke} bezeichnet werden. In Abbildung~\ref{fig:weiss_bezirke} sind diese Domänen schematisch als pastellgelbe Teilflächen dargestellt. Innerhalb einer Domäne sind die atomaren magnetischen Momente überwiegend gleichgerichtet, was im Bild durch die nahezu parallel ausgerichteten Pfeile innerhalb einer Teilfläche angedeutet ist. Die räumlich begrenzten Übergangszonen zwischen benachbarten Domänen mit unterschiedlicher Magnetisierungsrichtung werden als Bloch-Wände bezeichnet~\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}.
 
 Abbildung~\ref{fig:weiss_bezirke} illustriert die Veränderung dieser Domänenstruktur unter Einwirkung eines äußeren Magnetfeldes. Im unmagnetisierten Ausgangszustand ist die Domänenverteilung statistisch so angeordnet, dass die resultierende Magnetisierung nach außen näherungsweise \num{0} beträgt~\cite[Kap.~11]{book-Magnetisches_Feld_Moeller-Harriehausen}.
 
@@ -324,23 +326,24 @@ Die Neukurve beschreibt den initialen Magnetisierungsvorgang eines unmagnetisier
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{03_Ressourcen/simulation/hysterese/hysterese_kurve_final_colors.pdf}
-    \caption{Schematische Darstellung von Neukurve und Hystereseschleife im $B$-$H$-Diagramm \cite[text]{website-Magnetisierungskurve-Mietke}}
+    \caption{Schematische Darstellung von Neukurve und Hystereseschleife im $B$-$H$-Diagramm \cite{website-Magnetisierungskurve-Mietke}}
     \label{fig:bh-hysterese}
 \end{figure}
 
 Die von der Hystereseschleife umschlossene Fläche korreliert direkt mit den magnetischen Ummagnetisierungsverlusten pro Zyklus. In der Messtechnik werden daher bevorzugt weichmagnetische Werkstoffe mit geringer Koerzitivfeldstärke \gls{sym:Hc} und schmaler Hystereseschleife eingesetzt, um die Remanenz \gls{sym:Br} sowie die Verlustleistung zu minimieren~\cite[Kap.~11.12.1]{book-Magnetisches_Feld_Moeller-Harriehausen}\cite{book-Magnetisches_Feld_Moeller-Harriehausen, website-Magnetisierungskurve-Mietke}.
 
 
-
 \subsubsection{Störeinflüsse bei Messstromwandlern}
 \label{sec:stoerfelder_schaltanlagen}
 
-Die Messgenauigkeit von Stromwandlern im Betrieb wird maßgeblich von externen und systembedingten Faktoren beeinflusst. Die wesentlichen Störeinflüsse gliedern sich in die drei Kategorien der fehlerhaften Bürdenbeschaltung, der Einwirkung externer magnetischer Fremdfelder sowie der geometrischen Positionierung des Primärleiters~\cite[S.~65]{book-Technologie_Messwandler-Minkner}.
+Die Messgenauigkeit von Stromwandlern im Betrieb wird maßgeblich von externen und systembedingten Faktoren beeinflusst. Wesentliche systembedingte Einflüsse sind eine fehlerhafte Bürdenbeschaltung und die geometrische Positionierung des Primärleiters, während magnetische Fremdfelder als externer Störeinfluss wirken~\cite[S.~65]{book-Technologie_Messwandler-Minkner}.
 
-\paragraph{Einfluss der Bürde}
+\pagebreak[4]
+\medskip
+\noindent\textbf{Einfluss der Bürde}\par
 \label{par:einfluss_buerde}
 
-Die Impedanz der Bürde determiniert das Betriebsverhalten des Stromwandlers maßgeblich. Wie im vereinfachten Ersatzschaltbild (Abbildung~\ref{esb:wandler_vereinfacht}) dargestellt, setzt sich der Sekundärkreis aus der Innenimpedanz der Wicklung und der externen Bürde zusammen. Eine Vergrößerung des Gesamtimpedanzbetrags im Sekundärkreis erfordert eine höhere induzierte Spannung \gls{sym:Uo} zur Aufrechterhaltung des eingeprägten Sekundärstroms \gls{sym:I_sec}~\cite[S.~65--67]{book-Technologie_Messwandler-Minkner}.
+Die Impedanz der Bürde bestimmt das Betriebsverhalten des Stromwandlers maßgeblich. Wie im vereinfachten Ersatzschaltbild (Abbildung~\ref{esb:wandler_vereinfacht}) dargestellt, setzt sich der Sekundärkreis aus der Innenimpedanz der Wicklung und der externen Bürde zusammen. Eine Vergrößerung des Gesamtimpedanzbetrags im Sekundärkreis erfordert eine höhere induzierte Spannung \gls{sym:Uo} zur Aufrechterhaltung des eingeprägten Sekundärstroms \gls{sym:I_sec}~\cite[S.~65--67]{book-Technologie_Messwandler-Minkner}.
 
 Unter Berücksichtigung der Streuinduktivität der Sekundärwicklung \(L_s\) sowie einer induktiven Bürde \(L_B\) werden die Wicklung und die Bürde durch die komplexen Zeigerimpedanzen
 \begin{equation}
@@ -364,13 +367,12 @@ Für den Effektivwert folgt daraus die Beziehung
 \end{equation}
 
 Gemäß der Hauptgleichung des Transformators besteht ein proportionaler Zusammenhang zwischen der induzierten Spannung und dem magnetischen Fluss \gls{sym:Phi} im Kern~\cite[S.~67]{book-Technologie_Messwandler-Minkner}:
-
 \begin{equation}
     U_o = 4{,}44 \cdot f \cdot N_s \cdot \Phi.
     \label{eq:trafo_hauptgleichung}
 \end{equation}
 
-Durch Substitution von Gleichung \eqref{eq:spannung_impedanz} in \eqref{eq:trafo_hauptgleichung} ergibt sich für den Fluss \gls{sym:Phi}:
+Durch Einsetzten von Gleichung \eqref{eq:spannung_impedanz} in \eqref{eq:trafo_hauptgleichung} ergibt sich für den magnetischen Fluss \gls{sym:Phi}:
 \begin{equation}
     \Phi
     = \frac{I_s \cdot \sqrt{(R_s+R_B)^2 + \bigl(\omega(L_s+L_B)\bigr)^2}}
@@ -380,7 +382,10 @@ Durch Substitution von Gleichung \eqref{eq:spannung_impedanz} in \eqref{eq:trafo
 
 Aus Gleichung \eqref{eq:fluss_buerde_mit_induktivitaet} wird ersichtlich, dass nicht nur ein Anstieg des ohmschen Bürdenanteils \gls{sym:RB}, sondern ebenso eine Zunahme der induktiven Anteile den erforderlichen Spannungsbetrag und damit den magnetischen Fluss \gls{sym:Phi} erhöht. Übersteigt dieser Fluss die Sättigungsgrenze des Kernmaterials, verlässt der Wandler seinen linearen Arbeitsbereich, wodurch die Messabweichung signifikant zunimmt~\cite[S.~67, S.~73]{book-Technologie_Messwandler-Minkner}.
 
-\paragraph{Magnetische Fremdfelder}
+
+\pagebreak[1]
+\medskip
+\noindent\textbf{Magnetische Fremdfelder}\par
 \label{sec:theorie_fremdfelder}
 
 Nach dem Durchflutungsgesetz ist jeder stromdurchflossene Leiter von einem konzentrischen Magnetfeld umgeben. Befinden sich mehrere Leiter in unmittelbarer Nähe zueinander, überlagern sich deren magnetische Felder gemäß dem Superpositionsprinzip. Die Abhängigkeit der magnetischen Flussdichte \gls{sym:B} vom Abstand \gls{sym:r} zu einem geraden, unendlich langen Leiter wird durch das Gesetz von Biot-Savart beschrieben~\cite[S.~343]{book-Kuepfmueller_Theo_ETechnik-Mathis}\cite[Kap.~4.5.4]{book-Physik_Ingenieure-Hering}\cite[S.~333]{book-Kuepfmueller_Theo_ETechnik-Mathis}:
@@ -399,7 +404,7 @@ Ein Stromwandler ist idealerweise so konstruiert, dass sein Kern ausschließlich
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/zeichnungen/aufbau_abschätzung_fremdfeld.drawio.pdf}
+    \includegraphics[width=0.8\textwidth]{03_Ressourcen/zeichnungen/aufbau_abschätzung_fremdfeld.drawio.pdf}
     \caption{Geometrische Parameter zur Berechnung des Fremdfeldeinflusses}
     \label{pic:aufbau_abschaetzung_fremdfeld}
 \end{figure}
@@ -408,7 +413,7 @@ Die Variablen sind definiert als induzierte magnetische Fremdflussdichte \gls{sy
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/simulation/fremdfeld_ra_pfunder/Vergleich_Geometrie_und_Strom.pdf}
+    \includegraphics[width=0.8\textwidth]{03_Ressourcen/simulation/fremdfeld_ra_pfunder/Vergleich_Geometrie_und_Strom.pdf}
     \caption{Einfluss von Kerngröße und Stromstärke auf den zusätzlichen Streufluss}
     \label{pic:sim_streufluss_abhaengigkeit}
 \end{figure}
@@ -427,28 +432,44 @@ Ein größerer Kernquerschnitt \gls{sym:A_Fe} kompensiert die höhere Flussaufna
     \label{eq:phi_fremd_herleitung}
 \end{equation}
 
-\paragraph{Exzentrische Positionierung der Kupferschiene}
+
+\pagebreak[1]
+\medskip
+\noindent\textbf{Exzentrische Positionierung der Kupferschiene}\par
 \label{par:exzentrische_positionierung}
 
 Wie in Abschnitt \ref{sec:kompensationswicklungen} dargelegt, ist eine ideal zentrierte Montage der Kupferschienen in der Praxis oft nicht realisierbar. Bereits geringfügige Abweichungen führen zu einer inhomogenen Flussverteilung im Kern und begünstigen lokale Sättigungseffekte~\cite[S.~76]{book-Technologie_Messwandler-Minkner}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/simulation/wandler_mit_kupferschine/wandler_kupferschine_1p.pdf}
-    \caption{Simulierter Verlauf des magnetischen Flusses entlang des mittleren Kernumfangs bei zentrierter und exzentrischer Primärleiterposition}
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/simulation/wandler_mit_kupferschine/wandler_kupferschine_1p-2.pdf}
+    
+    \vspace{0.5cm}
+    
+    \includegraphics[width=0.83\textwidth]{03_Ressourcen/zeichnungen/wandler_asymetrisch_mittlererverlauf.drawio.pdf}
+    
+    \caption{Oben, simulierter Verlauf des magnetischen Flusses entlang des mittleren Kernumfangs bei zentrierter und exzentrischer Primärleiterposition. Unten, Definition der Auswertestrecke entlang des mittleren Kernumfangs mit Startpunkt und Zuordnung der Viertelpunkte.}
+
     \label{pic:sim_exzentrische_montiert}
 \end{figure}
 
-Abbildung~\ref{pic:sim_exzentrische_montiert} verdeutlicht den simulierten Verlauf des magnetischen Flusses \gls{sym:Phi} entlang des Kernumfangs. Während die zentrierte Anordnung (blau) eine homogene Verteilung aufweist, führt die exzentrische Position (orange) zu einer Asymmetrie. In leiternahen Bereichen steigt der Fluss \gls{sym:Phi} an, während er auf der gegenüberliegenden Seite abfällt. Sofern die Sekundärwicklung \gls{sym:Ns} nicht vollkommen gleichmäßig verteilt ist, resultieren aus dieser Inhomogenität Messabweichungen~\cite[S.~76]{book-Technologie_Messwandler-Minkner}.
+\pagebreak[4]
+Abbildung~\ref{pic:sim_exzentrische_montiert} zeigt den simulierten Verlauf des magnetischen Flusses \gls{sym:Phi} entlang des Kernumfangs. Die im Diagramm verwendete Länge ist dabei als Wegkoordinate entlang eines geschlossenen Pfads auf dem mittleren Kernradius definiert. Der Nullpunkt bei $0\,\mathrm{mm}$ liegt an der in der unteren Skizze markierten Referenzstelle, die Richtung der Zunahme entspricht der Pfeilrichtung. Die Markierungen bei $106\,\mathrm{mm}$, $212\,\mathrm{mm}$ und $318\,\mathrm{mm}$ entsprechen einer Viertel, Halb und Dreiviertelumrundung. Der Punkt \glqq Max\grqq{} kennzeichnet das Ende einer vollständigen Umrundung, also die gesamte mittlere Umfangslänge des Kerns.
+
+Bei zentrierter Primärleiterlage verläuft \gls{sym:Phi} vergleichsweise gleichmäßig. Die Kurve zeigt nur eine moderate Welligkeit, die aus der diskreten Abtastung und den lokalen Material und Geometrieeinflüssen resultiert. Bei exzentrischer Positionierung entsteht dagegen eine ausgeprägte Asymmetrie entlang des Umfangs. In dem Umfangsbereich, der in der unteren Skizze dem primärleiternahen Sektor entspricht, steigt \gls{sym:Phi} deutlich an, während er auf der gegenüberliegenden Seite ein Minimum ausbildet. Dadurch vergrößert sich die Spannweite des Flussverlaufs erheblich, was eine lokal höhere Flussdichte und damit eine erhöhte Sättigungsneigung in leiternahen Kernbereichen begünstigt.
+
+Diese Inhomogenität wirkt sich insbesondere dann auf die Messgenauigkeit aus, wenn die Sekundärwicklung \gls{sym:Ns} nicht exakt gleichmäßig über den Umfang verteilt ist oder wenn Teilbereiche des Kerns aufgrund der lokalen Vormagnetisierung in einen nichtlinearen Bereich geraten. In der Folge können sich die wirksame Übersetzung und die Phasenlage ortsabhängig verändern, was Messabweichungen begünstigt~\cite[S.~76]{book-Technologie_Messwandler-Minkner}.
+
+
 
 \subsection{Niederspannungsschaltanlagen}
 \label{sec:niederspannungsschaltanlagen}
 
-Niederspannungsschaltanlagen dienen der Verteilung, Schaltung und Absicherung elektrischer Energie innerhalb eines Bemessungsspannungsbereichs von bis zu \SI{1000,00}{V}. Sie fungieren als zentrales Bindeglied zwischen der Energieeinspeisung – etwa über Transformatorenstationen – und den nachgeschalteten Verbrauchern. Aufgrund ihrer primären Funktion im Energiefluss sind diese Anlagen sowohl für hohe Dauerbetriebsströme als auch für signifikante mechanische und thermische Beanspruchungen infolge von Kurzschlussereignissen dimensioniert.
+Niederspannungsschaltanlagen dienen der Verteilung, Schaltung und Absicherung elektrischer Energie innerhalb eines Bemessungsspannungsbereichs von bis zu \SI{1000,00}{V}. Sie fungieren als zentrales Bindeglied zwischen der Energieeinspeisung, etwa über Transformatorenstationen, und den nachgeschalteten Verbrauchern. Aufgrund ihrer primären Funktion im Energiefluss sind diese Anlagen sowohl für hohe Dauerbetriebsströme als auch für signifikante mechanische und thermische Beanspruchungen infolge von Kurzschlussereignissen dimensioniert.
 
-Der konstruktive Aufbau folgt üblicherweise einem modularen Prinzip, bei dem mehrere Schaltschrankfelder über ein gemeinsames Hauptsammelschienensystem elektrisch gekoppelt sind. Dieses System ist zumeist im rückwärtigen oder oberen Bereich der Anlage positioniert und übernimmt die Funktion des zentralen Energieverteilers. Funktional lassen sich die Felder in drei wesentliche Kategorien unterteilen: Einspeisefelder beziehen die elektrische Energie aus der Quelle, führen sie der Hauptsammelschiene zu und beherbergen in der Regel die zentralen Schutz- sowie Messsysteme. Über die Abgangsfelder erfolgt hingegen die gezielte Energieverteilung an nachgelagerte Verbraucher oder Unterverteilungen, während Kupplungsfelder die galvanische Verbindung oder Trennung einzelner Sammelschienenabschnitte ermöglichen. Letztere dienen insbesondere dazu, die Versorgungssicherheit durch redundante Einspeisungen zu erhöhen oder notwendige Wartungsarbeiten im Teilbetrieb zu realisieren.
+Der Aufbau folgt üblicherweise einem modularen Prinzip, bei dem mehrere Schaltschrankfelder über ein gemeinsames Hauptsammelschienensystem elektrisch gekoppelt sind. Dieses System ist zumeist im rückwärtigen oder oberen Bereich der Anlage positioniert und übernimmt die Funktion des zentralen Energieverteilers. Funktional lassen sich die Felder in drei wesentliche Kategorien unterteilen: Einspeisefelder beziehen die elektrische Energie aus der Quelle, führen sie der Hauptsammelschiene zu und beherbergen in der Regel die zentralen Schutz- sowie Messsysteme. Über die Abgangsfelder erfolgt hingegen die gezielte Energieverteilung an nachgelagerte Verbraucher oder Unterverteilungen, während Kupplungsfelder die galvanische Verbindung oder Trennung einzelner Sammelschienenabschnitte ermöglichen. Letztere dienen insbesondere dazu, die Versorgungssicherheit durch redundante Einspeisungen zu erhöhen oder notwendige Wartungsarbeiten im Teilbetrieb zu realisieren.
 
-Ein kritisches Sicherheitsmerkmal der Konstruktion stellt die mechanische und thermische Kurzschlussfestigkeit dar. Die mechanische Struktur muss derart robust ausgeführt sein, dass sie selbst extremen Belastungen, beispielsweise einem Kurzschlussstrom von $I_k = \SI{100,00}{kA}$, ohne strukturelle Zerstörung standhält. Ein wesentlicher Aspekt des Personenschutzes ist zudem die Störlichtbogenqualifikation. Im Fehlerfall eines internen Lichtbogens wird die schlagartig freigesetzte Druckenergie sowie die thermische Last kontrolliert über integrierte Druckentlastungsklappen abgeführt. Diese konstruktive Maßnahme verhindert ein Aufsprengen der Schaltschranktüren und schützt das Bedienpersonal vor den unmittelbaren Auswirkungen des Lichtbogens, während gleichzeitig ein beschleunigtes Erlöschen des Fehlers unterstützt wird.
+Ein kritisches Sicherheitsmerkmal der Konstruktion stellt die mechanische und thermische Kurzschlussfestigkeit dar. Die mechanische Struktur muss derart robust ausgeführt sein, dass sie selbst extremen Belastungen, beispielsweise einem Kurzschlussstrom von $I_k = \SI{100,00}{kA}$, ohne strukturelle Zerstörung standhält. Ein wesentlicher Aspekt des Personenschutzes ist die Störlichtbogenqualifikation. Im Fehlerfall eines internen Lichtbogens wird die schlagartig freigesetzte Druckenergie sowie die thermische Last kontrolliert über integrierte Druckentlastungsklappen abgeführt. Diese konstruktive Maßnahme verhindert ein Aufsprengen der Schaltschranktüren und schützt das Bedienpersonal vor den unmittelbaren Auswirkungen des Lichtbogens, während gleichzeitig ein beschleunigtes Erlöschen des Fehlers bewirkt wird.
 
 
 
@@ -462,7 +483,7 @@ Zur Sicherstellung der normativ geforderten Genauigkeitsklassen wird in der Prü
 Gemäß der Norm DIN EN 61869-2 sind zwei zentrale Kenngrößen zu ermitteln. Die Übersetzungsmessabweichung \gls{sym:epsilon} beschreibt die prozentuale Differenz der Stromamplituden und wird nach Gleichung \eqref{eq:messabweichung_epsilon} bestimmt:
 
 \begin{equation}
-    \varepsilon = \frac{k_n \cdot I_{s} - I_{p}}{I_{p}} \cdot \SI{100,00}{\percent}
+    \varepsilon = \frac{k_n \cdot I_{s} - I_{p}}{I_{p}} \cdot \SI{100}{\percent}
     \label{eq:messabweichung_epsilon}
 \end{equation}
 
