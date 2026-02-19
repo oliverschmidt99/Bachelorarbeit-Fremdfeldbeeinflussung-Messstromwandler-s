@@ -55,6 +55,12 @@
 
 \sisetup{locale = DE}
 \usepackage{verbatim}
+\usepackage{glossaries}
+\newglossarystyle{mynonbold}{
+  \setglossarystyle{list}
+  \renewcommand*{\glossentryname}[1]{\glsentryname{##1}}
+}
+
 % --- LAYOUT-DATEI LADEN ---
 % (Wird in der Haupt-Datei geladen)
 

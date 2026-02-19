@@ -2,9 +2,6 @@
 % HAUPTDOKUMENT (main.tex)
 % =============================================================================
 
-% GEÄNDERT: Dokumentenklasse zu 'scrartcl' (Artikel) geändert
-% NEU: numbers=noenddot entfernt den Punkt nach der Gliederungsnummer
-% NEU: headsepline korrigiert (ohne Wertangabe in der Class-Option)
 \documentclass[11pt, a4paper, headsepline, numbers=noenddot]{scrartcl}
 
 % --- EINSTELLUNGEN LADEN ---
@@ -26,40 +23,61 @@
 
 \begin{document}
 
-% ---------- DECKBLATT (ohne Nummer) ----------
+% ============================================================================
+% DECKBLATT (ohne Nummer)
+% ============================================================================
 \pagenumbering{gobble}
 \input{02_Inhalt/01_Vorspann/00_deckblatt.tex}
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\newpage
+\leereSeite
 
-% ---------- VORSPANN (römische Zählung) ----------
-\clearpage
+% ============================================================================
+% VORSPANN (römische Zählung)
+% Reihenfolge gemäß Vorgabe:
+%   Eigenständigkeitserklärung + Sperrvermerk
+%   Danksagung
+%   Abstract
+%   (Leere Seite)
+%   Inhalts-/Verzeichnisse
+% ============================================================================
 \pagenumbering{Roman}
 
-% --- VERZEICHNISSE ---
+% --- EIGENSTÄNDIGKEITSERKLÄRUNG + SPERRVERMERK ---
+\input{02_Inhalt/03_Nachspann/eigenstaendigkeitserklaerung.tex}
+\clearpage
+
+% --- DANKSAGUNG ---
+\input{02_Inhalt/01_Vorspann/03_danksagung.tex}
+\clearpage
+
+% --- ABSTRACT ---
+\input{02_Inhalt/01_Vorspann/01_abstract.tex}
+
+% --- LEERE SEITE ---
+\leereSeite
+
+% --- VERZEICHNISSE (Inhaltsverzeichnis, Abbildungen, Tabellen, Glossar, ...) ---
 % Hier wird nur die Datei geladen. Die Befehle \printglossary stehen
 % IN der Datei '02_verzeichnisse.tex', damit alles an einem Ort ist.
 \input{02_Inhalt/01_Vorspann/02_verzeichnisse.tex}
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\newpage
-% ---------- HAUPTTEIL (arabische Zählung ab 1) ----------
-\clearpage
+
+% --- LEERE SEITE ---
+\leereSeite
+
+% ============================================================================
+% HAUPTTEIL (arabische Zählung ab 1)
+% ============================================================================
 \pagenumbering{arabic}
 
 \include{02_Inhalt/02_Hauptteil/01_einleitung}
-\include{02_Inhalt/02_Hauptteil/02_theorieteil}
-\include{02_Inhalt/02_Hauptteil/03_methodenteil}
-\include{02_Inhalt/02_Hauptteil/04_ergebnisteil}
-\include{02_Inhalt/02_Hauptteil/05_diskussion_fazit}
-\include{02_Inhalt/02_Hauptteil/06_ausblick}
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\newpage
+%\include{02_Inhalt/02_Hauptteil/02_theorieteil}
+%\include{02_Inhalt/02_Hauptteil/03_methodenteil}
+%\include{02_Inhalt/02_Hauptteil/04_ergebnisteil}
+%\include{02_Inhalt/02_Hauptteil/05_diskussion_fazit}
+%\include{02_Inhalt/02_Hauptteil/06_ausblick}
+
+% Optional: Trennseite vor Anhang/Nachspann
+\leereSeite
+
 % ===========================================================================
 % ANHANG (Nummeriert mit A, B...)
 % ===========================================================================
@@ -69,7 +87,7 @@
 \renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
 
 % Anhang einbinden (erzeugt z.B. "A Anhang")
-\input{02_Inhalt/03_Nachspann/anhang.tex}
+%\input{02_Inhalt/03_Nachspann/anhang.tex}
 
 % ===========================================================================
 % NACHSPANN (Eingerückt & ohne Seitenzahlen im Inhaltsverzeichnis)
@@ -77,20 +95,11 @@
 
 % --- LITERATURVERZEICHNIS ---
 \clearpage
-\thispagestyle{empty} 
-\addtocontents{toc}{\protect\contentsline{section}{\protect\numberline{}Literaturverzeichnis}{}{}}
+\thispagestyle{empty}
+\addtocontents{toc}{\protect\contentsline{section}{\protect\numberline{}Literaturverzeichnis}{}{} }
 
 % Literaturverzeichnis ausgeben (ohne automatische Überschrift, da wir sie manuell setzen)
 \section*{Literaturverzeichnis}
 \printbibliography[heading=none]
-
-% --- EIGENSTÄNDIGKEITSERKLÄRUNG ---
-\clearpage
-\thispagestyle{empty} % Entfernt die Seitenzahl auf dieser Seite
-% Manueller Eintrag ins Inhaltsverzeichnis (Eingerückt, ohne Seitenzahl)
-\addtocontents{toc}{\protect\contentsline{section}{\protect\numberline{}Eigenständigkeitserklärung}{}{}}
-
-% Datei einbinden (Achtung: Du musst Schritt 2 beachten!)
-\input{02_Inhalt/03_Nachspann/eigenstaendigkeitserklaerung.tex}
 
 \end{document}

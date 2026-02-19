@@ -75,6 +75,21 @@
 
 % Definition für die vertikale Linie in der Kopfzeile
 \newcommand{\vlinie}{\vrule width 0.5pt height 10pt depth 2pt}
+
+% --- Leerseiten (ohne Kopf-/Fußzeile) ---
+% Verwendung: \leereSeite
+\newcommand{\leereSeite}{%
+    % Nur dann einen Seitenumbruch erzwingen, wenn auf der aktuellen Seite bereits Inhalt steht
+    \ifdim\pagetotal>0pt\clearpage\fi
+    \thispagestyle{empty}
+    \begin{center}
+        \vspace*{\fill}
+        \textbf{Leere Seite}
+        \vspace*{\fill}
+    \end{center}
+    \clearpage
+}
+
 % =============================================================================
 % ### BEFEHLE FÜR AUTOMATISIERTE UMGEBUNGEN ###
 % =============================================================================

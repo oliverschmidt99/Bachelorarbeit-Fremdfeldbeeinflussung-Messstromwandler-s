@@ -1,10 +1,14 @@
 % =============================================================================
 % ABSTRACT (01_abstract.tex)
-% -----------------------------------------------------------------------------
-% Eine kurze, prägnante Zusammenfassung deiner gesamten Arbeit.
-% (Thema, Vorgehen/Methode, wichtigste Ergebnisse, Schlussfolgerung)
-% Sie wird oft auch separat eingereicht.
 % =============================================================================
 
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
+
+In kompakten Niederspannungsschaltanlagen liegen Sammelschienen und Messstromwandler häufig in unmittelbarer Nähe. Dadurch überlagern sich die Magnetfelder der Außenleiter, was insbesondere bei der mittleren Phase L2 zu systematischen Messabweichungen führt und im Hochstrombereich normrelevante Fehler verursachen kann. Ziel dieser Arbeit ist es, Maßnahmen zur Erhöhung der Fremdfeldrobustheit zu bewerten und daraus eine serientaugliche sowie wirtschaftliche Empfehlung für Neuentwicklungen und Bestandsanlagen abzuleiten.
+
+Hierzu wurde ein praxisnaher Prüfaufbau in einer Schaltanlage realisiert und Messreihen im Bereich von \SI{2000}{A} bis \SI{4000}{A} durchgeführt. Untersucht wurden Standard- und kompensierte Messstromwandler, der Einsatz einer Fremdfeldprotektion sowie zwei Leiter-\/Wandleranordnungen (Parallel- und Dreiecksanordnung). Als Bewertungsgröße dient die Übersetzungsmessabweichung \gls{sym:epsilon}, ergänzt um eine Kosten-, Bauraum- und Integrationsbetrachtung.
+
+Die Ergebnisse zeigen, dass die Dreiecksanordnung den Fremdfeldeinfluss auf L2 im Nennlastbereich (\SI{80}{\percent} bis \SI{100}{\percent}) deutlich reduziert: bei \SI{4000}{A} sinkt die Abweichung bei Volllast von \SI{-3,30}{\percent} (Parallelanordnung) auf \SI{-0,15}{\percent}. Kompensierte Wandler erreichen über den gesamten Lastbereich sehr geringe Fehlerwerte (unter \num{0,21}\,\%), sind jedoch deutlich kostenintensiver und beschaffungsseitig weniger flexibel. Fremdfeldprotektion eignet sich insbesondere als Retrofit-Maßnahme, setzt jedoch eine definierte und prozesssichere Einbaulage voraus.
+
+Für Neuentwicklungen wird daher die Kombination aus Standardwandlern und Dreiecksanordnung als bevorzugter Systemansatz empfohlen. Ist die Leiterführung konstruktiv vorgegeben, sind Fremdfeldprotektion oder kompensierte Wandler zur Stabilisierung der Messung zu priorisieren.
