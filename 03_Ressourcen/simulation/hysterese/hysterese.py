@@ -33,7 +33,8 @@ def draw_hysteresis():
     ax.set_xlabel('Feldstärke H', loc='right', fontsize=16, fontweight='bold')
     ax.set_ylabel('Flussdichte B', loc='top', fontsize=16, rotation=0, fontweight='bold')
     ax.xaxis.set_label_coords(1.0, 0.48)
-    ax.yaxis.set_label_coords(0.55, 1.0)
+    # Y-Koordinate erhöht, damit der Text über dem Pfeil steht
+    ax.yaxis.set_label_coords(0.55, 1.05)
 
     # LINIENPLOT
     linewidth_curve = 4
@@ -49,7 +50,7 @@ def draw_hysteresis():
     br_val = np.tanh(0 + width) * scale  # Schnittpunkt Y-Achse
     hc_val = -width                      # Schnittpunkt X-Achse (negativ)
 
-    # PUNKTE MARKIEREN (Farben angepasst)
+    # PUNKTE MARKIEREN
     
     # Y-Achse Punkte (Remanenz) -> Orange
     ax.scatter([0], [br_val], color='orange', s=100, zorder=10)
@@ -96,16 +97,29 @@ def draw_hysteresis():
     ax.text(1.5, scale + 0.2, 'magnetische\nSättigung', fontsize=14, fontweight='bold')
     ax.text(-2.8, -scale - 0.5, 'magnetische\nSättigung', fontsize=14, fontweight='bold')
 
-    ax.text(0.8, 0.5, 'Neukurve', color='black', fontsize=14, fontweight='bold')
+    # NEUKURVE BOX UND PFEIL
+    ax.annotate(
+        'Neukurve', 
+        xy=(0.8, np.tanh(0.8) * scale),  # Punkt auf der Neukurve
+        xytext=(1.2, 0.4),               # Position der Textbox
+        fontsize=14, 
+        fontweight='bold', 
+        color='black',
+        bbox=dict(boxstyle="round,pad=0.4", fc="white", ec="blue", lw=2),
+        arrowprops=dict(arrowstyle="->", color="blue", lw=2, connectionstyle="arc3,rad=-0.2")
+    )
 
     ax.text(1.8, -1.0, r'$\frac{\Delta B}{\Delta H} = \mu_r$', fontsize=18, fontweight='bold')
     
-
-    # Layout
+    # Layout und Achsenbegrenzungen
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_xlim(-3.2, 3.5)
     ax.set_ylim(-2.8, 2.8)
+
+    # ACHSEN-PFEILE HINZUFÜGEN
+    ax.plot(3.5, 0, marker='>', color='black', markersize=10, clip_on=False, zorder=10) # Pfeil X-Achse
+    ax.plot(0, 2.8, marker='^', color='black', markersize=10, clip_on=False, zorder=10) # Pfeil Y-Achse
 
     plt.savefig('hysterese_kurve_final_colors.pdf', bbox_inches='tight')
     plt.show()

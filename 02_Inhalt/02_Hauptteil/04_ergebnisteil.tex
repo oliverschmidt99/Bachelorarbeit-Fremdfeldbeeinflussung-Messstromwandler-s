@@ -230,7 +230,7 @@ Die nachfolgenden Abschnitte ordnen die Ergebnisse nach Stromstärken ein. Die Z
 
 \subsubsection{Wirtschaftlichkeit im Bereich \SIrange{2000}{2500}{A}}
 
-Tabelle~\ref{tab:oeko_2000A_parallel_vs_dreieck} zeigt für \SI{2000}{A} ein heterogenes Bild. Einige Modelle weisen nur geringe, andere sehr ausgeprägte Änderungen zwischen Parallel- und Dreiecksanordnung auf. Der \textit{MBS ASK101.4} zeigt in allen drei Lastbereichen positive \(\eta_{\text{geo}}\)-Werte bei gleichzeitig niedrigem Preis. Innerhalb des Datensatzes ergibt sich damit eine Kombination aus moderater und konsistenter Verbesserung bei geringer Kostenbasis. Die Geometriesensitivität bleibt dabei im Vergleich zu stark reagierenden Modellen begrenzt.
+Tabelle~\ref{tab:oeko_2000A_parallel_vs_dreieck} zeigt für \SI{2000}{A} ein heterogenes Bild. Einige Modelle weisen nur geringe, andere sehr ausgeprägte Änderungen zwischen Parallel- und Dreiecksanordnung auf. Der \textit{MBS ASK101.4} zeigt im Nenn- und Überlastbereich positive \(\eta_{\text{geo}}\)-Werte bei gleichzeitig niedrigem Preis. Im Niederstrombereich ergibt sich hingegen im Datensatz eine deutliche Verschlechterung durch die Dreiecksanordnung. Damit ergibt sich für dieses Modell ein lastpunktabhängiger Geometrieeffekt, der in hochlastnahen Betriebsbereichen nutzbar ist, jedoch keine generelle Verbesserung über den gesamten Bereich darstellt.
 
 Beim \textit{Celsa ALO 10030} fällt eine hohe Geometriesensitivität auf. Im Niederstrombereich ergibt sich im Datensatz eine gegenläufige Tendenz durch ein negatives \(\eta_{\text{geo}}\). Im Nenn- und Überlastbereich treten deutliche positive Verbesserungen auf. Damit deutet das Modellprofil darauf hin, dass die Leitergeometrie insbesondere bei hohen Lasten maßgeblich in das Fehlerbild eingreift. Diese Interpretation ist konsistent mit den in Abschnitt~\ref{sec:analyse_messreihe_2000A} beschriebenen Sättigungs- und Fremdfeldeffekten. Diese prägen sich je nach Anordnung unterschiedlich stark aus.
 
@@ -252,17 +252,17 @@ Die \glsentryshort{ffp}-Ausführung (\textit{Redur 13A1030.3ffp}) zeigt eine deu
         \cmidrule(lr){3-6}
                                                       &                                 & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
         \midrule
-        \textit{MBS ASK101.4} Standard                & 43.67                           & 3.53            & 21.95         & 29.70             & 18.39           \\
-        \textit{Celsa ALO 10030} Standard             & 45.50                           & -44.79          & 78.13         & 86.87             & 69.93           \\
-        \textit{Celsa ALO 8030 K} kompensiert         & 95.95                           & -8.24           & -2.44         & 6.00              & 5.56            \\
-        \textit{Redur 13A1030.3ffp} \glsentryshort{ffp} & 146.01                          & 3.85            & -161.54       & -177.42           & 114.27          \\
+        \textit{MBS ASK101.4} Standard                & 43.67                           & -100.00         & 22.22         & 29.41             & 50.54           \\
+        \textit{Celsa ALO 10030} Standard             & 45.50                           & -46.15          & 78.12         & 86.79             & 70.36           \\
+        \textit{Celsa ALO 8030 K} kompensiert         & 95.95                           & 20.00           & -3.70         & 6.06              & 9.92            \\
+        \textit{Redur 13A1030.3ffp} \glsentryshort{ffp} & 146.01                          & 3.85            & -175.00       & -171.43           & 116.76          \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 Für \SI{2500}{A} (Tabelle~\ref{tab:oeko_2500A_parallel_vs_dreieck}) zeigt der Standardwandler \textit{Celsa ALO 10030} in allen drei Bereichen deutlich positive \(\eta_{\text{geo}}\)-Werte. In Kombination mit der niedrigen Preisbasis ergibt sich im Datensatz ein ausgeprägter Kosten-Nutzen-Hebel der Geometrieänderung. Gleichzeitig ist aus der technischen Diskussion in Abschnitt~\ref{sec:analyse_messreihe_2500A} ersichtlich, dass trotz Verbesserung im Hochlastbereich weiterhin Sättigungstendenzen verbleiben können. Die ökonomische Bewertung ist daher im Sinne eines relativen Vergleichs zwischen Geometrien zu lesen und nicht als Aussage über absolute Normkonformität in allen Punkten.
 
-Der kompensierte \textit{Celsa ALO 10050 K} zeigt demgegenüber kleinere Verbesserungen bei höherem Preis. Im Datensatz spricht dies gegen einen primären Nutzen dieser Variante durch maximale relative Zugewinne mittels Geometrieoptimierung. Vielmehr liegt der Nutzen in der insgesamt geringeren Fehlerausprägung und der reduzierten Sensitivität gegenüber externen Feldbedingungen (siehe Abschnitt~\ref{sec:analyse_messreihe_2500A}).
+Der kompensierte \textit{Celsa ALO 10050 K} zeigt im Datensatz ein uneinheitliches Profil. Im Niederstrombereich steigt der mittlere Fehler bei Dreiecksanordnung deutlich an, während im Nenn- und Überlastbereich nur moderate Verbesserungen auftreten. Angesichts der höheren Preisbasis ist die Geometrieoptimierung damit kein verlässlicher Hebel für relative Zugewinne. Der Nutzen dieser Variante ist daher eher in der absoluten Fehlerreduktion und in der Robustheit gegenüber externen Feldbedingungen zu verorten (siehe Abschnitt~\ref{sec:analyse_messreihe_2500A}).
 
 \begin{table}[H]
     \centering
@@ -271,26 +271,26 @@ Der kompensierte \textit{Celsa ALO 10050 K} zeigt demgegenüber kleinere Verbess
     \small
     \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{5.5cm} S[table-format=3.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]@{}}
+    \begin{tabular}{@{}p{5.5cm} S[table-format=3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=3.2]@{}}
         \toprule
         \textbf{Name}                          & {\textbf{Preis [\text{\euro}]}} &
         \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}}                                                                 \\
         \cmidrule(lr){3-6}
                                                &                                 & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
         \midrule
-        \textit{Celsa ALO 10030} Standard      & 45.50                           & 59.38           & 76.93         & 69.07             & 68.46           \\
-        \textit{Celsa ALO 10050 K} kompensiert & 104.20                          & 23.08           & 9.36          & 26.25             & 19.56           \\
+        \textit{Celsa ALO 10030} Standard      & 45.50                           & 76.19           & 76.95         & 69.09             & 74.08           \\
+        \textit{Celsa ALO 10050 K} kompensiert & 104.20                          & -150.00         & 7.69          & 26.42             & 61.37           \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \subsubsection{Kosteneffizienz im Hochstrombereich \SIrange{3000}{4000}{A}}
 
-Im Hochstrombereich (Tabelle~\ref{tab:oeko_3000A_parallel_vs_dreieck} und Tabelle~\ref{tab:oeko_4000A_parallel_vs_dreieck}) wird im Datensatz sichtbar, dass Standardwandler in Nenn- und Überlast besonders stark von der Dreiecksanordnung profitieren können. Für den \textit{Celsa ALO 12070} liegen die \(\eta_{\text{geo}}\)-Werte bei \SI{3000}{A} und \SI{4000}{A} im Nenn- und Überlastbereich deutlich im positiven Bereich. Der Niederstrombereich reagiert vergleichsweise schwach. Diese Charakteristik ist konsistent mit den technischen Befunden aus Abschnitt~\ref{sec:analyse_messreihe_3000A} und Abschnitt~\ref{sec:analyse_messreihe_4000A}. Sättigungseffekte prägen sich dort insbesondere bei hohen Lasten aus und werden durch die Geometrie beeinflusst.
+Im Hochstrombereich (Tabelle~\ref{tab:oeko_3000A_parallel_vs_dreieck} und Tabelle~\ref{tab:oeko_4000A_parallel_vs_dreieck}) wird im Datensatz sichtbar, dass Standardwandler in Nenn- und Überlast stark von der Dreiecksanordnung profitieren können. Für den \textit{Celsa ALO 12070} liegen die \(\eta_{\text{geo}}\)-Werte bei \SI{3000}{A} und \SI{4000}{A} im Nenn- und Überlastbereich deutlich im positiven Bereich. Im Niederstrombereich ergibt sich hingegen eine Verschlechterung, die bei \SI{3000}{A} besonders ausgeprägt ist. Diese Charakteristik ist konsistent mit den technischen Befunden aus Abschnitt~\ref{sec:analyse_messreihe_3000A} und Abschnitt~\ref{sec:analyse_messreihe_4000A}. Sättigungseffekte prägen sich dort insbesondere bei hohen Lasten aus und werden durch die Geometrie beeinflusst, während bei niedrigen Strömen andere Einflussgrößen dominieren können.
 
 Der kompensierte \textit{Celsa ALO 12070 K} zeigt bei \SI{3000}{A} ein gemischtes Profil. Im Überlastbereich ist im Datensatz eine deutliche Verbesserung durch die Dreiecksanordnung erkennbar. Nieder- und Nennbereich weisen negative Werte auf. Ökonomisch fällt dies aufgrund der hohen Preisbasis stärker ins Gewicht, sofern die Bewertung primär über den mittleren Zugewinn erfolgt. Gleichzeitig ist bei der Interpretation zu berücksichtigen, dass negative \(\eta_{\text{geo}}\)-Werte hier lediglich eine Verschiebung zwischen zwei bereits kleinen Fehlern bedeuten können (siehe Bereichsanalysen in Abschnitt~\ref{sec:analyse_messreihe_3000A}).
 
-Bei \SI{4000}{A} zeigt der kompensierte \textit{Celsa ALO 12070 K} im vorliegenden Datensatz in allen Bereichen negative Werte. Daraus folgt für die reine \emph{Geometriewirkung} zunächst, dass die Dreiecksanordnung bei diesem Modell keinen zusätzlichen Verbesserungshebel darstellt. Diese Aussage ist jedoch von der allgemeinen Robustheit des kompensierten Konzepts zu trennen. Die technischen Ergebnisse zeigen unabhängig von \(\eta_{\text{geo}}\) kleine absolute Fehlerwerte (siehe Abschnitt~\ref{sec:analyse_messreihe_4000A}).
+Bei \SI{4000}{A} zeigt der kompensierte \textit{Celsa ALO 12070 K} im vorliegenden Datensatz überwiegend negative Werte, während der Nennbereich nahezu neutral bleibt. Für die reine \emph{Geometriewirkung} ergibt sich damit, dass die Dreiecksanordnung bei diesem Modell keinen zusätzlichen Verbesserungshebel darstellt. Diese Aussage ist jedoch von der allgemeinen Robustheit des kompensierten Konzepts zu trennen. Die technischen Ergebnisse zeigen unabhängig von \(\eta_{\text{geo}}\) kleine absolute Fehlerwerte (siehe Abschnitt~\ref{sec:analyse_messreihe_4000A}).
 
 \begin{table}[H]
     \centering
@@ -299,15 +299,15 @@ Bei \SI{4000}{A} zeigt der kompensierte \textit{Celsa ALO 12070 K} im vorliegend
     \small
     \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{5.5cm} S[table-format=3.2] S[table-format=-2.2] S[table-format=-2.2] S[table-format=2.2] S[table-format=2.2]@{}}
+    \begin{tabular}{@{}p{5.5cm} S[table-format=3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=3.2]@{}}
         \toprule
         \textbf{Name}                          & {\textbf{Preis [\text{\euro}]}} &
         \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}}                                                                 \\
         \cmidrule(lr){3-6}
                                                &                                 & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
         \midrule
-        \textit{Celsa ALO 12070} Standard      & 71.51                           & 9.26            & 73.85         & 87.23             & 56.78           \\
-        \textit{Celsa ALO 12070 K} kompensiert & 346.06                          & -27.05          & -17.44        & 78.70             & 41.06           \\
+        \textit{Celsa ALO 12070} Standard      & 71.51                           & -100.00         & 73.17         & 87.35             & 86.84           \\
+        \textit{Celsa ALO 12070 K} kompensiert & 346.06                          & -42.86          & -12.50        & 77.78             & 44.38           \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -319,19 +319,19 @@ Bei \SI{4000}{A} zeigt der kompensierte \textit{Celsa ALO 12070 K} im vorliegend
     \small
     \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{1.05}
-    \begin{tabular}{@{}p{5.5cm} S[table-format=3.2] S[table-format=-2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]@{}}
+    \begin{tabular}{@{}p{5.5cm} S[table-format=3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=-3.2] S[table-format=3.2]@{}}
         \toprule
         \textbf{Name}                          & {\textbf{Preis [\text{\euro}]}} &
         \multicolumn{4}{c}{\textbf{Verbesserung \(\eta_{\text{geo}}\) [\%]}}                                                                 \\
         \cmidrule(lr){3-6}
                                                &                                 & \textbf{Nieder} & \textbf{Nenn} & \textbf{Überlast} & \textbf{Gesamt} \\
         \midrule
-        \textit{Celsa ALO 12070} Standard      & 71.51                           & -4.59           & 81.61         & 72.97             & 53.06           \\
-        \textit{Celsa ALO 12070 K} kompensiert & 401.91                          & -12.39          & -8.14         & -21.54            & 14.02           \\
+        \textit{Celsa ALO 12070} Standard      & 71.51                           & -33.33          & 81.19         & 73.02             & 62.51           \\
+        \textit{Celsa ALO 12070 K} kompensiert & 401.91                          & -22.22          & 0.00          & -18.18            & 13.47           \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \paragraph{Zwischenfazit der ökonomischen Einordnung}
 
-Über alle Strombereiche zeigt der Datensatz zwei wiederkehrende Muster. Erstens treten die größten relativen Geometrieeffekte typischerweise bei Standardwandlern im Nenn- und Überlastbereich auf. Dies deckt sich mit den dort dominanten Sättigungs- und Fremdfeldeinflüssen. Zweitens weisen kompensierte und \glsentryshort{ffp}-basierte Konzepte häufig eine geringere Geometriesensitivität auf. Die Richtung des Effekts kann dabei vom konkreten Aufbau abhängen, wie zum Beispiel der Schirmorientierung. In der reinen Gegenüberstellung von Kosten und \(\eta_{\text{geo}}\) wird damit die Geometrieoptimierung als potenziell starker Hebel sichtbar. Spezialtechnologien sind demgegenüber eher als Mittel zur Robustheit und zur Reduktion geometrischer Randbedingtheit interpretierbar. Welche dieser Perspektiven in der Gesamtabwägung dominiert hängt von den konkreten Integrationsrandbedingungen und dem dominanten Betriebsbereich ab und wird im Fazit zusammengeführt (Kapitel~\ref{chap:fazit}).
+Über alle Strombereiche zeigt der Datensatz zwei wiederkehrende Muster. Erstens treten die größten relativen Geometrieeffekte typischerweise bei Standardwandlern im Nenn- und Überlastbereich auf. Dies deckt sich mit den dort dominanten Sättigungs- und Fremdfeldeinflüssen. Zweitens weisen kompensierte Konzepte häufig eine geringere Geometriesensitivität auf, während \glsentryshort{ffp}-basierte Konzepte im Datensatz je nach Ausführung auch stark richtungsabhängig reagieren können. Die Richtung des Effekts kann dabei vom konkreten Aufbau abhängen, wie zum Beispiel der Schirmorientierung. In der reinen Gegenüberstellung von Kosten und \(\eta_{\text{geo}}\) wird damit die Geometrieoptimierung als potenziell starker Hebel sichtbar. Spezialtechnologien sind demgegenüber eher als Mittel zur Robustheit und zur Reduktion geometrischer Randbedingtheit interpretierbar. Welche dieser Perspektiven in der Gesamtabwägung dominiert hängt von den konkreten Integrationsrandbedingungen und dem dominanten Betriebsbereich ab und wird im Fazit zusammengeführt (Kapitel~\ref{chap:fazit}).

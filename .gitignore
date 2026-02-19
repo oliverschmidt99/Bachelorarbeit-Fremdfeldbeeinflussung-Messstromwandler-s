@@ -13,6 +13,7 @@
 .*.lb
 
 *.$
+*.bkp
 
 ## Intermediate documents:
 *.dvi
@@ -332,3 +333,4 @@ main.ist
 *.zip
 *.ist
 03_Ressourcen/dia_neu/.~lock.2026-02-11T11-12_export_ohne_5000A.csv#
+03_Ressourcen/zeichnungen/.$aufbau_wandler_kompensiert.drawio.bkp
