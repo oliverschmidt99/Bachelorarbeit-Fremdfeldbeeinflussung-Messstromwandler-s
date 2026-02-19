@@ -33,7 +33,7 @@ Diese Spannung speist den nachgeschalteten Hochstrom-Festtransformator der \text
 \subsubsection{Regelungskonzept}
 \label{sec:regelungskonzept}
 
-Die Stromregelung ist als digitaler \gls{pid}-Regelkreis innerhalb des Peripheriesystems Siemens \gls{et200s} implementiert. Der Bediener definiert über die \gls{wincc}-Visualisierung den Sollstrom, welchen die \gls{sps} kontinuierlich mit dem rückgeführten Istwert vergleicht. Als Stellgröße generiert die Steuerung Schaltbefehle für den Antriebsmotor des Säulenstelltransformators.
+Die Stromregelung ist als digitaler \acrshort{pid}-Regelkreis innerhalb des Peripheriesystems Siemens \acrshort{et200s} implementiert. Der Bediener definiert über die \acrshort{wincc}-Visualisierung den Sollstrom, welchen die \gls{sps} kontinuierlich mit dem rückgeführten Istwert vergleicht. Als Stellgröße generiert die Steuerung Schaltbefehle für den Antriebsmotor des Säulenstelltransformators.
 
 
 
@@ -46,25 +46,26 @@ Um hochfrequente Regelvorgänge zu vermeiden, welche transiente Stromspitzen ind
     \small
     \begin{tabularx}{\textwidth}{@{}l l l l X@{}}
         \toprule
-        \textbf{Komponente}      & \textbf{Typ}         & \textbf{\makecell[l]{Leistung /                                                                                                                   \\ Bürde}} & \textbf{\makecell[l]{Primär / \\ Input}} & \textbf{\makecell[l]{Sekundär / \\ Output}} \\ \midrule
-        Säulenstelltransformator & Ruhstrat             & \SI{90}{kVA}                                                                & \SI{380}{V}                      & \SIrange{0}{380}{V} (\SI{70}{A}) \\
-        Festtransformator        & Janssen              & \SI{30}{kVA}                                                                & \SI{380}{V}                      & \SI{6}{V} (\SI{5000}{A})         \\
-        Stromwandler             & Celsa ICG            & \SI{5}{VA}                                                                  & \SI{6000}{A}                     & \SI{5}{A} (Kl. 0,2S)             \\
-        Messumformer (3-K)       & 3-K Elektrik         & --                                                                          & \SI{0}{A} bis \SI{5}{A} \gls{ac} & \SIrange{0}{20}{mA} \gls{dc}     \\ \midrule
-        \textbf{Leittechnik}     & \textbf{Typ}         & \multicolumn{3}{l}{\textbf{Beschreibung}}                                                                                                         \\ \cmidrule(r){1-2}
-        Steuerung                & Siemens \gls{et200s} & \multicolumn{3}{l}{\gls{profinet}-Anbindung, Stromregelung, Analogeingänge}                                                                       \\
-        Visualisierung           & Siemens \gls{wincc}  & \multicolumn{3}{l}{\gls{hmi}-System, Prozessüberwachung, Datenlogging}                                                                            \\ \bottomrule
+        \textbf{Komponente}      & \textbf{Typ}         & \textbf{\makecell[l]{Leistung / \\ Bürde}} & \textbf{\makecell[l]{Primär / \\ Input}} & \textbf{\makecell[l]{Sekundär / \\ Output}} \\ \midrule
+        Säulenstelltransformator & Ruhstrat             & \SI{90}{kVA}                               & \SI{380}{V}                              & \SIrange{0}{380}{V} (\SI{70}{A})            \\
+        Festtransformator        & Janssen              & \SI{30}{kVA}                               & \SI{380}{V}                              & \SI{6}{V} (\SI{5000}{A})                    \\
+        Stromwandler             & Celsa ICG            & \SI{5}{VA}                                 & \SI{6000}{A}                             & \SI{5}{A} (Kl. 0,2S)                        \\
+        Messumformer (3-K)       & 3-K Elektrik         & --                                         & \SI{0}{A} bis \SI{5}{A} \acrshort{ac}    & \SIrange{0}{20}{mA} \acrshort{dc}           \\ \midrule
+        \textbf{Leittechnik}     & \textbf{Typ}         & \multicolumn{3}{l}{\textbf{Beschreibung}}                                                                                         \\ \cmidrule(r){1-2}
+        Steuerung                & Siemens \acrshort{et200s} & \multicolumn{3}{l}{\acrshort{profinet}-Anbindung, Stromregelung, Analogeingänge}                                           \\
+        Visualisierung           & Siemens \acrshort{wincc}  & \multicolumn{3}{l}{\acrshort{hmi}-System, Prozessüberwachung, Datenlogging}                                                \\ \bottomrule
     \end{tabularx}
 \end{table}
 
-\paragraph{Anforderungen an die Referenzmessstrecke}
+\pagebreak[4]
+\medskip
+\noindent\textbf{Anforderungen an die Referenzmessstrecke}\par
 \label{par:anforderungen_referenz}
 
-Für die Durchführung der experimentellen Untersuchungen an den Stromwandlern ist die Bereitstellung einer Referenzmessstrecke erforderlich, die eine valide Bewertung gemäß der Genauigkeitsklasse \num{1,00} ermöglicht. Hierzu werden die Referenzmessmittel, die Stromerzeugung sowie die Signalführung als geschlossene Messkette ausgelegt und vorab verifiziert. 
+Für die Durchführung der experimentellen Untersuchungen an den Stromwandlern ist die Bereitstellung einer Referenzmessstrecke erforderlich, die eine valide Bewertung gemäß der Genauigkeitsklasse \num{1,00} ermöglicht. Hierzu werden die Referenzmessmittel, die Stromerzeugung sowie die Signalführung als geschlossene Messkette ausgelegt und vorab verifiziert.
 
+Um die Anforderungen an ein wissenschaftliches Referenzsystem zu erfüllen, wird für die Primärstromerfassung eine deutlich höhere Präzision als die Zielklasse der Prüflinge angesetzt (z.\,B. Klasse \num{0,2} bzw. \num{0,2}S). Der Zusatz \glqq S\grqq{} kennzeichnet nach DIN EN 61869-2 eine Sonder-Genauigkeitsklasse mit verschärften Fehlergrenzen insbesondere im unteren Strombereich, sodass auch bei kleinen Messströmen eine höhere Messgenauigkeit sichergestellt ist~\cite{norm-DIN_EN_61869_2-Messwandler_Teil2-DIN}. Dadurch wird sichergestellt, dass die kombinierte Messunsicherheit der Referenzmessung hinreichend klein gegenüber den zulässigen Fehlergrenzen der Klasse \num{1,0} bleibt. Diese methodische Trennung gewährleistet, dass beobachtete Messabweichungen eindeutig den Charakteristika der Prüflinge zugeordnet werden können und keine signifikanten Einflüsse durch die Versuchseinrichtung enthalten sind.
 
-
-Um die Anforderungen an ein wissenschaftliches Referenzsystem zu erfüllen, wird für die Primärstromerfassung eine deutlich höhere Präzision als die Zielklasse der Prüflinge angesetzt (z.\,B. Klasse \num{0,2} bzw. \num{0,2}S). Dadurch wird sichergestellt, dass die kombinierte Messunsicherheit der Referenzmessung hinreichend klein gegenüber den zulässigen Fehlergrenzen der Klasse \num{1,0} bleibt. Diese methodische Trennung gewährleistet, dass beobachtete Messabweichungen eindeutig den Charakteristika der Prüflinge zugeordnet werden können und keine signifikanten Einflüsse durch die Versuchseinrichtung enthalten sind.
 
 
 
@@ -118,7 +119,7 @@ Damit sind beide Komponenten als Referenzmessmittel ungeeignet. Die Eigenfehler 
 
 Wie im vorangegangenen Abschnitt dargelegt, erfüllte die initiale Messstrecke nicht die Anforderungen an eine präzise Genauigkeitsprüfung von Messstromwandlern. Aus diesem Grund wurde eine umfassende Optimierung des Hochstromprüfstandes durchgeführt. Das primäre Ziel dieser Maßnahmen war die Steigerung der Messgenauigkeit sowie die Automatisierung des Prüfablaufs, um reproduzierbare und unmittelbar vergleichbare Ergebnisse sicherzustellen.
 
-Zur technischen Umsetzung wurden zwei digitale Energiemessgeräte der Siemens-Produktfamilie ausgewählt. Das Modell \gls{pac} 3220, welches für die Erfassung des Prüflingsstroms eingesetzt wird \cite[S.~97]{pdf-Handbuch_PAC3120-Siemens}, sowie das zur Überwachung der Einspeisung genutzte \gls{pac} 4220 \cite[S.~94]{pdf-Handbuch_PAC4220-Siemens}, verfügen jeweils über die Genauigkeitsklasse 0,2 für die Strommessung. 
+Zur technischen Umsetzung wurden zwei digitale Energiemessgeräte der Siemens-Produktfamilie ausgewählt. Das Modell \acrshort{pac} 3220, welches für die Erfassung des Prüflingsstroms eingesetzt wird \cite[S.~97]{pdf-Handbuch_PAC3120-Siemens}, sowie das zur Überwachung der Einspeisung genutzte \acrshort{pac} 4220 \cite[S.~94]{pdf-Handbuch_PAC4220-Siemens}, verfügen jeweils über die Genauigkeitsklasse 0,2 für die Strommessung. 
 
 \begin{figure}[H]
     \centering
@@ -127,23 +128,30 @@ Zur technischen Umsetzung wurden zwei digitale Energiemessgeräte der Siemens-Pr
     \label{pic:aufbau_messstrecke_neu}
 \end{figure}
 
-Diese Geräte ermöglichen durch optionale Erweiterungsmodule eine direkte Integration in die Systemumgebung der Siemens \gls{et200s} via \gls{profinet}-Protokoll. Ein wesentlicher Vorteil dieser Konfiguration liegt in der dezentralen Messwerterfassung unmittelbar am Messpunkt. Dadurch lassen sich parasitäre Effekte über lange Messleitungen effektiv reduzieren. Die Einbindung in die \gls{sps} erfolgt durch eine direkte zyklische Datenübertragung, wodurch die manuelle Abfrage von Registern entfällt und eine zeitsynchrone Datenbasis für beide Messpunkte geschaffen wird.
+Diese Geräte ermöglichen durch optionale Erweiterungsmodule eine direkte Integration in die Systemumgebung der Siemens \acrshort{et200s} via \acrshort{profinet}-Protokoll. Ein wesentlicher Vorteil dieser Konfiguration liegt in der dezentralen Messwerterfassung unmittelbar am Messpunkt. Dadurch lassen sich parasitäre Effekte über lange Messleitungen effektiv reduzieren. Die Einbindung in die \acrshort{sps} erfolgt durch eine direkte zyklische Datenübertragung, wodurch die manuelle Abfrage von Registern entfällt und eine zeitsynchrone Datenbasis für beide Messpunkte geschaffen wird.
 
 
 
-Die in Abbildung~\ref{pic:aufbau_messstrecke_neu} dargestellte Systemarchitektur verdeutlicht die informationstechnische Vernetzung des optimierten Messaufbaus. Während der obere Teil des Schemas den bereits beschriebenen Leistungspfad darstellt, erfolgt die messtechnische Erfassung der Primärströme \gls{sym:I_p} zyklisch durch die Geräte \gls{pac} 4220 (Einspeisung) und \gls{pac} 3220 (Prüfling). Die erfassten Stromwerte werden in \gls{wincc} archiviert und stehen dort für die Prozessüberwachung zur Verfügung. Über die Benutzeroberfläche (\gls{hmi}) können diese Daten als \gls{csv}-Datei exportiert werden. Diese Datei dient als Grundlage für die anschließende Genauigkeitsmessung und die detaillierte Auswertung der Versuchsreihen.
+Die in Abbildung~\ref{pic:aufbau_messstrecke_neu} dargestellte Systemarchitektur verdeutlicht die informationstechnische Vernetzung des optimierten Messaufbaus. Während der obere Teil des Schemas den bereits beschriebenen Leistungspfad darstellt, erfolgt die messtechnische Erfassung der Primärströme \gls{sym:I_p} zyklisch durch die Geräte \acrshort{pac} 4220 (Einspeisung) und \acrshort{pac} 3220 (Prüfling). Die erfassten Stromwerte werden in \acrshort{wincc} archiviert und stehen dort für die Prozessüberwachung zur Verfügung. Über die Benutzeroberfläche \acrshort{hmi} können diese Daten als \acrshort{csv}-Datei exportiert werden. Diese Datei dient als Grundlage für die anschließende Genauigkeitsmessung und die detaillierte Auswertung der Versuchsreihen.
 
 \subsubsection{Softwaregestützte Prozesskette zur Datenauswertung}
 \label{sec:datenaufbereitung_analyse}
 
-Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv}-Format vor und enthalten die zeitlichen Verläufe der Ströme \gls{sym:I_p} als Referenz sowie \gls{sym:I_sec} als Prüflingsstrom. Angesichts des Untersuchungsumfangs mit 31 Konfigurationen, jeweils zwei Messgeräten und drei Phasen ergeben sich insgesamt mehr als 180 auszuwertende Einzelmessreihen. Eine manuelle Verarbeitung in einer Tabellenkalkulation wäre aufgrund des hohen Zeitaufwands und der erhöhten Fehleranfälligkeit bei Übertragungen unzweckmäßig. Daher wurde eine spezialisierte Auswertungssoftware auf Basis von \textit{Python} entwickelt. Der erste Prozessschritt erfolgt im Modul \textit{„Manueller Rohdaten-Export“} (Abbildung~\ref{pic:manual_tagger}). Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} erfolgt, entstehen umfangreiche Zeitreihen. Der Rohdaten-Selektor identifiziert die aufgezeichneten Laststufen und isoliert die stationären Messbereiche. Dazu werden transiente Ein- und Ausschwingvorgänge aus dem Datensatz entfernt, sodass ausschließlich stabile Phasen in die weiterführende Genauigkeitsberechnung eingehen. Pro Laststufe werden exakt 560 Messpunkte ausgewertet, was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht. Obwohl das Plateau technisch fünf Minuten gehalten wird, werden die letzten 20 Sekunden als Sicherheitsabstand verworfen, damit keine Signalflanken des Abschaltvorgangs in die Berechnung einfließen. Die verbleibenden 560 Werte bilden eine statistisch belastbare Grundlage, und die selektierten Bereiche werden als sortierte Datensätze in der Datenbank persistiert.
+Die vom Prüfstand exportierten Rohdaten liegen im \gls{csv}-Format vor und enthalten die zeitlichen Verläufe der Ströme \gls{sym:I_p} als Referenz sowie \gls{sym:I_sec} als Prüflingsstrom. Angesichts des Untersuchungsumfangs mit 31 Konfigurationen, jeweils zwei Messgeräten und drei Phasen ergeben sich insgesamt mehr als 180 auszuwertende Einzelmessreihen. Eine manuelle Verarbeitung in einer Tabellenkalkulation wäre aufgrund des hohen Zeitaufwands und der erhöhten Fehleranfälligkeit bei Übertragungen unzweckmäßig.
+
+Daher wurde eine spezialisierte Auswertungssoftware auf Basis von \textit{Python} entwickelt. Der erste Prozessschritt erfolgt im Modul \textit{„Manueller Rohdaten-Export“} (Abbildung~\ref{pic:manual_tagger}). Da die Datenerfassung am Prüfstand mit einer Abtastrate von \SI{2}{Hz} erfolgt, entstehen umfangreiche Zeitreihen.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/pdf/datenverarbeitung/rohdaten_export.png}
+    \includegraphics[width=0.85\textwidth]{03_Ressourcen/pdf/datenverarbeitung/verlauf_gesamt.png}
     \caption{Benutzeroberfläche des manuellen Rohdaten-Exports zur Selektion stabiler Messbereiche}
     \label{pic:manual_tagger}
 \end{figure}
+
+Der Rohdaten-Selektor identifiziert die aufgezeichneten Laststufen und isoliert die stationären Messbereiche. Dazu werden transiente Ein- und Ausschwingvorgänge aus dem Datensatz entfernt, sodass ausschließlich stabile Phasen in die weiterführende Genauigkeitsberechnung eingehen. Pro Laststufe werden exakt 560 Messpunkte ausgewertet, was einem Zeitfenster von 4 Minuten und 40 Sekunden entspricht. Obwohl das Plateau technisch fünf Minuten gehalten wird, werden die letzten 20 Sekunden als Sicherheitsabstand verworfen, damit keine Signalflanken des Abschaltvorgangs in die Berechnung einfließen. Die verbleibenden 560 Werte bilden eine statistisch belastbare Grundlage, und die selektierten Bereiche werden als sortierte Datensätze in der Datenbank gespeichert.
+
+
+
 
 Aus den selektierten Zeitfenstern werden je Lastpunkt die arithmetischen Mittelwerte der Ströme gebildet. Dabei beschreibt $\bar{I}_{s}$ den Mittelwert der Stromstärke des Prüflings und $\bar{I}_{pri}$ den Mittelwert des Referenzmessgeräts im identischen Zeitraum. Zur kompakten Bewertung und zum Vergleich verschiedener Konfigurationen werden aus den ermittelten Übersetzungsmessabweichungen drei Kennwerte abgeleitet. Als Basiswert wird für alle Lastpunkte im Bereich \SIrange{5}{120}{\percent} sowie über alle drei Phasen der mittlere Betrag der Messabweichung gebildet, wodurch eine Kompensation positiver und negativer Abweichungen verhindert wird.
 \begin{equation}
@@ -153,9 +161,9 @@ Aus den selektierten Zeitfenstern werden je Lastpunkt die arithmetischen Mittelw
     \frac{1}{3}
     \sum_{p \in \{L1,L2,L3\}}
     \left(
-        \frac{1}{n}
-        \sum_{j=1}^{n}
-        \left|\varepsilon_{p,j}\right|
+    \frac{1}{n}
+    \sum_{j=1}^{n}
+    \left|\varepsilon_{p,j}\right|
     \right)
 \end{equation}
 Dabei ist $n$ die Anzahl der ausgewerteten Lastpunkte und $\varepsilon_{p,j}$ die Übersetzungsmessabweichung der Phase $p$ am Lastpunkt $j$. Die geometrische Verbesserung quantifiziert den Anteil des eliminierten Fehlers beim Wechsel von der Parallelanordnung zur Dreiecksanordnung.
@@ -164,7 +172,7 @@ Dabei ist $n$ die Anzahl der ausgewerteten Lastpunkte und $\varepsilon_{p,j}$ di
     \eta_{\text{geo}}
     =
     \left(
-        1 - \frac{\varepsilon_{\text{Dreieck}}}{\varepsilon_{\text{Parallel}}}
+    1 - \frac{\varepsilon_{\text{Dreieck}}}{\varepsilon_{\text{Parallel}}}
     \right)\cdot 100\%
 \end{equation}
 Zur ökonomischen Bewertung wird der technische Gewinn auf die Investitionskosten normiert.
@@ -181,21 +189,23 @@ Nach Abschluss der Berechnungen stehen die Ergebnisse in zwei Analysemodulen zur
     \centering
     \caption{Definition der Betriebsbereiche zur Aggregation der Messabweichungen}
     \label{tab:betriebsbereiche}
-    \begin{tabular}{l p{0.55\textwidth} l}
+    \begin{tabularx}{\textwidth}{@{}l X l@{}}
         \toprule
-        \textbf{Bereich} & \textbf{Funktion} & \textbf{Lastpunkte} \\
+        \textbf{Bereich}   & \textbf{Funktion} & \textbf{Lastpunkte} \\
         \midrule
-        Niederstrombereich &
-        Erfasst das Anlaufverhalten und die Genauigkeit bei geringer bis mittlerer Last &
+        Niederstrombereich & 
+        Erfasst das Anlaufverhalten und die Genauigkeit bei geringer bis mittlerer Last & 
         5\,\%, 20\,\% und 50\,\% $I_n$ \\
-        Nennstrombereich &
-        Bildet den Hauptarbeitsbereich um den Nennstrom ab &
+        \addlinespace
+        Nennstrombereich   & 
+        Bildet den Hauptarbeitsbereich um den Nennstrom ab & 
         80\,\%, 90\,\% und 100\,\% $I_n$ \\
-        Überstrombereich &
-        Visualisiert das Verhalten bei Überlast &
+        \addlinespace
+        Überstrombereich   & 
+        Visualisiert das Verhalten bei Überlast & 
         120\,\% $I_n$ \\
         \bottomrule
-    \end{tabular}
+    \end{tabularx}
 \end{table}
 
 
@@ -284,18 +294,12 @@ Es ist anzumerken, dass es sich hierbei um eine Vereinfachung handelt, die den W
 \end{table}
 Die eingesetzten Wandler lassen sich technologisch in drei Kategorien unterteilen. Als Basis dienen Standardwandler, die einen klassischen Aufbau ohne zusätzliche konstruktive Schutzmaßnahmen gegen externe Felder aufweisen (siehe Abschnitt \ref{sec:aufbau_wandler}). Eine weiterführende Bauform stellen die kompensierten Wandler dar. Diese Modelle verfügen über eine modifizierte Wicklungsanordnung, die gezielt zur Reduktion von Messabweichungen bei asymmetrischer Primärleiterlage eingesetzt wird (siehe Abschnitt \ref{sec:kompensationswicklungen}). 
 
-Die dritte Gruppe bilden die spezialisierten \gls{ffp}-Wandler der Firma \textit{Redur}, welche die Technologie der Fremdfeldprotektoren nutzen. Die Schirmwirkung wird hierbei durch die Integration eines Werkstoffs mit hoher magnetischer Permeabilität realisiert. Diese Schirmung fungiert als magnetischer Shunt, der die Feldlinien benachbarter Leiter um den Messkern herumleitet. 
-
-
-
-Infolgedessen bleibt die magnetische Induktion im Kernmaterial weitgehend unbeeinflusst von äußeren Feldern \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. Um die Vergleichbarkeit der Messergebnisse zu gewährleisten, entsprechen alle ausgewählten Wandler der Genauigkeitsklasse \num{1}. Die in der Tabelle aufgeführten Nennbürden sind so gewählt, dass sie die Anforderungen für die thermische Dauerbelastung erfüllen.
+Die dritte Gruppe bilden die spezialisierten \gls{ffp}-Wandler der Firma \textit{Redur}, welche die Technologie der Fremdfeldprotektoren nutzen. Die Schirmwirkung wird hierbei durch die Integration eines Werkstoffs mit hoher magnetischer Permeabilität realisiert. Diese Schirmung fungiert als magnetischer Shunt, der die Feldlinien benachbarter Leiter um den Messkern herumleitet. Infolgedessen bleibt die magnetische Induktion im Kernmaterial weitgehend unbeeinflusst von äußeren Feldern \cite{pdf-Fremdfeldstoerungen_Stromwandler-Redur}. Um die Vergleichbarkeit der Messergebnisse zu gewährleisten, entsprechen alle ausgewählten Wandler der Genauigkeitsklasse \num{1}. Die in der Tabelle aufgeführten Nennbürden sind so gewählt, dass sie die Anforderungen für die thermische Dauerbelastung erfüllen.
 
 \subsubsection{Geometrische Anordnung der Primärleiter}
 \label{sec:layout_geometrie}
 
 In Niederspannungsschaltanlagen werden Kupferschienen vorwiegend parallel angeordnet. Diese Bauweise zeichnet sich durch hohe Platzersparnis sowie eine geringe Montagekomplexität aus. Die Führung der Schienen wird konstruktiv maßgeblich durch die Anschlussebene des Leistungsschalters determiniert, weshalb Variationen der Geometrie im realen Anlagenbau nur eingeschränkt umsetzbar sind. Die Messstromwandler werden üblicherweise dem Hauptschalter nachgelagert im Anschlussraum installiert. Aufgrund des begrenzten Bauraums stellt die Realisierung abweichender Leiteranordnungen, wie etwa einer Dreieckskonfiguration zur Reduktion von Fremdfeldeinflüssen, eine konstruktive Herausforderung dar.
-
-
 
 \begin{figure}[H]
     \centering
@@ -304,9 +308,9 @@ In Niederspannungsschaltanlagen werden Kupferschienen vorwiegend parallel angeor
     \label{pic:kupferschienen_layout}
 \end{figure}
 
-Abbildung~\ref{pic:kupferschienen_layout} illustriert die konstruktive Umsetzung der untersuchten Geometrien. In der Frontalansicht ist die horizontale Führung der drei Außenleiter L1, L2 und L3 ersichtlich. Die Abgangsschienen weisen dabei unterschiedliche Phasenmittenabstände auf: Im linken Bereich (blaue Schiene) beträgt der Abstand \SI{130}{mm}, während im rechten Anlagenteil (rote Schiene) ein Abstand von \SI{210}{mm} realisiert wurde. Die Seitenansicht verdeutlicht die Umsetzung der Dreiecksanordnung. Hier ist erkennbar, dass die Schienen zur Kontaktierung der Anschlussebene zweifach gekröpft sind. Der vertikale Versatz von \SI{140}{mm} ermöglicht die räumliche Staffelung der Leiter für die Dreieckskonfiguration.
+Abbildung~\ref{pic:kupferschienen_layout} illustriert die konstruktive Umsetzung der untersuchten Geometrien. In der Frontalansicht ist die horizontale Führung der drei Außenleiter L1, L2 und L3 ersichtlich. Die Abgangsschienen weisen dabei unterschiedliche Phasenmittenabstände auf. Im linken Bereich (blaue Schiene) beträgt der Abstand \SI{130}{mm}, während im rechten Anlagenteil (rote Schiene) ein Abstand von \SI{210}{mm} realisiert wurde. Die Seitenansicht verdeutlicht die Umsetzung der Dreiecksanordnung. Hier ist erkennbar, dass die Schienen zur Kontaktierung der Anschlussebene zweifach gekröpft sind. Der vertikale Versatz von \SI{140}{mm} ermöglicht die räumliche Staffelung der Leiter für die Dreieckskonfiguration.
 
-Um den Einfluss der Leitergeometrie experimentell zu untersuchen, wurde das Kupferschienensystem des Hochstromprüfstandes auf Basis dieser Spezifikationen flexibel gestaltet. Dies ermöglicht den direkten Vergleich zwischen der konventionellen Parallelanordnung und einer feldoptimierten Dreiecksanordnung bei identischen elektrischen Parametern. Die gewählten Dimensionen orientieren sich an Industriestandards; Tabelle~\ref{tab:schienen_konfiguration} gibt hierzu eine Übersicht der Phasenmittenabstände für die Leistungsschalter der Reihen 3WA12 und 3WA13.
+Um den Einfluss der Leitergeometrie experimentell zu untersuchen, wurde das Kupferschienensystem des Hochstromprüfstandes auf Basis dieser Spezifikationen flexibel gestaltet. Dies ermöglicht den direkten Vergleich zwischen der konventionellen Parallelanordnung und einer feldoptimierten Dreiecksanordnung bei identischen elektrischen Parametern. Die gewählten Dimensionen orientieren sich an Industriestandards. Tabelle~\ref{tab:schienen_konfiguration} gibt hierzu eine Übersicht der Phasenmittenabstände für die Leistungsschalter der Reihen 3WA12 und 3WA13.
 
 \begin{table}[H]
     \centering
@@ -326,27 +330,27 @@ Um den Einfluss der Leitergeometrie experimentell zu untersuchen, wurde das Kupf
     \end{tabular}
 \end{table}
 
+Als Referenz fungiert die Parallelanordnung der drei Phasenleiter in einer Ebene. Dieser in Abbildung~\ref{pic:kupferschienen_aufbauten} gezeigte Aufbau bildet die realen Bedingungen in \textit{Siemens SIVACON S8} Schaltfeldern nach. Die verwendeten Abstände entsprechen den in Tabelle~\ref{tab:schienen_konfiguration} aufgeführten Herstellervorgaben. In dieser Konfiguration ist der Prüfling – hier beispielhaft ein Hochstrom-Messstromwandler – den maximalen magnetischen Fremdfeldern der benachbarten Leiter ausgesetzt.
 
-\paragraph{Parallelanordnung}
-Als Referenz fungiert die Parallelanordnung der drei Phasenleiter in einer Ebene. Dieser in Abbildung~\ref{pic:kupferschienen_parallel} gezeigte Aufbau bildet die realen Bedingungen in \textit{Siemens SIVACON S8} Schaltfeldern nach. Die verwendeten Abstände entsprechen den in Tabelle~\ref{tab:schienen_konfiguration} aufgeführten Herstellervorgaben. In dieser Konfiguration ist der Prüfling – hier beispielhaft ein Hochstrom-Messstromwandler – den maximalen magnetischen Fremdfeldern der benachbarten Leiter ausgesetzt.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/Bilder/kupferschienen_parallel.jpg}
-    \caption{Versuchsaufbau in paralleler Schienenanordnung mit montiertem Messstromwandler}
-    \label{pic:kupferschienen_parallel}
-\end{figure}
-
-\paragraph{Dreieckskonfiguration}
-Für die Realisierung der Dreiecksanordnung wurde der Aufbau gemäß Abbildung~\ref{pic:kupferschienen_dreieck} modifiziert. Ein speziell gefertigter Kupferadapter führt hierbei die mittlere Phase L2 geometrisch aus der Ebene der Außenleiter heraus und versetzt die Schiene um \SI{140}{mm} nach vorne. Durch diesen Versatz spannen die Mittelpunkte der drei Leiter im Querschnitt ein Dreieck auf. 
-
-
+Für die Realisierung der Dreiecksanordnung wurde der Aufbau gemäß Abbildung~\ref{pic:kupferschienen_aufbauten} modifiziert. Ein speziell gefertigter Kupferadapter führt hierbei die mittlere Phase L2 geometrisch aus der Ebene der Außenleiter heraus und versetzt die Schiene um \SI{140}{mm} nach vorne. Durch diesen Versatz spannen die Mittelpunkte der drei Leiter im Querschnitt ein Dreieck auf.
 
 Ziel dieser Anordnung ist eine symmetrischere Gestaltung der magnetischen Kopplung sowie die partielle Kompensation der vektoriellen Anteile der Fremdfelder im Bereich des Wandlerkerns. Auch in dieser Konfiguration wurden die ausgewählten Prüflinge vermessen.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{03_Ressourcen/Bilder/kupferschienen_dreieck.jpg}
-    \caption{Modifizierter Versuchsaufbau in Dreieckskonfiguration durch räumlichen Versatz der Phase L2 mittels Kupferadapter}
-    \label{pic:kupferschienen_dreieck}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{03_Ressourcen/Bilder/kupferschienen_parallel_new.jpg}
+        \caption{Versuchsaufbau in paralleler Schienenanordnung mit montiertem Messstromwandler}
+        \label{pic:kupferschienen_parallel}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{03_Ressourcen/Bilder/kupferschienen_dreieck_new.jpg}
+        \caption{Modifizierter Versuchsaufbau in Dreieckskonfiguration durch räumlichen Versatz der Phase L2 mittels Kupferadapter}
+        \label{pic:kupferschienen_dreieck}
+    \end{subfigure}
+    \caption{Versuchsaufbauten der untersuchten Leiteranordnungen}
+    \label{pic:kupferschienen_aufbauten}
 \end{figure}
