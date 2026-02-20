@@ -8,6 +8,26 @@ import re
 from matplotlib.patches import Patch
 from matplotlib.ticker import MultipleLocator
 
+# --- MATLAB STYLE CONFIGURATION ---
+plt.rcParams.update({
+    "text.usetex": True,
+    "text.latex.preamble": r"\usepackage{amsmath} \usepackage{textcomp}",
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Helvetica", "Arial", "DejaVu Sans"],
+    "axes.linewidth": 1.2,
+    "axes.edgecolor": "black",
+    "xtick.direction": "in",
+    "ytick.direction": "in",
+    "xtick.top": True,
+    "ytick.right": True,
+    "xtick.major.size": 6,
+    "ytick.major.size": 6,
+    "xtick.minor.size": 3,
+    "ytick.minor.size": 3,
+    "grid.linestyle": "--",
+    "grid.alpha": 0.7
+})
+
 # --- KONFIGURATION ---
 CSV_DATEI = "export_sortiert.csv"
 
@@ -41,14 +61,13 @@ BAR_SPACING = 0.02
 COLOR_MBS_BASE = "#d62728"   # Rot
 COLOR_CELSA_BASE = "#3187fc" # Hellblau
 COLOR_CELSA_KOMP = "#103dfc" # Dunkelblau
-COLOR_REDUR_BASE = "#1CAB10" # Grün
+COLOR_REDUR_BASE = "#1CAB10" # Gruen
 COLOR_GRAY_BASE = "#6d0e78"
 COLOR_SIEMENS = "#00FFFF"
 COLOR_3K = "#800080"
 COLOR_ROGOWSKI = "#FFA500"
 
 # --- HARTE KONTRAST-SEQUENZ (FLAG 1) ---
-# Reihenfolge wie gewünscht: Rot, Blau, Grün, Orange ...
 SEQUENCE_COLORS = [
     "#d62728", # 1. ROT
     "#0000FF", # 2. BLAU
@@ -61,7 +80,7 @@ SEQUENCE_COLORS = [
     "#808080"  # 9. GRAU
 ]
 
-# Farben für Bereichsanalyse
+# Farben fuer Bereichsanalyse
 COLOR_RANGE_LOW = "#1f77b4"
 COLOR_RANGE_NOM = "#2ca02c"
 COLOR_RANGE_HIGH = "#d62728"
@@ -69,6 +88,12 @@ COLOR_RANGE_HIGH = "#d62728"
 # ==========================================
 # HELPER
 # ==========================================
+
+def escape_latex(text: str) -> str:
+    """Maskiert Sonderzeichen für LaTeX."""
+    text = str(text)
+    text = text.replace("&", r"\&").replace("%", r"\%").replace("$", r"\$").replace("#", r"\#").replace("_", r"\_")
+    return text
 
 def create_directories():
     for path in DIRS.values():
@@ -79,7 +104,7 @@ def prettify_group_name(group_name: str) -> str:
     s = str(group_name).strip().replace("_", " ")
     s = re.sub(r"(?i)\bmes\b", "Messung", s)
     s = re.sub(r"(\d+)\s*A\b", r"\1 A", s)
-    return s.strip()
+    return escape_latex(s.strip())
 
 def normalize_geo(geo: str) -> str:
     g = str(geo).strip().lower()
@@ -100,7 +125,8 @@ def format_label_text(row: pd.Series, include_current: bool = False) -> str:
     label = f"{h} {m} | {t} | {geo}"
     if include_current:
         label += f" | {ns} A"
-    return re.sub(r"\s+\|\s+\|\s+", " | ", label).strip()
+    label = re.sub(r"\s+\|\s+\|\s+", " | ", label).strip()
+    return escape_latex(label)
 
 def calculate_layout_adjustments(data, base_height, ncol=2):
     unique_items = len(data)
@@ -122,7 +148,7 @@ def is_dark_color(hex_color, threshold=0.4):
 def format_value(val):
     if pd.isna(val): return ""
     if val == 0: return "0.00"
-    if abs(val) < 0.01: return "< 0.01"
+    if abs(val) < 0.01: return r"$< 0.01$"
     return f"{val:.2f}"
 
 # ==========================================
@@ -130,7 +156,6 @@ def format_value(val):
 # ==========================================
 
 def get_standard_color(row):
-    """Gibt die STANDARD-Basisfarbe zurück (für Flag 0)."""
     h = str(row.get("hersteller", "")).lower()
     t = str(row.get("technologie", "")).lower()
     if "mbs" in h: return COLOR_MBS_BASE
@@ -142,12 +167,8 @@ def get_standard_color(row):
     return COLOR_GRAY_BASE
 
 def assign_dynamic_colors_per_group(df_group):
-    """
-    Weist Farben basierend auf FLAGS zu.
-    """
     if df_group.empty: return df_group
     
-    # Flag auslesen
     flag = 0
     if "flags" in df_group.columns:
         val = df_group["flags"].iloc[0]
@@ -160,60 +181,34 @@ def assign_dynamic_colors_per_group(df_group):
     print(f"   -> Gruppe '{group_name}' | Modus: {'SEQUENZ (Rot/Blau...)' if flag == 1 else 'Standard'}")
 
     if flag == 0:
-        # --- FLAG 0: STANDARD ---
         df_group["color"] = df_group.apply(get_standard_color, axis=1)
         return df_group
         
     elif flag == 1:
-        # --- FLAG 1: HARTE SEQUENZ ---
-        # Farben werden strikt nach Reihenfolge vergeben:
-        # 1. Messung (Par+Drei) -> Rot
-        # 2. Messung (Par+Drei) -> Blau
-        # usw.
-        
-        # Key zur Identifikation gleicher Wandlertypen
         df_group["_type_key"] = df_group["hersteller"] + "_" + df_group["modell"] + "_" + df_group["technologie"]
-        
         colors_out = pd.Series(index=df_group.index, dtype=object)
-        
-        # Sortiere Typen (damit z.B. MBS vor Siemens kommt, oder alphabetisch)
         type_keys = sorted(df_group["_type_key"].unique())
-        
         current_seq_idx = 0
         
         for type_key in type_keys:
             sub_df = df_group[df_group["_type_key"] == type_key]
-            
-            # Sortieren nach Legende für Konsistenz (damit Messung 1 immer Messung 1 bleibt)
             sub_df = sub_df.sort_values("final_legend")
             
-            # Gruppieren nach Geometrie, um Messungs-Paare zu finden
             parallels = sub_df[sub_df["geometrie"].str.lower().str.contains("parallel")]
             triangles = sub_df[sub_df["geometrie"].str.lower().str.contains("dreieck")]
             others = sub_df[~sub_df.index.isin(parallels.index) & ~sub_df.index.isin(triangles.index)]
             
-            # Anzahl der "Instanzen" dieses Typs ermitteln
             n_instances = max(len(parallels), len(triangles), 1)
             if len(others) > 0: n_instances = max(n_instances, len(others))
             
-            # Zuweisung:
-            # i läuft von 0 bis n_instances-1
-            # Farbe kommt aus globalem Counter (current_seq_idx)
-            
             for i in range(n_instances):
-                # Farbe auswählen (modulo, falls mehr Messungen als Farben)
                 color = SEQUENCE_COLORS[current_seq_idx % len(SEQUENCE_COLORS)]
                 current_seq_idx += 1
                 
-                # Zuweisen an Parallel (i-te Zeile)
                 if i < len(parallels):
                     colors_out[parallels.index[i]] = color
-                    
-                # Zuweisen an Dreieck (i-te Zeile) -> GLEICHE Farbe wie Parallel!
                 if i < len(triangles):
                     colors_out[triangles.index[i]] = color
-                    
-                # Zuweisen an Others
                 if i < len(others):
                     colors_out[others.index[i]] = color
         
@@ -238,25 +233,21 @@ def create_dynamic_legend_handles(data, color_col="color", show_geo=True):
         edge = "white" if (is_tri and is_dark_color(color)) else "black"
         
         base_label = format_label_text(row, include_current=False)
-        
-        # Label deduplizieren
         label = base_label
         counter = 1
+        
         while True:
             if label in legend_dict:
                 existing_patch = legend_dict[label]
-                # Wenn Farbe & Hatch gleich -> gleicher Eintrag
                 if existing_patch.get_facecolor() == mcolors.to_rgba(color) and \
                    existing_patch.get_hatch() == hatch:
                     break 
                 else:
-                    # Gleicher Name, andere Farbe -> Zusatzinfo anhängen
                     counter += 1
                     extra = str(row.get("final_legend", ""))
-                    # Versuche Datum
                     match = re.search(r'\d{4} \d{2} \d{2}', extra)
                     suffix = match.group(0) if match else f"V{counter}"
-                    label = f"{base_label} ({suffix})"
+                    label = f"{base_label} ({escape_latex(suffix)})"
             else:
                 legend_dict[label] = Patch(facecolor=color, hatch=hatch, edgecolor=edge, label=label)
                 break
@@ -267,10 +258,10 @@ def draw_limit_lines(ax, accuracy_class="1.0"):
     x_lims = [5, 20, 100, 120]
     if accuracy_class == "0.2":
         y_vals = [0.75, 0.35, 0.20, 0.20]
-        lbl = "Grenzwert Kl. 0.2"
+        lbl = r"Grenzwert Kl. 0.2"
     else:
         y_vals = [3.0, 1.5, 1.0, 1.0]
-        lbl = "Grenzwert Kl. 1.0"
+        lbl = r"Grenzwert Kl. 1.0"
         
     ax.plot(x_lims, y_vals, 'k--', lw=2.5, alpha=0.8, label=lbl)
     ax.plot(x_lims, [-y for y in y_vals], 'k--', lw=2.5, alpha=0.8)
@@ -290,7 +281,10 @@ def plot_line_curves_thesis_grouped(data, group_name):
     
     calc_h, calc_b = calculate_layout_adjustments(data, BASE_HEIGHT_LINE, ncol=2)
     fig, axes = plt.subplots(1, 3, figsize=(20, calc_h), sharey=True)
-    fig.suptitle(f"Genauigkeitsverlauf – I_N = {current_val} A", fontsize=FONT_TITLE, fontweight="bold", y=0.96)
+    
+    # LaTeX Title
+    fig.suptitle(fr"\textbf{{Genauigkeitsverlauf -- $I_N = {escape_latex(current_val)}\,\mathrm{{A}}$}}", 
+                 fontsize=FONT_TITLE, y=0.96)
     
     phases = ["L1", "L2", "L3"]
     
@@ -298,13 +292,13 @@ def plot_line_curves_thesis_grouped(data, group_name):
         phase = phases[i]
         cols = [f"{c.lower().strip()}_{phase.lower()}" for c in SPALTEN_NAMEN_ORIG]
         
-        ax.grid(True, which="both", linestyle="--", alpha=0.7)
-        ax.axhline(0, color="black", linewidth=1)
+        ax.grid(True, which="both")
+        ax.axhline(0, color="black", linewidth=1.2)
         draw_limit_lines(ax, acc_class)
         
-        ax.set_title(f"Phase {phase}", fontsize=20, pad=10)
-        ax.set_xlabel("Strom I / I_N [%]", fontsize=FONT_AXIS_LABEL)
-        if i == 0: ax.set_ylabel("Abweichung [%]", fontsize=FONT_AXIS_LABEL)
+        ax.set_title(fr"\textbf{{Phase {phase}}}", fontsize=20, pad=10)
+        ax.set_xlabel(r"Strom $I / I_N$ [\%]", fontsize=FONT_AXIS_LABEL)
+        if i == 0: ax.set_ylabel(r"Abweichung [\%]", fontsize=FONT_AXIS_LABEL)
         ax.set_xlim(0, 125)
         
         for _, row in data.iterrows():
@@ -355,18 +349,18 @@ def plot_range_analysis(data, filename, folder_key, group_name):
 
     y_labels = [format_label_text(r) for _, r in data.iterrows()]
     ax.set_yticks(y_pos)
-    ax.set_yticklabels(y_labels, fontsize=16, fontweight="bold")
-    ax.set_xlabel("Mittlerer Fehler |ε| [%]", fontsize=FONT_AXIS_LABEL)
-    ax.set_title(f"Fehleranalyse Bereiche – {prettify_group_name(group_name)}", fontsize=FONT_TITLE, fontweight="bold")
+    ax.set_yticklabels(y_labels, fontsize=16)
+    ax.set_xlabel(r"Mittlerer Fehler $|\varepsilon|$ [\%]", fontsize=FONT_AXIS_LABEL)
+    ax.set_title(fr"\textbf{{Fehleranalyse Bereiche -- {prettify_group_name(group_name)}}}", fontsize=FONT_TITLE)
     
     for i, row in data.iterrows():
         for off, col in zip([-height, 0, height], cols):
             val = row[col]
             if pd.notna(val) and val != 0:
-                ax.text(val + 0.01, i + off, format_value(val), va='center', fontsize=12, fontweight='bold')
+                ax.text(val + 0.01, i + off, format_value(val), va='center', fontsize=12)
 
     ax.invert_yaxis()
-    ax.grid(axis="x", linestyle="--", alpha=0.5)
+    ax.grid(axis="x")
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=3, fontsize=14)
     
     plt.tight_layout()
@@ -397,16 +391,16 @@ def plot_horizontal_generic(data, value_col, title, x_label, filename, folder_ke
             
     y_labels = [format_label_text(r, include_current=True) for _, r in df_plot.iterrows()]
     ax.set_yticks(y_pos)
-    ax.set_yticklabels(y_labels, fontsize=16, fontweight="bold")
+    ax.set_yticklabels(y_labels, fontsize=16)
     ax.set_xlabel(x_label, fontsize=FONT_AXIS_LABEL)
-    ax.set_title(title, fontsize=FONT_TITLE, fontweight="bold")
+    ax.set_title(fr"\textbf{{{title}}}", fontsize=FONT_TITLE)
     
     for bar, val in zip(bars, df_plot[value_col]):
-        txt = f"{val:.2f} €" if is_cost else format_value(val)
-        ax.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2, txt, va='center', fontsize=14, fontweight="bold")
+        txt = fr"{val:.2f}\,\text{{\texteuro}}" if is_cost else format_value(val)
+        ax.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2, txt, va='center', fontsize=14)
         
     ax.invert_yaxis()
-    ax.grid(axis="x", linestyle="--", alpha=0.5)
+    ax.grid(axis="x")
     
     handles = create_dynamic_legend_handles(df_plot)
     if handles:
@@ -424,7 +418,6 @@ def plot_unified_bars(data, y_col, title, ylabel, filename, folder_key):
     data = data[data[y_col].notna() & (data[y_col] != 0)].copy()
     if data.empty: return
 
-    # Gruppierung nach Nennstrom
     grp_cols = ["nennstrom_num", "nennstrom", "hersteller", "modell", "technologie", "color"]
     df_agg = data.groupby([c for c in grp_cols if c in data.columns], as_index=False)[y_col].mean()
     
@@ -466,16 +459,16 @@ def plot_unified_bars(data, y_col, title, ylabel, filename, folder_key):
             y_txt = val + (0.5 if val > 0 else -0.5)
             if abs(val) < 2: y_txt = val + (2 if val > 0 else -2)
             
-            ax.text(x, y_txt, txt, ha='center', va='center', fontsize=12, fontweight='bold')
+            ax.text(x, y_txt, txt, ha='center', va='center', fontsize=12)
             
         x_pos_list.append(i)
-        x_labels.append(label)
+        x_labels.append(escape_latex(label))
         
     ax.set_xticks(x_pos_list)
-    ax.set_xticklabels(x_labels, fontsize=16, fontweight="bold")
+    ax.set_xticklabels(x_labels, fontsize=16)
     ax.set_ylabel(ylabel, fontsize=18)
-    ax.set_title(title, fontsize=32, fontweight="bold", pad=20)
-    ax.grid(axis="y", linestyle="--", alpha=0.5)
+    ax.set_title(fr"\textbf{{{title}}}", fontsize=32, pad=20)
+    ax.grid(axis="y")
     
     handles = create_dynamic_legend_handles(df_agg, show_geo=False)
     if handles:
@@ -525,8 +518,6 @@ def lade_und_plotte_alle():
         
     # --- FARBEN PRO GRUPPE ZUWEISEN ---
     df_list = []
-    # Reihenfolge beibehalten wichtig für Plots!
-    # Wir nehmen die Unique Groups in Reihenfolge des Auftretens (wenn möglich), sonst sortiert.
     
     for grp_name, grp_df in df.groupby("export_group"):
         grp_df = assign_dynamic_colors_per_group(grp_df.copy())
@@ -534,7 +525,6 @@ def lade_und_plotte_alle():
     
     df = pd.concat(df_list)
     
-    # Sortierindex
     def get_sort_idx(r):
         h = str(r.get('hersteller','')).lower()
         if "mbs" in h: return 1
@@ -554,22 +544,22 @@ def lade_und_plotte_alle():
         plot_line_curves_thesis_grouped(sub, group_name=group)
         
         # 2. Bereichsanalyse
-        if all(c.lower() in sub.columns for c in ["Nieder_Ges", "Nenn_Ges", "Ueber_Ges"]):
+        if all(c.lower() in sub.columns for c in ["nieder_ges", "nenn_ges", "ueber_ges"]):
             plot_range_analysis(sub, f"{group}_bereichs_analyse.png", "bereich", group)
             
         # 3. Horizontal: Absoluter Fehler
         if "gesamtfehler" in sub.columns:
-            plot_horizontal_generic(sub, "gesamtfehler", f"Absoluter Fehler – {prettify_group_name(group)}", 
-                                    "Fehler [%]", f"{group}_abs_fehler.png", "absolut")
+            plot_horizontal_generic(sub, "gesamtfehler", fr"Absoluter Fehler -- {prettify_group_name(group)}", 
+                                    r"Fehler [\%]", f"{group}_abs_fehler.png", "absolut")
                                     
         # 4. Horizontal: Kosten
         if "preis (€)" in sub.columns:
-             plot_horizontal_generic(sub, "preis (€)", f"Kosten – {prettify_group_name(group)}", 
-                                    "Kosten [€]", f"{group}_kosten.png", "kosten", is_cost=True)
+             plot_horizontal_generic(sub, "preis (€)", fr"Kosten -- {prettify_group_name(group)}", 
+                                    r"Kosten [\texteuro]", f"{group}_kosten.png", "kosten", is_cost=True)
                                     
     # 5. Global: Verbesserung
     if "verbesserung dreick" in df.columns:
-        plot_unified_bars(df, "verbesserung dreick", "Verbesserung Dreieck", "Verbesserung [%]", 
+        plot_unified_bars(df, "verbesserung dreick", "Verbesserung Dreieck", r"Verbesserung [\%]", 
                           "verbesserung_dreieck.png", "verbesserung")
 
 if __name__ == "__main__":

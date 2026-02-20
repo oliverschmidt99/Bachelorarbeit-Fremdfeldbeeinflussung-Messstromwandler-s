@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # Definition der Dateiendungen, die weg sollen
-# Ergänzt um deine spezifischen Glossar- und Index-Dateien aus dem tree-Output
 EXTENSIONS=(
     "aux" "log" "out" "toc" "lof" "lot"       # Standard
     "synctex.gz" "fdb_latexmk" "fls"          # Build-Tools
     "bbl" "blg" "bbl-SAVE-ERROR"              # Literaturverzeichnis & Fehler
     "acn" "acr" "alg" "glg" "glo" "gls" "ist" # Glossaries & Acronyms
     "nav" "snm" "vrb"                         # Beamer
-    "xdv" "indent.log" "lod"                  # Sonstiges
+    "xdv" "indent.log" "lod"  "bcf"                 # Sonstiges
 )
 
 echo "Starte rekursive Bereinigung in allen Ordnern..."
