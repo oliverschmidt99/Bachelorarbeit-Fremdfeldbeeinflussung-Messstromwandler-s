@@ -42,23 +42,21 @@
 \pagenumbering{Roman}
 
 % --- EIGENSTÄNDIGKEITSERKLÄRUNG + SPERRVERMERK ---
-\input{02_Inhalt/03_Nachspann/eigenstaendigkeitserklaerung.tex}
+\input{02_Inhalt/01_Vorspann/01_eigenstaendigkeitserklaerung.tex}
 \clearpage
 
 % --- DANKSAGUNG ---
-\input{02_Inhalt/01_Vorspann/03_danksagung.tex}
+\input{02_Inhalt/01_Vorspann/02_danksagung.tex}
 \clearpage
 
 % --- ABSTRACT ---
-\input{02_Inhalt/01_Vorspann/01_abstract.tex}
+\input{02_Inhalt/01_Vorspann/03_abstract.tex}
 
 % --- LEERE SEITE ---
 \leereSeite
 
 % --- VERZEICHNISSE (Inhaltsverzeichnis, Abbildungen, Tabellen, Glossar, ...) ---
-% Hier wird nur die Datei geladen. Die Befehle \printglossary stehen
-% IN der Datei '02_verzeichnisse.tex', damit alles an einem Ort ist.
-\input{02_Inhalt/01_Vorspann/02_verzeichnisse.tex}
+\input{02_Inhalt/01_Vorspann/04_verzeichnisse.tex}
 
 % --- LEERE SEITE ---
 \leereSeite
@@ -81,6 +79,15 @@
 % ===========================================================================
 % ANHANG (Nummeriert mit A, B...)
 % ===========================================================================
+
+% --- LITERATURVERZEICHNIS ---
+\clearpage
+\thispagestyle{empty}
+\addtocontents{toc}{\protect\contentsline{section}{\protect\numberline{}Literaturverzeichnis}{}{} }
+\section*{Literaturverzeichnis}
+\printbibliography[heading=none]
+
+
 \clearpage
 \appendix
 \renewcommand{\thesection}{\Alph{section}} % A, B, C ...
@@ -89,17 +96,5 @@
 % Anhang einbinden (erzeugt z.B. "A Anhang")
 \input{02_Inhalt/03_Nachspann/anhang.tex}
 
-% ===========================================================================
-% NACHSPANN (Eingerückt & ohne Seitenzahlen im Inhaltsverzeichnis)
-% ===========================================================================
-
-% --- LITERATURVERZEICHNIS ---
-\clearpage
-\thispagestyle{empty}
-\addtocontents{toc}{\protect\contentsline{section}{\protect\numberline{}Literaturverzeichnis}{}{} }
-
-% Literaturverzeichnis ausgeben (ohne automatische Überschrift, da wir sie manuell setzen)
-\section*{Literaturverzeichnis}
-\printbibliography[heading=none]
 
 \end{document}
