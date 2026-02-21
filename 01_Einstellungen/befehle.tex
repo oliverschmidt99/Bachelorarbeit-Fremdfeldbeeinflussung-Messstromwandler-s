@@ -80,15 +80,10 @@
 % --- Leerseiten (ohne Kopf-/Fußzeile) ---
 % Verwendung: \leereSeite
 \newcommand{\leereSeite}{%
-    % Nur dann einen Seitenumbruch erzwingen, wenn auf der aktuellen Seite bereits Inhalt steht
-    \ifdim\pagetotal>0pt\clearpage\fi
-    \thispagestyle{empty}
-    \begin{center}
-        \vspace*{\fill}
-        \textbf{Leere Seite}
-        \vspace*{\fill}
-    \end{center}
-    \clearpage
+    \clearpage           % Beendet die aktuelle Seite
+    \thispagestyle{empty} % Entfernt Kopf- und Fußzeilen für diese Seite
+    \hbox{}              % Fügt ein unsichtbares Element ein, damit die Seite nicht leer ist
+    \clearpage           % Beendet die leere Seite und springt zur nächsten
 }
 
 % =============================================================================
