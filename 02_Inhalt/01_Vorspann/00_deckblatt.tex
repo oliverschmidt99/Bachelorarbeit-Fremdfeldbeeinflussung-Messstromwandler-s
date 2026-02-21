@@ -4,7 +4,7 @@
 % =============================================================================
 
 \begin{titlepage}
-    % Geometrie für die Titelseite (etwas breiter für den Balken)
+    % Geometrie für die Titelseite
     \newgeometry{left=2.0cm, right=2.0cm, top=2cm, bottom=2cm}
 
     % Sicherheitshalber die Farbe definieren, falls layout.tex hier nicht greift
@@ -14,23 +14,24 @@
     % Wir setzen den Abstand der Box zum Inhalt auf 0, damit die Maße stimmen
     \setlength{\fboxsep}{0pt}
     
-    \noindent % Verhindert Einrücken
-    \colorbox{JanssenDarkBlue}{%
-        % Die Minipage definiert die Größe des blauen Balkens
-        % Höhe auf 2.0cm erhöht, damit die Logos Luft haben
-        \begin{minipage}[c][2.0cm][c]{\textwidth}%
-            \hspace{0.5cm}% Abstand links
-            %
-            % --- LINKES LOGO (HSEL Weiß) ---
-            \includegraphics[height=1.5cm, valign=c]{03_Ressourcen/Logo/hsel-logo-removebg-preview.png}%
-            %
-            \hfill% Schiebt den Rest nach rechts (kein Titel in der Mitte)
-            %
-            % --- RECHTES LOGO (Janssen ohne Text) ---
-            \includegraphics[height=2.5cm, valign=c]{03_Ressourcen/Logo/logo-rolf_janssen-mit_text.pdf}%
-            %
-            \hspace{0.5cm}% Abstand rechts
-        \end{minipage}%
+    \noindent
+    \makebox[\textwidth][c]{%
+        \colorbox{JanssenDarkBlue}{%
+            % Die Minipage nimmt nun die gesamte Papierbreite ein
+            \begin{minipage}[c][2.0cm][c]{\paperwidth}%
+                \hspace{2.0cm}% Abstand links (entspricht Seitenrand)
+                %
+                % --- LINKES LOGO (HSEL Weiß) ---
+                \includegraphics[height=1.5cm, valign=c]{03_Ressourcen/Logo/hsel-logo-removebg-preview.png}%
+                %
+                \hfill% Schiebt den Rest nach rechts
+                %
+                % --- RECHTES LOGO (Janssen ohne Text) ---
+                \includegraphics[height=2.5cm, valign=c]{03_Ressourcen/Logo/logo-rolf_janssen-mit_text.pdf}%
+                %
+                \hspace{2.0cm}% Abstand rechts (entspricht Seitenrand)
+            \end{minipage}%
+        }%
     }
 
     % --- HAUPTTEIL ---
