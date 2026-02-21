@@ -134,6 +134,32 @@ Diese Geräte ermöglichen durch optionale Erweiterungsmodule eine direkte Integ
 
 Die in Abbildung~\ref{pic:aufbau_messstrecke_neu} dargestellte Systemarchitektur verdeutlicht die informationstechnische Vernetzung des optimierten Messaufbaus. Während der obere Teil des Schemas den bereits beschriebenen Leistungspfad darstellt, erfolgt die messtechnische Erfassung der Primärströme \gls{sym:I_p} zyklisch durch die Geräte \acrshort{pac} 4220 (Einspeisung) und \acrshort{pac} 3220 (Prüfling). Die erfassten Stromwerte werden in \acrshort{wincc} archiviert und stehen dort für die Prozessüberwachung zur Verfügung. Über die Benutzeroberfläche \acrshort{hmi} können diese Daten als \acrshort{csv}-Datei exportiert werden. Diese Datei dient als Grundlage für die anschließende Genauigkeitsmessung und die detaillierte Auswertung der Versuchsreihen.
 
+\subsubsection{Systemintegration und Programmentwicklung}
+\label{sec:integration_programmierung}
+
+Die technische Umsetzung des optimierten Messsystems umfasst sowohl die informationstechnische Einbindung der Hardware-Komponenten als auch die Entwicklung der steuerungstechnischen Ablauflogik. Zur Adressierung der \textit{SENTRON}-Messgeräte wird jedem Gerät in der Hardware-Konfiguration des \textit{Simatic Managers} ein eindeutiger Gerätename sowie eine IP-Adresse zugewiesen. Diese Zuordnung ist notwendig, um die Kommunikation der Teilnehmer innerhalb des \acrshort{profinet}-Netzwerks mit der \acrshort{sps} zu ermöglichen.
+
+Innerhalb des Hardware-Konfigurators werden die relevanten Messwerte der Geräte auf die Eingangsadressen der \acrshort{sps} abgebildet. Die bereitgestellten Rohwerte werden im Anwenderprogramm aus dem Peripheriebereich ausgelesen und in Datenbausteine (DBs) übertragen. Der Quellcode der verwendeten Programmbausteine ist im Anhang~\ref{chap:anhang_programm} dokumentiert.
+
+Für die Erfassung der Daten in \acrshort{wincc} wird im Variablenhaushalt des Visualisierungssystems eine Kommunikationsverbindung zur Steuerung projektiert. Die Variablen der gemessenen Ströme werden direkt mit den entsprechenden Speicheradressen innerhalb der DBs verknüpft. Über diese Verbindung werden die Werte in regelmäßigen Abständen zyklisch ausgelesen, auf dem \acrshort{hmi} angezeigt und für den späteren Export als \acrshort{csv}-Datei archiviert.
+
+Die Automatisierung des Prüfablaufs wird über die \acrshort{sps} realisiert. Der vorhandene \acrshort{pid}-Regler dient hierbei zur präzisen Stromeinstellung. Für die normkonforme Genauigkeitsmessung eines Wandlers sind primär die Prüfpunkte bei 5\,\%, 20\,\%, 100\,\% und 120\,\% des Primärnennstroms relevant. Zur detaillierten Kennlinienaufnahme wurden zusätzliche Messpunkte ergänzt. Die automatisierte Erfassung umfasst somit die Pegel 5\,\%, 20\,\%, 50\,\%, 80\,\%, 90\,\%, 100\,\% und 120\,\%.
+
+Zur automatisierten Anfahrt dieser Messpunkte wurde eine Schrittkette implementiert. Diese durchläuft die Prüfpegel sequenziell und hält jeden Messpunkt für eine Dauer von fünf Minuten konstant. Der Zeitraum ermöglicht eine ausreichende thermische Sättigung des Wandlerkerns und stellt eine valide Mittelwertbildung der Messdaten sicher.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{03_Ressourcen/pdf/step7_programm/strukto_fb1.pdf}
+    \caption{Struktogramm der Schrittkette zur automatisierten Kennlinienaufnahme (FB~1)}
+    \label{pic:strukto_fb1}
+\end{figure}
+
+Der Ablauf der Automatisierung ist in Abbildung~\ref{pic:strukto_fb1} dargestellt. Zu Beginn erfolgt eine Initialisierung, bei der die interne Sollwertvariable auf Null gesetzt wird. Bei aktivem Reset-Signal wird die Schrittkette zurückgesetzt, indem der Schrittzähler auf Null und das Startsignal auf den Zustand \textit{Falsch} gesetzt werden. Während der regulären Bearbeitung wird basierend auf dem aktuellen Schritt der Sollwert für den Primärstrom vorgegeben. So entspricht beispielsweise Schritt 10 einer Last von 5\,\% und Schritt 20 einer Last von 20\,\% des Maximalstroms.
+
+Zur Prüfung der Messwertstabilität wird die Funktion FC~4 aufgerufen. Sie bewertet, ob die Phasenströme innerhalb eines definierten Toleranzfensters um den Sollwert liegen. Ein Zeitglied T1 entprellt den Eintritt in das Fenster, während ein Zeitglied T2 kurze Einbrüche überbrückt, um eine stabile Datenbasis sicherzustellen. Die eigentliche Messzeit wird durch den Timer T3 gesteuert, der nach Ablauf den Messpunkt als abgeschlossen markiert. Die Weiterschaltlogik wertet diesen Status aus. Im Ausgangszustand wird auf die Startbedingungen gewartet, in den aktiven Prüfschritten erfolgt der Übergang zum nächsten Pegel erst nach erfolgreichem Ablauf der Messzeit. Abschließend werden der ermittelte Sollwert an den Regler ausgegeben und der Schrittstatus für den nächsten Zyklus aktualisiert.
+
+
+
 \subsubsection{Softwaregestützte Prozesskette zur Datenauswertung}
 \label{sec:datenaufbereitung_analyse}
 
